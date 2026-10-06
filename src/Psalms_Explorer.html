@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Psalms Explorer (BIB523 Interactive Studio)</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans (Headlines), DM Sans (Body), Noto Serif Hebrew -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Serif+Hebrew:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="vendor/tailwind.js"></script>
+  <!-- D3.js v7 CDN -->
+  <script src="vendor/d3.v7.min.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="vendor/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neu: {
+              bg: '#E8F1FA',
+              surface: '#FFFFFF',
+              well: '#EEF5FC',
+              fg: '#1E293B',
+              muted: '#5A6A80',
+              accent: '#0066CC',
+              accentLight: '#2684FF',
+              teal: '#0D9488',
+              danger: '#E11D48'
+            },
+            slate: {
+              50: '#E8F1FA',
+              100: '#EEF5FC',
+              200: '#D6E4F0',
+              300: '#BACFE2',
+              400: '#94A3B8',
+              500: '#5A6A80',
+              600: '#334155',
+              700: '#1E293B',
+              800: '#1E293B',
+              900: '#0F172A',
+              950: '#0B1120'
+            },
+            blue: {
+              50: '#F0F7FF',
+              100: '#E0EFFF',
+              200: '#BAE0FD',
+              300: '#7CC4FA',
+              400: '#389BFF',
+              500: '#2684FF',
+              600: '#0066CC',
+              700: '#0052A3',
+              800: '#003D7A',
+              900: '#002952',
+              950: '#001429'
+            }
+          },
+          fontFamily: {
+            display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            sans: ['DM Sans', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+            serif: ['Plus Jakarta Sans', 'Georgia', 'serif'],
+            hebrew: ['Noto Serif Hebrew', 'SBL Hebrew', 'serif']
+          },
+          borderRadius: {
+            'card': '32px',
+            'btn': '16px'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* =============================================================================
+       NEUMORPHISM (SOFT UI) DESIGN SYSTEM - PSALMS EXPLORER
+       Aligned directly with the Psalms Poetic Devices Interactive Studio
+       ============================================================================= */
+    :root {
+      --neu-bg: #E8F1FA;
+      --neu-surface: #FFFFFF;
+      --neu-surface-well: #EEF5FC;
+      --neu-fg: #1E293B;
+      --neu-muted: #5A6A80;
+      --neu-accent: #0066CC;
+      --neu-accent-light: #2684FF;
+      --neu-accent-dark: #004C99;
+      --neu-accent-glow: rgba(0, 102, 204, 0.4);
+
+      --neu-shadow-dark: rgba(180, 200, 222, 0.65);
+      --neu-shadow-light: rgba(255, 255, 255, 0.95);
+      --neu-shadow-dark-deep: rgba(160, 185, 212, 0.75);
+      --neu-shadow-light-deep: rgba(255, 255, 255, 1);
+      --neu-shadow-dark-hover: rgba(160, 185, 212, 0.8);
+      --neu-shadow-light-hover: rgba(255, 255, 255, 1);
+    }
+
+    .dark {
+      --neu-bg: #0F172A;
+      --neu-surface: #1E293B;
+      --neu-surface-well: #0B1120;
+      --neu-fg: #F1F5F9;
+      --neu-muted: #94A3B8;
+      --neu-accent: #389BFF;
+      --neu-accent-light: #60A5FA;
+      --neu-accent-dark: #0066CC;
+      --neu-accent-glow: rgba(56, 155, 255, 0.45);
+
+      --neu-shadow-dark: rgba(0, 0, 0, 0.7);
+      --neu-shadow-light: rgba(255, 255, 255, 0.05);
+      --neu-shadow-dark-deep: rgba(0, 0, 0, 0.85);
+      --neu-shadow-light-deep: rgba(255, 255, 255, 0.08);
+      --neu-shadow-dark-hover: rgba(0, 0, 0, 0.85);
+      --neu-shadow-light-hover: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+      background-color: var(--neu-bg);
+      background-image: radial-gradient(120% 120% at 50% 0%, #DCE9F6 0%, #E8F1FA 50%, #F0F6FC 100%);
+      background-attachment: fixed;
+      color: var(--neu-fg);
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      letter-spacing: -0.01em;
+      margin: 0;
+      overflow: hidden;
+      transition: background-color 300ms ease-out, color 300ms ease-out;
+    }
+
+    html.dark body,
+    .dark body {
+      background-color: var(--neu-bg);
+      background-image: radial-gradient(120% 120% at 50% 0%, #172033 0%, #0F172A 50%, #080D18 100%);
+      background-attachment: fixed;
+    }
+
+    /* Custom Neumorphic Scrollbars */
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #334155;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+
+    /* Neumorphic Containers & Utility Classes */
+    .neu-card {
+      background-color: var(--neu-surface) !important;
+      border-radius: 28px !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      box-shadow: 8px 10px 22px var(--neu-shadow-dark), -8px -8px 20px var(--neu-shadow-light) !important;
+      transition: transform 300ms ease-out, box-shadow 300ms ease-out;
+    }
+    .dark .neu-card {
+      border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+
+    .neu-inset {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.45) !important;
+      box-shadow: inset 4px 4px 8px var(--neu-shadow-dark), inset -4px -4px 8px var(--neu-shadow-light) !important;
+    }
+    .dark .neu-inset {
+      border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .neu-inset-sm {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.35) !important;
+      box-shadow: inset 3px 3px 6px var(--neu-shadow-dark), inset -3px -3px 6px var(--neu-shadow-light) !important;
+    }
+    .dark .neu-inset-sm {
+      border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .neu-btn {
+      background: linear-gradient(145deg, #FFFFFF, #E2E8F0) !important;
+      color: #0066CC !important;
+      border-radius: 14px !important;
+      border: 1px solid rgba(255, 255, 255, 0.8) !important;
+      box-shadow: 4px 4px 10px var(--neu-shadow-dark), -4px -4px 10px var(--neu-shadow-light) !important;
+      font-weight: 700;
+      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .dark .neu-btn {
+      background: linear-gradient(145deg, #2A303C, #1E232B) !important;
+      color: #60A5FA !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6), -4px -4px 10px rgba(255, 255, 255, 0.05) !important;
+    }
+    .neu-btn:hover:not(:disabled) {
+      transform: translateY(-1.5px);
+      background: linear-gradient(145deg, #F0F7FF, #E0EFFF) !important;
+      color: #004C99 !important;
+      box-shadow: 6px 6px 14px rgba(0, 102, 204, 0.28), -6px -6px 14px rgba(255, 255, 255, 0.95) !important;
+    }
+    .dark .neu-btn:hover:not(:disabled) {
+      background: linear-gradient(145deg, #1E3A5F, #162C47) !important;
+      color: #93C5FD !important;
+      box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.7), -6px -6px 14px rgba(255, 255, 255, 0.1) !important;
+    }
+    .neu-btn:active:not(:disabled) {
+      transform: translateY(0.5px);
+      box-shadow: inset 3px 3px 6px var(--neu-shadow-dark), inset -3px -3px 6px var(--neu-shadow-light) !important;
+    }
+
+    .neu-icon-well {
+      background: linear-gradient(145deg, #FFFFFF, #E2E8F0);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 3px 3px 8px var(--neu-shadow-dark), -3px -3px 8px var(--neu-shadow-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dark .neu-icon-well {
+      background: linear-gradient(145deg, #2A303C, #1E232B);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6), -3px -3px 8px rgba(255, 255, 255, 0.05);
+    }
+
+    .neu-input {
+      background-color: var(--neu-surface-well) !important;
+      border-radius: 14px !important;
+      border: 1.5px solid rgba(180, 200, 222, 0.5) !important;
+      color: var(--neu-fg) !important;
+      box-shadow: inset 3px 3px 6px var(--neu-shadow-dark), inset -3px -3px 6px var(--neu-shadow-light) !important;
+      transition: all 200ms ease-out;
+    }
+    .dark .neu-input {
+      border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .neu-input:focus {
+      outline: none !important;
+      background-color: var(--neu-surface) !important;
+      border-color: var(--neu-accent) !important;
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.25), inset 2px 2px 4px var(--neu-shadow-dark) !important;
+    }
+
+    /* Tooltip: Elevated Neumorphic Surface Card */
+    #tooltip {
+      position: absolute;
+      opacity: 0;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 10px 14px 28px rgba(160, 185, 212, 0.6), -8px -8px 20px rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 16px 18px;
+      pointer-events: none;
+      font-size: 0.875rem;
+      transition: opacity 0.18s ease, transform 0.1s ease;
+      z-index: 60;
+      backdrop-filter: blur(12px);
+      color: #1E293B;
+      max-width: 310px;
+    }
+    .dark #tooltip {
+      background: rgba(30, 41, 59, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 10px 14px 28px rgba(0, 0, 0, 0.8), -8px -8px 20px rgba(255, 255, 255, 0.04);
+      color: #F1F5F9;
+    }
+
+    /* D3 Bubble Styling */
+    .bubble {
+      stroke: rgba(255, 255, 255, 0.8);
+      stroke-width: 1.5px;
+      cursor: pointer;
+      transition: stroke-width 0.2s, stroke 0.2s, filter 0.2s, opacity 0.3s;
+    }
+    .dark .bubble {
+      stroke: rgba(255, 255, 255, 0.2);
+    }
+    .bubble:hover {
+      stroke: #0066CC;
+      stroke-width: 3px;
+      filter: drop-shadow(0 4px 10px rgba(0, 102, 204, 0.45));
+    }
+    .dark .bubble:hover {
+      stroke: #389BFF;
+      stroke-width: 3px;
+      filter: drop-shadow(0 4px 12px rgba(56, 155, 255, 0.6));
+    }
+
+    .bubble.highlighted {
+      stroke: #0066CC !important;
+      stroke-width: 3.5px !important;
+      filter: drop-shadow(0 0 12px rgba(0, 102, 204, 0.7)) !important;
+      animation: pulse-ring 2s infinite ease-in-out;
+    }
+    .dark .bubble.highlighted {
+      stroke: #389BFF !important;
+      filter: drop-shadow(0 0 14px rgba(56, 155, 255, 0.85)) !important;
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { stroke-width: 3px; }
+      50% { stroke-width: 5px; }
+    }
+
+    .bubble-text {
+      pointer-events: none;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      fill: #FFFFFF;
+      text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.7);
+      user-select: none;
+    }
+
+    /* Legend Chip Button - Tactile Outset Pill */
+    .legend-chip {
+      cursor: pointer;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      background: linear-gradient(145deg, #FFFFFF, #EBF2FA);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 2px 2px 5px var(--neu-shadow-dark), -2px -2px 5px var(--neu-shadow-light);
+      transition: all 180ms ease;
+      font-weight: 600;
+    }
+    .dark .legend-chip {
+      background: linear-gradient(145deg, #2A303C, #1E232B);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6), -2px -2px 6px rgba(255, 255, 255, 0.04);
+    }
+    .legend-chip:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 3px 4px 8px var(--neu-shadow-dark), -3px -3px 8px var(--neu-shadow-light);
+    }
+    .dark .legend-chip:hover {
+      box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7), -3px -3px 8px rgba(255, 255, 255, 0.06);
+    }
+    .legend-chip.active-filter {
+      background: linear-gradient(135deg, #0066CC 0%, #2684FF 100%) !important;
+      color: #FFFFFF !important;
+      box-shadow: 2px 3px 8px rgba(0, 102, 204, 0.45) !important;
+      border-color: rgba(255, 255, 255, 0.3) !important;
+    }
+    .legend-chip.active-filter span {
+      border: 1.5px solid #FFFFFF;
+    }
+
+    /* ForeignObject Interactive Button in SVG */
+    .group-label-fo {
+      overflow: visible !important;
+      pointer-events: all;
+    }
+    .genre-cluster-btn {
+      height: 32px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      line-height: 1 !important;
+      border-radius: 9999px !important;
+      white-space: nowrap !important;
+    }
+  </style>
+</head>
+<body class="h-screen w-screen flex flex-col antialiased">
+
+  <!-- TOP NAVIGATION BAR: SOFT NEUMORPHIC HEADER -->
+  <header class="h-16 shrink-0 bg-[#E8F1FA]/90 dark:bg-[#0F172A]/90 backdrop-blur shadow-[0_6px_20px_rgba(180,200,222,0.6)] dark:shadow-[0_6px_16px_rgba(0,0,0,0.7)] border-b border-white/60 dark:border-white/5 px-4 sm:px-6 flex items-center justify-between z-30">
+    
+    <!-- Title & Brand -->
+    <div class="flex items-center gap-3">
+      <a href="Psalms_Interactive_Learning_Suite.html" class="neu-btn px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 text-slate-700 dark:text-slate-200 hover:text-[#0066CC] transition shrink-0" title="Return to All Course Apps">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span class="hidden sm:inline">Suite Hub</span>
+      </a>
+      <div class="neu-icon-well w-10 h-10 shrink-0">
+        <i data-lucide="compass" class="w-5 h-5 text-[#0066CC] dark:text-[#389BFF]"></i>
+      </div>
+      <div>
+        <h1 class="font-display font-extrabold text-lg sm:text-xl text-[#1E293B] dark:text-[#F1F5F9] tracking-tight">
+          Psalms Explorer
+        </h1>
+      </div>
+    </div>
+
+    <!-- Dynamic Legend & Utility Controls -->
+    <div class="flex items-center gap-2 sm:gap-3">
+      <!-- Dynamic Legend Container -->
+      <div id="legend-container" class="px-2 py-1 rounded-2xl hidden lg:flex items-center gap-2 flex-wrap justify-end text-xs text-[#5A6A80] dark:text-[#94A3B8]">
+        <!-- Injected dynamically by JavaScript -->
+      </div>
+
+      <!-- Audio Mute/Unmute -->
+      <button id="sound-toggle-btn" onclick="toggleAudio()" title="Toggle sound cues" class="neu-btn w-9 h-9 flex items-center justify-center text-[#5A6A80] dark:text-[#94A3B8] hover:text-[#0066CC] dark:hover:text-[#389BFF]">
+        <i id="sound-icon" data-lucide="volume-2" class="w-4 h-4"></i>
+      </button>
+
+      <!-- Theme Mode Toggle -->
+      <button id="theme-toggle-btn" onclick="toggleDarkMode()" title="Toggle Light/Dark Theme" class="neu-btn w-9 h-9 flex items-center justify-center text-[#5A6A80] dark:text-[#94A3B8] hover:text-[#0066CC] dark:hover:text-[#389BFF]">
+        <i id="theme-icon" data-lucide="moon" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+  </header>
+
+  <!-- MAIN APPLICATION LAYOUT -->
+  <div class="flex flex-1 overflow-hidden relative">
+
+    <!-- LEFT SIDEBAR: NEUMORPHIC CONTROLS -->
+    <aside class="w-72 sm:w-80 shrink-0 bg-[#E8F1FA]/80 dark:bg-[#1E293B]/80 backdrop-blur border-r border-white/60 dark:border-white/5 flex flex-col z-20 shadow-[6px_0_20px_rgba(180,200,222,0.35)] dark:shadow-[6px_0_20px_rgba(0,0,0,0.5)] p-5 overflow-y-auto space-y-4">
+      
+      <!-- Explorer Header Card -->
+      <div class="neu-inset-sm p-3.5 rounded-2xl">
+        <div class="flex items-center gap-2 mb-1">
+          <i data-lucide="sliders-horizontal" class="w-4 h-4 text-[#0066CC] dark:text-[#389BFF]"></i>
+          <h2 class="text-xs uppercase tracking-wider font-bold text-[#1E293B] dark:text-[#F1F5F9]">
+            Explorer Controls
+          </h2>
+        </div>
+        <p class="text-[11px] text-[#5A6A80] dark:text-[#94A3B8] leading-relaxed">
+          Explore all 150 Psalms categorized by C. Hassell Bullock's genres. Bubble diameter indicates canonical verse count.
+        </p>
+      </div>
+
+      <!-- Group By Selector -->
+      <div>
+        <label for="group-by" class="block text-xs font-bold uppercase tracking-wider text-[#5A6A80] dark:text-[#94A3B8] mb-1.5 flex items-center gap-1.5">
+          <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-[#0066CC] dark:text-[#389BFF]"></i>
+          <span>Group By</span>
+        </label>
+        <select id="group-by" class="neu-input w-full p-2 text-xs font-bold cursor-pointer">
+          <option value="none">All Together (Single Cloud)</option>
+          <option value="order">Sequential Order (1–150 Grid)</option>
+          <option value="book">Book (Books I – V)</option>
+          <option value="genre">Genre (Bullock Categories)</option>
+          <option value="author">Author Attribution</option>
+          <option value="tag">Selected Tag (Tag Match vs Others)</option>
+          <option value="top-theme">Top Themes (8 Core Themes)</option>
+        </select>
+      </div>
+
+      <!-- Color By Selector -->
+      <div>
+        <label for="color-by" class="block text-xs font-bold uppercase tracking-wider text-[#5A6A80] dark:text-[#94A3B8] mb-1.5 flex items-center gap-1.5">
+          <i data-lucide="palette" class="w-3.5 h-3.5 text-[#0066CC] dark:text-[#389BFF]"></i>
+          <span>Color By</span>
+        </label>
+        <select id="color-by" class="neu-input w-full p-2 text-xs font-bold cursor-pointer">
+          <option value="genre">Genre (Bullock)</option>
+          <option value="book">Book (I – V)</option>
+          <option value="tag">Selected Tag (Match Highlight)</option>
+        </select>
+      </div>
+
+      <!-- Physics Reheat Button -->
+      <div>
+        <button id="reheat-btn" onclick="reheatSimulation()" class="neu-btn w-full py-2 px-4 text-xs font-bold flex items-center justify-center gap-2">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span>Re-center / Shuffle Cloud</span>
+        </button>
+      </div>
+
+      <!-- TAG / THEME SELECTOR (DROPDOWN ONLY AT BOTTOM) -->
+      <div class="pt-2 border-t border-slate-200/60 dark:border-white/5">
+        <div class="flex items-center justify-between mb-1.5">
+          <label for="tag-select" class="block text-xs font-bold uppercase tracking-wider text-[#5A6A80] dark:text-[#94A3B8] flex items-center gap-1.5">
+            <i data-lucide="tag" class="w-3.5 h-3.5 text-[#0066CC] dark:text-[#389BFF]"></i>
+            <span>Tag / Theme Selector</span>
+          </label>
+          <button id="clear-tag-btn" onclick="selectTag('all')" class="hidden text-[10px] font-bold text-[#0066CC] dark:text-[#60A5FA] hover:underline">
+            Reset Tag
+          </button>
+        </div>
+        <select id="tag-select" class="neu-input w-full p-2.5 text-xs font-bold cursor-pointer">
+          <option value="all">All Tags &amp; Themes (150 Psalms)</option>
+          <!-- Dynamically populated -->
+        </select>
+      </div>
+
+      <!-- Academic Attribution Footer -->
+      <div class="mt-auto pt-3 border-t border-white/60 dark:border-white/5 text-[10px] text-[#5A6A80] dark:text-[#94A3B8] text-center leading-normal">
+        Categorization based on C. Hassell Bullock,<br/>
+        <em class="font-semibold">Encountering the Book of Psalms</em>.
+      </div>
+
+    </aside>
+
+    <!-- MAIN CHART AREA -->
+    <main class="flex-1 relative overflow-hidden" id="chart-container">
+      
+      <!-- FLOATING ZOOM FOCUS CONTROLLER BANNER -->
+      <div id="focus-banner" class="hidden absolute top-4 left-6 z-20 flex items-center gap-3 bg-white/95 dark:bg-[#1E293B]/95 backdrop-blur px-4 py-2.5 rounded-2xl shadow-[0_8px_24px_rgba(0,102,204,0.25)] border border-blue-200 dark:border-blue-700/50 transition-all">
+        <button onclick="resetGenreFocus()" class="neu-btn px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 text-[#0066CC] dark:text-[#389BFF] hover:scale-105 transition-all">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Back to All Genres</span>
+        </button>
+        <div class="h-4 w-px bg-slate-300 dark:bg-slate-700"></div>
+        <div id="focus-banner-text" class="text-xs font-extrabold text-[#1E293B] dark:text-[#F1F5F9] uppercase tracking-wider flex items-center gap-2">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- D3 SVG injected dynamically here -->
+    </main>
+
+  </div>
+
+  <!-- NEUMORPHIC FLOATING TOOLTIP ELEMENT -->
+  <div id="tooltip"></div>
+
+  <script>
+    // =============================================================================
+    // AUDIO ENGINE: Subtle Web Audio API Chimes (Zero external dependencies)
+    // =============================================================================
+    let isAudioEnabled = true;
+    try {
+      const savedAudio = localStorage.getItem('psalms_audio_enabled');
+      if (savedAudio !== null) isAudioEnabled = savedAudio === 'true';
+    } catch(e) {}
+
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioCtx;
+    }
+
+    function initAudioUI() {
+      const icon = document.getElementById('sound-icon');
+      if (icon) {
+        icon.setAttribute('data-lucide', isAudioEnabled ? 'volume-2' : 'volume-x');
+        lucide.createIcons();
+      }
+    }
+
+    function toggleAudio() {
+      isAudioEnabled = !isAudioEnabled;
+      try {
+        localStorage.setItem('psalms_audio_enabled', isAudioEnabled);
+      } catch(e) {}
+      initAudioUI();
+      if (isAudioEnabled) playSound('click');
+    }
+
+    function playSound(type) {
+      if (!isAudioEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (ctx.state === 'suspended') ctx.resume();
+
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        const now = ctx.currentTime;
+        if (type === 'hover') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(640, now);
+          osc.frequency.exponentialRampToValueAtTime(780, now + 0.05);
+          gain.gain.setValueAtTime(0.04, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+          osc.start(now);
+          osc.stop(now + 0.06);
+        } else if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(220, now + 0.04);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'zoom') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(640, now + 0.15);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+          osc.start(now);
+          osc.stop(now + 0.25);
+        }
+      } catch(e) {}
+    }
+
+    // =============================================================================
+    // THEME CONTROLLER: Dark / Light Mode (Synced with Poetic Devices App)
+    // =============================================================================
+    function initTheme() {
+      try {
+        const savedTheme = localStorage.getItem('psalms_theme');
+        let isDark = false;
+        if (savedTheme) {
+          isDark = savedTheme === 'dark';
+        } else {
+          isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        updateThemeIcon(isDark);
+      } catch(e) {}
+    }
+
+    function updateThemeIcon(isDark) {
+      const icon = document.getElementById('theme-icon');
+      if (icon) {
+        icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+        lucide.createIcons();
+      }
+    }
+
+    function toggleDarkMode() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try {
+        localStorage.setItem('psalms_theme', isDark ? 'dark' : 'light');
+      } catch(e) {}
+      updateThemeIcon(isDark);
+      playSound('click');
+    }
+
+    // =============================================================================
+    // DATA LAYER: Complete Canonical Dataset & Metadata
+    // =============================================================================
+    const extraDetails = {
+            1: { i: "Blessed is the man who walks not in the counsel of the wicked...", s: "", t: ["Torah", "Righteousness", "Two Ways"], a: false },
+            2: { i: "Why do the nations rage and the peoples plot in vain?", s: "", t: ["Messiah", "Zion", "Rebellion"], a: false },
+            3: { i: "O LORD, how many are my foes! Many are rising against me...", s: "A Psalm of David, when he fled from Absalom his son.", t: ["Deliverance", "Protection"], a: false },
+            4: { i: "Answer me when I call, O God of my righteousness!", s: "To the choirmaster: with stringed instruments. A Psalm of David.", t: ["Evening", "Trust"], a: false },
+            5: { i: "Give ear to my words, O LORD; consider my groaning.", s: "To the choirmaster: for the flutes. A Psalm of David.", t: ["Morning", "Guidance"], a: false },
+            6: { i: "O LORD, rebuke me not in your anger, nor discipline me in your wrath.", s: "To the choirmaster: with stringed instruments; according to The Sheminith.", t: ["Penitence", "Sickness"], a: false },
+            7: { i: "O LORD my God, in you do I take refuge; save me from all my pursuers...", s: "A Shiggaion of David, which he sang to the LORD concerning Cush, a Benjaminite.", t: ["Justice", "Vindication"], a: false },
+            8: { i: "O LORD, our Lord, how majestic is your name in all the earth!", s: "To the choirmaster: according to The Gittith. A Psalm of David.", t: ["Creation", "Humanity", "Majesty"], a: false },
+            9: { i: "I will give thanks to the LORD with my whole heart...", s: "To the choirmaster: according to Muth-labben. A Psalm of David.", t: ["Thanksgiving", "Justice"], a: true },
+            10: { i: "Why, O LORD, do you stand far away? Why do you hide yourself...", s: "", t: ["Oppression", "Justice", "Deliverance"], a: true },
+            11: { i: "In the LORD I take refuge; how can you say to my soul, 'Flee like a bird...'", s: "To the choirmaster. Of David.", t: ["Trust", "Refuge", "God's Throne"], a: false },
+            12: { i: "Save, O LORD, for the godly one is gone; for the faithful have vanished...", s: "To the choirmaster: according to The Sheminith. A Psalm of David.", t: ["Deceit", "God's Word"], a: false },
+            13: { i: "How long, O LORD? Will you forget me forever?", s: "To the choirmaster. A Psalm of David.", t: ["Waiting", "Hope", "Sorrow"], a: false },
+            14: { i: "The fool says in his heart, 'There is no God.'", s: "To the choirmaster. Of David.", t: ["Folly", "Corruption", "Salvation"], a: false },
+            15: { i: "O LORD, who shall sojourn in your tent? Who shall dwell on your holy hill?", s: "A Psalm of David.", t: ["Sanctuary", "Ethics", "Righteousness"], a: false },
+            16: { i: "Preserve me, O God, for in you I take refuge.", s: "A Miktam of David.", t: ["Inheritance", "Joy", "Resurrection"], a: false },
+            17: { i: "Hear a just cause, O LORD; attend to my cry!", s: "A Prayer of David.", t: ["Vindication", "Protection"], a: false },
+            18: { i: "I love you, O LORD, my strength. The LORD is my rock and my fortress...", s: "To the choirmaster. A Psalm of David... who addressed the words of this song to the LORD on the day when the LORD delivered him...", t: ["Victory", "Deliverance", "Theophany"], a: false },
+            19: { i: "The heavens declare the glory of God, and the sky above proclaims his handiwork.", s: "To the choirmaster. A Psalm of David.", t: ["Creation", "Torah", "Revelation"], a: false },
+            20: { i: "May the LORD answer you in the day of trouble!", s: "To the choirmaster. A Psalm of David.", t: ["Battle", "Blessing", "Kingship"], a: false },
+            21: { i: "O LORD, in your strength the king rejoices...", s: "To the choirmaster. A Psalm of David.", t: ["Kingship", "Victory", "Thanksgiving"], a: false },
+            22: { i: "My God, my God, why have you forsaken me?", s: "To the choirmaster: according to The Doe of the Dawn. A Psalm of David.", t: ["Suffering", "Vindication", "Messianic"], a: false },
+            23: { i: "The LORD is my shepherd; I shall not want.", s: "A Psalm of David.", t: ["Shepherd", "Provision", "Comfort"], a: false },
+            24: { i: "The earth is the LORD's and the fullness thereof...", s: "A Psalm of David.", t: ["King of Glory", "Sanctuary", "Purity"], a: false },
+            25: { i: "To you, O LORD, I lift up my soul.", s: "Of David.", t: ["Guidance", "Forgiveness", "Trust"], a: true },
+            26: { i: "Vindicate me, O LORD, for I have walked in my integrity...", s: "Of David.", t: ["Integrity", "Sanctuary", "Purity"], a: false },
+            27: { i: "The LORD is my light and my salvation; whom shall I fear?", s: "Of David.", t: ["Light", "Salvation", "Courage"], a: false },
+            28: { i: "To you, O LORD, I call; my rock, be not deaf to me...", s: "Of David.", t: ["Petition", "Praise", "Strength"], a: false },
+            29: { i: "Ascribe to the LORD, O heavenly beings, ascribe to the LORD glory and strength.", s: "A Psalm of David.", t: ["Storm", "Glory", "Voice of God"], a: false },
+            30: { i: "I will extol you, O LORD, for you have drawn me up...", s: "A Psalm of David. A song at the dedication of the temple.", t: ["Healing", "Thanksgiving", "Joy"], a: false },
+            31: { i: "In you, O LORD, do I take refuge; let me never be put to shame...", s: "To the choirmaster. A Psalm of David.", t: ["Refuge", "Distress", "Deliverance"], a: false },
+            32: { i: "Blessed is the one whose transgression is forgiven, whose sin is covered.", s: "A Maskil of David.", t: ["Forgiveness", "Confession", "Penitence"], a: false },
+            33: { i: "Shout for joy in the LORD, O you righteous!", s: "", t: ["Praise", "Creation", "Providence"], a: false },
+            34: { i: "I will bless the LORD at all times; his praise shall continually be in my mouth.", s: "Of David, when he changed his behavior before Abimelech, so that he drove him out, and he went away.", t: ["Deliverance", "Fear of the Lord", "Goodness"], a: true },
+            35: { i: "Contend, O LORD, with those who contend with me...", s: "Of David.", t: ["Imprecation", "Deliverance", "Vindication"], a: false },
+            36: { i: "Transgression speaks to the wicked deep in his heart...", s: "To the choirmaster. Of David, the servant of the LORD.", t: ["Wickedness", "Steadfast Love", "Life"], a: false },
+            37: { i: "Fret not yourself because of evildoers; be not envious of wrongdoers!", s: "Of David.", t: ["Wisdom", "Patience", "Inheritance"], a: true },
+            38: { i: "O LORD, rebuke me not in your anger, nor discipline me in your wrath!", s: "A Psalm of David, for the memorial offering.", t: ["Sickness", "Penitence", "Suffering"], a: false },
+            39: { i: "I said, 'I will guard my ways, that I may not sin with my tongue...'", s: "To the choirmaster: to Jeduthun. A Psalm of David.", t: ["Brevity of Life", "Silence", "Hope"], a: false },
+            40: { i: "I waited patiently for the LORD; he inclined to me and heard my cry.", s: "To the choirmaster. A Psalm of David.", t: ["Deliverance", "Obedience", "Proclamation"], a: false },
+            41: { i: "Blessed is the one who considers the poor! In the day of trouble the LORD delivers him.", s: "To the choirmaster. A Psalm of David.", t: ["Healing", "Betrayal", "Mercy"], a: false },
+            42: { i: "As a deer pants for flowing streams, so pants my soul for you, O God.", s: "To the choirmaster. A Maskil of the Sons of Korah.", t: ["Thirst", "Exile", "Hope"], a: false },
+            43: { i: "Vindicate me, O God, and defend my cause against an ungodly people...", s: "", t: ["Light", "Truth", "Altar"], a: false },
+            44: { i: "O God, we have heard with our ears, our fathers have told us...", s: "To the choirmaster. A Maskil of the Sons of Korah.", t: ["National Lament", "Defeat", "Faithfulness"], a: false },
+            45: { i: "My heart overflows with a pleasing theme; I address my verses to the king...", s: "To the choirmaster: according to Lilies. A Maskil of the Sons of Korah; a love song.", t: ["Royal Wedding", "Majesty", "Beauty"], a: false },
+            46: { i: "God is our refuge and strength, a very present help in trouble.", s: "To the choirmaster. Of the Sons of Korah. According to Alamoth. A Song.", t: ["Refuge", "Zion", "Stillness"], a: false },
+            47: { i: "Clap your hands, all peoples! Shout to God with loud songs of joy!", s: "To the choirmaster. A Psalm of the Sons of Korah.", t: ["Kingship", "Ascension", "Nations"], a: false },
+            48: { i: "Great is the LORD and greatly to be praised in the city of our God!", s: "A Song. A Psalm of the Sons of Korah.", t: ["Zion", "Security", "Beauty"], a: false },
+            49: { i: "Hear this, all peoples! Give ear, all inhabitants of the world...", s: "To the choirmaster. A Psalm of the Sons of Korah.", t: ["Wealth", "Mortality", "Wisdom"], a: false },
+            50: { i: "The Mighty One, God the LORD, speaks and summons the earth...", s: "A Psalm of Asaph.", t: ["Judgment", "Sacrifice", "Thanksgiving"], a: false },
+            51: { i: "Have mercy on me, O God, according to your steadfast love...", s: "To the choirmaster. A Psalm of David, when Nathan the prophet went to him, after he had gone in to Bathsheba.", t: ["Repentance", "Forgiveness", "Clean Heart"], a: false },
+            52: { i: "Why do you boast of evil, O mighty man? The steadfast love of God endures...", s: "To the choirmaster. A Maskil of David, when Doeg, the Edomite, came and told Saul...", t: ["Deceit", "Judgment", "Trust"], a: false },
+            53: { i: "The fool says in his heart, 'There is no God.'", s: "To the choirmaster: according to Mahalath. A Maskil of David.", t: ["Folly", "Corruption", "Salvation"], a: false },
+            54: { i: "O God, save me by your name, and vindicate me by your might.", s: "To the choirmaster: with stringed instruments. A Maskil of David, when the Ziphites went and told Saul...", t: ["Vindication", "Deliverance"], a: false },
+            55: { i: "Give ear to my prayer, O God, and hide not yourself from my plea!", s: "To the choirmaster: with stringed instruments. A Maskil of David.", t: ["Betrayal", "Distress", "Trust"], a: false },
+            56: { i: "Be gracious to me, O God, for man tramples on me...", s: "To the choirmaster: according to The Dove on Far-off Terebinths. A Miktam of David, when the Philistines seized him in Gath.", t: ["Fear", "Trust", "Deliverance"], a: false },
+            57: { i: "Be merciful to me, O God, be merciful to me, for in you my soul takes refuge...", s: "To the choirmaster: according to Do Not Destroy. A Miktam of David, when he fled from Saul, in the cave.", t: ["Refuge", "Exaltation", "Awakening"], a: false },
+            58: { i: "Do you indeed decree what is right, you gods? Do you judge the children of man uprightly?", s: "To the choirmaster: according to Do Not Destroy. A Miktam of David.", t: ["Injustice", "Judgment", "Vengeance"], a: false },
+            59: { i: "Deliver me from my enemies, O my God; protect me from those who rise up against me...", s: "To the choirmaster: according to Do Not Destroy. A Miktam of David, when Saul sent men to watch his house in order to kill him.", t: ["Protection", "Strength", "Vigilance"], a: false },
+            60: { i: "O God, you have rejected us, broken our defenses; you have been angry...", s: "To the choirmaster: according to Shushan Eduth. A Miktam of David; for instruction; when he strove with Aram-naharaim and with Aram-zobah...", t: ["Defeat", "Restoration", "Victory"], a: false },
+            61: { i: "Hear my cry, O God, listen to my prayer...", s: "To the choirmaster: with stringed instruments. Of David.", t: ["Refuge", "Rock", "Heritage"], a: false },
+            62: { i: "For God alone my soul waits in silence; from him comes my salvation.", s: "To the choirmaster: according to Jeduthun. A Psalm of David.", t: ["Silence", "Trust", "Power"], a: false },
+            63: { i: "O God, you are my God; earnestly I seek you...", s: "A Psalm of David, when he was in the wilderness of Judah.", t: ["Thirst", "Satisfied", "Shadow of Wings"], a: false },
+            64: { i: "Hear my voice, O God, in my complaint; preserve my life from dread of the enemy.", s: "To the choirmaster. A Psalm of David.", t: ["Protection", "Deceit", "Rejoicing"], a: false },
+            65: { i: "Praise is due to you, O God, in Zion, and to you shall vows be performed.", s: "To the choirmaster. A Psalm of David. A Song.", t: ["Harvest", "Provision", "Atonement"], a: false },
+            66: { i: "Shout for joy to God, all the earth; sing the glory of his name...", s: "To the choirmaster. A Song. A Psalm.", t: ["Testing", "Deliverance", "Praise"], a: false },
+            67: { i: "May God be gracious to us and bless us and make his face to shine upon us...", s: "To the choirmaster: with stringed instruments. A Psalm. A Song.", t: ["Blessing", "Nations", "Harvest"], a: false },
+            68: { i: "God shall arise, his enemies shall be scattered...", s: "To the choirmaster. A Psalm of David. A Song.", t: ["Procession", "Victory", "Sinai"], a: false },
+            69: { i: "Save me, O God! For the waters have come up to my neck.", s: "To the choirmaster: according to Lilies. Of David.", t: ["Suffering", "Zeal", "Deliverance"], a: false },
+            70: { i: "Make haste, O God, to deliver me! O LORD, make haste to help me!", s: "To the choirmaster. Of David, for the memorial offering.", t: ["Urgency", "Deliverance", "Rejoicing"], a: false },
+            71: { i: "In you, O LORD, do I take refuge; let me never be put to shame!", s: "", t: ["Old Age", "Hope", "Righteousness"], a: false },
+            72: { i: "Give the king your justice, O God, and your righteousness to the royal son!", s: "Of Solomon.", t: ["Kingship", "Justice", "Prosperity"], a: false },
+            73: { i: "Truly God is good to Israel, to those who are pure in heart.", s: "A Psalm of Asaph.", t: ["Theodicy", "Sanctuary", "Presence"], a: false },
+            74: { i: "O God, why do you cast us off forever? Why does your anger smoke...", s: "A Maskil of Asaph.", t: ["Destruction", "Sanctuary", "Covenant"], a: false },
+            75: { i: "We give thanks to you, O God; we give thanks, for your name is near.", s: "To the choirmaster: according to Do Not Destroy. A Psalm of Asaph. A Song.", t: ["Judgment", "Exaltation", "Cup of Wrath"], a: false },
+            76: { i: "In Judah God is known; his name is great in Israel.", s: "To the choirmaster: with stringed instruments. A Psalm of Asaph. A Song.", t: ["Majesty", "Victory", "Zion"], a: false },
+            77: { i: "I cry aloud to God, aloud to God, and he will hear me.", s: "To the choirmaster: according to Jeduthun. A Psalm of Asaph.", t: ["Distress", "Remembrance", "Redemption"], a: false },
+            78: { i: "Give ear, O my people, to my teaching; incline your ears to the words of my mouth!", s: "A Maskil of Asaph.", t: ["History", "Rebellion", "Faithfulness"], a: false },
+            79: { i: "O God, the nations have come into your inheritance; they have defiled your holy temple...", s: "A Psalm of Asaph.", t: ["Defilement", "Lament", "Forgiveness"], a: false },
+            80: { i: "Give ear, O Shepherd of Israel, you who lead Joseph like a flock.", s: "To the choirmaster: according to Lilies. A Testimony. A Psalm of Asaph.", t: ["Restoration", "Vine", "Face to Shine"], a: false },
+            81: { i: "Sing aloud to God our strength; shout for joy to the God of Jacob!", s: "To the choirmaster: according to The Gittith. Of Asaph.", t: ["Festival", "Obedience", "Provision"], a: false },
+            82: { i: "God has taken his place in the divine council; in the midst of the gods he holds judgment...", s: "A Psalm of Asaph.", t: ["Divine Council", "Justice", "Oppressed"], a: false },
+            83: { i: "O God, do not keep silence; do not hold your peace or be still, O God!", s: "A Song. A Psalm of Asaph.", t: ["Conspiracy", "Enemies", "Most High"], a: false },
+            84: { i: "How lovely is your dwelling place, O LORD of hosts!", s: "To the choirmaster: according to The Gittith. A Psalm of the Sons of Korah.", t: ["Sanctuary", "Pilgrimage", "Favor"], a: false },
+            85: { i: "LORD, you were favorable to your land; you restored the fortunes of Jacob.", s: "To the choirmaster. A Psalm of the Sons of Korah.", t: ["Restoration", "Peace", "Righteousness"], a: false },
+            86: { i: "Incline your ear, O LORD, and answer me, for I am poor and needy.", s: "A Prayer of David.", t: ["Supplication", "Steadfast Love", "Undivided Heart"], a: false },
+            87: { i: "On the holy mount stands the city he founded...", s: "A Psalm of the Sons of Korah. A Song.", t: ["Zion", "Nations", "Citizenship"], a: false },
+            88: { i: "O LORD, God of my salvation; I cry out day and night before you.", s: "A Song. A Psalm of the Sons of Korah. To the choirmaster: according to Mahalath Leannoth. A Maskil of Heman the Ezrahite.", t: ["Despair", "Darkness", "Death"], a: false },
+            89: { i: "I will sing of the steadfast love of the LORD, forever...", s: "A Maskil of Ethan the Ezrahite.", t: ["Davidic Covenant", "Faithfulness", "Lament"], a: false },
+            90: { i: "Lord, you have been our dwelling place in all generations.", s: "A Prayer of Moses, the man of God.", t: ["Eternity", "Mortality", "Wisdom"], a: false },
+            91: { i: "He who dwells in the shelter of the Most High will abide in the shadow of the Almighty.", s: "", t: ["Protection", "Refuge", "Angels"], a: false },
+            92: { i: "It is good to give thanks to the LORD, to sing praises to your name, O Most High...", s: "A Psalm. A Song for the Sabbath.", t: ["Thanksgiving", "Flourishing", "Sabbath"], a: false },
+            93: { i: "The LORD reigns; he is robed in majesty...", s: "", t: ["Kingship", "Majesty", "Holiness"], a: false },
+            94: { i: "O LORD, God of vengeance, O God of vengeance, shine forth!", s: "", t: ["Vengeance", "Justice", "Comfort"], a: false },
+            95: { i: "Oh come, let us sing to the LORD; let us make a joyful noise to the rock of our salvation!", s: "", t: ["Kingship", "Worship", "Warning", "Rest"], a: false },
+            96: { i: "Oh sing to the LORD a new song; sing to the LORD, all the earth!", s: "", t: ["New Song", "Glory", "Judgment"], a: false },
+            97: { i: "The LORD reigns, let the earth rejoice; let the many coastlands be glad!", s: "", t: ["Kingship", "Joy", "Light"], a: false },
+            98: { i: "Oh sing to the LORD a new song, for he has done marvelous things!", s: "A Psalm.", t: ["Victory", "Salvation", "Joy"], a: false },
+            99: { i: "The LORD reigns; let the peoples tremble! He sits enthroned upon the cherubim...", s: "", t: ["Holiness", "Kingship", "Justice"], a: false },
+            100: { i: "Make a joyful noise to the LORD, all the earth!", s: "A Psalm for giving thanks.", t: ["Thanksgiving", "Joy", "Goodness"], a: false },
+            101: { i: "I will sing of steadfast love and justice; to you, O LORD, I will make music.", s: "A Psalm of David.", t: ["Integrity", "Justice", "Leadership"], a: false },
+            102: { i: "Hear my prayer, O LORD; let my cry come to you!", s: "A Prayer of one afflicted, when he is faint and pours out his complaint before the LORD.", t: ["Affliction", "Eternity", "Zion"], a: false },
+            103: { i: "Bless the LORD, O my soul, and all that is within me, bless his holy name!", s: "Of David.", t: ["Compassion", "Forgiveness", "Healing"], a: false },
+            104: { i: "Bless the LORD, O my soul! O LORD my God, you are very great!", s: "", t: ["Creation", "Providence", "Majesty"], a: false },
+            105: { i: "Oh give thanks to the LORD; call upon his name; make known his deeds among the peoples!", s: "", t: ["History", "Covenant", "Exodus"], a: false },
+            106: { i: "Praise the LORD! Oh give thanks to the LORD, for he is good, for his steadfast love endures forever!", s: "", t: ["Rebellion", "Mercy", "History"], a: false },
+            107: { i: "Oh give thanks to the LORD, for he is good, for his steadfast love endures forever!", s: "", t: ["Redemption", "Deliverance", "Gathering"], a: false },
+            108: { i: "My heart is steadfast, O God! I will sing and make melody with all my being!", s: "A Song. A Psalm of David.", t: ["Steadfastness", "Victory", "Praise"], a: false },
+            109: { i: "Be not silent, O God of my praise! For wicked and deceitful mouths are opened against me...", s: "To the choirmaster. A Psalm of David.", t: ["Imprecation", "Betrayal", "Deliverance"], a: false },
+            110: { i: "The LORD says to my Lord: 'Sit at my right hand, until I make your enemies your footstool.'", s: "A Psalm of David.", t: ["Messiah", "Priest", "King"], a: false },
+            111: { i: "Praise the LORD! I will give thanks to the LORD with my whole heart...", s: "", t: ["Works of God", "Wisdom", "Covenant"], a: true },
+            112: { i: "Praise the LORD! Blessed is the man who fears the LORD...", s: "", t: ["Righteousness", "Blessing", "Light"], a: true },
+            113: { i: "Praise the LORD! Praise, O servants of the LORD, praise the name of the LORD!", s: "", t: ["Exaltation", "Humility", "Praise"], a: false },
+            114: { i: "When Israel went out from Egypt, the house of Jacob from a people of strange language...", s: "", t: ["Exodus", "Presence", "Trembling"], a: false },
+            115: { i: "Not to us, O LORD, not to us, but to your name give glory...", s: "", t: ["Glory", "Idols", "Trust"], a: false },
+            116: { i: "I love the LORD, because he has heard my voice and my pleas for mercy.", s: "", t: ["Deliverance", "Vows", "Thanksgiving"], a: false },
+            117: { i: "Praise the LORD, all nations! Extol him, all peoples!", s: "", t: ["Nations", "Praise", "Steadfast Love"], a: false },
+            118: { i: "Oh give thanks to the LORD, for he is good; let his steadfast love endure forever!", s: "", t: ["Cornerstone", "Victory", "Thanksgiving"], a: false },
+            119: { i: "Blessed are those whose way is blameless, who walk in the law of the LORD!", s: "", t: ["Torah", "Word of God", "Meditation"], a: true },
+            120: { i: "In my distress I called to the LORD, and he answered me.", s: "A Song of Ascents.", t: ["Deceit", "Peace", "Distress"], a: false },
+            121: { i: "I lift up my eyes to the hills. From where does my help come?", s: "A Song of Ascents.", t: ["Help", "Keeper", "Protection"], a: false },
+            122: { i: "I was glad when they said to me, 'Let us go to the house of the LORD!'", s: "A Song of Ascents. Of David.", t: ["Jerusalem", "Peace", "Joy"], a: false },
+            123: { i: "To you I lift up my eyes, O you who are enthroned in the heavens!", s: "A Song of Ascents.", t: ["Mercy", "Dependence", "Contempt"], a: false },
+            124: { i: "If it had not been the LORD who was on our side—let Israel now say—", s: "A Song of Ascents. Of David.", t: ["Escape", "Deliverance", "Help"], a: false },
+            125: { i: "Those who trust in the LORD are like Mount Zion, which cannot be moved...", s: "A Song of Ascents.", t: ["Security", "Mount Zion", "Peace"], a: false },
+            126: { i: "When the LORD restored the fortunes of Zion, we were like those who dream.", s: "A Song of Ascents.", t: ["Restoration", "Joy", "Harvest"], a: false },
+            127: { i: "Unless the LORD builds the house, those who build it labor in vain.", s: "A Song of Ascents. Of Solomon.", t: ["Labor", "Children", "Blessing"], a: false },
+            128: { i: "Blessed is everyone who fears the LORD, who walks in his ways!", s: "A Song of Ascents.", t: ["Family", "Blessing", "Fear of the Lord"], a: false },
+            129: { i: "Greatly have they afflicted me from my youth—let Israel now say—", s: "A Song of Ascents.", t: ["Affliction", "Perseverance", "Justice"], a: false },
+            130: { i: "Out of the depths I cry to you, O LORD!", s: "A Song of Ascents.", t: ["Depths", "Forgiveness", "Hope"], a: false },
+            131: { i: "O LORD, my heart is not lifted up; my eyes are not raised too high...", s: "A Song of Ascents. Of David.", t: ["Humility", "Quiet Soul", "Hope"], a: false },
+            132: { i: "Remember, O LORD, in David's favor, all the hardships he endured...", s: "A Song of Ascents.", t: ["Davidic Covenant", "Zion", "Dwelling"], a: false },
+            133: { i: "Behold, how good and pleasant it is when brothers dwell in unity!", s: "A Song of Ascents. Of David.", t: ["Unity", "Blessing", "Anointing"], a: false },
+            134: { i: "Come, bless the LORD, all you servants of the LORD...", s: "A Song of Ascents.", t: ["Night Watch", "Blessing", "Sanctuary"], a: false },
+            135: { i: "Praise the LORD! Praise the name of the LORD, give praise, O servants of the LORD...", s: "", t: ["Sovereignty", "Idols", "History"], a: false },
+            136: { i: "Give thanks to the LORD, for he is good, for his steadfast love endures forever.", s: "", t: ["Creation", "Exodus", "Steadfast Love"], a: false },
+            137: { i: "By the waters of Babylon, there we sat down and wept, when we remembered Zion.", s: "", t: ["Exile", "Babylon", "Remembrance"], a: false },
+            138: { i: "I give you thanks, O LORD, with my whole heart; before the gods I sing your praise...", s: "Of David.", t: ["Thanksgiving", "Exaltation", "Purpose"], a: false },
+            139: { i: "O LORD, you have searched me and known me!", s: "To the choirmaster. A Psalm of David.", t: ["Omniscience", "Omnipresence", "Creation"], a: false },
+            140: { i: "Deliver me, O LORD, from evil men; preserve me from violent men...", s: "To the choirmaster. A Psalm of David.", t: ["Protection", "Slander", "Justice"], a: false },
+            141: { i: "O LORD, I call upon you; hasten to me! Give ear to my voice when I call to you!", s: "A Psalm of David.", t: ["Incense", "Guard my Mouth", "Refuge"], a: false },
+            142: { i: "With my voice I cry out to the LORD; with my voice I plead for mercy to the LORD.", s: "A Maskil of David, when he was in the cave. A Prayer.", t: ["Cave", "Complaint", "Refuge"], a: false },
+            143: { i: "Hear my prayer, O LORD; give ear to my pleas for mercy! In your faithfulness answer me...", s: "A Psalm of David.", t: ["Guidance", "Thirst", "Deliverance"], a: false },
+            144: { i: "Blessed be the LORD, my rock, who trains my hands for war, and my fingers for battle...", s: "Of David.", t: ["Victory", "Prosperity", "Deliverance"], a: false },
+            145: { i: "I will extol you, my God and King, and bless your name forever and ever.", s: "A Song of Praise. Of David.", t: ["Greatness", "Goodness", "Kingdom"], a: true },
+            146: { i: "Praise the LORD! Praise the LORD, O my soul!", s: "", t: ["Praise", "Trust", "Justice"], a: false },
+            147: { i: "Praise the LORD! For it is good to sing praises to our God; for it is pleasant...", s: "", t: ["Rebuilding", "Providence", "Word"], a: false },
+            148: { i: "Praise the LORD! Praise the LORD from the heavens; praise him in the heights!", s: "", t: ["Cosmic Praise", "Creation", "Exaltation"], a: false },
+            149: { i: "Praise the LORD! Sing to the LORD a new song, his praise in the assembly of the godly!", s: "", t: ["New Song", "Victory", "Judgment"], a: false },
+            150: { i: "Praise the LORD! Praise God in his sanctuary; praise him in his mighty heavens!", s: "", t: ["Praise", "Instruments", "Hallelujah"], a: false }
+        };
+
+    // Exact Canonical Verse Counts for all 150 Psalms
+    const canonicalVerseCounts = [
+      6, 12, 8, 8, 12, 10, 17, 9, 20, 18, 
+      7, 8, 6, 7, 5, 11, 15, 50, 14, 9, 
+      13, 31, 6, 10, 22, 12, 14, 9, 11, 12, 
+      24, 11, 22, 22, 28, 12, 40, 22, 13, 17, 
+      13, 11, 5, 26, 17, 11, 9, 14, 20, 23, 
+      19, 9, 6, 7, 23, 13, 11, 11, 17, 12, 
+      8, 12, 11, 10, 13, 20, 7, 35, 36, 5, 
+      24, 20, 28, 23, 10, 12, 20, 72, 13, 19, 
+      16, 8, 18, 12, 13, 17, 7, 18, 52, 17, 
+      16, 15, 5, 23, 11, 13, 12, 9, 9, 5, 
+      8, 28, 22, 35, 45, 48, 43, 13, 31, 7, 
+      10, 10, 9, 8, 18, 19, 2, 29, 176, 7, 
+      8, 9, 4, 8, 5, 6, 5, 6, 8, 8, 
+      3, 18, 3, 3, 21, 26, 9, 8, 24, 13, 
+      10, 7, 12, 15, 21, 10, 20, 14, 9, 6
+    ];
+
+    // Form-critical categorization based on C. Hassell Bullock (Encountering the Book of Psalms)
+    const torah = [1, 19, 119];
+    const kingship = [2, 18, 20, 21, 45, 47, 72, 89, 93, 95, 96, 97, 98, 99, 101, 110, 132, 144];
+    const wisdom = [15, 37, 49, 73, 78, 82, 112, 127, 128, 133];
+    const trust = [11, 16, 23, 27, 46, 62, 63, 84, 91, 121, 125, 131, 139];
+    const thanksgiving = [30, 32, 34, 40, 65, 66, 67, 75, 92, 107, 116, 118, 124, 129, 136, 138];
+    const corpLament = [12, 14, 44, 53, 58, 60, 74, 79, 80, 83, 85, 90, 106, 123, 126, 137];
+    const hymn = [8, 24, 29, 33, 48, 50, 68, 76, 81, 87, 100, 103, 104, 105, 111, 113, 114, 115, 117, 122, 134, 135, 145, 146, 147, 148, 149, 150];
+
+    const top8Themes = ['Deliverance', 'Justice', 'Victory', 'Trust', 'Thanksgiving', 'Refuge', 'Zion', 'Creation'];
+
+    const psalmData = [];
+
+    for (let i = 1; i <= 150; i++) {
+      let book = 1;
+      if (i >= 42 && i <= 72) book = 2;
+      else if (i >= 73 && i <= 89) book = 3;
+      else if (i >= 90 && i <= 106) book = 4;
+      else if (i >= 107) book = 5;
+
+      let author = "Anonymous";
+      if ((i >= 3 && i <= 41) || (i >= 51 && i <= 65) || (i >= 138 && i <= 145) || [108,109,110,131,133].includes(i)) {
+        author = "David";
+      } else if (i === 50 || (i >= 73 && i <= 83)) {
+        author = "Asaph";
+      } else if ((i >= 42 && i <= 49) || (i >= 84 && i <= 85) || i === 87) {
+        author = "Sons of Korah";
+      } else if (i === 72 || i === 127) {
+        author = "Solomon";
+      } else if (i === 90) {
+        author = "Moses";
+      } else if (i === 88) {
+        author = "Heman";
+      } else if (i === 89) {
+        author = "Ethan";
+      }
+
+      let genre = "Indiv. Lament";
+      if (torah.includes(i)) genre = "Torah";
+      else if (kingship.includes(i)) genre = "Kingship";
+      else if (wisdom.includes(i)) genre = "Wisdom";
+      else if (trust.includes(i)) genre = "Trust";
+      else if (thanksgiving.includes(i)) genre = "Thanksgiving";
+      else if (corpLament.includes(i)) genre = "Corp. Lament";
+      else if (hymn.includes(i)) genre = "Hymn / Praise";
+
+      const length = canonicalVerseCounts[i - 1];
+      const details = extraDetails[i] || { i: `Psalm ${i}`, s: "", t: [], a: false };
+
+      const allThemes = [...details.t];
+      if (details.a && !allThemes.includes("Acrostic")) {
+        allThemes.push("Acrostic");
+      }
+
+      let primaryTopTheme = "Other";
+      for (const t of top8Themes) {
+        if (allThemes.includes(t)) {
+          primaryTopTheme = t;
+          break;
+        }
+      }
+
+      psalmData.push({
+        id: i,
+        book: `Book ${book}`,
+        author: author,
+        genre: genre,
+        length: length,
+        radius: Math.sqrt(length) * 3 + 3.5,
+        incipit: details.i,
+        superscription: details.s,
+        themes: allThemes,
+        acrostic: details.a,
+        topTheme: primaryTopTheme
+      });
+    }
+
+    // =============================================================================
+    // COLOR PALETTES (Exact Original Colors Preserved)
+    // =============================================================================
+    const genreColors = {
+      "Indiv. Lament": "#2563eb", // Blue 600
+      "Corp. Lament": "#7dd3fc",  // Sky 300
+      "Hymn / Praise": "#eab308", // Yellow
+      "Thanksgiving": "#f97316",  // Orange
+      "Trust": "#10b981",         // Emerald Green
+      "Wisdom": "#8b5cf6",        // Violet
+      "Kingship": "#d946ef",      // Fuchsia (Royal & Yahweh Kingship)
+      "Royal": "#d946ef",         // Backward compatibility
+      "Torah": "#ef4444"          // Red
+    };
+
+    const bookColors = d3.scaleOrdinal()
+      .domain(["Book 1", "Book 2", "Book 3", "Book 4", "Book 5"])
+      .range(["#f43f5e", "#f97316", "#eab308", "#10b981", "#0ea5e9"]);
+
+    let currentColorMode = 'genre';
+    let currentFilterKey = null;
+    let currentSelectedTag = 'all';
+
+    function getColor(d, key = currentColorMode) {
+      if (key === 'genre') return genreColors[d.genre];
+      if (key === 'book') return bookColors(d.book);
+      if (key === 'tag') {
+        if (currentSelectedTag && currentSelectedTag !== 'all') {
+          return d.themes.includes(currentSelectedTag) ? '#0066CC' : '#CBD5E1';
+        }
+        return '#0066CC';
+      }
+      return "#cbd5e1";
+    }
+
+    // =============================================================================
+    // DYNAMIC LEGEND
+    // =============================================================================
+    const legendContainer = document.getElementById('legend-container');
+
+    function renderLegend(key = currentColorMode) {
+      legendContainer.innerHTML = '';
+      if (key === 'genre') {
+        Object.entries(genreColors).forEach(([genre, color]) => {
+          const item = document.createElement('button');
+          item.className = `legend-chip flex items-center gap-1.5 font-medium transition-all ${currentFilterKey === genre || focusedCategory === genre ? 'active-filter' : ''}`;
+          item.innerHTML = `<span class="w-2.5 h-2.5 rounded-full inline-block shadow-sm" style="background-color: ${color}"></span> ${genre}`;
+          item.onclick = () => {
+            if (currentGrouping === 'genre') {
+              focusOnCategory('genre', genre);
+            } else {
+              filterByLegend('genre', genre);
+            }
+          };
+          legendContainer.appendChild(item);
+        });
+      } else if (key === 'book') {
+        ["Book 1", "Book 2", "Book 3", "Book 4", "Book 5"].forEach(book => {
+          const color = bookColors(book);
+          const item = document.createElement('button');
+          item.className = `legend-chip flex items-center gap-1.5 font-medium transition-all ${currentFilterKey === book || focusedCategory === book ? 'active-filter' : ''}`;
+          item.innerHTML = `<span class="w-2.5 h-2.5 rounded-full inline-block shadow-sm" style="background-color: ${color}"></span> ${book}`;
+          item.onclick = () => {
+            if (currentGrouping === 'book') {
+              focusOnCategory('book', book);
+            } else {
+              filterByLegend('book', book);
+            }
+          };
+          legendContainer.appendChild(item);
+        });
+      } else if (key === 'tag') {
+        const tagName = currentSelectedTag === 'all' ? 'All Psalms' : currentSelectedTag;
+        const matchCount = currentSelectedTag === 'all' ? 150 : psalmData.filter(d => d.themes.includes(currentSelectedTag)).length;
+        const item1 = document.createElement('div');
+        item1.className = 'flex items-center gap-1.5 font-bold text-[#0066CC] dark:text-[#389BFF]';
+        item1.innerHTML = `<span class="w-2.5 h-2.5 rounded-full inline-block shadow-sm bg-[#0066CC] dark:bg-[#389BFF]"></span> ${tagName} (${matchCount})`;
+        legendContainer.appendChild(item1);
+
+        if (currentSelectedTag !== 'all') {
+          const item2 = document.createElement('div');
+          item2.className = 'flex items-center gap-1.5 text-[#5A6A80] dark:text-[#94A3B8]';
+          item2.innerHTML = `<span class="w-2.5 h-2.5 rounded-full inline-block shadow-sm bg-[#CBD5E1] dark:bg-[#334155]"></span> Other Psalms (${150 - matchCount})`;
+          legendContainer.appendChild(item2);
+        }
+      }
+    }
+
+    function filterByLegend(type, value) {
+      playSound('click');
+      if (currentFilterKey === value) {
+        currentFilterKey = null;
+        applyCombinedFilters();
+      } else {
+        currentFilterKey = value;
+        applyCombinedFilters();
+      }
+      renderLegend(currentColorMode);
+    }
+
+    // =============================================================================
+    // TAG SELECTOR (DROPDOWN ONLY)
+    // =============================================================================
+    const tagSelectElem = document.getElementById('tag-select');
+    const clearTagBtn = document.getElementById('clear-tag-btn');
+
+    const popularTags = [
+      'Deliverance', 'Justice', 'Victory', 'Trust', 'Thanksgiving',
+      'Refuge', 'Praise', 'Zion', 'Creation', 'Kingship', 'Acrostic', 'Torah', 'Messiah'
+    ];
+
+    function initTagSelector() {
+      const tagCounts = {};
+      psalmData.forEach(d => {
+        d.themes.forEach(t => {
+          tagCounts[t] = (tagCounts[t] || 0) + 1;
+        });
+      });
+
+      tagSelectElem.innerHTML = '<option value="all">All Tags &amp; Themes (150 Psalms)</option>';
+
+      const popGroup = document.createElement('optgroup');
+      popGroup.label = "🔥 Popular Biblical Themes";
+      popularTags.forEach(tag => {
+        const opt = document.createElement('option');
+        opt.value = tag;
+        opt.textContent = `${tag} (${tagCounts[tag] || 0} psalms)`;
+        popGroup.appendChild(opt);
+      });
+      tagSelectElem.appendChild(popGroup);
+
+      const allSortedTags = Object.keys(tagCounts).sort();
+      const allGroup = document.createElement('optgroup');
+      allGroup.label = "📚 All Tags & Themes (A - Z)";
+      allSortedTags.forEach(tag => {
+        const opt = document.createElement('option');
+        opt.value = tag;
+        opt.textContent = `${tag} (${tagCounts[tag]} psalms)`;
+        allGroup.appendChild(opt);
+      });
+      tagSelectElem.appendChild(allGroup);
+
+      tagSelectElem.addEventListener('change', (e) => {
+        selectTag(e.target.value);
+      });
+    }
+
+    function selectTag(tag) {
+      playSound('click');
+      currentSelectedTag = tag;
+      tagSelectElem.value = tag;
+
+      if (tag === 'all') {
+        clearTagBtn.classList.add('hidden');
+      } else {
+        clearTagBtn.classList.remove('hidden');
+      }
+
+      if (currentColorMode === 'tag') {
+        circles.transition().duration(500).attr("fill", d => getColor(d, 'tag'));
+        renderLegend('tag');
+      }
+
+      if (currentGrouping === 'tag') {
+        updateGrouping('tag');
+      }
+
+      applyCombinedFilters();
+    }
+
+    function applyCombinedFilters() {
+      const searchInputEl = document.getElementById("search-input");
+      const searchVal = searchInputEl ? searchInputEl.value.trim().toLowerCase() : "";
+
+      circles.classed("highlighted", false);
+
+      circles.style("opacity", d => {
+        let visible = true;
+
+        if (focusedCategory) {
+          const catField = (currentGrouping === 'book') ? 'book' : 'genre';
+          if (d[catField] !== focusedCategory) visible = false;
+        }
+
+        if (currentSelectedTag && currentSelectedTag !== 'all') {
+          if (!d.themes.includes(currentSelectedTag)) visible = false;
+        }
+
+        if (currentFilterKey) {
+          if (d[currentColorMode] !== currentFilterKey) visible = false;
+        }
+
+        if (searchVal) {
+          const numMatch = searchVal.match(/^\s*(?:psalm\s*)?(\d+)\s*$/);
+          if (numMatch) {
+            const targetId = parseInt(numMatch[1], 10);
+            if (d.id !== targetId) visible = false;
+          } else {
+            const match = d.id.toString() === searchVal ||
+              d.genre.toLowerCase().includes(searchVal) ||
+              d.author.toLowerCase().includes(searchVal) ||
+              d.book.toLowerCase().includes(searchVal) ||
+              d.incipit.toLowerCase().includes(searchVal) ||
+              d.superscription.toLowerCase().includes(searchVal) ||
+              d.themes.some(t => t.toLowerCase().includes(searchVal));
+            if (!match) visible = false;
+          }
+        }
+
+        return visible ? 1 : 0.08;
+      });
+
+      if (currentSelectedTag !== 'all' || searchVal || currentFilterKey) {
+        circles.filter(function() {
+          return d3.select(this).style("opacity") === "1";
+        }).classed("highlighted", true);
+      }
+    }
+
+    // =============================================================================
+    // D3 FORCE SIMULATION & ZOOM ARCHITECTURE
+    // =============================================================================
+    const container = document.getElementById('chart-container');
+    let width = container.clientWidth;
+    let height = container.clientHeight;
+
+    const svg = d3.select("#chart-container")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    const g = svg.append("g").attr("class", "viewport-g");
+
+    // D3 Zoom controller
+    const zoom = d3.zoom()
+      .scaleExtent([0.5, 4.5])
+      .on("zoom", (event) => {
+        g.attr("transform", event.transform);
+      });
+
+    svg.call(zoom);
+    svg.on("dblclick.zoom", null);
+
+    const groupLabels = g.append("g").attr("class", "labels-layer");
+    const tooltip = d3.select("#tooltip");
+
+    psalmData.forEach(d => {
+      d.x = width / 2 + (Math.random() - 0.5) * 120;
+      d.y = height / 2 + (Math.random() - 0.5) * 120;
+    });
+
+    const simulation = d3.forceSimulation(psalmData)
+      .force("charge", d3.forceManyBody().strength(2))
+      .force("collide", d3.forceCollide().radius(d => d.radius + 1.5).iterations(4))
+      .force("x", d3.forceX(width / 2).strength(0.05))
+      .force("y", d3.forceY(height / 2).strength(0.05));
+
+    const node = g.selectAll(".node")
+      .data(psalmData)
+      .enter().append("g")
+      .attr("class", "node")
+      .call(d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended));
+
+    let lastHoverSound = 0;
+    const circles = node.append("circle")
+      .attr("class", "bubble")
+      .attr("r", d => d.radius)
+      .attr("fill", d => getColor(d, currentColorMode))
+      .on("mouseover", function(event, d) {
+        const now = Date.now();
+        if (now - lastHoverSound > 100) {
+          playSound('hover');
+          lastHoverSound = now;
+        }
+        showTooltip(event, d, this);
+      })
+      .on("mousemove", moveTooltip)
+      .on("mouseout", function() {
+        hideTooltip(this);
+      });
+
+    const labels = node.append("text")
+      .attr("class", "bubble-text")
+      .attr("dy", "0.32em")
+      .attr("text-anchor", "middle")
+      .text(d => d.id)
+      .style("opacity", d => d.radius > 11 ? 1 : 0);
+
+    let currentCatCenters = null;
+
+    simulation.on("tick", () => {
+      node.attr("transform", d => {
+        if (currentGrouping !== 'none' && currentGrouping !== 'order' && currentCatCenters) {
+          let catKey = d[currentGrouping];
+          if (currentGrouping === 'tag') {
+            catKey = d.themes.includes(currentSelectedTag === 'all' ? 'Deliverance' : currentSelectedTag) ? 'match' : 'other';
+          } else if (currentGrouping === 'top-theme') {
+            catKey = d.topTheme;
+          }
+          if (currentCatCenters[catKey]) {
+            const catInfo = currentCatCenters[catKey];
+            d.y = Math.max(catInfo.minY + d.radius, Math.min(height - d.radius - 8, d.y));
+          } else {
+            d.y = Math.max(d.radius + 8, Math.min(height - d.radius - 8, d.y));
+          }
+        } else {
+          d.y = Math.max(d.radius + 8, Math.min(height - d.radius - 8, d.y));
+        }
+        d.x = Math.max(d.radius + 8, Math.min(width - d.radius - 8, d.x));
+        return `translate(${d.x},${d.y})`;
+      });
+    });
+
+    // =============================================================================
+    // ZOOM FOCUS ARCHITECTURE (Click Genre to Zoom & Isolate)
+    // =============================================================================
+    let focusedCategory = null;
+    const focusBanner = document.getElementById("focus-banner");
+    const focusBannerText = document.getElementById("focus-banner-text");
+
+    function focusOnCategory(type, categoryName) {
+      if (focusedCategory === categoryName) {
+        resetGenreFocus();
+        return;
+      }
+
+      focusedCategory = categoryName;
+      playSound('zoom');
+
+      const matching = psalmData.filter(d => d[type] === categoryName);
+      if (matching.length === 0) return;
+
+      let minX = d3.min(matching, d => d.x - d.radius);
+      let maxX = d3.max(matching, d => d.x + d.radius);
+      let minY = d3.min(matching, d => d.y - d.radius);
+      let maxY = d3.max(matching, d => d.y + d.radius);
+
+      if (currentCatCenters && currentCatCenters[categoryName]) {
+        minY = Math.min(minY, currentCatCenters[categoryName].minY - 45);
+      }
+
+      const boxW = Math.max(maxX - minX, 100);
+      const boxH = Math.max(maxY - minY, 100);
+      const midX = (minX + maxX) / 2;
+      const midY = (minY + maxY) / 2;
+
+      const padX = width * 0.16;
+      const padY = height * 0.16;
+      const scaleX = (width - padX * 2) / boxW;
+      const scaleY = (height - padY * 2) / boxH;
+      let targetScale = Math.min(scaleX, scaleY, 2.7);
+      targetScale = Math.max(targetScale, 1.25);
+
+      const targetX = (width / 2) - (midX * targetScale);
+      const targetY = (height / 2) - (midY * targetScale);
+
+      svg.transition()
+        .duration(850)
+        .ease(d3.easeCubicInOut)
+        .call(zoom.transform, d3.zoomIdentity.translate(targetX, targetY).scale(targetScale));
+
+      circles.transition().duration(400)
+        .style("opacity", d => d[type] === categoryName ? 1 : 0.06);
+
+      labels.transition().duration(400)
+        .style("opacity", d => (d[type] === categoryName && (d.radius * targetScale > 9)) ? 1 : 0);
+
+      focusBannerText.innerHTML = `
+        <span class="w-3 h-3 rounded-full inline-block shadow-sm" style="background-color: ${type === 'genre' ? genreColors[categoryName] : bookColors(categoryName)}"></span>
+        <span>${categoryName}</span>
+        <span class="text-[10px] font-semibold text-[#5A6A80] dark:text-[#94A3B8]">(${matching.length} Psalms)</span>
+      `;
+      focusBanner.classList.remove("hidden");
+
+      groupLabels.selectAll(".group-label-fo")
+        .transition().duration(400)
+        .style("opacity", function() {
+          return d3.select(this).attr("data-category") === categoryName ? 1 : 0.12;
+        });
+
+      renderLegend(currentColorMode);
+    }
+
+    function resetGenreFocus() {
+      if (!focusedCategory) return;
+      focusedCategory = null;
+      playSound('click');
+
+      focusBanner.classList.add("hidden");
+
+      svg.transition()
+        .duration(750)
+        .ease(d3.easeCubicInOut)
+        .call(zoom.transform, d3.zoomIdentity);
+
+      applyCombinedFilters();
+
+      labels.transition().duration(400)
+        .style("opacity", d => d.radius > 11 ? 1 : 0);
+
+      groupLabels.selectAll(".group-label-fo")
+        .transition().duration(400)
+        .style("opacity", 1);
+
+      renderLegend(currentColorMode);
+    }
+
+    // =============================================================================
+    // TOOLTIP & INTERACTIVITY
+    // =============================================================================
+    function showTooltip(event, d, circleElem) {
+      tooltip.transition().duration(180).style("opacity", 1);
+
+      let html = `
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700/60 pb-2 mb-2">
+          <div class="font-display font-extrabold text-lg text-[#1E293B] dark:text-[#F1F5F9]">
+            Psalm ${d.id}
+          </div>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-100 dark:bg-blue-900/60 text-[#0066CC] dark:text-[#60A5FA]">
+            ${d.book}
+          </span>
+        </div>
+      `;
+
+      if (d.superscription) {
+        html += `<div class="text-[10px] leading-tight text-[#5A6A80] dark:text-[#94A3B8] uppercase tracking-wider mb-2 font-bold">${d.superscription}</div>`;
+      }
+
+      html += `<div class="italic text-[#1E293B] dark:text-[#F1F5F9] text-xs mb-3 font-serif leading-relaxed">"${d.incipit}"</div>`;
+
+      html += `
+        <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 text-xs bg-slate-50 dark:bg-slate-900/50 p-2.5 rounded-xl border border-slate-200/50 dark:border-white/5 mb-3">
+          <div>
+            <span class="text-[#5A6A80] dark:text-[#94A3B8] block text-[10px] uppercase font-bold tracking-wider">Author</span>
+            <span class="text-[#1E293B] dark:text-[#F1F5F9] font-semibold">${d.author}</span>
+          </div>
+
+          <div>
+            <span class="text-[#5A6A80] dark:text-[#94A3B8] block text-[10px] uppercase font-bold tracking-wider">Verses</span>
+            <span class="text-[#1E293B] dark:text-[#F1F5F9] font-semibold">${d.length} verses</span>
+          </div>
+
+          <div class="col-span-2 pt-1 border-t border-slate-200/40 dark:border-white/5">
+            <span class="text-[#5A6A80] dark:text-[#94A3B8] block text-[10px] uppercase font-bold tracking-wider">Genre</span>
+            <span class="text-[#1E293B] dark:text-[#F1F5F9] font-bold flex items-center gap-1.5 mt-0.5">
+              <span class="w-2.5 h-2.5 rounded-full inline-block shadow-sm" style="background-color: ${genreColors[d.genre]}"></span>
+              ${d.genre}
+            </span>
+          </div>
+        </div>
+      `;
+
+      if (d.themes.length > 0 || d.acrostic) {
+        html += `<div class="flex flex-wrap gap-1.5 pt-1">`;
+        d.themes.forEach(theme => {
+          const isTagActive = (currentSelectedTag === theme);
+          if (theme === 'Acrostic') {
+            html += `<span class="px-2 py-0.5 ${isTagActive ? 'bg-indigo-600 text-white' : 'bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300'} font-bold rounded-lg text-[10px] shadow-sm cursor-pointer" onclick="selectTag('Acrostic')">ACROSTIC</span>`;
+          } else {
+            html += `<span class="px-2 py-0.5 ${isTagActive ? 'bg-[#0066CC] text-white' : 'bg-slate-100 dark:bg-slate-800 text-[#5A6A80] dark:text-[#94A3B8]'} font-medium rounded-lg text-[10px] border border-slate-200/60 dark:border-slate-700/60 cursor-pointer" onclick="selectTag('${theme}')">${theme}</span>`;
+          }
+        });
+        html += `</div>`;
+      }
+
+      tooltip.html(html);
+
+      const searchInputEl = document.getElementById("search-input");
+      const hasSearch = searchInputEl && searchInputEl.value.trim();
+      if (!focusedCategory && !currentFilterKey && currentSelectedTag === 'all' && !hasSearch) {
+        circles.style("opacity", 0.18);
+        d3.select(circleElem).style("opacity", 1).attr("stroke-width", "3px");
+      }
+    }
+
+    function moveTooltip(event) {
+      let x = event.pageX + 16;
+      let y = event.pageY - 28;
+
+      const tooltipNode = tooltip.node();
+      if (!tooltipNode) return;
+      const rect = tooltipNode.getBoundingClientRect();
+      if (x + rect.width > window.innerWidth) x = event.pageX - rect.width - 16;
+      if (y + rect.height > window.innerHeight) y = event.pageY - rect.height - 16;
+
+      tooltip.style("left", x + "px").style("top", y + "px");
+    }
+
+    function hideTooltip(circleElem) {
+      tooltip.transition().duration(180).style("opacity", 0);
+      const searchInputEl = document.getElementById("search-input");
+      const hasSearch = searchInputEl && searchInputEl.value.trim();
+      if (!focusedCategory && !currentFilterKey && currentSelectedTag === 'all' && !hasSearch) {
+        circles.style("opacity", 1).attr("stroke-width", "1.5px");
+      } else {
+        circles.attr("stroke-width", "1.5px");
+      }
+    }
+
+    function dragstarted(event, d) {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+
+    function dragended(event, d) {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+
+    // =============================================================================
+    // GROUPING ARCHITECTURE (With Tactile Neumorphic Buttons & Label Clearance)
+    // =============================================================================
+    let currentGrouping = 'none';
+
+    function updateGrouping(groupBy) {
+      currentGrouping = groupBy;
+      resetGenreFocus();
+      groupLabels.selectAll("*").remove();
+      currentCatCenters = null;
+
+      if (groupBy === 'none') {
+        simulation
+          .force("x", d3.forceX(width / 2).strength(0.06))
+          .force("y", d3.forceY(height / 2).strength(0.06))
+          .force("collide", d3.forceCollide().radius(d => d.radius + 1.5).iterations(4));
+      } else if (groupBy === 'order') {
+        const cols = 15;
+        const rows = 10;
+        const marginX = width * 0.08;
+        const marginY = height * 0.12;
+        const availableWidth = width - (marginX * 2);
+        const availableHeight = height - (marginY * 2);
+
+        const stepX = availableWidth / (cols - 1);
+        const stepY = availableHeight / (rows - 1);
+
+        simulation
+          .force("x", d3.forceX(d => marginX + (((d.id - 1) % cols) * stepX)).strength(0.8))
+          .force("y", d3.forceY(d => marginY + (Math.floor((d.id - 1) / cols) * stepY)).strength(0.8))
+          .force("collide", d3.forceCollide().radius(d => d.radius + 0.5).iterations(2));
+      } else if (groupBy === 'tag') {
+        const activeTag = (currentSelectedTag && currentSelectedTag !== 'all') ? currentSelectedTag : 'Deliverance';
+        const matchCount = psalmData.filter(d => d.themes.includes(activeTag)).length;
+
+        const cellW = width / 2;
+        const centers = {
+          'match': {
+            x: cellW * 0.5,
+            y: height * 0.55,
+            minY: 54
+          },
+          'other': {
+            x: cellW * 1.5,
+            y: height * 0.55,
+            minY: 54
+          }
+        };
+
+        // Button 1: Tag Match
+        const w1 = Math.max(activeTag.length * 10 + 90, 160);
+        const fo1 = groupLabels.append("foreignObject")
+          .attr("class", "group-label-fo")
+          .attr("x", centers['match'].x - w1 / 2)
+          .attr("y", 12)
+          .attr("width", w1)
+          .attr("height", 46);
+
+        fo1.append("xhtml:div")
+          .attr("class", "neu-btn genre-cluster-btn w-full h-8 px-3.5 flex items-center justify-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#0066CC] dark:text-[#60A5FA] select-none")
+          .html(`
+            <span class="w-2.5 h-2.5 rounded-full inline-block shrink-0 shadow-sm bg-[#0066CC] dark:bg-[#389BFF]"></span>
+            <span class="truncate">${activeTag}</span>
+            <span class="text-[10px] font-bold text-[#5A6A80] dark:text-[#94A3B8]">(${matchCount})</span>
+          `);
+
+        // Button 2: Other Psalms
+        const w2 = 160;
+        const fo2 = groupLabels.append("foreignObject")
+          .attr("class", "group-label-fo")
+          .attr("x", centers['other'].x - w2 / 2)
+          .attr("y", 12)
+          .attr("width", w2)
+          .attr("height", 46);
+
+        fo2.append("xhtml:div")
+          .attr("class", "neu-btn genre-cluster-btn w-full h-8 px-3.5 flex items-center justify-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#5A6A80] dark:text-[#94A3B8] select-none")
+          .html(`
+            <span class="w-2.5 h-2.5 rounded-full inline-block shrink-0 shadow-sm bg-[#CBD5E1] dark:bg-[#334155]"></span>
+            <span>Other Psalms</span>
+            <span class="text-[10px] font-bold text-[#5A6A80] dark:text-[#94A3B8]">(${150 - matchCount})</span>
+          `);
+
+        currentCatCenters = centers;
+
+        simulation
+          .force("x", d3.forceX(d => d.themes.includes(activeTag) ? centers['match'].x : centers['other'].x).strength(0.10))
+          .force("y", d3.forceY(d => d.themes.includes(activeTag) ? centers['match'].y : centers['other'].y).strength(0.12))
+          .force("collide", d3.forceCollide().radius(d => d.radius + 1.8).iterations(4));
+
+      } else if (groupBy === 'top-theme') {
+        const cols = 4;
+        const rows = 2;
+        const cellW = width / cols;
+        const cellH = height / rows;
+
+        const centers = {};
+        top8Themes.forEach((theme, i) => {
+          const col = i % cols;
+          const row = Math.floor(i / cols);
+          const count = psalmData.filter(d => d.topTheme === theme).length;
+
+          const labelY = (row * cellH) + 12;
+          const centerY = (row * cellH) + (cellH * 0.58) + (count > 20 ? 18 : 0);
+          const centerX = (col * cellW) + (cellW / 2);
+
+          centers[theme] = {
+            x: centerX,
+            y: centerY,
+            minY: (row * cellH) + 54
+          };
+
+          const btnW = Math.max(theme.length * 10 + 60, 130);
+          const fo = groupLabels.append("foreignObject")
+            .attr("class", "group-label-fo")
+            .attr("x", centerX - btnW / 2)
+            .attr("y", labelY)
+            .attr("width", btnW)
+            .attr("height", 46);
+
+          fo.append("xhtml:div")
+            .attr("class", "neu-btn genre-cluster-btn w-full h-8 px-3 flex items-center justify-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#0066CC] dark:text-[#60A5FA] select-none")
+            .html(`
+              <span class="truncate">${theme}</span>
+              <span class="text-[10px] font-bold text-[#5A6A80] dark:text-[#94A3B8]">(${count})</span>
+            `);
+        });
+
+        currentCatCenters = centers;
+
+        simulation
+          .force("x", d3.forceX(d => (centers[d.topTheme] || centers['Deliverance']).x).strength(0.10))
+          .force("y", d3.forceY(d => (centers[d.topTheme] || centers['Deliverance']).y).strength(0.12))
+          .force("collide", d3.forceCollide().radius(d => d.radius + 1.8).iterations(4));
+
+      } else {
+        const categories = Array.from(new Set(psalmData.map(d => d[groupBy])));
+        if (groupBy === 'book') categories.sort();
+
+        let cols, rows;
+        if (categories.length === 8) {
+          cols = 4;
+          rows = 2;
+        } else {
+          cols = Math.ceil(Math.sqrt(categories.length));
+          rows = Math.ceil(categories.length / cols);
+        }
+
+        const cellW = width / cols;
+        const cellH = height / rows;
+
+        const catCounts = {};
+        psalmData.forEach(d => {
+          catCounts[d[groupBy]] = (catCounts[d[groupBy]] || 0) + 1;
+        });
+
+        const centers = {};
+
+        categories.forEach((cat, i) => {
+          const col = i % cols;
+          const row = Math.floor(i / cols);
+          const count = catCounts[cat] || 0;
+
+          const labelY = (row * cellH) + 12;
+          const extraOffset = count > 30 ? 25 : (count > 15 ? 12 : 0);
+          const centerY = (row * cellH) + (cellH * 0.58) + extraOffset;
+          const centerX = (col * cellW) + (cellW / 2);
+          const labelCeiling = (row * cellH) + 54;
+
+          centers[cat] = {
+            x: centerX,
+            y: centerY,
+            row: row,
+            col: col,
+            minY: labelCeiling
+          };
+
+          // Real Neumorphic Pill Button inside foreignObject
+          const color = (groupBy === 'book') ? bookColors(cat) : (genreColors[cat] || '#0066CC');
+          const btnW = Math.max(cat.length * 9.5 + 68, 140);
+          const btnH = 34;
+
+          const fo = groupLabels.append("foreignObject")
+            .attr("class", "group-label-fo")
+            .attr("data-category", cat)
+            .attr("x", centerX - btnW / 2)
+            .attr("y", labelY)
+            .attr("width", btnW)
+            .attr("height", btnH + 12);
+
+          const btn = fo.append("xhtml:button")
+            .attr("class", "neu-btn genre-cluster-btn w-full h-8 px-3.5 flex items-center justify-center gap-2 text-[11px] font-extrabold uppercase tracking-wider text-[#0066CC] dark:text-[#60A5FA] cursor-pointer hover:scale-105 active:scale-95 transition-all select-none")
+            .attr("title", `Click to zoom focus on ${cat} (${count} psalms)`)
+            .on("click", (e) => {
+              e.stopPropagation();
+              if (groupBy === 'genre' || groupBy === 'book') {
+                focusOnCategory(groupBy, cat);
+              }
+            });
+
+          btn.html(`
+            <span class="w-2.5 h-2.5 rounded-full inline-block shrink-0 shadow-sm" style="background-color: ${color}"></span>
+            <span class="truncate">${cat}</span>
+            <span class="text-[10px] font-bold text-[#5A6A80] dark:text-[#94A3B8]">(${count})</span>
+            <i data-lucide="zoom-in" class="w-3 h-3 text-[#0066CC] dark:text-[#389BFF] opacity-75 shrink-0 ml-0.5"></i>
+          `);
+        });
+
+        currentCatCenters = centers;
+
+        // Render Lucide zoom-in icons inside buttons
+        lucide.createIcons();
+
+        simulation
+          .force("x", d3.forceX(d => centers[d[groupBy]].x).strength(0.10))
+          .force("y", d3.forceY(d => centers[d[groupBy]].y).strength(0.12))
+          .force("collide", d3.forceCollide().radius(d => d.radius + 1.8).iterations(4));
+      }
+
+      simulation.alpha(0.85).restart();
+    }
+
+    function reheatSimulation() {
+      playSound('click');
+      simulation.alpha(0.9).restart();
+    }
+
+    // =============================================================================
+    // SEARCH & FILTER SYSTEM (Optional / Guarded)
+    // =============================================================================
+    const searchInput = document.getElementById("search-input");
+    const clearSearchBtn = document.getElementById("clear-search-btn");
+
+    function clearSearch() {
+      if (searchInput) searchInput.value = "";
+      if (clearSearchBtn) clearSearchBtn.classList.add("hidden");
+      applyCombinedFilters();
+      playSound('click');
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        if (e.target.value.trim()) {
+          if (clearSearchBtn) clearSearchBtn.classList.remove("hidden");
+        } else {
+          if (clearSearchBtn) clearSearchBtn.classList.add("hidden");
+        }
+        applyCombinedFilters();
+      });
+    }
+
+    // =============================================================================
+    // UI CONTROLS EVENT LISTENERS
+    // =============================================================================
+    document.getElementById("group-by").addEventListener("change", (e) => {
+      playSound('click');
+      updateGrouping(e.target.value);
+    });
+
+    document.getElementById("color-by").addEventListener("change", (e) => {
+      playSound('click');
+      currentColorMode = e.target.value;
+      currentFilterKey = null;
+
+      circles.transition()
+        .duration(700)
+        .attr("fill", d => getColor(d, currentColorMode));
+
+      renderLegend(currentColorMode);
+    });
+
+    window.addEventListener("resize", () => {
+      width = container.clientWidth;
+      height = container.clientHeight;
+
+      svg.attr("width", width).attr("height", height);
+      updateGrouping(currentGrouping);
+    });
+
+    // Lifecycle Init
+    window.addEventListener("DOMContentLoaded", () => {
+      initTheme();
+      initAudioUI();
+      initTagSelector();
+      renderLegend(currentColorMode);
+      updateGrouping('none');
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

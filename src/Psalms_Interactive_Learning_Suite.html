@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIB523 The Book of Psalms - Interactive Learning Suite</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans, DM Sans, Noto Serif Hebrew -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Serif+Hebrew:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="vendor/tailwind.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="vendor/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neu: {
+              bg: '#E8F1FA',
+              surface: '#FFFFFF',
+              well: '#EEF5FC',
+              fg: '#1E293B',
+              muted: '#5A6A80',
+              accent: '#0066CC',
+              accentLight: '#2684FF'
+            }
+          },
+          fontFamily: {
+            display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+            hebrew: ['Noto Serif Hebrew', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --neu-bg: #E8F1FA;
+      --neu-surface: #FFFFFF;
+      --neu-surface-well: #EEF5FC;
+      --neu-fg: #1E293B;
+      --neu-shadow-dark: rgba(180, 200, 222, 0.65);
+      --neu-shadow-light: rgba(255, 255, 255, 0.95);
+    }
+    .dark {
+      --neu-bg: #0F172A;
+      --neu-surface: #1E293B;
+      --neu-surface-well: #0B1120;
+      --neu-fg: #F1F5F9;
+      --neu-shadow-dark: rgba(0, 0, 0, 0.7);
+      --neu-shadow-light: rgba(255, 255, 255, 0.05);
+    }
+    body { background-color: var(--neu-bg); color: var(--neu-fg); font-family: 'DM Sans', sans-serif; }
+    .neu-card {
+      background-color: var(--neu-surface) !important;
+      border-radius: 28px !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      box-shadow: 8px 10px 22px var(--neu-shadow-dark), -8px -8px 20px var(--neu-shadow-light) !important;
+      transition: all 250ms ease;
+    }
+    .dark .neu-card { border: 1px solid rgba(255, 255, 255, 0.06) !important; }
+    .neu-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 12px 16px 28px var(--neu-shadow-dark), -12px -12px 28px var(--neu-shadow-light) !important;
+    }
+    .neu-inset {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.45) !important;
+      box-shadow: inset 4px 4px 8px var(--neu-shadow-dark), inset -4px -4px 8px var(--neu-shadow-light) !important;
+    }
+    .dark .neu-inset { border: 1px solid rgba(255, 255, 255, 0.04) !important; }
+        /* Outset Tactile Pill / Small Badge for Crisp Elevation */
+    .neu-outset-sm {
+      background: linear-gradient(145deg, #FFFFFF, #EDF4FA) !important;
+      border: 1px solid rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 2px 3px 6px var(--neu-shadow-dark), -2px -2px 6px var(--neu-shadow-light) !important;
+      transition: all 200ms ease;
+    }
+
+    .dark .neu-outset-sm {
+      background: linear-gradient(145deg, #1E293B, #151F30) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.6), -2px -2px 6px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .neu-inset-sm {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.35) !important;
+      box-shadow: inset 2.5px 2.5px 5px var(--neu-shadow-dark), inset -2.5px -2.5px 5px var(--neu-shadow-light) !important;
+    }
+    .neu-btn {
+      background: linear-gradient(145deg, #FFFFFF, #E2E8F0) !important;
+      color: #0066CC !important;
+      border-radius: 14px !important;
+      border: 1px solid rgba(255, 255, 255, 0.8) !important;
+      box-shadow: 4px 4px 10px var(--neu-shadow-dark), -4px -4px 10px var(--neu-shadow-light) !important;
+      font-weight: 700;
+      transition: all 200ms ease;
+      cursor: pointer;
+    }
+    .dark .neu-btn {
+      background: linear-gradient(145deg, #2A303C, #1E232B) !important;
+      color: #60A5FA !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6), -4px -4px 10px rgba(255, 255, 255, 0.05) !important;
+    }
+    .neu-btn-primary {
+      background: linear-gradient(135deg, #0066CC 0%, #2684FF 100%) !important;
+      color: #FFFFFF !important;
+      border-radius: 14px !important;
+      box-shadow: 4px 4px 12px rgba(0, 102, 204, 0.45) !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased transition-colors duration-300">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-[#E8F1FA]/90 dark:bg-[#0F172A]/90 backdrop-blur border-b border-white/60 dark:border-white/5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl neu-outset-sm flex items-center justify-center text-[#0066CC] shadow-sm">
+          <i data-lucide="layers" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h1 class="font-display font-extrabold text-xl text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+            BIB523 Interactive Learning Suite
+            <span class="text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full bg-blue-100 text-[#0066CC] dark:bg-blue-950 dark:text-blue-300">
+              ABTS &bull; Masterclass Tools
+            </span>
+          </h1>
+        </div>
+      </div>
+
+      <button onclick="toggleTheme()" class="neu-btn w-10 h-10 flex items-center justify-center text-slate-500">
+        <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN SUITE GRID -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
+
+    <!-- Hero Card -->
+    <div class="neu-card p-8 sm:p-12 relative overflow-hidden">
+      <div class="relative z-10 max-w-3xl space-y-3">
+        <div class="neu-outset-sm px-4 py-1.5 rounded-full inline-flex items-center gap-2 text-xs font-display font-bold text-[#0066CC] uppercase shadow-sm">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          Active Learning Tools &bull; Interactive Seminary Labs
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Tactile Poetics, Theological Diagnostics &amp; Hermeneutical Labs
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+          Interactive masterclass studios designed to help students visualize Hebrew poetic syntax, diagnose canonical seams, apply the four senses of scripture, conduct rigorous Hebrew word studies, and preach the Psalms with homiletical faithfulness.
+        </p>
+      </div>
+    </div>
+
+    <!-- Apps Catalog Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- App 1: Psalms Explorer -->
+      <div class="neu-card p-6 flex flex-col justify-between space-y-5 border-t-4 border-t-blue-600">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[10px] font-display font-bold text-blue-600 uppercase shadow-sm">Week 1 Foundation</span>
+            <span class="w-8 h-8 rounded-xl neu-outset-sm flex items-center justify-center shadow-sm text-blue-600"><i data-lucide="compass" class="w-4 h-4"></i></span>
+          </div>
+          <h3 class="font-display font-extrabold text-lg text-slate-800 dark:text-white">Psalms Explorer</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+            Interactive D3 bubble and matrix visualizer for all 150 psalms. Explore the 5 Books, genre clusters, authors, historical settings, and canonical seams.
+          </p>
+        </div>
+        <a href="Psalms_Explorer.html" class="neu-btn px-4 py-2.5 text-xs font-bold flex items-center justify-center gap-2 text-center">
+          <span>Launch Explorer</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- App 2: Poetic Devices Tutor -->
+      <div class="neu-card p-6 flex flex-col justify-between space-y-5 border-t-4 border-t-indigo-600">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[10px] font-display font-bold text-indigo-600 uppercase shadow-sm">Week 2 Poetics</span>
+            <span class="w-8 h-8 rounded-xl neu-outset-sm flex items-center justify-center shadow-sm text-indigo-600"><i data-lucide="book-open" class="w-4 h-4"></i></span>
+          </div>
+          <h3 class="font-display font-extrabold text-lg text-slate-800 dark:text-white">Poetic Devices Tutor</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+            Interactive tutor for the 12 core Hebrew poetic devices. Features Click-to-Pair cola, Chiasm Builder, Red-Pen Commentary Audit, and 463 practice drills.
+          </p>
+        </div>
+        <a href="Psalms_Poetic_Devices_Tutor.html" class="neu-btn px-4 py-2.5 text-xs font-bold flex items-center justify-center gap-2 text-center">
+          <span>Launch Poetics Tutor</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- App 3: Lament Diagnostic Studio -->
+      <div class="neu-card p-6 flex flex-col justify-between space-y-5 border-t-4 border-t-rose-500">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[10px] font-display font-bold text-rose-600 uppercase shadow-sm">Week 5 Intensive</span>
+            <span class="w-8 h-8 rounded-xl neu-outset-sm flex items-center justify-center shadow-sm text-rose-500"><i data-lucide="heart-crack" class="w-4 h-4"></i></span>
+          </div>
+          <h3 class="font-display font-extrabold text-lg text-slate-800 dark:text-white">Lament Diagnostic &amp; Soul-Care</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+            5-part lament anatomy dissector, "Find the Pivot" interactive drill challenge, Psalm 88 dark night analysis, and pastoral crisis counseling simulator.
+          </p>
+        </div>
+        <a href="Lament%20Soul-Care%20Studio/Psalms_Lament_Diagnostic_Studio.html" class="neu-btn px-4 py-2.5 text-xs font-bold flex items-center justify-center gap-2 text-center">
+          <span>Launch Lament Studio</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- App 4: Quadriga Four Senses Studio -->
+      <div class="neu-card p-6 flex flex-col justify-between space-y-5 border-t-4 border-t-purple-600">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[10px] font-display font-bold text-purple-600 uppercase shadow-sm">Week 5 Masterclass</span>
+            <span class="w-8 h-8 rounded-xl neu-outset-sm flex items-center justify-center shadow-sm text-purple-600"><i data-lucide="layers" class="w-4 h-4"></i></span>
+          </div>
+          <h3 class="font-display font-extrabold text-lg text-slate-800 dark:text-white">The Four Senses (Quadriga)</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+            Dr. Patrick Schreiner’s 4-story house model: Literal, Christological, Moral, and Eschatological. Multi-sense labs (Pss 22, 110), trap auditor, and sermon blueprint builder.
+          </p>
+        </div>
+        <a href="Quadriga%20Hermeneutics%20Studio/Psalms_Quadriga_Four_Senses_Studio.html" class="neu-btn px-4 py-2.5 text-xs font-bold flex items-center justify-center gap-2 text-center">
+          <span>Launch Quadriga Studio</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- App 5: Psalm 119 Acrostic Studio -->
+      <div class="neu-card p-6 flex flex-col justify-between space-y-5 border-t-4 border-t-teal-600">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[10px] font-display font-bold text-teal-600 uppercase shadow-sm">Week 7 Wisdom &amp; Torah</span>
+            <span class="w-8 h-8 rounded-xl neu-outset-sm flex items-center justify-center shadow-sm text-teal-600"><span class="font-hebrew font-bold text-base">א</span></span>
+          </div>
+          <h3 class="font-display font-extrabold text-lg text-slate-800 dark:text-white">Psalm 119 Acrostic &amp; Synonyms</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+            22-letter Hebrew Aleph-Bet keyboard, deep-dive into the 8 legal Torah synonyms (*Torah, Davar, Mishpat, Edut, etc.*), and the "Praise in the Pit" affliction lens.
+          </p>
+        </div>
+        <a href="Psalm%20119%20Acrostic%20Studio/Psalm_119_Acrostic_Synonyms_Studio.html" class="neu-btn px-4 py-2.5 text-xs font-bold flex items-center justify-center gap-2 text-center">
+          <span>Launch Psalm 119 Studio</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- App 6: Songs of Ascents Studio -->
+      <div class="neu-card p-6 flex flex-col justify-between space-y-5 border-t-4 border-t-amber-600">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[10px] font-display font-bold text-amber-600 uppercase shadow-sm">Week 8 Pilgrimage</span>
+            <span class="w-8 h-8 rounded-xl neu-outset-sm flex items-center justify-center shadow-sm text-amber-600"><i data-lucide="mountain" class="w-4 h-4"></i></span>
+          </div>
+          <h3 class="font-display font-extrabold text-lg text-slate-800 dark:text-white">Songs of Ascents Pilgrimage</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+            15-step elevation climb from lowlands exile to Zion's sanctuary (Pss 120–134), 5-triad redaction analyzer, and keyword motif tracker (*Shamar, Shalom, Zion*).
+          </p>
+        </div>
+        <a href="Songs%20of%20Ascents%20Pilgrimage/Psalms_Songs_of_Ascents_Pilgrimage.html" class="neu-btn px-4 py-2.5 text-xs font-bold flex items-center justify-center gap-2 text-center">
+          <span>Launch Ascents Studio</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- App 7: Hebrew Key Word Study: Bless (Barakh) -->
+      <div class="neu-card p-6 flex flex-col justify-between space-y-5 border-t-4 border-t-blue-500">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[10px] font-display font-bold text-blue-600 uppercase shadow-sm">Key Word Studies</span>
+            <span class="w-8 h-8 rounded-xl neu-outset-sm flex items-center justify-center shadow-sm text-blue-600"><span class="font-hebrew font-bold text-base">ב</span></span>
+          </div>
+          <h3 class="font-display font-extrabold text-lg text-slate-800 dark:text-white">Hebrew Word Studies (Barakh, Hesed, Qadosh)</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+            Plain-meaning lexical masterclasses exploring <em>Bārakh</em> (Blessing/Praise), <em>Ḥesed</em> (Covenant Loyalty), and <em>Qōdesh / Qādôsh</em> (Holiness) with audio pronunciation, semantic ranges, and canonical trajectory.
+          </p>
+        </div>
+        <div class="space-y-2">
+          <a href="Psalms_Word_Study_Bless.html" class="neu-btn px-4 py-2 text-xs font-bold flex items-center justify-between text-blue-600 hover:text-blue-700">
+            <span>1. "Blessing" (Bārakh)</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+          <a href="Psalms_Word_Study_Hesed.html" class="neu-btn px-4 py-2 text-xs font-bold flex items-center justify-between text-blue-600 hover:text-blue-700">
+            <span>2. "Steadfast Love" (Ḥesed)</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+          <a href="Psalms_Word_Study_Holiness.html" class="neu-btn px-4 py-2 text-xs font-bold flex items-center justify-between text-blue-600 hover:text-blue-700">
+            <span>3. "Holiness" (Qōdesh / Qādôsh)</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+          <a href="Hebrew_Transliteration_Quick_Reference_Guide.html" class="text-[11px] text-slate-500 hover:text-blue-600 font-bold flex items-center justify-center gap-1 transition pt-1">
+            <i data-lucide="book-open" class="w-3 h-3 text-blue-600"></i>
+            <span>Transliteration Guide: SBL vs. Simplified</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- App 8: Psalms Sermon Prep Studio -->
+      <div class="neu-card p-6 flex flex-col justify-between space-y-5 border-t-4 border-t-emerald-600">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[10px] font-display font-bold text-emerald-600 uppercase shadow-sm">Homiletics Masterclass</span>
+            <span class="w-8 h-8 rounded-xl neu-outset-sm flex items-center justify-center shadow-sm text-emerald-600"><i data-lucide="mic" class="w-4 h-4"></i></span>
+          </div>
+          <h3 class="font-display font-extrabold text-lg text-slate-800 dark:text-white">Psalms Sermon Prep Studio</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+            The 6-stage homiletical bridge from Hebrew text to living sermon: Genre &amp; Tone trajectory, Poetic Parallelism mapping (anti-two-point fallacy), Sensory Imagery audit, 4-Lens Christological Matrix, Robinson Big Idea Forge, and Homiletical Isomorphism movement builder.
+          </p>
+        </div>
+        <div class="space-y-2">
+          <a href="Sermon%20Prep%20Studio/Psalms_Sermon_Prep_Studio.html" class="neu-btn px-4 py-2.5 text-xs font-bold flex items-center justify-center gap-2 text-center text-emerald-600 hover:text-emerald-700">
+            <span>Launch Sermon Prep Studio</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="neu-inset-sm mt-auto py-5 px-6 text-xs text-slate-500 text-center border-t border-slate-200/60 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>BIB523 The Book of Psalms &bull; Asia Biblical Theological Seminary</div>
+      <div class="font-display italic text-slate-600 dark:text-slate-300">"Open my eyes, that I may behold wondrous things out of your Torah." (Psalm 119:18)</div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (icon) icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+      lucide.createIcons();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

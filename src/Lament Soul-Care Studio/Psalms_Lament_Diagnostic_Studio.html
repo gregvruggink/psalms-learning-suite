@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Psalms Lament Diagnostic & Pastoral Soul-Care Studio (BIB523)</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans, DM Sans, Noto Serif Hebrew -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Serif+Hebrew:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="../vendor/tailwind.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="../vendor/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neu: {
+              bg: '#E8F1FA',
+              surface: '#FFFFFF',
+              well: '#EEF5FC',
+              fg: '#1E293B',
+              muted: '#5A6A80',
+              accent: '#0066CC',
+              accentLight: '#2684FF',
+              rose: '#E11D48',
+              amber: '#D97706',
+              teal: '#0D9488',
+              purple: '#7C3AED'
+            }
+          },
+          fontFamily: {
+            display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+            serif: ['Plus Jakarta Sans', 'Georgia', 'serif'],
+            hebrew: ['Noto Serif Hebrew', 'SBL Hebrew', 'serif']
+          },
+          borderRadius: {
+            'card': '32px',
+            'btn': '16px'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --neu-bg: #E8F1FA;
+      --neu-surface: #FFFFFF;
+      --neu-surface-well: #EEF5FC;
+      --neu-fg: #1E293B;
+      --neu-muted: #5A6A80;
+      --neu-accent: #0066CC;
+      --neu-shadow-dark: rgba(180, 200, 222, 0.65);
+      --neu-shadow-light: rgba(255, 255, 255, 0.95);
+    }
+    .dark {
+      --neu-bg: #0F172A;
+      --neu-surface: #1E293B;
+      --neu-surface-well: #0B1120;
+      --neu-fg: #F1F5F9;
+      --neu-muted: #94A3B8;
+      --neu-accent: #389BFF;
+      --neu-shadow-dark: rgba(0, 0, 0, 0.7);
+      --neu-shadow-light: rgba(255, 255, 255, 0.05);
+    }
+    body {
+      background-color: var(--neu-bg);
+      color: var(--neu-fg);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .neu-card {
+      background-color: var(--neu-surface) !important;
+      border-radius: 28px !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      box-shadow: 8px 10px 22px var(--neu-shadow-dark), -8px -8px 20px var(--neu-shadow-light) !important;
+      transition: all 250ms ease;
+    }
+    .dark .neu-card {
+      border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+    .neu-inset {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.45) !important;
+      box-shadow: inset 4px 4px 8px var(--neu-shadow-dark), inset -4px -4px 8px var(--neu-shadow-light) !important;
+    }
+    .dark .neu-inset {
+      border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    }
+        /* Outset Tactile Pill / Small Badge for Crisp Elevation */
+    .neu-outset-sm {
+      background: linear-gradient(145deg, #FFFFFF, #EDF4FA) !important;
+      border: 1px solid rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 2px 3px 6px var(--neu-shadow-dark), -2px -2px 6px var(--neu-shadow-light) !important;
+      transition: all 200ms ease;
+    }
+
+    .dark .neu-outset-sm {
+      background: linear-gradient(145deg, #1E293B, #151F30) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.6), -2px -2px 6px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .neu-inset-sm {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.35) !important;
+      box-shadow: inset 2.5px 2.5px 5px var(--neu-shadow-dark), inset -2.5px -2.5px 5px var(--neu-shadow-light) !important;
+    }
+    .dark .neu-inset-sm {
+      border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    }
+    .neu-btn {
+      background: linear-gradient(145deg, #FFFFFF, #E2E8F0) !important;
+      color: #0066CC !important;
+      border-radius: 14px !important;
+      border: 1px solid rgba(255, 255, 255, 0.8) !important;
+      box-shadow: 4px 4px 10px var(--neu-shadow-dark), -4px -4px 10px var(--neu-shadow-light) !important;
+      font-weight: 700;
+      transition: all 200ms ease;
+      cursor: pointer;
+    }
+    .dark .neu-btn {
+      background: linear-gradient(145deg, #2A303C, #1E232B) !important;
+      color: #60A5FA !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6), -4px -4px 10px rgba(255, 255, 255, 0.05) !important;
+    }
+    .neu-btn:hover:not(:disabled) {
+      transform: translateY(-1.5px);
+      background: linear-gradient(145deg, #F0F7FF, #E0EFFF) !important;
+      box-shadow: 6px 6px 14px rgba(0, 102, 204, 0.28), -6px -6px 14px rgba(255, 255, 255, 0.95) !important;
+    }
+    .neu-btn-primary {
+      background: linear-gradient(135deg, #0066CC 0%, #2684FF 100%) !important;
+      color: #FFFFFF !important;
+      border-radius: 14px !important;
+      box-shadow: 4px 4px 12px rgba(0, 102, 204, 0.45), -4px -4px 12px rgba(255, 255, 255, 0.7) !important;
+    }
+    .neu-tab-pill {
+      border-radius: 12px !important;
+      transition: all 200ms ease;
+    }
+    .neu-tab-pill.active {
+      background: linear-gradient(135deg, #0066CC 0%, #2684FF 100%) !important;
+      color: #FFFFFF !important;
+      box-shadow: 3px 3px 10px rgba(0, 102, 204, 0.45) !important;
+      font-weight: 700;
+    }
+    .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: rgba(180, 200, 222, 0.2); border-radius: 9999px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 102, 204, 0.25); border-radius: 9999px; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased transition-colors duration-300">
+
+  <!-- TOP HEADER -->
+  <header class="sticky top-0 z-40 bg-[#E8F1FA]/90 dark:bg-[#0F172A]/90 backdrop-blur border-b border-white/60 dark:border-white/5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="../Psalms_Interactive_Learning_Suite.html" class="neu-btn px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 text-slate-700 dark:text-slate-200 hover:text-rose-600 transition shrink-0" title="Return to All Course Apps">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Suite Hub</span>
+        </a>
+        <div class="w-10 h-10 rounded-2xl neu-outset-sm flex items-center justify-center text-[#E11D48] shrink-0 shadow-sm">
+          <i data-lucide="heart-crack" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h1 class="font-display font-extrabold text-lg sm:text-xl text-slate-800 dark:text-white tracking-tight flex items-center gap-2">
+            Lament Diagnostic &amp; Soul-Care Studio
+            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-400">
+              Week 5 Intensive
+            </span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <nav class="neu-inset-sm p-1 rounded-2xl flex items-center gap-1 text-xs">
+          <button onclick="switchTab('anatomy')" id="tab-btn-anatomy" class="neu-tab-pill active px-3.5 py-1.5 font-bold">5-Part Anatomy</button>
+          <button onclick="switchTab('dissector')" id="tab-btn-dissector" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">Passage Dissector</button>
+          <button onclick="switchTab('pivot')" id="tab-btn-pivot" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">Find the Pivot (Drill)</button>
+          <button onclick="switchTab('pastoral')" id="tab-btn-pastoral" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">Pastoral Soul-Care</button>
+        </nav>
+
+        <button onclick="toggleAudio()" id="audio-toggle" class="neu-btn w-9 h-9 flex items-center justify-center text-slate-500">
+          <i data-lucide="volume-2" class="w-4 h-4"></i>
+        </button>
+        <button onclick="toggleTheme()" class="neu-btn w-9 h-9 flex items-center justify-center text-slate-500">
+          <i data-lucide="moon" id="theme-icon" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- TAB 1: 5-PART ANATOMY OF LAMENT -->
+    <section id="view-anatomy" class="space-y-6">
+      
+      <!-- Golden Rule Banner -->
+      <div class="neu-card p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 max-w-2xl">
+          <div class="neu-outset-sm px-3.5 py-1 rounded-full inline-flex items-center gap-1.5 text-xs font-display font-bold text-[#E11D48] uppercase tracking-wider shadow-sm">
+            <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i>
+            The Theology of Lament
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white">
+            Biblical Lament is Faith in Extremis, Not Faith Abandoned.
+          </h2>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Over a third of the Psalter consists of laments. Biblical lament is not despair or therapeutic venting; it is an act of <strong>unflinching covenant loyalty</strong> that brings raw human trauma directly into the presence of Yahweh, expecting Him to act.
+          </p>
+        </div>
+
+        <div class="w-full md:w-auto shrink-0 neu-inset p-4 rounded-2xl text-center space-y-1">
+          <span class="text-xs uppercase font-bold text-slate-400">Canonical Ratio</span>
+          <div class="text-2xl font-black text-[#E11D48]">~67 of 150</div>
+          <div class="text-[11px] text-slate-500">Psalms contain lament elements</div>
+        </div>
+      </div>
+
+      <!-- The 5 Anatomical Movements -->
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+        
+        <!-- Part 1: Invocation -->
+        <div class="neu-card p-5 space-y-3 border-t-4 border-t-blue-500">
+          <div class="flex items-center justify-between">
+            <span class="w-7 h-7 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 font-black text-xs flex items-center justify-center">1</span>
+            <span class="text-[10px] uppercase font-display font-bold text-blue-500">Invocation</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-800 dark:text-slate-100">The Cry (Address)</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            The sufferer addresses God directly by personal covenant name (<em>Yahweh</em>). Even in feeling abandoned, God is still <em>"My God"</em> (Ps 22:1).
+          </p>
+          <div class="neu-inset-sm p-2 rounded-xl text-[11px] text-blue-700 dark:text-blue-300 font-serif">
+            "How long, O LORD? Will you forget me forever?" (Ps 13:1)
+          </div>
+        </div>
+
+        <!-- Part 2: Complaint -->
+        <div class="neu-card p-5 space-y-3 border-t-4 border-t-rose-500">
+          <div class="flex items-center justify-between">
+            <span class="w-7 h-7 rounded-xl bg-rose-100 dark:bg-rose-950 text-rose-600 font-black text-xs flex items-center justify-center">2</span>
+            <span class="text-[10px] uppercase font-display font-bold text-rose-500">Querimonia</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-800 dark:text-slate-100">The Complaint</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Uncensored honesty about pain. Categorized into 3 targets: <strong>God's silence</strong>, <strong>cruel enemies</strong>, or <strong>internal anguish &amp; guilt</strong>.
+          </p>
+          <div class="neu-inset-sm p-2 rounded-xl text-[11px] text-rose-700 dark:text-rose-300 font-serif">
+            "I am poured out like water, all my bones are out of joint." (Ps 22:14)
+          </div>
+        </div>
+
+        <!-- Part 3: Trust -->
+        <div class="neu-card p-5 space-y-3 border-t-4 border-t-amber-500">
+          <div class="flex items-center justify-between">
+            <span class="w-7 h-7 rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 font-black text-xs flex items-center justify-center">3</span>
+            <span class="text-[10px] uppercase font-display font-bold text-amber-500">Fiducia</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-800 dark:text-slate-100">Remembered Trust</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            The memory anchor. Recalling God's historical covenant faithfulness (*hesed*) to past generations or during youth.
+          </p>
+          <div class="neu-inset-sm p-2 rounded-xl text-[11px] text-amber-700 dark:text-amber-300 font-serif">
+            "In you our fathers trusted; they trusted, and you delivered them." (Ps 22:4)
+          </div>
+        </div>
+
+        <!-- Part 4: Petition -->
+        <div class="neu-card p-5 space-y-3 border-t-4 border-t-purple-500">
+          <div class="flex items-center justify-between">
+            <span class="w-7 h-7 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-600 font-black text-xs flex items-center justify-center">4</span>
+            <span class="text-[10px] uppercase font-display font-bold text-purple-500">Petitio</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-800 dark:text-slate-100">The Urgent Plea</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Audacious commands addressed to God: <em>Look! Hear! Answer! Arise! Redeem!</em> Often includes motive clauses for God's glory.
+          </p>
+          <div class="neu-inset-sm p-2 rounded-xl text-[11px] text-purple-700 dark:text-purple-300 font-serif">
+            "Consider and answer me, O LORD my God; light up my eyes!" (Ps 13:3)
+          </div>
+        </div>
+
+        <!-- Part 5: Praise -->
+        <div class="neu-card p-5 space-y-3 border-t-4 border-t-emerald-500">
+          <div class="flex items-center justify-between">
+            <span class="w-7 h-7 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 font-black text-xs flex items-center justify-center">5</span>
+            <span class="text-[10px] uppercase font-display font-bold text-emerald-500">Votum Laudis</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-800 dark:text-slate-100">The Vow of Praise</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            The sudden, triumphant turn. Promising public praise in the great congregation (*qahal*) before physical deliverance even arrives!
+          </p>
+          <div class="neu-inset-sm p-2 rounded-xl text-[11px] text-emerald-700 dark:text-emerald-300 font-serif">
+            "I will sing to the LORD, because he has dealt bountifully with me." (Ps 13:6)
+          </div>
+        </div>
+
+      </div>
+
+      <!-- The Two Critical Exceptions: Psalm 88 & Imprecations -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div class="neu-card p-6 space-y-3 border-l-4 border-l-slate-600">
+          <div class="flex items-center gap-2 text-slate-700 dark:text-slate-200 font-bold">
+            <i data-lucide="moon" class="w-5 h-5 text-slate-500"></i>
+            <span>The Dark Exception: Psalm 88 (The Unresolved Dark Night)</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            Nearly all laments end in praise. <strong>Psalm 88 is the sole exception</strong>: it ends with no turn, no resolution, only the chilling Hebrew word <em>maḥšāk</em> (<strong>"darkness is my only companion"</strong>, v. 18).
+          </p>
+          <div class="p-3 neu-inset rounded-xl text-xs text-slate-600 dark:text-slate-300">
+            <strong>Pastoral Significance:</strong> Scripture validates chronic depression and unbroken seasons of loss. God does not demand a forced smile or rushed theological platitudes from the brokenhearted.
+          </div>
+        </div>
+
+        <div class="neu-card p-6 space-y-3 border-l-4 border-l-red-600">
+          <div class="flex items-center gap-2 text-red-700 dark:text-red-400 font-bold">
+            <i data-lucide="flame" class="w-5 h-5"></i>
+            <span>The Scandal of Imprecation: Psalms 58, 109, 137</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            How do Christians read prayers asking God to break teeth (Ps 58:6) or dash infants against rocks (Ps 137:9)?
+          </p>
+          <div class="p-3 neu-inset rounded-xl text-xs text-slate-600 dark:text-slate-300">
+            <strong>Theological Guardrail:</strong> Imprecation is <em>handing vengeance over to God</em> (Rom 12:19), refusing personal vigilantism. It expresses holy indignation against genocide and oppression, trusting divine justice.
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TAB 2: PASSAGE DISSECTOR -->
+    <section id="view-dissector" class="hidden space-y-6">
+      
+      <div class="neu-card p-4 sm:p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl font-display font-extrabold text-slate-800 dark:text-white">Interactive Passage Dissector</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Inspect real psalms verse by verse and explore how the 5 anatomical stages operate.</p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <label class="text-xs font-bold text-slate-600 dark:text-slate-300">Select Psalm:</label>
+            <select id="dissector-select" onchange="loadDissectorPsalm()" class="neu-inset-sm px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 focus:outline-none">
+              <option value="ps13">Psalm 13 (The Classic Individual Lament - 6 verses)</option>
+              <option value="ps22">Psalm 22:1-24 (The Sufferer &amp; The Cross)</option>
+              <option value="ps42">Psalm 42-43 (The Refrain Lament - Soul Cast Down)</option>
+              <option value="ps88">Psalm 88 (The Unresolved Dark Night)</option>
+              <option value="ps130">Psalm 130 (De Profundis - Depths of Sin &amp; Hope)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Dissector Stage Filter Legend -->
+        <div class="neu-inset-sm p-2 rounded-2xl flex flex-wrap items-center gap-2 text-xs">
+          <span class="text-[11px] font-bold text-slate-400 uppercase ml-2">Highlight:</span>
+          <button onclick="highlightStage('all')" class="stage-filter active px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-200 dark:bg-slate-800">All</button>
+          <button onclick="highlightStage('invocation')" class="stage-filter px-2.5 py-1 rounded-lg text-xs font-bold text-blue-600 dark:text-blue-400">1. Cry (Address)</button>
+          <button onclick="highlightStage('complaint')" class="stage-filter px-2.5 py-1 rounded-lg text-xs font-bold text-rose-600 dark:text-rose-400">2. Complaint</button>
+          <button onclick="highlightStage('trust')" class="stage-filter px-2.5 py-1 rounded-lg text-xs font-bold text-amber-600 dark:text-amber-400">3. Trust</button>
+          <button onclick="highlightStage('petition')" class="stage-filter px-2.5 py-1 rounded-lg text-xs font-bold text-purple-600 dark:text-purple-400">4. Petition</button>
+          <button onclick="highlightStage('praise')" class="stage-filter px-2.5 py-1 rounded-lg text-xs font-bold text-emerald-600 dark:text-emerald-400">5. Vow of Praise</button>
+        </div>
+
+        <!-- Rendered Passage Container -->
+        <div id="dissector-output" class="space-y-3 font-serif pt-2"></div>
+      </div>
+
+    </section>
+
+    <!-- TAB 3: FIND THE PIVOT DRILLS -->
+    <section id="view-pivot" class="hidden space-y-6">
+      
+      <div class="neu-card p-6 sm:p-10 space-y-6 max-w-4xl mx-auto">
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase text-[#0066CC] dark:text-[#389BFF]">Drill Challenge</span>
+            <h2 class="text-2xl font-display font-extrabold text-slate-800 dark:text-white">Locate the Pivot (The Turn of Faith)</h2>
+          </div>
+          <div class="flex items-center gap-3">
+            <span id="drill-score" class="neu-outset-sm px-3.5 py-1 rounded-full text-xs font-display font-bold text-emerald-600 shadow-sm">Score: 0 / 0</span>
+          </div>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          In biblical lament, the poet often makes an abrupt, shocking transition from acute agony to soaring praise. Read the passage and select the <strong>exact verse where the pivot occurs</strong>, and identify the theological hinge.
+        </p>
+
+        <!-- Dynamic Drill Card -->
+        <div id="pivot-drill-card" class="space-y-6"></div>
+
+        <!-- Feedback Box -->
+        <div id="pivot-feedback" class="hidden p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed"></div>
+
+        <div class="flex justify-end pt-2">
+          <button id="next-drill-btn" onclick="nextPivotDrill()" class="hidden neu-btn-primary px-6 py-2.5 text-xs font-bold flex items-center gap-2">
+            <span>Next Drill Question</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 4: PASTORAL SOUL-CARE SIMULATOR -->
+    <section id="view-pastoral" class="hidden space-y-6">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-6">
+        <div>
+          <span class="text-xs font-mono font-bold uppercase text-[#0D9488]">Ministry Application</span>
+          <h2 class="text-2xl font-display font-extrabold text-slate-800 dark:text-white">Pastoral Crisis &amp; Soul-Care Simulator</h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+            Choose a pastoral case study. Analyze the sufferer's spiritual posture, determine which lament movement they need to pray, and review pastoral wisdom to avoid toxic spiritual clichés.
+          </p>
+        </div>
+
+        <!-- Case Study Selector Pills -->
+        <div id="case-study-pills" class="flex flex-wrap gap-2"></div>
+
+        <!-- Active Case Study Detail -->
+        <div id="case-study-card" class="space-y-6"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- JAVASCRIPT DATA & LOGIC -->
+  <script>
+    // Audio synthesis
+    let audioEnabled = true;
+    function playSound(type) {
+      if (!audioEnabled) return;
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        if (type === 'click') {
+          osc.frequency.setValueAtTime(420, ctx.currentTime);
+          gain.gain.setValueAtTime(0.04, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+          osc.start(); osc.stop(ctx.currentTime + 0.08);
+        } else if (type === 'correct') {
+          osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+          osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
+          gain.gain.setValueAtTime(0.08, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+          osc.start(); osc.stop(ctx.currentTime + 0.25);
+        } else if (type === 'incorrect') {
+          osc.frequency.setValueAtTime(220, ctx.currentTime);
+          gain.gain.setValueAtTime(0.08, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+          osc.start(); osc.stop(ctx.currentTime + 0.2);
+        }
+      } catch(e) {}
+    }
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      const icon = document.querySelector('#audio-toggle i');
+      if (icon) icon.setAttribute('data-lucide', audioEnabled ? 'volume-2' : 'volume-x');
+      lucide.createIcons();
+    }
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (icon) icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+      lucide.createIcons();
+      playSound('click');
+    }
+
+    // Tab Switching
+    function switchTab(tab) {
+      ['anatomy', 'dissector', 'pivot', 'pastoral'].forEach(t => {
+        document.getElementById(`view-${t}`).classList.add('hidden');
+        const btn = document.getElementById(`tab-btn-${t}`);
+        btn.className = 'neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]';
+      });
+      document.getElementById(`view-${tab}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-btn-${tab}`);
+      activeBtn.className = 'neu-tab-pill active px-3.5 py-1.5 font-bold';
+      playSound('click');
+      if (tab === 'dissector') loadDissectorPsalm();
+      if (tab === 'pivot') loadPivotDrill();
+      if (tab === 'pastoral') loadCaseStudies();
+      lucide.createIcons();
+    }
+
+    // DISSECTOR DATA
+    const DISSECTOR_DATA = {
+      ps13: {
+        title: "Psalm 13: The Prototype Individual Lament",
+        tagline: "From Agonizing Fourfold 'How Long?' to Joyous Singing",
+        verses: [
+          { v: "13:1", text: "How long, O LORD? Will you forget me forever? How long will you hide your face from me?", stage: "invocation", label: "1. Cry & Complaint (God's Distance)" },
+          { v: "13:2", text: "How long must I take counsel in my soul and have sorrow in my heart all the day? How long shall my enemy be exalted over me?", stage: "complaint", label: "2. Complaint (Self & Enemy)" },
+          { v: "13:3", text: "Consider and answer me, O LORD my God; light up my eyes, lest I sleep the sleep of death,", stage: "petition", label: "4. Urgent Petition (Awaken & Answer!)" },
+          { v: "13:4", text: "lest my enemy say, 'I have prevailed over him,' lest my foes rejoice because I am shaken.", stage: "petition", label: "4. Motive Clause (Preventing Enemy Boasting)" },
+          { v: "13:5", text: "But I have trusted in your steadfast love (hesed); my heart shall rejoice in your salvation.", stage: "trust", label: "3 & PIVOT: The Hinge of Faith ('wa'ani' = But as for me!)" },
+          { v: "13:6", text: "I will sing to the LORD, because he has dealt bountifully with me.", stage: "praise", label: "5. Vow of Praise (Pre-emptive Celebration)" }
+        ]
+      },
+      ps22: {
+        title: "Psalm 22:1-24: The Afflicted Sufferer & The Great Congregation",
+        tagline: "From Godforsaken Despair to Global Worship",
+        verses: [
+          { v: "22:1-2", text: "My God, my God, why have you forsaken me? Why are you so far from saving me, from the words of my groaning? O my God, I cry by day, but you do not answer, and by night, but I find no rest.", stage: "invocation", label: "1. Cry & Anguish of Silence" },
+          { v: "22:3-5", text: "Yet you are holy, enthroned on the praises of Israel. In you our fathers trusted; they trusted, and you delivered them. To you they cried and were rescued; in you they trusted and were not put to shame.", stage: "trust", label: "3. Remembered Covenant History" },
+          { v: "22:6-8", text: "But I am a worm and not a man, scorned by mankind and despised by the people. All who see me mock me; they make mouths at me; they wag their heads: 'He trusts in the LORD; let him deliver him!'", stage: "complaint", label: "2. Complaint: Social Contempt & Scorn" },
+          { v: "22:9-11", text: "Yet you are he who took me from the womb; you made me trust at my mother's breasts. Be not far from me, for trouble is near, and there is none to help.", stage: "trust", label: "3. Personal Trust from Birth" },
+          { v: "22:12-18", text: "Many bulls encompass me; strong bulls of Bashan surround me; they open wide their mouths at me, like a ravening and roaring lion... they have pierced my hands and feet—I can count all my bones—they stare and gloat over me; they divide my garments among them, and for my clothing they cast lots.", stage: "complaint", label: "2. Vivid Metaphorical Affliction (Beasts & Death)" },
+          { v: "22:19-21", text: "But you, O LORD, do not be far off! O you my help, hasten to my aid! Deliver my soul from the sword, my precious life from the power of the dog! Save me from the mouth of the lion! You have rescued me from the horns of the wild oxen!", stage: "petition", label: "4. Urgent Cry for Rescue" },
+          { v: "22:22-24", text: "I will tell of your name to my brothers; in the midst of the congregation I will praise you: You who fear the LORD, praise him! All you offspring of Jacob, glorify him... For he has not despised or abhorred the affliction of the afflicted, and he has not hidden his face from him, but has heard, when he cried to him.", stage: "praise", label: "5 & PIVOT: Global Congregation of Praise" }
+        ]
+      },
+      ps42: {
+        title: "Psalms 42-43: The Refrain Lament of the Exile",
+        tagline: "Wrestling with Spiritual Depression Amidst the Crashing Waves",
+        verses: [
+          { v: "42:1-3", text: "As a deer pants for flowing streams, so pants my soul for you, O God. My soul thirsts for God, for the living God. When shall I come and appear before God? My tears have been my food day and night, while they say to me all the day long, 'Where is your God?'", stage: "invocation", label: "1. Thirst & Complaint of Taunting" },
+          { v: "42:4", text: "These things I remember, as I pour out my soul: how I would go with the throng and lead them in procession to the house of God, with glad shouts and songs of praise, a multitude keeping festival.", stage: "trust", label: "3. Memory of Past Corporate Worship" },
+          { v: "42:5", text: "Why are you cast down, O my soul, and why are you in turmoil within me? Hope in God; for I shall again praise him, my salvation and my God.", stage: "praise", label: "REFRAIN 1 (The Soul-Dialogue / Hope)" },
+          { v: "42:6-8", text: "My soul is cast down within me; therefore I remember you from the land of Jordan and of Hermon... Deep calls to deep at the roar of your waterfalls; all your breakers and your waves have gone over me. By day the LORD commands his steadfast love, and at night his song is with me, a prayer to the God of my life.", stage: "complaint", label: "2. The Crashing Waves of God" },
+          { v: "42:9-10", text: "I say to God, my rock: 'Why have you forgotten me? Why do I go mourning because of the oppression of the enemy?' As with a deadly wound in my bones, my adversaries taunt me, while they say to me all the day long, 'Where is your God?'", stage: "petition", label: "4. Direct Questioning & Protest" },
+          { v: "42:11", text: "Why are you cast down, O my soul, and why are you in turmoil within me? Hope in God; for I shall again praise him, my salvation and my God.", stage: "praise", label: "REFRAIN 2 (Iterative Battle of Faith)" }
+        ]
+      },
+      ps88: {
+        title: "Psalm 88: The Psalm With No Sun",
+        tagline: "The Sole Psalm in the Psalter Ending in Total Darkness",
+        verses: [
+          { v: "88:1-2", text: "O LORD, God of my salvation, I cry out day and night before you. Let my prayer come before you; incline your ear to my cry!", stage: "invocation", label: "1. Relentless Invocation" },
+          { v: "88:3-5", text: "For my soul is full of troubles, and my life draws near to Sheol. I am counted among those who go down to the pit; I am a man who has no strength, like one set loose among the dead...", stage: "complaint", label: "2. Complaint: Living Among the Corpses" },
+          { v: "88:6-9", text: "You have put me in the depths of the pit, in the regions dark and deep. Your wrath lies heavy upon me, and you overwhelm me with all your waves. You have caused my companions to shun me; you have made me a horror to them. I am shut in so that I cannot escape; my eye grows dim through sorrow.", stage: "complaint", label: "2. God Cast as the Afflicter" },
+          { v: "88:10-12", text: "Do you work wonders for the dead? Do the departed rise up to praise you? Is your steadfast love declared in the grave, or your faithfulness in Abaddon? Are your wonders known in the darkness, or your righteousness in the land of forgetfulness?", stage: "petition", label: "4. The Theological Protest: Dead Men Can't Praise!" },
+          { v: "88:13-18", text: "But I, O LORD, cry to you; in the morning my prayer comes before you. O LORD, why do you cast my soul away? Why do you hide your face from me?... Your dreadful assaults destroy me... You have caused my beloved and my friend to shun me; my companions have become darkness (ḥōšek)!", stage: "complaint", label: "NO RESOLUTION: Ends in Ḥōšek (Darkness)" }
+        ]
+      },
+      ps130: {
+        title: "Psalm 130: Out of the Depths (De Profundis)",
+        tagline: "From the Chasm of Iniquity to Hope in Redemptive Forgiveness",
+        verses: [
+          { v: "130:1-2", text: "Out of the depths I cry to you, O LORD! O Lord, hear my voice! Let your ears be attentive to the voice of my pleas for mercy!", stage: "invocation", label: "1. Cry Out of the Submerged Depths" },
+          { v: "130:3-4", text: "If you, O LORD, should mark iniquities, O Lord, who could stand? But with you there is forgiveness, that you may be feared.", stage: "trust", label: "3 & PIVOT: The Impossibility of Self-Justification & The Wonder of Forgiveness" },
+          { v: "130:5-6", text: "I wait for the LORD, my soul waits, and in his word I hope; my soul waits for the Lord more than watchmen for the morning, more than watchmen for the morning.", stage: "petition", label: "4. Patient, Vigilant Waiting" },
+          { v: "130:7-8", text: "O Israel, hope in the LORD! For with the LORD there is steadfast love, and with him is plentiful redemption. And he will redeem Israel from all his iniquities.", stage: "praise", label: "5. Communal Exhortation & Plentiful Redemption" }
+        ]
+      }
+    };
+
+    let currentFilterStage = 'all';
+
+    function loadDissectorPsalm() {
+      const select = document.getElementById('dissector-select');
+      const psalmKey = select.value;
+      const data = DISSECTOR_DATA[psalmKey];
+      const container = document.getElementById('dissector-output');
+      if (!container || !data) return;
+
+      container.innerHTML = `
+        <div class="border-b border-slate-200 dark:border-slate-800 pb-3 mb-4">
+          <h3 class="font-display font-bold text-lg text-slate-800 dark:text-white">${data.title}</h3>
+          <p class="text-xs text-[#0066CC] dark:text-[#389BFF] italic">${data.tagline}</p>
+        </div>
+        <div class="space-y-3">
+          ${data.verses.map(v => {
+            const isMatch = currentFilterStage === 'all' || v.stage === currentFilterStage;
+            const borderColors = {
+              invocation: 'border-l-blue-500 bg-blue-50/40 dark:bg-blue-950/20',
+              complaint: 'border-l-rose-500 bg-rose-50/40 dark:bg-rose-950/20',
+              trust: 'border-l-amber-500 bg-amber-50/40 dark:bg-amber-950/20',
+              petition: 'border-l-purple-500 bg-purple-50/40 dark:bg-purple-950/20',
+              praise: 'border-l-emerald-500 bg-emerald-50/40 dark:bg-emerald-950/20'
+            };
+            return `
+              <div class="p-3.5 rounded-2xl border-l-4 transition-all ${borderColors[v.stage]} ${isMatch ? 'opacity-100' : 'opacity-25'}">
+                <div class="flex items-center justify-between text-[11px] font-sans font-bold mb-1">
+                  <span class="text-slate-800 dark:text-slate-200">${v.v}</span>
+                  <span class="uppercase tracking-wider px-2 py-0.5 rounded-full neu-inset-sm text-[10px]">${v.label}</span>
+                </div>
+                <div class="text-sm sm:text-base leading-relaxed text-slate-800 dark:text-slate-100">
+                  "${v.text}"
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function highlightStage(stage) {
+      currentFilterStage = stage;
+      document.querySelectorAll('.stage-filter').forEach(btn => {
+        btn.classList.remove('active', 'bg-slate-200', 'dark:bg-slate-800');
+        if (btn.innerText.toLowerCase().includes(stage) || (stage === 'all' && btn.innerText === 'All')) {
+          btn.classList.add('active', 'bg-slate-200', 'dark:bg-slate-800');
+        }
+      });
+      loadDissectorPsalm();
+      playSound('click');
+    }
+
+    // PIVOT DRILL DATA
+    const PIVOT_DRILLS = [
+      {
+        psalm: "Psalm 13",
+        textSnippet: "v.1-4: 'How long, O LORD? Will you forget me forever?... Consider and answer me... lest my enemy say I have prevailed.'<br><br>v.5: 'But I have trusted in your steadfast love; my heart shall rejoice in your salvation.'<br><br>v.6: 'I will sing to the LORD, because he has dealt bountifully with me.'",
+        options: [
+          { text: "Verse 3: The petition to awaken God's eyes.", isCorrect: false },
+          { text: "Verse 5: The emphatic contrast 'wa'ani' ('But as for me, I have trusted...').", isCorrect: true },
+          { text: "Verse 6: The actual singing in the congregation.", isCorrect: false }
+        ],
+        explanation: "<strong>Correct!</strong> In Hebrew, verse 5 begins with the disjunctive contrast <em>wa'ani</em> (<strong>'But as for me!'</strong>). It serves as the psychological and spiritual hinge where the psalmist tears their eyes away from the encroaching enemy and anchors them in Yahweh's covenant <em>hesed</em>."
+      },
+      {
+        psalm: "Psalm 22",
+        textSnippet: "v.19-21: 'Be not far off, O LORD!... Deliver my soul from the sword, my life from the dog! Save me from the lion's mouth! You have answered me from the horns of the wild oxen.'<br><br>v.22: 'I will tell of your name to my brothers; in the midst of the congregation I will praise you!'",
+        options: [
+          { text: "Verse 19: The plea 'O LORD, do not be far off!'", isCorrect: false },
+          { text: "Verse 21b/22: The sudden realization of rescue ('You have answered me!') shifting directly to the vow of praise in the congregation.", isCorrect: true },
+          { text: "Verse 1: 'My God, my God, why have you forsaken me?'", isCorrect: false }
+        ],
+        explanation: "<strong>Spot on!</strong> At the end of verse 21 in Hebrew stands the abrupt declaration: <em>'anitani</em> (<strong>'You have answered me!'</strong>). Instantly, in verse 22, the solitary suffering victim transforms into a worship leader singing praise before the whole assembly."
+      },
+      {
+        psalm: "Psalm 31",
+        textSnippet: "v.13: 'For I hear the whispering of many—terror on every side!—as they scheme together against me, as they plot to take my life.'<br><br>v.14: 'But I trust in you, O LORD; I say, You are my God.'",
+        options: [
+          { text: "Verse 14: The disjunctive covenant declaration 'wa'ani' ('But as for me, I trust in you, O LORD').", isCorrect: true },
+          { text: "Verse 13: The description of terror on every side.", isCorrect: false },
+          { text: "Verse 11: The grief over broken vessels.", isCorrect: false }
+        ],
+        explanation: "<strong>Brilliant!</strong> Exactly like Psalm 13:5, Psalm 31:14 employs the classic Hebrew pivot formula <em>wa'ani 'aleyka vatahti</em> (<strong>'But as for me, upon you I trust!'</strong>). The pivot is an intentional act of the will defying terror with covenant confession."
+      },
+      {
+        psalm: "Psalm 73",
+        textSnippet: "v.2-3: 'My feet had almost stumbled... for I was envious of the arrogant.'<br><br>v.16-17: 'When I thought how to understand this, it seemed to me a wearisome task, until I went into the sanctuary of God; then I discerned their end.'",
+        options: [
+          { text: "Verse 2: The confession of stumbling feet.", isCorrect: false },
+          { text: "Verse 17: Entering the Sanctuary of God (liturgical perspective shift).", isCorrect: true },
+          { text: "Verse 4: The health of the wicked.", isCorrect: false }
+        ],
+        explanation: "<strong>Bingo!</strong> The pivot of Psalm 73 is not cognitive self-talk, but a <em>spatial and liturgical encounter</em>: <strong>'Until I entered the sanctuary of God.'</strong> In the presence of Yahweh's holiness, the illusion of worldly prosperity dissolves into eternal reality."
+      }
+    ];
+
+    let currentDrillIdx = 0;
+    let drillScore = 0;
+    let drillAnswered = false;
+
+    function loadPivotDrill() {
+      const drill = PIVOT_DRILLS[currentDrillIdx];
+      const card = document.getElementById('pivot-drill-card');
+      const feedback = document.getElementById('pivot-feedback');
+      const nextBtn = document.getElementById('next-drill-btn');
+      drillAnswered = false;
+
+      feedback.classList.add('hidden');
+      nextBtn.classList.add('hidden');
+
+      card.innerHTML = `
+        <div class="neu-inset p-5 rounded-2xl space-y-3 font-serif">
+          <div class="flex items-center justify-between text-xs font-sans font-bold text-[#0066CC] dark:text-[#389BFF]">
+            <span>${drill.psalm}</span>
+            <span>Question ${currentDrillIdx + 1} of ${PIVOT_DRILLS.length}</span>
+          </div>
+          <div class="text-sm sm:text-base text-slate-800 dark:text-slate-100 leading-relaxed">
+            ${drill.textSnippet}
+          </div>
+        </div>
+
+        <div class="space-y-3 font-sans">
+          <div class="text-xs font-bold uppercase text-slate-500">Where is the structural Pivot Hinge?</div>
+          <div class="space-y-2">
+            ${drill.options.map((opt, i) => `
+              <button onclick="checkPivotAnswer(${i})" id="opt-btn-${i}" class="w-full text-left p-4 rounded-2xl neu-card hover:bg-blue-50 dark:hover:bg-slate-800 transition text-xs sm:text-sm font-semibold flex items-center justify-between">
+                <span>${opt.text}</span>
+                <i data-lucide="circle" class="w-4 h-4 text-slate-400"></i>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function checkPivotAnswer(selectedIdx) {
+      if (drillAnswered) return;
+      drillAnswered = true;
+
+      const drill = PIVOT_DRILLS[currentDrillIdx];
+      const feedback = document.getElementById('pivot-feedback');
+      const nextBtn = document.getElementById('next-drill-btn');
+
+      drill.options.forEach((opt, idx) => {
+        const btn = document.getElementById(`opt-btn-${idx}`);
+        if (opt.isCorrect) {
+          btn.classList.add('border-2', 'border-emerald-500', 'bg-emerald-50', 'dark:bg-emerald-950/40');
+        } else if (idx === selectedIdx) {
+          btn.classList.add('border-2', 'border-rose-500', 'bg-rose-50', 'dark:bg-rose-950/40');
+        }
+      });
+
+      const isCorrect = drill.options[selectedIdx].isCorrect;
+      if (isCorrect) {
+        drillScore++;
+        playSound('correct');
+        feedback.className = 'p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed border-l-4 border-l-emerald-500 text-emerald-900 dark:text-emerald-200';
+        feedback.innerHTML = `<strong class="text-emerald-600 block mb-1">✓ Correct Pivot Identification!</strong> ${drill.explanation}`;
+      } else {
+        playSound('incorrect');
+        feedback.className = 'p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed border-l-4 border-l-rose-500 text-rose-900 dark:text-rose-200';
+        feedback.innerHTML = `<strong class="text-rose-600 block mb-1">Review the Hinge:</strong> ${drill.explanation}`;
+      }
+
+      document.getElementById('drill-score').innerText = `Score: ${drillScore} / ${currentDrillIdx + 1}`;
+      feedback.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');
+    }
+
+    function nextPivotDrill() {
+      currentDrillIdx = (currentDrillIdx + 1) % PIVOT_DRILLS.length;
+      loadPivotDrill();
+      playSound('click');
+    }
+
+    // PASTORAL SOUL-CARE DATA
+    const CASE_STUDIES = [
+      {
+        id: "bereavement",
+        title: "Sudden Bereavement",
+        tag: "Acute Grief",
+        scenario: "Sarah (34), a vibrant worship leader, unexpectedly lost her husband in a collision. Well-meaning church members keep telling her, 'God needed another angel' and 'Rejoice in all circumstances!' She feels intense rage and guilt, feeling like an unfaithful Christian because she cannot stop weeping.",
+        postureAnalysis: "Sarah is trapped in the 'Toxic Positivity Trap.' She is being forced into premature Step 5 (Praise) before being permitted to mourn through Steps 1 & 2 (Cry & Raw Complaint).",
+        recommendedPsalm: "Psalm 13 or Psalm 88",
+        counselStep: "Give Sarah explicit pastoral permission to inhabit Step 1 & Step 2 without shame. Read Psalm 88 with her to show that Scripture contains tears without neat resolutions.",
+        harmfulClichés: ["'God never gives you more than you can handle.'", "'Everything happens for a reason—just praise Him!'"],
+        healingAction: "Sit in silence. Validate that death is an enemy (1 Cor 15:26), not God's original design. Pray the raw questions of Psalm 13 on her behalf when she has no strength to pray."
+      },
+      {
+        id: "depression",
+        title: "Chronic Clinical Depression",
+        tag: "Dark Night",
+        scenario: "David (48), an elder, has struggled with severe clinical depression for 18 months. Medical treatments have helped marginally, but his prayer life feels like speaking into empty outer space. He confesses: 'I don't feel God at all. Darkness is literally my only friend.'",
+        postureAnalysis: "David is living in Psalm 88. He needs to know that Psalm 88 is in the inspired canon for this exact moment—to prove that unmitigated darkness does NOT mean covenant disqualification.",
+        recommendedPsalm: "Psalm 88:1-18",
+        counselStep: "Point out that Psalm 88 begins with 'O LORD, God of my salvation' even though it ends in darkness. The very act of praying in the dark IS an act of profound faith.",
+        harmfulClichés: ["'There must be unconfessed sin blocking your joy.'", "'Just read Philippians and choose joy.'"],
+        healingAction: "Remove the performance burden. Establish that feelings are not the measure of covenant standing. Have trusted friends pray the laments of the Psalter over him."
+      },
+      {
+        id: "betrayal",
+        title: "Betrayal & Slander",
+        tag: "Injustice & Rage",
+        scenario: "Marcus, a young pastor, was maliciously slandered by his senior associate, resulting in a forced resignation. Marcus finds himself consumed with fantasies of revenge, wanting to destroy the associate's reputation online.",
+        postureAnalysis: "Marcus is burning with imprecatory rage. He needs a holy channel to surrender vengeance to God before his bitterness turns toxic (Hebrews 12:15).",
+        recommendedPsalm: "Psalm 35 or Psalm 109",
+        counselStep: "Teach Marcus the theology of the Imprecatory Psalms: handing the sword over to the Judge of all the earth so Marcus doesn't wield it himself.",
+        harmfulClichés: ["'Just forgive and forget right now—act like it never happened.'", "'Good Christians don't feel anger.'"],
+        healingAction: "Have Marcus pray through Psalm 109, releasing every grievance to God's tribunal. Once vengeance is surrendered to God, the heart can begin the long road toward releasing personal malice."
+      }
+    ];
+
+    let currentCaseIdx = 0;
+
+    function loadCaseStudies() {
+      const pillsContainer = document.getElementById('case-study-pills');
+      const card = document.getElementById('case-study-card');
+      if (!pillsContainer || !card) return;
+
+      pillsContainer.innerHTML = CASE_STUDIES.map((c, i) => `
+        <button onclick="selectCaseStudy(${i})" class="px-4 py-2 rounded-2xl text-xs font-bold transition neu-btn ${i === currentCaseIdx ? 'active' : ''}">
+          ${c.title} (${c.tag})
+        </button>
+      `).join('');
+
+      const c = CASE_STUDIES[currentCaseIdx];
+      card.innerHTML = `
+        <div class="neu-inset p-6 rounded-2xl space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="font-display font-extrabold text-lg text-slate-800 dark:text-white">${c.title}</h3>
+            <span class="neu-inset-sm px-3 py-1 rounded-full text-xs font-bold text-[#E11D48]">${c.tag}</span>
+          </div>
+          <p class="text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-serif">
+            "${c.scenario}"
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="neu-card p-5 space-y-2 border-l-4 border-l-rose-500">
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">Diagnosis of Spiritual Posture</span>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${c.postureAnalysis}</p>
+            <div class="pt-2">
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-100">Recommended Text:</span>
+              <span class="text-xs font-mono font-bold text-[#0066CC] dark:text-[#389BFF] ml-1">${c.recommendedPsalm}</span>
+            </div>
+          </div>
+
+          <div class="neu-card p-5 space-y-2 border-l-4 border-l-emerald-500">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Pastoral Care Action</span>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${c.healingAction}</p>
+          </div>
+        </div>
+
+        <div class="neu-inset-sm p-5 rounded-2xl space-y-2">
+          <span class="text-xs font-bold uppercase text-red-500 flex items-center gap-1.5">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i> Harmful Spiritual Clichés to Avoid:
+          </span>
+          <ul class="list-disc list-inside text-xs text-slate-600 dark:text-slate-400 space-y-1">
+            ${c.harmfulClichés.map(cl => `<li>${cl}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function selectCaseStudy(idx) {
+      currentCaseIdx = idx;
+      playSound('click');
+      loadCaseStudies();
+    }
+
+    // Init
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      loadDissectorPsalm();
+      loadPivotDrill();
+      loadCaseStudies();
+    });
+  </script>
+</body>
+</html>

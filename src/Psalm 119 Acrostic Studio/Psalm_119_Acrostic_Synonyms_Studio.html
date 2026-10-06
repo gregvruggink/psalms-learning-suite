@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Psalm 119 Acrostic Matrix & The 8 Torah Synonyms Studio - BIB523</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans, DM Sans, Noto Serif Hebrew -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Serif+Hebrew:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="../vendor/tailwind.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="../vendor/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neu: {
+              bg: '#E8F1FA',
+              surface: '#FFFFFF',
+              well: '#EEF5FC',
+              fg: '#1E293B',
+              muted: '#5A6A80',
+              accent: '#0066CC',
+              accentLight: '#2684FF',
+              amber: '#D97706',
+              teal: '#0D9488',
+              rose: '#E11D48'
+            }
+          },
+          fontFamily: {
+            display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+            serif: ['Plus Jakarta Sans', 'Georgia', 'serif'],
+            hebrew: ['Noto Serif Hebrew', 'SBL Hebrew', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --neu-bg: #E8F1FA;
+      --neu-surface: #FFFFFF;
+      --neu-surface-well: #EEF5FC;
+      --neu-fg: #1E293B;
+      --neu-shadow-dark: rgba(180, 200, 222, 0.65);
+      --neu-shadow-light: rgba(255, 255, 255, 0.95);
+    }
+    .dark {
+      --neu-bg: #0F172A;
+      --neu-surface: #1E293B;
+      --neu-surface-well: #0B1120;
+      --neu-fg: #F1F5F9;
+      --neu-shadow-dark: rgba(0, 0, 0, 0.7);
+      --neu-shadow-light: rgba(255, 255, 255, 0.05);
+    }
+    body { background-color: var(--neu-bg); color: var(--neu-fg); font-family: 'DM Sans', sans-serif; }
+    .neu-card {
+      background-color: var(--neu-surface) !important;
+      border-radius: 28px !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      box-shadow: 8px 10px 22px var(--neu-shadow-dark), -8px -8px 20px var(--neu-shadow-light) !important;
+      transition: all 250ms ease;
+    }
+    .dark .neu-card { border: 1px solid rgba(255, 255, 255, 0.06) !important; }
+    .neu-inset {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.45) !important;
+      box-shadow: inset 4px 4px 8px var(--neu-shadow-dark), inset -4px -4px 8px var(--neu-shadow-light) !important;
+    }
+    .dark .neu-inset { border: 1px solid rgba(255, 255, 255, 0.04) !important; }
+        /* Outset Tactile Pill / Small Badge for Crisp Elevation */
+    .neu-outset-sm {
+      background: linear-gradient(145deg, #FFFFFF, #EDF4FA) !important;
+      border: 1px solid rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 2px 3px 6px var(--neu-shadow-dark), -2px -2px 6px var(--neu-shadow-light) !important;
+      transition: all 200ms ease;
+    }
+
+    .dark .neu-outset-sm {
+      background: linear-gradient(145deg, #1E293B, #151F30) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.6), -2px -2px 6px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .neu-inset-sm {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.35) !important;
+      box-shadow: inset 2.5px 2.5px 5px var(--neu-shadow-dark), inset -2.5px -2.5px 5px var(--neu-shadow-light) !important;
+    }
+    .neu-btn {
+      background: linear-gradient(145deg, #FFFFFF, #E2E8F0) !important;
+      color: #0066CC !important;
+      border-radius: 14px !important;
+      border: 1px solid rgba(255, 255, 255, 0.8) !important;
+      box-shadow: 4px 4px 10px var(--neu-shadow-dark), -4px -4px 10px var(--neu-shadow-light) !important;
+      font-weight: 700;
+      transition: all 200ms ease;
+      cursor: pointer;
+    }
+    .dark .neu-btn {
+      background: linear-gradient(145deg, #2A303C, #1E232B) !important;
+      color: #60A5FA !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6), -4px -4px 10px rgba(255, 255, 255, 0.05) !important;
+    }
+    .neu-btn:hover:not(:disabled) {
+      transform: translateY(-1.5px);
+      background: linear-gradient(145deg, #F0F7FF, #E0EFFF) !important;
+      box-shadow: 6px 6px 14px rgba(0, 102, 204, 0.28), -6px -6px 14px rgba(255, 255, 255, 0.95) !important;
+    }
+    .neu-btn-primary {
+      background: linear-gradient(135deg, #0066CC 0%, #2684FF 100%) !important;
+      color: #FFFFFF !important;
+      border-radius: 14px !important;
+      box-shadow: 4px 4px 12px rgba(0, 102, 204, 0.45) !important;
+    }
+    .neu-tab-pill { border-radius: 12px !important; transition: all 200ms ease; }
+    .neu-tab-pill.active {
+      background: linear-gradient(135deg, #0066CC 0%, #2684FF 100%) !important;
+      color: #FFFFFF !important;
+      box-shadow: 3px 3px 10px rgba(0, 102, 204, 0.45) !important;
+      font-weight: 700;
+    }
+    .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: rgba(180, 200, 222, 0.2); border-radius: 9999px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 102, 204, 0.25); border-radius: 9999px; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased transition-colors duration-300">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-[#E8F1FA]/90 dark:bg-[#0F172A]/90 backdrop-blur border-b border-white/60 dark:border-white/5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="../Psalms_Interactive_Learning_Suite.html" class="neu-btn px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 text-slate-700 dark:text-slate-200 hover:text-teal-600 transition shrink-0" title="Return to All Course Apps">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Suite Hub</span>
+        </a>
+        <div class="w-10 h-10 rounded-2xl neu-outset-sm flex items-center justify-center text-[#0D9488] shrink-0 shadow-sm">
+          <span class="font-hebrew font-bold text-xl">א</span>
+        </div>
+        <div>
+          <h1 class="font-display font-extrabold text-lg sm:text-xl text-slate-800 dark:text-white tracking-tight flex items-center gap-2">
+            Psalm 119 Acrostic &amp; Synonyms Studio
+            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300">
+              Week 7 Wisdom &amp; Torah
+            </span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <nav class="neu-inset-sm p-1 rounded-2xl flex items-center gap-1 text-xs">
+          <button onclick="switchTab('matrix')" id="tab-btn-matrix" class="neu-tab-pill active px-3.5 py-1.5 font-bold">Acrostic Keyboard</button>
+          <button onclick="switchTab('synonyms')" id="tab-btn-synonyms" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">8 Legal Synonyms</button>
+          <button onclick="switchTab('pit')" id="tab-btn-pit" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">Praise in the Pit</button>
+          <button onclick="switchTab('drills')" id="tab-btn-drills" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">Synonym Drills</button>
+        </nav>
+
+        <button onclick="toggleTheme()" class="neu-btn w-9 h-9 flex items-center justify-center text-slate-500">
+          <i data-lucide="moon" id="theme-icon" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- TAB 1: ACROSTIC KEYBOARD & STANZA VIEWER -->
+    <section id="view-matrix" class="space-y-6">
+      
+      <!-- Overview Banner -->
+      <div class="neu-card p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 max-w-3xl">
+          <div class="neu-outset-sm px-3.5 py-1 rounded-full inline-flex items-center gap-1.5 text-xs font-display font-bold text-[#0D9488] uppercase tracking-wider shadow-sm">
+            <i data-lucide="book-marked" class="w-3.5 h-3.5"></i>
+            The Complete A-to-Z of Covenant Devotion
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white">
+            An Exhaustive Monument to Divine Order
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Psalm 119 is built from the 22 letters of the Hebrew alphabet. Each letter receives an 8-verse stanza (22 &times; 8 = 176 verses). In every stanza, every single line begins with that letter! The structure proclaims: <strong>God's sovereign Word covers every letter of reality and grief.</strong>
+          </p>
+        </div>
+
+        <div class="neu-inset p-4 rounded-2xl text-center space-y-1 shrink-0">
+          <span class="text-xs uppercase font-bold text-slate-400">Total Architecture</span>
+          <div class="text-2xl font-black text-[#0D9488]">22 &times; 8 = 176</div>
+          <div class="text-[11px] text-slate-500">Verses of Alphabetical Praise</div>
+        </div>
+      </div>
+
+      <!-- 22 Hebrew Letters Selector Track -->
+      <div class="neu-card p-3 sm:p-4 space-y-2">
+        <div class="flex items-center justify-between px-1">
+          <span class="text-xs font-bold uppercase text-slate-500 flex items-center gap-1.5">
+            <i data-lucide="layout-grid" class="w-4 h-4 text-[#0066CC]"></i> Select Hebrew Letter Stanza:
+          </span>
+          <span id="active-stanza-badge" class="neu-outset-sm px-3.5 py-0.5 rounded-full text-xs font-display font-bold text-[#0D9488] shadow-sm">
+            Stanza 1: Aleph (א)
+          </span>
+        </div>
+
+        <div id="hebrew-keyboard" class="flex items-center gap-1.5 overflow-x-auto pb-2 custom-scrollbar"></div>
+      </div>
+
+      <!-- Active Stanza Viewer Card -->
+      <div class="neu-card p-6 sm:p-8 space-y-5">
+        <div class="flex flex-wrap items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 gap-2">
+          <div class="flex items-center gap-3">
+            <span id="stanza-large-letter" class="w-12 h-12 rounded-2xl neu-inset font-hebrew text-2xl font-bold flex items-center justify-center text-[#0D9488]">א</span>
+            <div>
+              <h3 id="stanza-title" class="font-display font-extrabold text-xl text-slate-800 dark:text-white">Aleph (vv. 1–8)</h3>
+              <p id="stanza-desc" class="text-xs text-slate-500 dark:text-slate-400">Walking Blameless in the Instruction of Yahweh</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="prevStanza()" class="neu-btn p-2 rounded-xl text-slate-600 dark:text-slate-300"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+            <button onclick="nextStanza()" class="neu-btn p-2 rounded-xl text-slate-600 dark:text-slate-300"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+          </div>
+        </div>
+
+        <div id="stanza-verses" class="space-y-3 font-serif"></div>
+      </div>
+
+    </section>
+
+    <!-- TAB 2: THE 8 LEGAL SYNONYMS -->
+    <section id="view-synonyms" class="hidden space-y-6">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-4">
+        <div>
+          <span class="text-xs font-mono font-bold uppercase text-[#0D9488]">Linguistic Precision</span>
+          <h2 class="text-2xl font-display font-extrabold text-slate-800 dark:text-white">The 8 Facets of God's Word</h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-3xl">
+            Almost every verse of Psalm 119 uses one of 8 specific Hebrew legal terms. Each term reveals a distinct facet of divine relationship—balancing sovereign authority with intimate covenant affection.
+          </p>
+        </div>
+
+        <!-- 8 Synonyms Grid -->
+        <div id="synonyms-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+      </div>
+
+    </section>
+
+    <!-- TAB 3: PRAISE IN THE PIT -->
+    <section id="view-pit" class="hidden space-y-6">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-4">
+        <div class="space-y-2 max-w-3xl">
+          <span class="text-xs font-mono font-bold uppercase text-rose-500">The Context of Affliction</span>
+          <h2 class="text-2xl font-display font-extrabold text-slate-800 dark:text-white">Psalm 119 Was Composed in the Shadows</h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Many assume Psalm 119 is dry legalism written in an ivory tower. In truth, over <strong>65 verses</strong> describe the psalmist being mocked, surrounded by corrupt rulers, falsely accused, facing prison pits, and near death. Torah devotion was their sanity lifeline amid intense suffering!
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="neu-card p-5 space-y-2 border-l-4 border-l-rose-500">
+            <span class="text-xs font-bold uppercase text-rose-600 dark:text-rose-400">1. Like a Wineskin in the Smoke</span>
+            <div class="neu-inset-sm p-3 rounded-xl text-xs font-serif text-slate-700 dark:text-slate-200">
+              "For I have become like a wineskin in the smoke, yet I have not forgotten your statutes." (v. 83)
+            </div>
+            <p class="text-[11px] text-slate-500 leading-relaxed">Shriveled, blackened, and dried out by suffering, yet clinging to God's instruction.</p>
+          </div>
+
+          <div class="neu-card p-5 space-y-2 border-l-4 border-l-rose-500">
+            <span class="text-xs font-bold uppercase text-rose-600 dark:text-rose-400">2. Pits Dug by the Insolent</span>
+            <div class="neu-inset-sm p-3 rounded-xl text-xs font-serif text-slate-700 dark:text-slate-200">
+              "The insolent have dug pitfalls for me; they do not conform to your law... They have almost made an end of me on earth." (vv. 85, 87)
+            </div>
+            <p class="text-[11px] text-slate-500 leading-relaxed">Facing legal ambush and physical entrapment from corrupt totalitarian authorities.</p>
+          </div>
+
+          <div class="neu-card p-5 space-y-2 border-l-4 border-l-rose-500">
+            <span class="text-xs font-bold uppercase text-rose-600 dark:text-rose-400">3. Smeared with Lies</span>
+            <div class="neu-inset-sm p-3 rounded-xl text-xs font-serif text-slate-700 dark:text-slate-200">
+              "The insolent smear me with lies, but with my whole heart I keep your precepts; their heart is unfeeling like fat." (vv. 69–70)
+            </div>
+            <p class="text-[11px] text-slate-500 leading-relaxed">Enduring weaponized disinformation while anchoring the heart in divine truth.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 4: SYNONYM DRILLS -->
+    <section id="view-drills" class="hidden space-y-6">
+      
+      <div class="neu-card p-6 sm:p-10 space-y-6 max-w-4xl mx-auto">
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase text-[#0D9488]">Hebrew Vocabulary Challenge</span>
+            <h2 class="text-2xl font-display font-extrabold text-slate-800 dark:text-white">Identify the Torah Synonym</h2>
+          </div>
+          <span id="quiz-score" class="neu-outset-sm px-3.5 py-1 rounded-full text-xs font-display font-bold text-teal-600 shadow-sm">Score: 0 / 0</span>
+        </div>
+
+        <div id="quiz-card" class="space-y-6"></div>
+        <div id="quiz-feedback" class="hidden p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed"></div>
+
+        <div class="flex justify-end pt-2">
+          <button id="next-quiz-btn" onclick="nextQuiz()" class="hidden neu-btn-primary px-6 py-2.5 text-xs font-bold flex items-center gap-2">
+            <span>Next Question</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (icon) icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+      lucide.createIcons();
+    }
+
+    function switchTab(tab) {
+      ['matrix', 'synonyms', 'pit', 'drills'].forEach(t => {
+        document.getElementById(`view-${t}`).classList.add('hidden');
+        document.getElementById(`tab-btn-${t}`).className = 'neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]';
+      });
+      document.getElementById(`view-${tab}`).classList.remove('hidden');
+      document.getElementById(`tab-btn-${tab}`).className = 'neu-tab-pill active px-3.5 py-1.5 font-bold';
+      if (tab === 'drills') loadQuiz();
+      lucide.createIcons();
+    }
+
+    const HEBREW_LETTERS = [
+      { name: "Aleph", letter: "א", range: "vv. 1–8", desc: "Walking Blameless in the Law of Yahweh", verses: [
+        { num: 1, text: "Blessed are those whose way is blameless, who walk in the law (Torah) of the LORD!", hebrew: "אַשְׁרֵי תְמִימֵי-דָרֶךְ" },
+        { num: 2, text: "Blessed are those who keep his testimonies (Edut), who seek him with their whole heart,", hebrew: "אַשְׁרֵי נֹצְרֵי עֵדֹתָיו" },
+        { num: 3, text: "who also do no wrong, but walk in his ways!", hebrew: "אַף לֹא-פָעֲלוּ עַוְלָה" },
+        { num: 4, text: "You have commanded your precepts (Pikudim) to be kept diligently.", hebrew: "אַתָּה צִוִּיתָה פִקֻּדֶיךָ" },
+        { num: 5, text: "Oh that my ways may be steadfast in keeping your statutes (Choq)!", hebrew: "אַחֲלַי יִכֹּנוּ דְרָכָי" },
+        { num: 6, text: "Then I shall not be put to shame, having my eyes fixed on all your commandments (Mitswah).", hebrew: "אָז לֹא-אֵבוֹשׁ" },
+        { num: 7, text: "I will praise you with an upright heart, when I learn your righteous rules (Mishpat).", hebrew: "אוֹדְךָ בְּיֹשֶׁר לֵבָב" },
+        { num: 8, text: "I will keep your statutes (Choq); do not utterly forsake me!", hebrew: "אֶת-חֻקֶּיךָ אֶשְׁמֹר" }
+      ]},
+      { name: "Beth", letter: "ב", range: "vv. 9–16", desc: "Guarding Youthful Purity in God's Word", verses: [
+        { num: 9, text: "How can a young man keep his way pure? By guarding it according to your word (Davar).", hebrew: "בַּמֶּה יְזַכֶּה-נַּעַר" },
+        { num: 10, text: "With my whole heart I seek you; let me not wander from your commandments (Mitswah)!", hebrew: "בְּכָל-לִבִּי דְרַשְׁתִּיךָ" },
+        { num: 11, text: "I have stored up your word (Imrah / Promise) in my heart, that I might not sin against you.", hebrew: "בְּלִבִּי צָפַנְתִּי אִמְרָתֶךָ" },
+        { num: 12, text: "Blessed are you, O LORD; teach me your statutes (Choq)!", hebrew: "בָּרוּךְ אַתָּה יְהוָה" },
+        { num: 13, text: "With my lips I declare all the rules (Mishpat) of your mouth.", hebrew: "בִּשְׂפָתַי סִפַּרְתִּי" },
+        { num: 14, text: "In the way of your testimonies (Edut) I delight as much as in all riches.", hebrew: "בְּדֶרֶךְ עֵדְוֺתֶיךָ שַׂשְׂתִּי" },
+        { num: 15, text: "I will meditate on your precepts (Pikudim) and fix my eyes on your ways.", hebrew: "בְּפִקֻּדֶיךָ אָשִׂיחָה" },
+        { num: 16, text: "I will delight in your statutes (Choq); I will not forget your word (Davar).", hebrew: "בְּחֻקֹּתֶיךָ אֶשְׁתַּעֲשָׁע" }
+      ]},
+      { name: "Mem", letter: "מ", range: "vv. 97–104", desc: "Wisdom Sweeter Than Honey", verses: [
+        { num: 97, text: "Oh how I love your law (Torah)! It is my meditation all the day.", hebrew: "מָה-אָהַבְתִּי תוֹרָתֶךָ" },
+        { num: 98, text: "Your commandment (Mitswah) makes me wiser than my enemies, for it is ever with me.", hebrew: "מֵאֹיְבַי תְּחַכְּמֵנִי" },
+        { num: 99, text: "I have more understanding than all my teachers, for your testimonies (Edut) are my meditation.", hebrew: "מִכָּל-מְלַמְּדַי הִשְׂכַּלְתִּי" },
+        { num: 100, text: "I understand more than the aged, for I keep your precepts (Pikudim).", hebrew: "מִזְּקֵנִים אֶתְבּוֹנָן" },
+        { num: 101, text: "I hold back my feet from every evil way, in order to keep your word (Davar).", hebrew: "מִכָּל-אֹרַח רָע" },
+        { num: 102, text: "I do not turn aside from your rules (Mishpat), for you have taught me.", hebrew: "מִמִּשְׁפָּטֶיךָ לֹא-סָרְתִּי" },
+        { num: 103, text: "How sweet are your words (Imrah) to my taste, sweeter than honey to my mouth!", hebrew: "מַה-נִּמְלְצוּ לְחִכִּי אִמְרָתֶךָ" },
+        { num: 104, text: "Through your precepts (Pikudim) I get understanding; therefore I hate every false way.", hebrew: "מִפִּקּוּדֶיךָ אֶתְבּוֹנָן" }
+      ]},
+      { name: "Nun", letter: "נ", range: "vv. 105–112", desc: "A Lamp Unto My Feet", verses: [
+        { num: 105, text: "Your word (Davar) is a lamp to my feet and a light to my path.", hebrew: "נֵר-לְרַגְלִי דְבָרֶךָ" },
+        { num: 106, text: "I have sworn an oath and confirmed it, to keep your righteous rules (Mishpat).", hebrew: "נִשְׁבַּעְתִּי וָאֲקַיֵּמָה" },
+        { num: 107, text: "I am severely afflicted; give me life, O LORD, according to your word (Davar)!", hebrew: "נַעֲנֵיתִי עַד-מְאֹד" },
+        { num: 108, text: "Accept my freewill offerings of praise, O LORD, and teach me your rules (Mishpat).", hebrew: "נִדְבוֹת פִּי רְצֵה-נָא" },
+        { num: 109, text: "I hold my life in my hand continually, but I do not forget your law (Torah).", hebrew: "נַפְשִׁי בְכַפִּי תָמִיד" },
+        { num: 110, text: "The wicked have laid a snare for me, but I do not stray from your precepts (Pikudim).", hebrew: "נָתְנוּ רְשָׁעִים פַּח לִי" },
+        { num: 111, text: "Your testimonies (Edut) are my heritage forever, for they are the joy of my heart.", hebrew: "נָחַלְתִּי עֵדְוֺתֶיךָ לְעוֹלָם" },
+        { num: 112, text: "I incline my heart to perform your statutes (Choq) forever, to the end.", hebrew: "נָטִיתִי לִבִּי לַעֲשׂוֹת חֻקֶּיךָ" }
+      ]}
+    ];
+
+    let currentStanzaIndex = 0;
+
+    function renderKeyboard() {
+      const container = document.getElementById('hebrew-keyboard');
+      container.innerHTML = HEBREW_LETTERS.map((s, idx) => `
+        <button onclick="selectStanza(${idx})" class="shrink-0 px-3.5 py-2 rounded-xl neu-btn text-xs font-bold flex items-center gap-1.5 ${idx === currentStanzaIndex ? 'active' : ''}">
+          <span class="font-hebrew text-sm font-black text-[#0D9488]">${s.letter}</span>
+          <span>${s.name}</span>
+          <span class="text-[10px] text-slate-400 font-mono">(${s.range})</span>
+        </button>
+      `).join('');
+    }
+
+    function selectStanza(idx) {
+      currentStanzaIndex = idx;
+      renderKeyboard();
+      renderStanza();
+    }
+
+    function prevStanza() {
+      if (currentStanzaIndex > 0) selectStanza(currentStanzaIndex - 1);
+    }
+
+    function nextStanza() {
+      if (currentStanzaIndex < HEBREW_LETTERS.length - 1) selectStanza(currentStanzaIndex + 1);
+    }
+
+    function renderStanza() {
+      const s = HEBREW_LETTERS[currentStanzaIndex];
+      document.getElementById('stanza-large-letter').innerText = s.letter;
+      document.getElementById('stanza-title').innerText = `${s.name} (${s.range})`;
+      document.getElementById('stanza-desc').innerText = s.desc;
+      document.getElementById('active-stanza-badge').innerText = `Stanza: ${s.name} (${s.letter})`;
+
+      const list = document.getElementById('stanza-verses');
+      list.innerHTML = s.verses.map(v => `
+        <div class="p-3.5 rounded-2xl neu-inset-sm hover:neu-card transition flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="space-y-1">
+            <span class="font-sans font-bold text-xs text-[#0D9488]">Verse ${v.num}</span>
+            <div class="text-sm sm:text-base text-slate-800 dark:text-slate-100 font-serif leading-relaxed">
+              "${v.text}"
+            </div>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="font-hebrew text-sm sm:text-base font-semibold text-slate-600 dark:text-slate-300">${v.hebrew}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    const SYNONYMS_DATA = [
+      { name: "Torah (תּוֹרָה)", count: "25x", meaning: "Instruction / Direction", desc: "Not cold bureaucratic code, but a loving father's or mother's guidance pointing travelers in the true path of life." },
+      { name: "Davar (דָּבָר)", count: "24x", meaning: "Word / Personal Message", desc: "God's active self-revelation. The dynamic, creative speech that called the universe into existence and communicates with man." },
+      { name: "Mishpat (מִשְׁפָּט)", count: "23x", meaning: "Judgment / Right Verdict", desc: "Judicial decisions rendered by the divine Judge. Settles disputes with flawless moral equity and justice." },
+      { name: "Edut (עֵדוּת)", count: "23x", meaning: "Testimony / Solemn Covenant", desc: "The solemn witness of God's covenant stipulations (like the two tablets placed inside the Ark of the Testimony)." },
+      { name: "Mitswah (מִצְוָה)", count: "22x", meaning: "Commandment / Authority", desc: "Direct, non-negotiable authoritative royal decrees issued by the Sovereign King to His subjects." },
+      { name: "Choq (חֹק)", count: "21x", meaning: "Statute / Engraved Boundary", desc: "From root meaning 'to carve or engrave'. Permanent, immutable laws chiseled in stone that mark inviolable boundaries." },
+      { name: "Pikudim (פִּקּוּדִים)", count: "21x", meaning: "Precepts / Detailed Care", desc: "Occurs only in poetry. Specific, fine-grained moral directions appointed by an overseer who meticulously cares for his charge." },
+      { name: "Imrah (אִמְרָה)", count: "19x", meaning: "Promise / Tender Saying", desc: "The spoken promises of God. Associated with sweetness, comfort in affliction, and tested trustworthiness." }
+    ];
+
+    function renderSynonyms() {
+      const grid = document.getElementById('synonyms-grid');
+      grid.innerHTML = SYNONYMS_DATA.map(s => `
+        <div class="neu-card p-5 space-y-2 border-t-4 border-t-teal-600">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-display font-bold text-teal-600">${s.count}</span>
+            <span class="neu-inset-sm px-2 py-0.5 rounded-full text-[10px] font-bold text-slate-500 uppercase">${s.meaning}</span>
+          </div>
+          <h4 class="font-display font-bold text-base text-slate-800 dark:text-white">${s.name}</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">${s.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    const QUIZ_QUESTIONS = [
+      {
+        q: "Which Hebrew synonym comes from a root meaning 'to carve or engrave into stone', emphasizing permanent, unchangeable boundaries?",
+        options: ["Pikudim (Precepts)", "Choq (Statute)", "Imrah (Promise)"],
+        correct: 1,
+        exp: "<strong>Spot on!</strong> <em>Choq</em> (חֹק) comes from the root <em>ḥāqaq</em> ('to engrave or inscribe'). It signifies permanent, chiseled ordinances that mark unalterable boundaries."
+      },
+      {
+        q: "In Psalm 119:103, 'How sweet are your words to my taste, sweeter than honey to my mouth!', which specific synonym is used for 'words'?",
+        options: ["Imrah (Tender Spoken Promise)", "Mishpat (Judicial Verdict)", "Mitswah (Commandment)"],
+        correct: 0,
+        exp: "<strong>Correct!</strong> The term is <em>Imrah</em> (אִמְרָה), the spoken promise of God that brings deep personal comfort and tasted sweetness to the soul in affliction."
+      },
+      {
+        q: "Which synonym occurs ONLY in Hebrew poetry and refers to the detailed, caring directions of a loving overseer?",
+        options: ["Torah (Law)", "Edut (Testimony)", "Pikudim (Precepts)"],
+        correct: 2,
+        exp: "<strong>Brilliant!</strong> <em>Pikudim</em> (פִּקּוּדִים) occurs exclusively in poetic literature, deriving from a root meaning 'to visit, care for, or oversee'. It denotes tailored, caring guidance."
+      }
+    ];
+
+    let currentQuizIdx = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+
+    function loadQuiz() {
+      const q = QUIZ_QUESTIONS[currentQuizIdx];
+      const card = document.getElementById('quiz-card');
+      const feedback = document.getElementById('quiz-feedback');
+      const nextBtn = document.getElementById('next-quiz-btn');
+      quizAnswered = false;
+
+      feedback.classList.add('hidden');
+      nextBtn.classList.add('hidden');
+
+      card.innerHTML = `
+        <div class="neu-inset p-5 rounded-2xl space-y-2">
+          <span class="text-xs font-display font-bold text-teal-600">Question ${currentQuizIdx + 1} of ${QUIZ_QUESTIONS.length}</span>
+          <p class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-100 leading-relaxed">${q.q}</p>
+        </div>
+
+        <div class="space-y-2">
+          ${q.options.map((opt, i) => `
+            <button onclick="checkQuiz(${i})" id="q-opt-${i}" class="w-full text-left p-4 rounded-2xl neu-card hover:bg-teal-50 dark:hover:bg-slate-800 transition text-xs sm:text-sm font-semibold flex items-center justify-between">
+              <span>${opt}</span>
+              <i data-lucide="circle" class="w-4 h-4 text-slate-400"></i>
+            </button>
+          `).join('')}
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function checkQuiz(idx) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+
+      const q = QUIZ_QUESTIONS[currentQuizIdx];
+      const feedback = document.getElementById('quiz-feedback');
+      const nextBtn = document.getElementById('next-quiz-btn');
+
+      q.options.forEach((opt, i) => {
+        const btn = document.getElementById(`q-opt-${i}`);
+        if (i === q.correct) {
+          btn.classList.add('border-2', 'border-emerald-500', 'bg-emerald-50', 'dark:bg-emerald-950/40');
+        } else if (i === idx) {
+          btn.classList.add('border-2', 'border-rose-500', 'bg-rose-50', 'dark:bg-rose-950/40');
+        }
+      });
+
+      if (idx === q.correct) {
+        quizScore++;
+        feedback.className = 'p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed border-l-4 border-l-emerald-500 text-emerald-900 dark:text-emerald-200';
+        feedback.innerHTML = `<strong class="text-emerald-600 block mb-1">✓ Excellent Precision!</strong> ${q.exp}`;
+      } else {
+        feedback.className = 'p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed border-l-4 border-l-rose-500 text-rose-900 dark:text-rose-200';
+        feedback.innerHTML = `<strong class="text-rose-600 block mb-1">Review the Hebrew Root:</strong> ${q.exp}`;
+      }
+
+      document.getElementById('quiz-score').innerText = `Score: ${quizScore} / ${currentQuizIdx + 1}`;
+      feedback.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');
+    }
+
+    function nextQuiz() {
+      currentQuizIdx = (currentQuizIdx + 1) % QUIZ_QUESTIONS.length;
+      loadQuiz();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderKeyboard();
+      renderStanza();
+      renderSynonyms();
+    });
+  </script>
+</body>
+</html>

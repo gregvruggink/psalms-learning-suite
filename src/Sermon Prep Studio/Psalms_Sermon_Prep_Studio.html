@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Psalms Sermon Prep Studio • BIB523 Homiletics Lab</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans, DM Sans, Noto Serif Hebrew -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Serif+Hebrew:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="../vendor/tailwind.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="../vendor/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neu: {
+              bg: '#E8F1FA',
+              surface: '#FFFFFF',
+              well: '#EEF5FC',
+              fg: '#1E293B',
+              muted: '#5A6A80',
+              accent: '#0066CC',
+              accentLight: '#2684FF',
+              accentDark: '#004C99',
+              teal: '#0D9488',
+              amber: '#D97706',
+              rose: '#E11D48',
+              purple: '#7E22CE',
+              indigo: '#4F46E5'
+            },
+            slate: {
+              50: '#E8F1FA',
+              100: '#EEF5FC',
+              200: '#D6E4F0',
+              300: '#BACFE2',
+              400: '#94A3B8',
+              500: '#5A6A80',
+              600: '#334155',
+              700: '#1E293B',
+              800: '#1E293B',
+              900: '#0F172A',
+              950: '#0B1120'
+            },
+            blue: {
+              50: '#EFF6FF',
+              100: '#DBEAFE',
+              200: '#BFDBFE',
+              300: '#93C5FD',
+              400: '#60A5FA',
+              500: '#3B82F6',
+              600: '#0066CC',
+              700: '#0052A3',
+              800: '#003D7A',
+              900: '#002952'
+            }
+          },
+          fontFamily: {
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            hebrew: ['"Noto Serif Hebrew"', '"SBL Hebrew"', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --neu-bg: #E8F1FA;
+      --neu-surface: #FFFFFF;
+      --neu-surface-well: #EEF5FC;
+      --neu-shadow-dark: rgba(166, 185, 206, 0.65);
+      --neu-shadow-light: rgba(255, 255, 255, 0.95);
+      --neu-border: rgba(180, 200, 222, 0.6);
+      --accent-color: #0066CC;
+    }
+
+    .dark {
+      --neu-bg: #12151B;
+      --neu-surface: #1E232B;
+      --neu-surface-well: #161920;
+      --neu-shadow-dark: rgba(0, 0, 0, 0.7);
+      --neu-shadow-light: rgba(255, 255, 255, 0.04);
+      --neu-border: rgba(255, 255, 255, 0.08);
+      --accent-color: #389BFF;
+    }
+
+    body {
+      background-color: var(--neu-bg);
+      color: #1E293B;
+      transition: background-color 300ms ease, color 300ms ease;
+    }
+
+    .dark body {
+      color: #E2E8F0;
+    }
+
+    .neu-card {
+      background-color: var(--neu-surface) !important;
+      border: 1px solid var(--neu-border) !important;
+      box-shadow: 8px 8px 20px var(--neu-shadow-dark), -8px -8px 20px var(--neu-shadow-light) !important;
+      border-radius: 24px;
+    }
+
+    .dark .neu-card {
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 8px 8px 24px rgba(0, 0, 0, 0.65), -4px -4px 16px rgba(255, 255, 255, 0.03) !important;
+    }
+
+    .neu-inset {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.45) !important;
+      box-shadow: inset 4px 4px 8px var(--neu-shadow-dark), inset -4px -4px 8px var(--neu-shadow-light) !important;
+    }
+
+    .dark .neu-inset {
+      border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    }
+
+        /* Outset Tactile Pill / Small Badge for Crisp Elevation */
+    .neu-outset-sm {
+      background: linear-gradient(145deg, #FFFFFF, #EDF4FA) !important;
+      border: 1px solid rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 2px 3px 6px var(--neu-shadow-dark), -2px -2px 6px var(--neu-shadow-light) !important;
+      transition: all 200ms ease;
+    }
+
+    .dark .neu-outset-sm {
+      background: linear-gradient(145deg, #1E293B, #151F30) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.6), -2px -2px 6px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .neu-inset-sm {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.35) !important;
+      box-shadow: inset 2.5px 2.5px 5px var(--neu-shadow-dark), inset -2.5px -2.5px 5px var(--neu-shadow-light) !important;
+    }
+
+    .dark .neu-inset-sm {
+      border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .neu-btn {
+      background: linear-gradient(145deg, #FFFFFF, #E2E8F0) !important;
+      color: #0066CC !important;
+      border-radius: 16px !important;
+      border: 1px solid rgba(255, 255, 255, 0.8) !important;
+      box-shadow: 5px 5px 12px var(--neu-shadow-dark), -5px -5px 12px var(--neu-shadow-light) !important;
+      font-weight: 700;
+      transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .dark .neu-btn {
+      background: linear-gradient(145deg, #2A303C, #1E232B) !important;
+      color: #60A5FA !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.6), -5px -5px 12px rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .neu-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      background: linear-gradient(145deg, #F0F7FF, #E0EFFF) !important;
+      color: #004C99 !important;
+      box-shadow: 7px 7px 16px rgba(0, 102, 204, 0.28), -7px -7px 16px rgba(255, 255, 255, 0.95) !important;
+      border-color: rgba(0, 102, 204, 0.35) !important;
+    }
+
+    .dark .neu-btn:hover:not(:disabled) {
+      background: linear-gradient(145deg, #1E3A5F, #162C47) !important;
+      color: #93C5FD !important;
+      box-shadow: 7px 7px 16px rgba(0, 0, 0, 0.7), -7px -7px 16px rgba(255, 255, 255, 0.1) !important;
+      border-color: rgba(96, 165, 250, 0.4) !important;
+    }
+
+    .neu-btn-primary {
+      background: linear-gradient(135deg, #0066CC 0%, #2684FF 100%) !important;
+      color: #FFFFFF !important;
+      border-radius: 16px !important;
+      border: 1px solid rgba(255, 255, 255, 0.4) !important;
+      box-shadow: 6px 6px 14px rgba(0, 102, 204, 0.35), -4px -4px 10px rgba(255, 255, 255, 0.8) !important;
+      font-weight: 700;
+      transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .neu-btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #0052A3 0%, #0066CC 100%) !important;
+      box-shadow: 8px 8px 18px rgba(0, 102, 204, 0.45) !important;
+    }
+
+    .font-hebrew {
+      font-family: 'Noto Serif Hebrew', 'SBL Hebrew', serif;
+      direction: rtl;
+    }
+
+    .step-active {
+      border-color: #0066CC !important;
+      background: linear-gradient(135deg, rgba(0, 102, 204, 0.12) 0%, rgba(38, 132, 255, 0.08) 100%) !important;
+      box-shadow: 0 0 0 2px #0066CC, inset 2px 2px 5px rgba(0, 102, 204, 0.2) !important;
+    }
+
+    .dark .step-active {
+      border-color: #389BFF !important;
+      background: linear-gradient(135deg, rgba(56, 155, 255, 0.18) 0%, rgba(38, 132, 255, 0.08) 100%) !important;
+      box-shadow: 0 0 0 2px #389BFF, inset 2px 2px 5px rgba(56, 155, 255, 0.3) !important;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen text-slate-800 dark:text-slate-100 antialiased selection:bg-blue-500 selection:text-white pb-20">
+
+  <!-- =========================================================================
+       APPLICATION HEADER
+       ========================================================================= -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/75 dark:bg-slate-900/75 border-b border-slate-200/60 dark:border-slate-800/60 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between">
+      
+      <!-- Brand & Course Context -->
+      <div class="flex items-center gap-3">
+        <a href="../Psalms_Interactive_Learning_Suite.html" class="w-10 h-10 rounded-2xl neu-inset-sm flex items-center justify-center text-[#0066CC] dark:text-[#389BFF] hover:scale-105 transition" title="Back to Learning Suite Hub">
+          <i data-lucide="arrow-left" class="w-5 h-5"></i>
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">BIB523</span>
+            <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+            <span class="text-xs font-semibold text-slate-500">The Book of Psalms</span>
+          </div>
+          <h1 class="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+            Psalms Sermon Prep Studio
+            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-blue-100 text-[#0066CC] dark:bg-blue-950 dark:text-blue-300">
+              6-Stage Homiletical Workbench
+            </span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Header Utilities & Actions -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        
+        <!-- Case Study Selector -->
+        <div class="neu-inset-sm px-3 py-1.5 rounded-2xl flex items-center gap-2 text-xs">
+          <i data-lucide="book-marked" class="w-4 h-4 text-blue-600 shrink-0"></i>
+          <span class="text-slate-400 hidden sm:inline">Case Study:</span>
+          <select id="case-study-select" onchange="loadCaseStudy(this.value)" class="bg-transparent font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer text-xs">
+            <option value="ps13">Psalm 13 • Individual Lament</option>
+            <option value="ps23">Psalm 23 • Psalm of Trust</option>
+            <option value="ps1">Psalm 1 • Wisdom / Gateway</option>
+            <option value="ps2">Psalm 2 • Royal / Messianic</option>
+            <option value="ps29">Psalm 29 • Cosmic Hymn of Praise</option>
+            <option value="ps30">Psalm 30 • Personal Thanksgiving</option>
+            <option value="custom">-- Custom Psalm Workspace --</option>
+          </select>
+        </div>
+
+        <!-- Pre-Pulpit Audit Modal Button -->
+        <button onclick="openAuditModal()" class="neu-btn px-3 py-2 text-xs font-bold flex items-center gap-1.5 text-slate-700 dark:text-slate-200" title="Pre-Pulpit Homiletical Health Audit">
+          <i data-lucide="clipboard-check" class="w-4 h-4 text-teal-600"></i>
+          <span class="hidden md:inline">Pre-Pulpit Audit</span>
+        </button>
+
+        <!-- Export Dossier Button -->
+        <button onclick="openExportModal()" class="neu-btn-primary px-3.5 py-2 text-xs font-bold flex items-center gap-1.5 shadow-sm" title="Generate Complete Sermon Brief">
+          <i data-lucide="file-text" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Export Brief</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle-btn" onclick="toggleTheme()" class="w-10 h-10 rounded-2xl neu-btn flex items-center justify-center text-slate-700 dark:text-yellow-400" title="Toggle Theme">
+          <i id="theme-icon" data-lucide="moon" class="w-5 h-5"></i>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+
+  <!-- =========================================================================
+       MAIN APPLICATION WORKBENCH
+       ========================================================================= -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 space-y-8">
+
+    <!-- HERO WORKSPACE OVERVIEW CARD -->
+    <section class="neu-card p-6 sm:p-8 relative overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        
+        <div class="lg:col-span-8 space-y-3">
+          <div class="neu-inset-sm px-3.5 py-1 rounded-full inline-flex items-center gap-2 text-xs font-bold text-[#0066CC] dark:text-[#389BFF] uppercase tracking-wider">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            Homiletical Architecture for Hebrew Poetry
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white tracking-tight">
+            "The Sermon Should Do What the Psalm Does"
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
+            Preaching the Psalms is fundamentally different from preaching epistles or narratives. The Psalms are inspired poems of worship trading in sensory metaphor, emotional trajectories, and covenant memory. This six-stage workshop equips you to move from rigorous Hebrew exegesis to a dynamic sermon that takes the congregation on the psalm's living experiential journey.
+          </p>
+        </div>
+
+        <div class="lg:col-span-4 flex flex-col justify-center">
+          <div class="neu-inset p-4 sm:p-5 rounded-2xl space-y-2 border border-blue-200/50 dark:border-blue-900/40">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-bold text-slate-500">Current Text Target:</span>
+              <span id="active-psalm-badge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-blue-600 text-white">Psalm 13</span>
+            </div>
+            <div id="active-psalm-title" class="font-display font-black text-lg text-slate-900 dark:text-white">
+              "How Long, O LORD? Will You Forget Me Forever?"
+            </div>
+            <div id="active-psalm-summary" class="text-xs text-slate-500 dark:text-slate-400 italic">
+              Individual Lament &bull; 6 Verses &bull; Descent, Desperate Plea, Sudden Covenant Pivot
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         STAGE NAVIGATION STEPPER BAR (6 STAGES)
+         ======================================================================= -->
+    <nav class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+      
+      <!-- Stage 1 Tab -->
+      <button onclick="setStage(1)" id="tab-stage-1" class="neu-card p-3.5 text-left space-y-1.5 transition-all step-active border-2">
+        <div class="flex items-center justify-between">
+          <span class="w-6 h-6 rounded-lg neu-inset-sm flex items-center justify-center text-xs font-bold text-blue-600">1</span>
+          <i data-lucide="compass" class="w-4 h-4 text-blue-600"></i>
+        </div>
+        <div class="font-display font-extrabold text-xs text-slate-900 dark:text-white">Genre &amp; Tone</div>
+        <div class="text-[10px] text-slate-500">Rules of Engagement</div>
+      </button>
+
+      <!-- Stage 2 Tab -->
+      <button onclick="setStage(2)" id="tab-stage-2" class="neu-card p-3.5 text-left space-y-1.5 transition-all border-2 border-transparent">
+        <div class="flex items-center justify-between">
+          <span class="w-6 h-6 rounded-lg neu-inset-sm flex items-center justify-center text-xs font-bold text-indigo-600">2</span>
+          <i data-lucide="git-commit" class="w-4 h-4 text-indigo-600"></i>
+        </div>
+        <div class="font-display font-extrabold text-xs text-slate-900 dark:text-white">Poetic Structure</div>
+        <div class="text-[10px] text-slate-500">Stanzas &amp; Parallelism</div>
+      </button>
+
+      <!-- Stage 3 Tab -->
+      <button onclick="setStage(3)" id="tab-stage-3" class="neu-card p-3.5 text-left space-y-1.5 transition-all border-2 border-transparent">
+        <div class="flex items-center justify-between">
+          <span class="w-6 h-6 rounded-lg neu-inset-sm flex items-center justify-center text-xs font-bold text-teal-600">3</span>
+          <i data-lucide="eye" class="w-4 h-4 text-teal-600"></i>
+        </div>
+        <div class="font-display font-extrabold text-xs text-slate-900 dark:text-white">Sensory Imagery</div>
+        <div class="text-[10px] text-slate-500">Governing Metaphors</div>
+      </button>
+
+      <!-- Stage 4 Tab -->
+      <button onclick="setStage(4)" id="tab-stage-4" class="neu-card p-3.5 text-left space-y-1.5 transition-all border-2 border-transparent">
+        <div class="flex items-center justify-between">
+          <span class="w-6 h-6 rounded-lg neu-inset-sm flex items-center justify-center text-xs font-bold text-purple-600">4</span>
+          <i data-lucide="cross" class="w-4 h-4 text-purple-600"></i>
+        </div>
+        <div class="font-display font-extrabold text-xs text-slate-900 dark:text-white">Canonical Context</div>
+        <div class="text-[10px] text-slate-500">Psalter &amp; Christ</div>
+      </button>
+
+      <!-- Stage 5 Tab -->
+      <button onclick="setStage(5)" id="tab-stage-5" class="neu-card p-3.5 text-left space-y-1.5 transition-all border-2 border-transparent">
+        <div class="flex items-center justify-between">
+          <span class="w-6 h-6 rounded-lg neu-inset-sm flex items-center justify-center text-xs font-bold text-amber-600">5</span>
+          <i data-lucide="zap" class="w-4 h-4 text-amber-600"></i>
+        </div>
+        <div class="font-display font-extrabold text-xs text-slate-900 dark:text-white">Homiletical Idea</div>
+        <div class="text-[10px] text-slate-500">The Big Idea Forge</div>
+      </button>
+
+      <!-- Stage 6 Tab -->
+      <button onclick="setStage(6)" id="tab-stage-6" class="neu-card p-3.5 text-left space-y-1.5 transition-all border-2 border-transparent">
+        <div class="flex items-center justify-between">
+          <span class="w-6 h-6 rounded-lg neu-inset-sm flex items-center justify-center text-xs font-bold text-rose-600">6</span>
+          <i data-lucide="layout" class="w-4 h-4 text-rose-600"></i>
+        </div>
+        <div class="font-display font-extrabold text-xs text-slate-900 dark:text-white">Sermon Movements</div>
+        <div class="text-[10px] text-slate-500">Living Dynamic Outline</div>
+      </button>
+
+    </nav>
+
+
+    <!-- =======================================================================
+         STAGE 1 CONTENT: GENRE & EMOTIONAL TRAJECTORY
+         ======================================================================= -->
+    <section id="stage-panel-1" class="space-y-6">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div>
+            <span class="neu-inset-sm px-3 py-1 rounded-full text-xs font-bold text-blue-600 uppercase tracking-wider inline-flex items-center gap-1.5 mb-2">
+              <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+              Stage 1 &bull; Rules of Engagement
+            </span>
+            <h3 class="text-2xl font-display font-extrabold text-slate-900 dark:text-white">
+              1. Identify the Genre &amp; Map the Emotional Trajectory
+            </h3>
+          </div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 max-w-sm">
+            Determining the genre reveals the poem's structural grammar, standard movements, and sets the emotional arc for your sermon.
+          </div>
+        </div>
+
+        <!-- Genre Taxonomy Grid -->
+        <div class="space-y-3">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">
+            A. Categorize the Primary Psalm Genre:
+          </label>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <button onclick="selectGenre('lament')" id="genre-btn-lament" class="p-3 rounded-2xl neu-inset-sm text-left space-y-1 transition hover:scale-105 border-2 border-blue-500">
+              <div class="font-bold text-xs text-blue-600">Lament</div>
+              <div class="text-[10px] text-slate-500">Pain to Praise</div>
+            </button>
+            <button onclick="selectGenre('praise')" id="genre-btn-praise" class="p-3 rounded-2xl neu-card text-left space-y-1 transition hover:scale-105 border-2 border-transparent">
+              <div class="font-bold text-xs text-teal-600">Hymn / Praise</div>
+              <div class="text-[10px] text-slate-500">Awe &amp; Wonder</div>
+            </button>
+            <button onclick="selectGenre('thanksgiving')" id="genre-btn-thanksgiving" class="p-3 rounded-2xl neu-card text-left space-y-1 transition hover:scale-105 border-2 border-transparent">
+              <div class="font-bold text-xs text-amber-600">Thanksgiving</div>
+              <div class="text-[10px] text-slate-500">Rescued Memory</div>
+            </button>
+            <button onclick="selectGenre('trust')" id="genre-btn-trust" class="p-3 rounded-2xl neu-card text-left space-y-1 transition hover:scale-105 border-2 border-transparent">
+              <div class="font-bold text-xs text-indigo-600">Trust / Refuge</div>
+              <div class="text-[10px] text-slate-500">Serene Security</div>
+            </button>
+            <button onclick="selectGenre('royal')" id="genre-btn-royal" class="p-3 rounded-2xl neu-card text-left space-y-1 transition hover:scale-105 border-2 border-transparent">
+              <div class="font-bold text-xs text-purple-600">Royal / Kingship</div>
+              <div class="text-[10px] text-slate-500">Messianic Throne</div>
+            </button>
+            <button onclick="selectGenre('wisdom')" id="genre-btn-wisdom" class="p-3 rounded-2xl neu-card text-left space-y-1 transition hover:scale-105 border-2 border-transparent">
+              <div class="font-bold text-xs text-rose-600">Wisdom / Torah</div>
+              <div class="text-[10px] text-slate-500">The Two Paths</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Genre Anatomy & Emotional Motion Box -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          
+          <!-- Left: Form-Critical Anatomy -->
+          <div class="lg:col-span-7 neu-inset p-5 sm:p-6 rounded-3xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+              <span id="genre-anatomy-title" class="font-display font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">
+                Expected Structural Elements: Individual Lament
+              </span>
+              <span class="neu-inset-sm px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold text-blue-600">
+                Form Grammar
+              </span>
+            </div>
+
+            <div id="genre-anatomy-list" class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+              <!-- Dynamically populated -->
+            </div>
+
+            <div class="neu-card p-3.5 rounded-2xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40 text-xs text-amber-900 dark:text-amber-200">
+              <strong class="flex items-center gap-1.5 text-amber-700 dark:text-amber-400 mb-1">
+                <i data-lucide="alert-triangle" class="w-4 h-4"></i> Critical Preaching Pitfall:
+              </strong>
+              <p id="genre-pitfall-text">
+                Rushing to the vow of praise prematurely! A sermon on a lament that skips past the agonizing complaints to offer quick positive clichés ruins the pastoral medicine of the psalm. Preach the silence before preaching the song.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: Emotional Trajectory Graph Visualizer -->
+          <div class="lg:col-span-5 neu-inset p-5 sm:p-6 rounded-3xl space-y-4 flex flex-col justify-between">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+              <span class="font-display font-extrabold text-sm text-slate-900 dark:text-white">
+                Emotional Arc Visualizer
+              </span>
+              <span class="text-[10px] text-slate-400 font-mono">Pacing Curve</span>
+            </div>
+
+            <!-- SVG Visual Curve -->
+            <div id="emotional-curve-container" class="w-full aspect-[16/9] bg-white/40 dark:bg-slate-900/40 rounded-2xl p-3 flex flex-col justify-between relative overflow-hidden border border-slate-200/50 dark:border-slate-800/50">
+              <!-- Dynamic SVG drawn by JS -->
+            </div>
+
+            <p id="emotional-curve-desc" class="text-[11px] text-slate-500 italic">
+              The classic "U-Curve": begins in despair ("How long?"), reaches maximum vulnerability in the petition, pivots abruptly upon God's covenant loyalty (ḥeseḏ), and ascends to ecstatic joy.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Preacher's Guided Drafting Box for Stage 1 -->
+        <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">
+            Preacher's Stage 1 Exegesis Notes:
+          </label>
+          <textarea id="note-stage-1" rows="3" oninput="saveNote('stage1', this.value)" class="w-full neu-inset p-3.5 rounded-2xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-800 dark:text-slate-100" placeholder="Record your observations on this psalm's genre, structural landmarks, and emotional movement..."></textarea>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================================
+         STAGE 2 CONTENT: POETIC STRUCTURE & PARALLELISM
+         ======================================================================= -->
+    <section id="stage-panel-2" class="space-y-6 hidden">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div>
+            <span class="neu-inset-sm px-3 py-1 rounded-full text-xs font-bold text-indigo-600 uppercase tracking-wider inline-flex items-center gap-1.5 mb-2">
+              <i data-lucide="git-commit" class="w-3.5 h-3.5"></i>
+              Stage 2 &bull; The Mechanics of Hebrew Verse
+            </span>
+            <h3 class="text-2xl font-display font-extrabold text-slate-900 dark:text-white">
+              2. Map the Poetic Structure &amp; Parallelism
+            </h3>
+          </div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 max-w-sm">
+            Before parsing individual words, diagram strophes (stanzas) and analyze line parallelism to avoid the fatal "Two-Point Fallacy."
+          </div>
+        </div>
+
+        <!-- The "Two-Point Fallacy" Warning & Simulator -->
+        <div class="neu-card p-5 sm:p-6 rounded-3xl bg-indigo-50/40 dark:bg-indigo-950/20 border-2 border-indigo-200 dark:border-indigo-900/40 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="font-display font-extrabold text-sm sm:text-base text-indigo-900 dark:text-indigo-200 flex items-center gap-2">
+              <i data-lucide="alert-octagon" class="w-5 h-5 text-indigo-600"></i>
+              The Number One Homiletical Error in the Psalms: The "Two-Point Fallacy"
+            </span>
+            <span class="neu-inset-sm px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold text-indigo-600">
+              Robert Alter &bull; Kugel Principle
+            </span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Hebrew parallelism is almost never static repetition. James Kugel famously demonstrated that biblical parallelism operates on the dynamic: <strong>"A, and what's more, B."</strong> Line B sharpens, intensifies, specifies, or climaxes Line A. 
+          </p>
+
+          <!-- Interactive Comparison Demonstration -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+            
+            <div class="neu-inset p-4 rounded-2xl space-y-2 border-l-4 border-l-rose-500">
+              <div class="flex items-center gap-2 text-xs font-bold text-rose-600">
+                <i data-lucide="x-circle" class="w-4 h-4"></i>
+                The Novice Mistake (2 Separate Points):
+              </div>
+              <div class="text-xs font-serif italic text-slate-700 dark:text-slate-300 bg-white/50 dark:bg-slate-800/50 p-2.5 rounded-xl">
+                "The heavens declare the glory of God, and the sky above proclaims his handiwork." (Ps 19:1)
+              </div>
+              <div class="text-[11px] text-slate-500 space-y-1">
+                <div>&bull; Point 1: Look at the heavens.</div>
+                <div>&bull; Point 2: Look at the sky.</div>
+                <div class="font-bold text-rose-600 pt-1">Result: A disjointed, repetitive, boring sermon!</div>
+              </div>
+            </div>
+
+            <div class="neu-inset p-4 rounded-2xl space-y-2 border-l-4 border-l-teal-500">
+              <div class="flex items-center gap-2 text-xs font-bold text-teal-600">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                The Exegetical Preaching Dynamic ("A, what's more, B"):
+              </div>
+              <div class="text-xs font-serif italic text-slate-700 dark:text-slate-300 bg-white/50 dark:bg-slate-800/50 p-2.5 rounded-xl">
+                Line A speaks of majesty; Line B specifies the personal craftsmanship ("handiwork").
+              </div>
+              <div class="text-[11px] text-slate-500 space-y-1">
+                <div>&bull; Single Unified Point: Creation is God's active cosmic cathedral.</div>
+                <div>&bull; Preaching Strategy: Use Line B's tactile imagery ("handiwork") to intensify the wonder of Line A!</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 3 Core Parallelism Types & Strophic Diagramming -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          
+          <div class="neu-inset p-5 rounded-2xl space-y-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-600 block">Type 1 &bull; Intensifying (Synonymous)</span>
+            <h4 class="font-bold text-sm text-slate-800 dark:text-white">Escalation / Focus</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Line B takes the general concept of Line A and makes it vivid, specific, or climactic. Preach the single theme with heightened volume on B.
+            </p>
+            <div class="text-[11px] font-mono text-slate-600 dark:text-slate-400 italic pt-1">
+              Ps 13:1 &mdash; "How long, O LORD? Will you forget me forever? / How long will you hide your face from me?" (Hiding face intensifies forgetting).
+            </div>
+          </div>
+
+          <div class="neu-inset p-5 rounded-2xl space-y-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-teal-600 block">Type 2 &bull; Contrastive (Antithetic)</span>
+            <h4 class="font-bold text-sm text-slate-800 dark:text-white">The Great Divide</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Line B sets up an uncompromising moral or covenant contrast to Line A. Essential for wisdom and royal preaching.
+            </p>
+            <div class="text-[11px] font-mono text-slate-600 dark:text-slate-400 italic pt-1">
+              Ps 1:6 &mdash; "For the LORD knows the way of the righteous, / but the way of the wicked will perish."
+            </div>
+          </div>
+
+          <div class="neu-inset p-5 rounded-2xl space-y-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-purple-600 block">Type 3 &bull; Strophic Markers</span>
+            <h4 class="font-bold text-sm text-slate-800 dark:text-white">Stanza Boundaries</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Look for refrains, Selah pauses, changes in pronoun (I &rarr; You &rarr; They), or inclusios (bookends) to define your sermon's major movements.
+            </p>
+            <div class="text-[11px] font-mono text-slate-600 dark:text-slate-400 italic pt-1">
+              Ps 42 & 43 &mdash; 3 strophes each ending with the exact refrain: "Why are you cast down, O my soul?"
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Preacher's Guided Drafting Box for Stage 2 -->
+        <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">
+            Preacher's Stage 2 Structure &amp; Parallelism Map:
+          </label>
+          <textarea id="note-stage-2" rows="3" oninput="saveNote('stage2', this.value)" class="w-full neu-inset p-3.5 rounded-2xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800 dark:text-slate-100" placeholder="Map your stanzas (Strophe 1, 2, 3), note significant parallelisms, and ensure you are not creating false sermon points from synonymous lines..."></textarea>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================================
+         STAGE 3 CONTENT: SENSORY IMAGERY & GOVERNING METAPHORS
+         ======================================================================= -->
+    <section id="stage-panel-3" class="space-y-6 hidden">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div>
+            <span class="neu-inset-sm px-3 py-1 rounded-full text-xs font-bold text-teal-600 uppercase tracking-wider inline-flex items-center gap-1.5 mb-2">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+              Stage 3 &bull; Sensory Exegesis
+            </span>
+            <h3 class="text-2xl font-display font-extrabold text-slate-900 dark:text-white">
+              3. Unpack the Imagery &amp; Governing Metaphors
+            </h3>
+          </div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 max-w-sm">
+            The Psalms trade in vivid, physical language. Don't flatten the poem into cold abstractions; make the congregation experience the image!
+          </div>
+        </div>
+
+        <!-- 5-Sense Sensory Audit Scanner -->
+        <div class="space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block">
+            A. Complete the Five-Sense Sensory Audit:
+          </span>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs">
+            
+            <div class="neu-inset p-3.5 rounded-2xl space-y-1 border-t-2 border-t-blue-500">
+              <div class="flex items-center gap-1.5 font-bold text-blue-600">
+                <i data-lucide="eye" class="w-4 h-4"></i> Sight
+              </div>
+              <p class="text-[11px] text-slate-500">Caves, shadows, lightning, boiling waters, green trees.</p>
+            </div>
+
+            <div class="neu-inset p-3.5 rounded-2xl space-y-1 border-t-2 border-t-teal-500">
+              <div class="flex items-center gap-1.5 font-bold text-teal-600">
+                <i data-lucide="volume-2" class="w-4 h-4"></i> Sound
+              </div>
+              <p class="text-[11px] text-slate-500">Roaring lions, crashing waves, groaning bones, festive shouts.</p>
+            </div>
+
+            <div class="neu-inset p-3.5 rounded-2xl space-y-1 border-t-2 border-t-amber-500">
+              <div class="flex items-center gap-1.5 font-bold text-amber-600">
+                <i data-lucide="hand" class="w-4 h-4"></i> Touch / Physical
+              </div>
+              <p class="text-[11px] text-slate-500">Parched throat, muddy clay, crushing rod, healing oil.</p>
+            </div>
+
+            <div class="neu-inset p-3.5 rounded-2xl space-y-1 border-t-2 border-t-purple-500">
+              <div class="flex items-center gap-1.5 font-bold text-purple-600">
+                <i data-lucide="move" class="w-4 h-4"></i> Spatial / Kinetic
+              </div>
+              <p class="text-[11px] text-slate-500">Sinking into Sheol, fleeing to crags, ascending Zion hill.</p>
+            </div>
+
+            <div class="neu-inset p-3.5 rounded-2xl space-y-1 border-t-2 border-t-rose-500">
+              <div class="flex items-center gap-1.5 font-bold text-rose-600">
+                <i data-lucide="flame" class="w-4 h-4"></i> Visceral Peril
+              </div>
+              <p class="text-[11px] text-slate-500">Hunters' snares, poison under lips, melting wax heart.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Governing Metaphors in Biblical Geography -->
+        <div class="neu-card p-5 sm:p-6 rounded-3xl space-y-4">
+          <h4 class="font-display font-extrabold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+            <i data-lucide="anchor" class="w-4 h-4 text-teal-600"></i>
+            Anchor Metaphors of the Psalter (Grounding Without Guesswork)
+          </h4>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            
+            <div class="neu-inset-sm p-4 rounded-2xl space-y-2">
+              <strong class="text-blue-700 dark:text-blue-300 block font-bold">God as Rock / Fortress (Mā‘ôz / Ṣûr)</strong>
+              <p class="text-slate-600 dark:text-slate-400">
+                Rooted in the precipitous limestone cliffs of the Judean wilderness (e.g. Masada, En-gedi). A rock is not a gravel pebble; it is a sheer vertical stronghold where foot soldiers cannot pursue you.
+              </p>
+            </div>
+
+            <div class="neu-inset-sm p-4 rounded-2xl space-y-2">
+              <strong class="text-teal-700 dark:text-teal-300 block font-bold">The Shepherd (Rō‘eh)</strong>
+              <p class="text-slate-600 dark:text-slate-400">
+                In the arid hills of Judah, sheep die without an experienced shepherd who knows where hidden wadis hold water. A rod fights off wolves; a staff pulls sheep from crevices.
+              </p>
+            </div>
+
+            <div class="neu-inset-sm p-4 rounded-2xl space-y-2">
+              <strong class="text-purple-700 dark:text-purple-300 block font-bold">The Pit / Mire (Bôr / Ṭîṭ)</strong>
+              <p class="text-slate-600 dark:text-slate-400">
+                Ancient cisterns cut into limestone. Once you slip into the cold mud at the bottom, there is no foothold and no escape unless someone lowers a rope from above (Ps 40:2).
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- The "Preach the Image" Rule -->
+        <div class="neu-inset p-4 rounded-2xl text-xs space-y-1.5 border-l-4 border-l-teal-600">
+          <strong class="text-teal-700 dark:text-teal-300 block font-bold">The Preacher's Rule: Do Not Kill the Metaphor!</strong>
+          <p class="text-slate-600 dark:text-slate-300">
+            If you immediately translate "God is my rock" into "God gives stability," you strip the poem of its emotional horsepower. First help your listeners standing on the edge of the cliff with the enemy army below; then let them feel the unshakeable granite beneath their feet.
+          </p>
+        </div>
+
+        <!-- Preacher's Guided Drafting Box for Stage 3 -->
+        <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">
+            Preacher's Stage 3 Imagery &amp; Metaphor Inventory:
+          </label>
+          <textarea id="note-stage-3" rows="3" oninput="saveNote('stage3', this.value)" class="w-full neu-inset p-3.5 rounded-2xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-teal-500 text-slate-800 dark:text-slate-100" placeholder="List the governing metaphors in this psalm. How will you paint the sensory landscape in your sermon before unpacking the doctrine?"></textarea>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================================
+         STAGE 4 CONTENT: CANONICAL CONTEXT & CHRISTOLOGICAL TRAJECTORY
+         ======================================================================= -->
+    <section id="stage-panel-4" class="space-y-6 hidden">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div>
+            <span class="neu-inset-sm px-3 py-1 rounded-full text-xs font-bold text-purple-600 uppercase tracking-wider inline-flex items-center gap-1.5 mb-2">
+              <i data-lucide="cross" class="w-3.5 h-3.5"></i>
+              Stage 4 &bull; Redemptive-Historical Navigation
+            </span>
+            <h3 class="text-2xl font-display font-extrabold text-slate-900 dark:text-white">
+              4. Trace Canonical Context &amp; Christological Trajectory
+            </h3>
+          </div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 max-w-sm">
+            Locate the psalm within the 5-Book architecture of the Psalter, then trace its highway to Christ and the resurrection (Luke 24:44).
+          </div>
+        </div>
+
+        <!-- The 5 Books of the Psalter Positioning Radar -->
+        <div class="neu-inset p-5 sm:p-6 rounded-3xl space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-purple-600">
+              A. Macro-Canonical Location: Where does it sit in the 5 Books?
+            </span>
+            <span id="active-book-indicator" class="neu-inset-sm px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold text-purple-600">
+              Book I (Psalms 1–41)
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs">
+            <div class="p-3 rounded-2xl bg-purple-100 dark:bg-purple-950/60 border border-purple-400 text-purple-900 dark:text-purple-200">
+              <strong class="block text-[11px]">Book I (1–41)</strong>
+              <span class="text-[10px] text-purple-800 dark:text-purple-300">Davidic Combat &amp; Agony</span>
+            </div>
+            <div class="p-3 rounded-2xl neu-card opacity-60">
+              <strong class="block text-[11px]">Book II (42–72)</strong>
+              <span class="text-[10px] text-slate-500">National Kingdom &amp; Temple</span>
+            </div>
+            <div class="p-3 rounded-2xl neu-card opacity-60">
+              <strong class="block text-[11px]">Book III (73–89)</strong>
+              <span class="text-[10px] text-slate-500">Exile &amp; Crown Shattered</span>
+            </div>
+            <div class="p-3 rounded-2xl neu-card opacity-60">
+              <strong class="block text-[11px]">Book IV (90–106)</strong>
+              <span class="text-[10px] text-slate-500">The LORD Reigns in Exile</span>
+            </div>
+            <div class="p-3 rounded-2xl neu-card opacity-60">
+              <strong class="block text-[11px]">Book V (107–150)</strong>
+              <span class="text-[10px] text-slate-500">Return &amp; Hallelujah Chorus</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- The 4 Christological Lenses Matrix -->
+        <div class="space-y-3">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">
+            B. The Four Highways to Christ in the Psalms:
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            
+            <div class="neu-card p-4 space-y-2 border-l-4 border-l-blue-600">
+              <div class="flex items-center gap-2 font-bold text-blue-600">
+                <i data-lucide="message-square" class="w-4 h-4"></i>
+                1. Christ as the Pray-er / Singer of the Psalm
+              </div>
+              <p class="text-slate-600 dark:text-slate-300">
+                Jesus takes our human flesh and prays this psalm. When David cries "My God, my God, why have you forsaken me?" (Ps 22) or "Into your hands I commit my spirit" (Ps 31), Jesus is the ultimate Singer on the cross.
+              </p>
+            </div>
+
+            <div class="neu-card p-4 space-y-2 border-l-4 border-l-teal-600">
+              <div class="flex items-center gap-2 font-bold text-teal-600">
+                <i data-lucide="crown" class="w-4 h-4"></i>
+                2. Christ as the Subject / Lord of the Psalm
+              </div>
+              <p class="text-slate-600 dark:text-slate-300">
+                The psalm prophetically describes the ascended King. "The LORD said to my Lord: Sit at my right hand" (Ps 110:1) or the Anointed Son of Psalm 2 whom all kings must kiss.
+              </p>
+            </div>
+
+            <div class="neu-card p-4 space-y-2 border-l-4 border-l-amber-600">
+              <div class="flex items-center gap-2 font-bold text-amber-600">
+                <i data-lucide="check" class="w-4 h-4"></i>
+                3. Christ as the True Israelite (The Righteous One)
+              </div>
+              <p class="text-slate-600 dark:text-slate-300">
+                Where Israel and humanity failed, Jesus is the only man of Psalm 1 who perfectly delighted in God's Torah day and night, and the only one with clean hands and a pure heart who can ascend God's holy hill (Ps 24).
+              </p>
+            </div>
+
+            <div class="neu-card p-4 space-y-2 border-l-4 border-l-purple-600">
+              <div class="flex items-center gap-2 font-bold text-purple-600">
+                <i data-lucide="users" class="w-4 h-4"></i>
+                4. The Church Singing In Christ
+              </div>
+              <p class="text-slate-600 dark:text-slate-300">
+                Because we are united to the risen Christ by faith, we now sing these ancient songs with resurrection confidence, knowing our tears are temporary and the Kingdom is secure.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Warning Against Moralizing David -->
+        <div class="neu-inset-sm p-4 rounded-2xl text-xs space-y-1 bg-rose-50/50 dark:bg-rose-950/20 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-900/40">
+          <strong class="flex items-center gap-1.5 font-bold">
+            <i data-lucide="shield-alert" class="w-4 h-4 text-rose-600"></i> The Moralizing Trap:
+          </strong>
+          <p>
+            Never tell your congregation: "Be brave like David." David was an adulterer, murderer, and flawed king. The hero of the Psalter is Yahweh, the covenant-keeping God who redeems David from the pit and who sent the true Son of David to absorb the wrath our sins deserved!
+          </p>
+        </div>
+
+        <!-- Preacher's Guided Drafting Box for Stage 4 -->
+        <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">
+            Preacher's Stage 4 Canonical &amp; Christological Bridge:
+          </label>
+          <textarea id="note-stage-4" rows="3" oninput="saveNote('stage4', this.value)" class="w-full neu-inset p-3.5 rounded-2xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-purple-500 text-slate-800 dark:text-slate-100" placeholder="Where is this psalm located in the five books? How does Jesus fulfill this psalm, and how does the Church sing it in light of the empty tomb?"></textarea>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================================
+         STAGE 5 CONTENT: HOMILETICAL IDEA (THE BIG IDEA FORGE)
+         ======================================================================= -->
+    <section id="stage-panel-5" class="space-y-6 hidden">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div>
+            <span class="neu-inset-sm px-3 py-1 rounded-full text-xs font-bold text-amber-600 uppercase tracking-wider inline-flex items-center gap-1.5 mb-2">
+              <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+              Stage 5 &bull; Distillation of Exegesis
+            </span>
+            <h3 class="text-2xl font-display font-extrabold text-slate-900 dark:text-white">
+              5. Formulate the Homiletical Idea (The Big Idea Forge)
+            </h3>
+          </div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 max-w-sm">
+            Distill your exegesis into one Exegetical Idea, then translate it into one memorable, biblical Homiletical Idea that captures both truth and emotional posture.
+          </div>
+        </div>
+
+        <!-- Haddon Robinson's Two-Part Synthesis Engine -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          
+          <div class="neu-inset p-5 rounded-2xl space-y-2 border-l-4 border-l-blue-600">
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-600 block">Step A &bull; The Subject</span>
+            <h4 class="font-bold text-sm text-slate-800 dark:text-white">What is the psalmist talking about?</h4>
+            <p class="text-xs text-slate-500">
+              Formulated as a comprehensive question or precise topic without the answer.
+            </p>
+            <div id="subject-example" class="p-2.5 rounded-xl bg-white/60 dark:bg-slate-800/60 font-mono text-xs text-slate-700 dark:text-slate-200 italic">
+              "How does a covenant believer endure when God seems silent and absent in prolonged suffering?"
+            </div>
+          </div>
+
+          <div class="neu-inset p-5 rounded-2xl space-y-2 border-l-4 border-l-teal-600">
+            <span class="text-xs font-bold uppercase tracking-wider text-teal-600 block">Step B &bull; The Complement</span>
+            <h4 class="font-bold text-sm text-slate-800 dark:text-white">What does the psalmist declare about it?</h4>
+            <p class="text-xs text-slate-500">
+              The theological conclusion and resolution given by the inspired poet.
+            </p>
+            <div id="complement-example" class="p-2.5 rounded-xl bg-white/60 dark:bg-slate-800/60 font-mono text-xs text-slate-700 dark:text-slate-200 italic">
+              "...by boldly voicing honest agony, pleading for intervention, and anchoring trust in God's unfailing steadfast love (ḥeseḏ)."
+            </div>
+          </div>
+
+        </div>
+
+        <!-- The Synthesis Forge -->
+        <div class="neu-card p-6 rounded-3xl space-y-4 border-2 border-amber-300 dark:border-amber-700/40 bg-gradient-to-br from-amber-50/30 via-white to-sky-50/30 dark:from-slate-900 dark:via-slate-850 dark:to-slate-900">
+          <div class="flex items-center justify-between">
+            <span class="font-display font-extrabold text-sm text-amber-900 dark:text-amber-300 uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
+              The Two-Tier Synthesis (Exegetical &rarr; Homiletical)
+            </span>
+            <span class="text-[10px] font-mono text-slate-400">Robinson Homiletic Standard</span>
+          </div>
+
+          <!-- Exegetical Idea (Past Tense / Text Bound) -->
+          <div class="space-y-1">
+            <span class="text-[10px] font-bold uppercase text-slate-400">1. Exegetical Idea (Historically Grounded):</span>
+            <div id="exegetical-idea-display" class="p-3.5 rounded-2xl neu-inset font-serif italic text-xs sm:text-sm text-slate-700 dark:text-slate-200">
+              "David moved from prolonged agony over God's apparent silence to ecstatic praise by anchoring his desperate soul in Yahweh's unfailing covenant loyalty (ḥeseḏ)."
+            </div>
+          </div>
+
+          <!-- Homiletical Idea (The Big Idea: Contemporary, Crisp, Memorable) -->
+          <div class="space-y-1 pt-2">
+            <span class="text-[10px] font-bold uppercase text-amber-600 dark:text-amber-400">2. Homiletical Idea (The Big Idea for Contemporary Preaching):</span>
+            <div id="homiletical-idea-display" class="p-4 rounded-2xl bg-amber-100/70 dark:bg-amber-950/60 border-2 border-amber-400 font-display font-black text-sm sm:text-base text-amber-950 dark:text-amber-100 shadow-sm">
+              "When God feels distant, honest prayer turns our deepest agony into bold songs of unfailing love."
+            </div>
+          </div>
+        </div>
+
+        <!-- Criteria of Excellence Scorecard for Big Idea -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div class="neu-inset-sm p-3 rounded-2xl space-y-1 text-center">
+            <span class="text-slate-400 block text-[10px] uppercase font-bold">1. Faithful</span>
+            <span class="font-bold text-teal-600 flex items-center justify-center gap-1"><i data-lucide="check" class="w-3.5 h-3.5"></i> Text Grounded</span>
+          </div>
+          <div class="neu-inset-sm p-3 rounded-2xl space-y-1 text-center">
+            <span class="text-slate-400 block text-[10px] uppercase font-bold">2. Memorable</span>
+            <span class="font-bold text-teal-600 flex items-center justify-center gap-1"><i data-lucide="check" class="w-3.5 h-3.5"></i> Single Sentence</span>
+          </div>
+          <div class="neu-inset-sm p-3 rounded-2xl space-y-1 text-center">
+            <span class="text-slate-400 block text-[10px] uppercase font-bold">3. Emotional Posture</span>
+            <span class="font-bold text-teal-600 flex items-center justify-center gap-1"><i data-lucide="check" class="w-3.5 h-3.5"></i> Matches Mood</span>
+          </div>
+          <div class="neu-inset-sm p-3 rounded-2xl space-y-1 text-center">
+            <span class="text-slate-400 block text-[10px] uppercase font-bold">4. Christ-Centered</span>
+            <span class="font-bold text-teal-600 flex items-center justify-center gap-1"><i data-lucide="check" class="w-3.5 h-3.5"></i> Gospel Anchor</span>
+          </div>
+        </div>
+
+        <!-- Preacher's Guided Drafting Box for Stage 5 -->
+        <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">
+            Preacher's Stage 5 Big Idea Forge:
+          </label>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <input type="text" id="custom-subject-input" oninput="saveNote('subject', this.value)" class="neu-inset p-3 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="Enter Subject (What is the author talking about?)...">
+            <input type="text" id="custom-complement-input" oninput="saveNote('complement', this.value)" class="neu-inset p-3 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="Enter Complement (What does the author conclude?)...">
+          </div>
+          <textarea id="note-stage-5" rows="2" oninput="saveNote('stage5', this.value)" class="w-full neu-inset p-3.5 rounded-2xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-amber-500 text-slate-800 dark:text-slate-100" placeholder="Draft your final Homiletical Idea (one memorable sentence capturing truth and tone)..."></textarea>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================================
+         STAGE 6 CONTENT: SERMONIC MOVEMENTS ("DO WHAT THE PSALM DOES")
+         ======================================================================= -->
+    <section id="stage-panel-6" class="space-y-6 hidden">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div>
+            <span class="neu-inset-sm px-3 py-1 rounded-full text-xs font-bold text-rose-600 uppercase tracking-wider inline-flex items-center gap-1.5 mb-2">
+              <i data-lucide="layout" class="w-3.5 h-3.5"></i>
+              Stage 6 &bull; Homiletical Isomorphism
+            </span>
+            <h3 class="text-2xl font-display font-extrabold text-slate-900 dark:text-white">
+              6. Structure the Sermon to Match the Text
+            </h3>
+          </div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 max-w-sm">
+            The sermon outline must mirror the emotional and psychological movement of the poem, taking the congregation on the same journey!
+          </div>
+        </div>
+
+        <!-- Contrast: Dry Lecture vs Living Journey -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="neu-inset p-4 rounded-2xl space-y-2 border-l-4 border-l-slate-400 text-xs">
+            <span class="font-bold text-slate-500 uppercase tracking-wider block">The Dry Propositional Lecture (Flattens the Poetry):</span>
+            <div class="space-y-1 font-mono text-[11px] text-slate-600 dark:text-slate-400">
+              <div>Point 1: We all face problems in life.</div>
+              <div>Point 2: We should pray when bad things happen.</div>
+              <div>Point 3: God wants us to be happy.</div>
+            </div>
+            <p class="text-[11px] text-slate-400 italic">
+              Result: The congregation receives a lecture about despair instead of feeling the desperate thirst and drinking the living water.
+            </p>
+          </div>
+
+          <div class="neu-inset p-4 rounded-2xl space-y-2 border-l-4 border-l-rose-500 text-xs">
+            <span class="font-bold text-rose-600 uppercase tracking-wider block">The Living Experiential Journey (Does What the Text Does):</span>
+            <div class="space-y-1 font-mono text-[11px] text-slate-700 dark:text-slate-200">
+              <div>Movement 1: Entering the Darkness of God's Apparent Silence (Vs 1–2)</div>
+              <div>Movement 2: The Desperate Cry at the Edge of Death (Vs 3–4)</div>
+              <div>Movement 3: The Miracle of the Covenant Pivot: Remembering Ḥeseḏ (Vs 5)</div>
+              <div>Movement 4: Christ on the Cross &amp; The Risen Song of the Redeemed (Vs 6)</div>
+            </div>
+            <p class="text-[11px] text-rose-600 font-bold">
+              Result: The congregation walks through agony and arrives at genuine doxology!
+            </p>
+          </div>
+        </div>
+
+        <!-- Active Sermon Outline Movements Display -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">
+              Complete Preaching Outline for Active Case Study:
+            </span>
+            <span id="outline-genre-tag" class="neu-inset-sm px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold text-rose-600">
+              Individual Lament Architecture
+            </span>
+          </div>
+
+          <div id="sermon-movements-container" class="space-y-3">
+            <!-- Dynamically populated outline movements -->
+          </div>
+        </div>
+
+        <!-- Preacher's Guided Drafting Box for Stage 6 -->
+        <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">
+            Preacher's Custom Sermon Outline &amp; Moves:
+          </label>
+          <textarea id="note-stage-6" rows="4" oninput="saveNote('stage6', this.value)" class="w-full neu-inset p-3.5 rounded-2xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-rose-500 text-slate-800 dark:text-slate-100" placeholder="Map your sermon movements here: Movement 1 (The Tension), Movement 2 (The Textual Agony/Wonder), Movement 3 (The Gospel Pivot), Movement 4 (The Congregational Landing)..."></textarea>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================================
+         STAGE STEPPER CONTROLS (PREV / NEXT)
+         ======================================================================= -->
+    <div class="flex items-center justify-between pt-2">
+      <button onclick="prevStage()" id="btn-prev-stage" class="neu-btn px-5 py-2.5 text-xs font-bold flex items-center gap-2 text-slate-600 disabled:opacity-40 disabled:cursor-not-allowed">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+        <span>Previous Stage</span>
+      </button>
+
+      <span id="stage-indicator-text" class="text-xs font-mono font-bold text-slate-400">
+        Stage 1 of 6 &bull; Genre &amp; Tone
+      </span>
+
+      <button onclick="nextStage()" id="btn-next-stage" class="neu-btn-primary px-5 py-2.5 text-xs font-bold flex items-center gap-2">
+        <span>Next Stage</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+  </main>
+
+
+  <!-- =========================================================================
+       MODAL 1: PRE-PULPIT HOMILETICAL HEALTH AUDIT (10-POINT CHECKLIST)
+       ========================================================================= -->
+  <div id="audit-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="neu-card w-full max-w-2xl max-h-[85vh] overflow-y-auto p-6 sm:p-8 space-y-6 relative border border-slate-200 dark:border-slate-800">
+      
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="clipboard-check" class="w-5 h-5 text-teal-600"></i>
+          <h4 class="font-display font-extrabold text-lg text-slate-900 dark:text-white">
+            Pre-Pulpit Homiletical Health Audit
+          </h4>
+        </div>
+        <button onclick="closeAuditModal()" class="w-8 h-8 rounded-full neu-inset-sm flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-white transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-500">
+        Before entering the pulpit, run your sermon through this 10-point audit to eliminate common student errors and ensure your sermon honors the poetry, Christ, and the congregation:
+      </p>
+
+      <div class="space-y-3" id="audit-checklist-container">
+        <!-- 10 Interactive Audit Checks -->
+      </div>
+
+      <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <span id="audit-score" class="font-mono text-xs font-bold text-teal-600">0 of 10 Verified</span>
+        <button onclick="closeAuditModal()" class="neu-btn px-5 py-2 text-xs font-bold text-blue-600">
+          Done with Audit
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       MODAL 2: SERMON PREP DOSSIER EXPORT
+       ========================================================================= -->
+  <div id="export-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="neu-card w-full max-w-3xl max-h-[85vh] overflow-y-auto p-6 sm:p-8 space-y-6 relative border border-slate-200 dark:border-slate-800">
+      
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="file-text" class="w-5 h-5 text-blue-600"></i>
+          <h4 class="font-display font-extrabold text-lg text-slate-900 dark:text-white">
+            Complete Sermon Preparation Dossier
+          </h4>
+        </div>
+        <button onclick="closeExportModal()" class="w-8 h-8 rounded-full neu-inset-sm flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-white transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Printable / Copyable Text Area Container -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span>Formatted Exegesis &amp; Homiletics Brief:</span>
+          <div class="flex items-center gap-2">
+            <button onclick="copyDossierText()" id="btn-copy-dossier" class="neu-btn px-3 py-1 text-xs font-bold text-blue-600 flex items-center gap-1">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              <span id="copy-btn-label">Copy to Clipboard</span>
+            </button>
+            <button onclick="window.print()" class="neu-btn px-3 py-1 text-xs font-bold text-slate-600 flex items-center gap-1">
+              <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+              <span>Print Brief</span>
+            </button>
+          </div>
+        </div>
+
+        <pre id="dossier-preview-box" class="w-full neu-inset p-4 rounded-2xl text-xs font-mono text-slate-700 dark:text-slate-200 whitespace-pre-wrap max-h-96 overflow-y-auto"></pre>
+      </div>
+
+      <div class="pt-2 flex justify-end">
+        <button onclick="closeExportModal()" class="neu-btn px-5 py-2 text-xs font-bold text-blue-600">
+          Close Dossier
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       DATASET & CLIENT INTERACTION ENGINE
+       ========================================================================= -->
+  <script>
+    let currentStage = 1;
+    let currentCaseStudy = 'ps13';
+    let currentGenre = 'lament';
+
+    // Store user notes per case study
+    let userNotes = {
+      ps13: { stage1: '', stage2: '', stage3: '', stage4: '', subject: '', complement: '', stage5: '', stage6: '' },
+      ps23: { stage1: '', stage2: '', stage3: '', stage4: '', subject: '', complement: '', stage5: '', stage6: '' },
+      ps1: { stage1: '', stage2: '', stage3: '', stage4: '', subject: '', complement: '', stage5: '', stage6: '' },
+      ps2: { stage1: '', stage2: '', stage3: '', stage4: '', subject: '', complement: '', stage5: '', stage6: '' },
+      ps29: { stage1: '', stage2: '', stage3: '', stage4: '', subject: '', complement: '', stage5: '', stage6: '' },
+      ps30: { stage1: '', stage2: '', stage3: '', stage4: '', subject: '', complement: '', stage5: '', stage6: '' },
+      custom: { stage1: '', stage2: '', stage3: '', stage4: '', subject: '', complement: '', stage5: '', stage6: '' }
+    };
+
+    // Load stored notes from localStorage if available
+    try {
+      const saved = localStorage.getItem('psalms_sermon_prep_notes');
+      if (saved) {
+        userNotes = Object.assign(userNotes, JSON.parse(saved));
+      }
+    } catch(e) {}
+
+    // Case Studies Masterclass Dataset
+    const caseStudiesData = {
+      ps13: {
+        badge: "Psalm 13",
+        title: '"How Long, O LORD? Will You Forget Me Forever?"',
+        summary: "Individual Lament • 6 Verses • Agony, Desperate Plea, The Sudden Ḥeseḏ Pivot",
+        genre: "lament",
+        book: "Book I (Psalms 1–41) • Davidic Combat",
+        anatomy: [
+          "1. Direct Address & Agonized Cry (vs 1–2): 4-fold 'How long?'",
+          "2. Urgent Petitions with Motives (vs 3–4): 'Light up my eyes, lest I sleep the sleep of death'",
+          "3. Sudden Covenant Pivot (v 5): 'But I have trusted in your steadfast love (ḥeseḏ)'",
+          "4. Triumphant Vow of Praise (v 6): 'I will sing to the LORD because he has dealt bountifully with me'"
+        ],
+        pitfall: "Rushing past the four-fold 'How long?' to deliver cheap cheerfulness! Let the church inhabit the agony of God's silence so the relief of God's ḥeseḏ carries genuine weight.",
+        emotionalCurve: [
+          { label: "Agony / Silence", score: 20 },
+          { label: "Depths of Grief", score: 10 },
+          { label: "Desperate Plea", score: 40 },
+          { label: "Sudden Pivot (Ḥeseḏ)", score: 85 },
+          { label: "Ecstatic Praise", score: 95 }
+        ],
+        sensoryAudit: "Darkness of death-sleep; fading eyes; heavy heart daily; sudden dancing step; singing tongue.",
+        metaphors: "Eyes enlightened like torches in battle; enemy triumphing as a conqueror; ḥeseḏ as unshakeable anchor.",
+        christology: "Christ is the ultimate Singer of Psalm 13: on the cross He drank the cup of God's silence so that we would never be forgotten forever.",
+        subject: "How does a believer endure when God seems silent and absent in prolonged suffering?",
+        complement: "By honestly voicing agony, pleading for intervention, and anchoring trust in God's sworn steadfast love (ḥeseḏ).",
+        exegeticalIdea: "David moved from agonizing despair over God's apparent silence to ecstatic praise by anchoring his desperate soul in Yahweh's unfailing covenant loyalty.",
+        homileticalIdea: "When God feels distant, honest prayer turns our deepest agony into bold songs of unfailing love.",
+        movements: [
+          { num: 1, title: "Entering the Silence: When God Feels a Thousand Miles Away", text: "Psalm 13:1–2", move: "Expose the universal pain of unanswered prayer without superficial answers." },
+          { num: 2, title: "The Daring Plea: Praying at the Threshold of the Grave", text: "Psalm 13:3–4", move: "Show that biblical faith doesn't pretend; it demands that God protect His own glory." },
+          { num: 3, title: "The Sudden Pivot: Anchoring the Soul in Ḥeseḏ", text: "Psalm 13:5", move: "Explain how remembering covenant loyalty sparks joy before the circumstances even change." },
+          { num: 4, title: "The Cross & The Eternal Song", text: "Psalm 13:6", move: "Christ endured the true silence of God on Calvary so our final word is always bountiful praise." }
+        ]
+      },
+
+      ps23: {
+        badge: "Psalm 23",
+        title: '"The LORD is My Shepherd; I Shall Not Want"',
+        summary: "Psalm of Trust / Confidence • 6 Verses • Green Pastures, Valley of Death-Shadow, The Royal Banquet",
+        genre: "trust",
+        book: "Book I (Psalms 1–41) • Personal Refuge",
+        anatomy: [
+          "1. The Metaphor of the Shepherd (vs 1–3): Total provision and guiding in right paths",
+          "2. The Dark Valley (v 4): Shift from speaking ABOUT God ('He') to speaking TO God ('You are with me')",
+          "3. The Metaphor of the Royal Host (v 5): Banquet table prepared in the presence of surrounding enemies",
+          "4. Final Covenant Assurance (v 6): Goodness and ḥeseḏ pursuing the believer forever"
+        ],
+        pitfall: "Preaching sentimentality! The Judean wilderness is harsh limestone crags and flash-flood ravines, and enemies surround the banquet. Preach deep danger met by supreme divine security.",
+        emotionalCurve: [
+          { label: "Serene Green Pasture", score: 85 },
+          { label: "Quiet Waters", score: 90 },
+          { label: "Death-Shadow Valley", score: 35 },
+          { label: "You are with Me", score: 80 },
+          { label: "Overflowing Banquet", score: 100 }
+        ],
+        sensoryAudit: "Lush grass, still water, shadow of deep darkness, wooden rod and staff, olive oil on head, overflowing wine goblet.",
+        metaphors: "God as Royal Shepherd in barren desert; God as Desert Host offering inviolable sanctuary hospitality.",
+        christology: "Jesus is the Good Shepherd (John 10) who laid down His life for the sheep and walked through the ultimate valley of death so we walk through only its shadow.",
+        subject: "How does a believer find contentment and fearlessness in a dangerous, uncertain world?",
+        complement: "By resting in the personal presence of Yahweh, who shepherds through the darkest valleys and hosts us in His house forever.",
+        exegeticalIdea: "David rested in complete security through desert perils because Yahweh's personal presence provided guidance in death's shadow and an eternal feast.",
+        homileticalIdea: "Because the Lord is our Shepherd, we don't have to fear the darkest valley—His presence turns every shadow into a banquet.",
+        movements: [
+          { num: 1, title: "The Care of the Shepherd: Rest in an Exhausting World", text: "Psalm 23:1–3", move: "Contemplate the rare gift of contentment in the Shepherd's guidance." },
+          { num: 2, title: "The Shadow of the Valley: When the Grammar Shifts to 'You'", text: "Psalm 23:4", move: "Highlight the intimate shift from talking about God to speaking face-to-face in peril." },
+          { num: 3, title: "The Feast in the Frontlines: A Table in the Midst of Enemies", text: "Psalm 23:5", move: "Show that God does not wait for problems to disappear before feeding His people." },
+          { num: 4, title: "Pursued by Steadfast Love to the Father's House", text: "Psalm 23:6", move: "Proclaim Christ who prepares a room for us in the Father's eternal dwelling." }
+        ]
+      },
+
+      ps1: {
+        badge: "Psalm 1",
+        title: '"Blessed is the Man: The Two Paths at the Portal"',
+        summary: "Wisdom / Torah Gateway • 6 Verses • The Planted Tree vs Chaff Blown by Wind",
+        genre: "wisdom",
+        book: "Canonical Portal • Introduces the entire 150 Psalms with Psalm 2",
+        anatomy: [
+          "1. The Beatitude & Negative Deliberation (v 1): Not walking, standing, or sitting with wickedness",
+          "2. The Delighted Heart (v 2): Meditating on Yahweh's Torah day and night",
+          "3. The Metaphor of the Fruitful Tree (v 3): Rooted by irrigation streams, bearing seasonable fruit",
+          "4. The Metaphor of Chaff (vs 4–5): Rootless, weightless, scattered in the judgment",
+          "5. The Divine Summary (v 6): The way of the righteous known; the way of the wicked perishing"
+        ],
+        pitfall: "Preaching moralism! Telling people 'Just don't hang out with bad guys' turns Psalm 1 into self-righteousness. Christ is the only truly Blessed Man who perfectly delighted in God's Torah.",
+        emotionalCurve: [
+          { label: "Quiet Joy ('Ashrey)", score: 80 },
+          { label: "Deep Meditation", score: 85 },
+          { label: "Flourishing Tree", score: 95 },
+          { label: "Barren Chaff", score: 25 },
+          { label: "Final Separation", score: 70 }
+        ],
+        sensoryAudit: "Walking/standing/sitting posture; whispering tongue reciting Torah; roots drinking running water; green leaves; dry chaff blowing away.",
+        metaphors: "The tree deliberately transplanted by water canals; the weightless chaff on the exposed threshing floor.",
+        christology: "Jesus is the True Tree of Life and the only righteous man who never sat in the seat of scoffers; by union with Him, we are planted by living water.",
+        subject: "What determines whether a human life bears permanent fruit or vanishes into ruin?",
+        complement: "Delighting in and absorbing God's revealed instruction (Torah) rather than assimilating to the worldview of the wicked.",
+        exegeticalIdea: "The psalmist declares that true flourishing belongs solely to the one who meditates on God's Torah, while the wicked remain weightless chaff.",
+        homileticalIdea: "The life rooted in God's word flourishes in every season, while a life rooted in the world blows away like dust.",
+        movements: [
+          { num: 1, title: "The Subtle Drift: Walking, Standing, and Sitting", text: "Psalm 1:1", move: "Expose how secular compromise happens gradually, step by step." },
+          { num: 2, title: "The Secret Feast: Delighting in God's Voice", text: "Psalm 1:2", move: "Shift from external duty to internal affection and rhythmic meditation." },
+          { num: 3, title: "The Rooted Tree vs The Drifting Chaff", text: "Psalm 1:3–5", move: "Contrast the organic durability of the tree with the weightlessness of chaff." },
+          { num: 4, title: "Christ the True Root and the Judgment to Come", text: "Psalm 1:6", move: "Show how Jesus was cut down on the tree of Calvary so we could be grafted into life." }
+        ]
+      },
+
+      ps2: {
+        badge: "Psalm 2",
+        title: '"Why Do the Nations Rage? The Coronation on Zion"',
+        summary: "Royal / Messianic Psalm • 12 Verses • Raging Kings, The Laugh of God, The King Anointed",
+        genre: "royal",
+        book: "Canonical Portal (Twin to Psalm 1) • Covenant Throne",
+        anatomy: [
+          "1. The Conspiracy of the Nations (vs 1–3): Earthly rulers attempting to break God's bonds",
+          "2. The Heavenly Reaction (vs 4–6): The Lord laughs and announces His King on Zion",
+          "3. The Decree of the Son (vs 7–9): 'You are my Son; today I have begotten you'",
+          "4. The Final Admonition (vs 10–12): Kiss the Son lest he be angry; blessed are all who take refuge"
+        ],
+        pitfall: "Preaching contemporary partisan politics! Psalm 2 shows that all human empires are conspiratorial against God's rule. Preach the absolute supremacy of King Jesus.",
+        emotionalCurve: [
+          { label: "Raging Rebellion", score: 30 },
+          { label: "Heavenly Laughter", score: 85 },
+          { label: "Divine Decree", score: 95 },
+          { label: "Iron Rod Judgment", score: 60 },
+          { label: "Blessed Refuge", score: 90 }
+        ],
+        sensoryAudit: "Raging crowds, snapping ropes/cords, thunderous divine laughter, iron mace shattering pottery, kiss of homage.",
+        metaphors: "Human rulers as plotting rebels; potter's vessel shattered into ceramic dust; the kiss of feudal allegiance.",
+        christology: "Applied in Acts 4 and 13 directly to the crucifixion and resurrection of Jesus: Herod and Pilate raged, but God raised Jesus as King of kings.",
+        subject: "How does God respond to the proud rebellions of human rulers and empires?",
+        complement: "By mocking their arrogance and establishing His anointed Son on Zion, summoning all to submit and find refuge in Him.",
+        exegeticalIdea: "The psalmist warns that human empires will be shattered by the Lord's anointed King, and true blessing is found only in submitting to the Son.",
+        homileticalIdea: "Though the world rages against God, Jesus reigns supreme—kiss the Son and find your refuge in Him.",
+        movements: [
+          { num: 1, title: "The Noise of Rebellion: The Futile Rage of Human Pride", text: "Psalm 2:1–3", move: "Diagnose why modern culture desperately wants to snap God's moral cords." },
+          { num: 2, title: "The Laughter of the Sovereign: Unshaken in the Heavens", text: "Psalm 2:4–6", move: "Bring calm to the church by showing God never panics over earthly elections or tyrants." },
+          { num: 3, title: "The Coronation of the Son: The Empty Tomb Decree", text: "Psalm 2:7–9", move: "Celebrate Jesus' resurrection as the public installation of the King of the universe." },
+          { num: 4, title: "The Royal Warning and the Shelter of Grace", text: "Psalm 2:10–12", move: "Call the congregation to kiss the Son in worship, closing on the beatitude of refuge." }
+        ]
+      },
+
+      ps29: {
+        badge: "Psalm 29",
+        title: '"Ascribe to the LORD, O Heavenly Beings: The Voice of Thunder"',
+        summary: "Descriptive Praise / Cosmic Hymn • 11 Verses • The 7-Fold Voice of Yahweh Over the Storm",
+        genre: "praise",
+        book: "Book I (Psalms 1–41) • Divine Majesty",
+        anatomy: [
+          "1. Heavenly Call to Ascribe Glory (vs 1–2): Celestial court summoned to worship in holy splendor",
+          "2. The Seven Thunders of Yahweh (vs 3–9): Voice moving from the Mediterranean over Lebanon to Kadesh",
+          "3. The Temple Echo (v 9c): In His temple all cry 'Glory!'",
+          "4. The Enthroned Sovereign Over the Flood (vs 10–11): The God of cosmic power gives peace to His people"
+        ],
+        pitfall: "Preaching duty instead of awe! If your sermon on Psalm 29 sounds like a lecture on meteorology, you've missed it. Let the thunderstorm shake the pews so the final gift of 'peace' is breathtaking.",
+        emotionalCurve: [
+          { label: "Heavenly Summons", score: 75 },
+          { label: "Crashing Thunder", score: 95 },
+          { label: "Splintering Cedars", score: 100 },
+          { label: "All Cry 'Glory!'", score: 90 },
+          { label: "Settled Peace (Shalom)", score: 95 }
+        ],
+        sensoryAudit: "Blinding flash of lightning, deafening crack of thunder, snapping cedar trunks, shaking desert, stripped forests.",
+        metaphors: "The storm as the vocal cord of God; the Lord enthroned above the primeval floodwaters (mabbūl).",
+        christology: "Jesus is the One whose voice rebukes the storm on Galilee ('Peace, be still!') and who gives His disciples His supernatural shalom.",
+        subject: "What is the true nature of God's majestic power over the chaotic forces of creation?",
+        complement: "His voice shatters every earthly power, commands universal worship, and guarantees peace to His covenant people.",
+        exegeticalIdea: "David summons all beings to adore the voice of Yahweh which shatters cedars and shakes deserts, because this sovereign King blesses His people with peace.",
+        homileticalIdea: "The almighty voice that commands the thunderstorm speaks peace to the hearts of His people.",
+        movements: [
+          { num: 1, title: "The Call to the Heavens: Ascribing Real Glory", text: "Psalm 29:1–2", move: "Awaken worshippers from casual familiarity into holy reverence." },
+          { num: 2, title: "The Thunderous Tour: Watching the Forest Shatter", text: "Psalm 29:3–9", move: "Trace the storm from the sea across Lebanon, demonstrating God's effortless power." },
+          { num: 3, title: "The Temple Cry: 'Glory!' in the Sanctuary", text: "Psalm 29:9c", move: "Show that worshippers are those who interpret the thunder as God's majestic praise." },
+          { num: 4, title: "The Storm God Who Gives Shalom: The Gift of the Cross", text: "Psalm 29:10–11", move: "The sovereign Lord above the flood speaks tender shalom to His flock through Jesus." }
+        ]
+      },
+
+      ps30: {
+        badge: "Psalm 30",
+        title: '"Joy Comes with the Morning: Deliverance from the Pit"',
+        summary: "Thanksgiving / Declarative Praise • 12 Verses • Sickness, Self-Sufficiency Shattered, Dancing Clothes",
+        genre: "thanksgiving",
+        book: "Book I (Psalms 1–41) • Temple Dedication Song",
+        anatomy: [
+          "1. Declarative Thanksgiving (vs 1–3): Rescued from the edge of the pit (Sheol)",
+          "2. Invitation to the Congregation (vs 4–5): Weeping may tarry for the night, but joy in the morning",
+          "3. Confession of Past Pride (vs 6–7): 'I said in my prosperity: I shall never be moved'",
+          "4. Retelling the Desperate Cry (vs 8–10): 'What profit is there in my death?'",
+          "5. Transformation of Mourning into Dancing (vs 11–12): Sackcloth stripped, girded with gladness"
+        ],
+        pitfall: "Preaching thanksgiving without recalling the mud! Declarative praise only sings because the grave was open. Don't skip the confession of self-reliance (v 6).",
+        emotionalCurve: [
+          { label: "Praise for Rescue", score: 85 },
+          { label: "The Deceptive Prosperity", score: 50 },
+          { label: "Terror of the Pit", score: 20 },
+          { label: "Mourning to Dancing", score: 95 },
+          { label: "Unsilent Thanksgiving", score: 100 }
+        ],
+        sensoryAudit: "Pulled up like bucket from well; cold pit of Sheol; tearing off coarse sackcloth; putting on bright festive robe; dancing feet.",
+        metaphors: "Drawn up like a drowning person; sackcloth vs dancing garments; the grave as a silent mouth unable to praise.",
+        christology: "Jesus experienced the ultimate night of weeping in the garden and on the cross; His resurrection is the eternal Easter morning where joy broke the tomb.",
+        subject: "How does God transform a believer's complacency through suffering and deliverance?",
+        complement: "By shattering self-reliance, answering urgent cries from the pit, and clothing mourning with joyful praise.",
+        exegeticalIdea: "David thanked God for pulling him from near-death, confessing that God shattered his arrogant self-sufficiency to turn his mourning into dancing.",
+        homileticalIdea: "Weeping may last for the dark night of suffering, but God's resurrection joy always dawns in the morning.",
+        movements: [
+          { num: 1, title: "The Illusion of Security: 'I Shall Never Be Moved'", text: "Psalm 30:6–7", move: "Confront how easily health and wealth tempt us into self-reliant complacency." },
+          { num: 2, title: "The Sudden Pit: When God Hides His Face", text: "Psalm 30:1–3, 8–10", move: "Explore how quickly life crumbles and drives us back to desperate prayer." },
+          { num: 3, title: "The Arithmetic of Grace: A Moment of Anger vs A Lifetime of Favor", text: "Psalm 30:4–5", move: "Weigh the temporary pain of discipline against the unending ocean of God's favor." },
+          { num: 4, title: "The Easter Wardrobe: Clothed in Dancing Clothes", text: "Psalm 30:11–12", move: "Celebrate Christ who stripped off our graveclothes and clothed us with eternal joy." }
+        ]
+      },
+
+      custom: {
+        badge: "Custom Psalm",
+        title: "Your Selected Psalm Workbench",
+        summary: "Customizable Exegesis & Homiletics Workspace",
+        genre: "lament",
+        book: "Custom",
+        anatomy: [
+          "Enter your text's structural milestones..."
+        ],
+        pitfall: "Audit your text for parallelisms, genre rules, and Christ-centered integrity.",
+        emotionalCurve: [
+          { label: "Opening", score: 50 },
+          { label: "Development", score: 30 },
+          { label: "Climax / Pivot", score: 80 },
+          { label: "Resolution", score: 90 }
+        ],
+        sensoryAudit: "Identify sight, sound, touch, and visceral peril in your text.",
+        metaphors: "Analyze the governing metaphors.",
+        christology: "Identify how Christ fulfills this psalm.",
+        subject: "What is the author talking about?",
+        complement: "What does the author conclude about the subject?",
+        exegeticalIdea: "Draft your exegetical idea...",
+        homileticalIdea: "Draft your single-sentence Big Idea...",
+        movements: [
+          { num: 1, title: "Movement 1: The Tension", text: "Passage Intro", move: "Open the world of the text." },
+          { num: 2, title: "Movement 2: Deepening the Problem", text: "Body Text", move: "Explore the text's conflict." },
+          { num: 3, title: "Movement 3: The Gospel Pivot", text: "Climax Text", move: "Encounter Christ in the turning point." },
+          { num: 4, title: "Movement 4: Living the Song", text: "Conclusion", move: "Send the congregation with faith." }
+        ]
+      }
+    };
+
+    // Genre Details Reference Matrix
+    const genreDatabase = {
+      lament: {
+        name: "Lament (Individual or Corporate)",
+        tag: "Descent to Praise",
+        anatomy: [
+          "1. Direct Address & Cry for Help (Calling on Yahweh's covenant name)",
+          "2. The Complaint (Describing distress: enemies, personal guilt/illness, or God's perceived silence)",
+          "3. Confession of Trust (Reminding God and self of past deliverances)",
+          "4. Specific Petitions (Pleading for rescue, judgment on evil, or light)",
+          "5. Motives for God to Act ('For your name's sake', 'Because you are faithful')",
+          "6. The Vow of Praise / The Sudden Pivot (Transitioning from agony to confident praise)"
+        ],
+        pitfall: "Rushing to the praise prematurely! A sermon on a lament that skips past the agonizing complaints to offer quick positive clichés ruins the pastoral medicine of the psalm. Preach the silence before preaching the song.",
+        curve: [
+          { label: "Agony / Silence", score: 20 },
+          { label: "Depths of Grief", score: 10 },
+          { label: "Desperate Plea", score: 40 },
+          { label: "Sudden Pivot (Ḥeseḏ)", score: 85 },
+          { label: "Ecstatic Praise", score: 95 }
+        ],
+        curveDesc: "The classic 'U-Curve': begins in deep crisis, reaches bottom in desperate prayer, turns abruptly on covenant faithfulness (ḥeseḏ), and ends in confident thanksgiving."
+      },
+      praise: {
+        name: "Hymn of Praise (Descriptive Praise)",
+        tag: "Wonder & Majesty",
+        anatomy: [
+          "1. Imperative Call to Praise ('Praise the LORD!', 'Sing to God a new song')",
+          "2. The Motivation / 'Kî' Clause ('For the LORD is great...', detailing God's work in creation and redemption)",
+          "3. Cosmic Expansion (Summoning sun, moon, kings, beasts, and deep waters to worship)",
+          "4. Renewed Acclamation / Doxology (Concluding with universal blessing)"
+        ],
+        pitfall: "Preaching duty instead of awe! Telling people 'You ought to praise God' produces guilt. Instead, display God's breathtaking greatness in creation and redemption so praise erupts spontaneously.",
+        curve: [
+          { label: "Call to Praise", score: 70 },
+          { label: "Cosmic Wonders", score: 85 },
+          { label: "Creation Power", score: 95 },
+          { label: "Covenant Grace", score: 90 },
+          { label: "Final Hallelujah", score: 100 }
+        ],
+        curveDesc: "The ascending staircase: starts high with a call to worship, climbs higher through creation and redemption, and peaks in pure adoration."
+      },
+      thanksgiving: {
+        name: "Thanksgiving (Declarative Praise)",
+        tag: "Rescue Remembered",
+        anatomy: [
+          "1. Intent to Praise ('I will extol you, O LORD, for you have drawn me up')",
+          "2. Retelling the Historical Crisis (Remembering the cords of death, the pit, the tears)",
+          "3. The Cry of Desperation (Quoting the original prayer made during the storm)",
+          "4. The Divine Intervention ('He heard my voice and pulled me out')",
+          "5. Public Testimony / Sacrificial Feast in Community ('Come hear, all you who fear God, what he has done!')"
+        ],
+        pitfall: "Preaching thanksgiving without recalling the mud! Declarative praise is only sweet because the grave was standing wide open. Recreate the desperation before celebrating the deliverance.",
+        curve: [
+          { label: "Praise for Rescue", score: 80 },
+          { label: "Memory of Crisis", score: 30 },
+          { label: "The Deep Pit", score: 15 },
+          { label: "The Rescue Hand", score: 90 },
+          { label: "Congregational Feast", score: 100 }
+        ],
+        curveDesc: "The V-shaped narrative: starts at thanksgiving, dives backward into the memory of the crisis, and rockets back to celebratory public testimony."
+      },
+      trust: {
+        name: "Psalm of Trust / Confidence",
+        tag: "Serene Security",
+        anatomy: [
+          "1. Declaration of Unshakeable Trust ('The LORD is my light and my salvation; whom shall I fear?')",
+          "2. Vivid Contrast with Looming Dangers (War, besieging armies, false witnesses)",
+          "3. Single Desire for Sacred Presence ('One thing have I asked... to gaze upon the beauty of the LORD')",
+          "4. Calm Defiance in Adversity ('Even if father and mother forsake me, the LORD will take me in')"
+        ],
+        pitfall: "Turning trust into naivety! The psalmists don't trust God because they are naive about life; they trust God in the direct presence of hostile armies and death shadows.",
+        curve: [
+          { label: "Confidence Declared", score: 85 },
+          { label: "Enemies Surrounding", score: 50 },
+          { label: "Secret Pavilion", score: 90 },
+          { label: "Waiting on the Lord", score: 95 }
+        ],
+        curveDesc: "The plateau of peace: hovering steadily above chaos because the anchor is dropped in the sanctuary presence of God."
+      },
+      royal: {
+        name: "Royal / Kingship (Messianic)",
+        tag: "The Davidic Throne",
+        anatomy: [
+          "1. The Cosmic Rebellion of Earthly Empires ('Why do the nations rage?')",
+          "2. The Divine Installation of the King ('I have set my King on Zion, my holy hill')",
+          "3. The Sworn Covenant Promise (2 Samuel 7 bedrock: 'You are my Son')",
+          "4. Judgment on Injustice & Universal Peace",
+          "5. Invitation to Fealty / Blessing ('Kiss the Son... Blessed are all who take refuge')"
+        ],
+        pitfall: "Preaching partisan politics or moralizing David! The Davidic king in the Psalter is the type and forerunner of Jesus. Christ is the King whose throne cannot be shaken.",
+        curve: [
+          { label: "Nations Raging", score: 35 },
+          { label: "Divine Laughter", score: 80 },
+          { label: "Coronation Decree", score: 95 },
+          { label: "Shattered Pots", score: 65 },
+          { label: "Refuge in the Son", score: 90 }
+        ],
+        curveDesc: "The throne trajectory: confronts chaotic human power and establishes the eternal rule of God's Messiah over all nations."
+      },
+      wisdom: {
+        name: "Wisdom / Torah Psalm",
+        tag: "The Two Ways",
+        anatomy: [
+          "1. The Opening Beatitude ('Ashrey / Blessed is the one...')",
+          "2. The Deliberate Choice of Paths (The way of the righteous vs. the way of the wicked)",
+          "3. Organic Metaphors of Fruitfulness vs. Futility (Fruitful tree vs. blown chaff)",
+          "4. Deep Delight in Instruction (Torah as honey, lamp, treasure)",
+          "5. The Inevitable Crisis of Judgment"
+        ],
+        pitfall: "Preaching dry legalism! The Torah in the Psalms is not burdensome rules; it is the life-giving, honey-sweet revelation of God's character that makes wise the simple.",
+        curve: [
+          { label: "Beatitude Joy", score: 80 },
+          { label: "The Two Ways", score: 60 },
+          { label: "The Rooted Tree", score: 95 },
+          { label: "Chaff Blown Away", score: 20 },
+          { label: "The Lord's Way", score: 85 }
+        ],
+        curveDesc: "The fork in the road: presents two radically diverging destinies and calls the listener to step onto the path of life."
+      }
+    };
+
+    // 10-Point Pre-Pulpit Health Audit Checklist Dataset
+    const auditChecks = [
+      { id: 1, text: "I have avoided the 'Two-Point Fallacy': I did NOT invent two separate sermon points from two lines of synonymous parallelism." },
+      { id: 2, text: "My sermon's emotional trajectory mirrors the psalm's journey (e.g., if lament, I let the church feel the agony before the praise)." },
+      { id: 3, text: "I preserved the governing sensory metaphors (rock, pit, shepherd, cup) rather than flattening them into dry theological abstractions." },
+      { id: 4, text: "I accounted for the psalm's canonical position in the 5 Books and its relationship to neighboring psalms." },
+      { id: 5, text: "Christ is proclaimed as the true Singer, Subject, and Savior—I have avoided moralizing David into a mere hero to imitate." },
+      { id: 6, text: "My Homiletical Idea (Big Idea) is a single, crisp, memorable sentence that captures both truth and emotional tone." },
+      { id: 7, text: "My sermon movements 'do what the psalm does' instead of delivering a static, topical lecture." },
+      { id: 8, text: "I located the pivotal turning point (e.g. the ḥeseḏ pivot) and gave it appropriate weight and dramatic climax in the preaching." },
+      { id: 9, text: "The historical context and superscription were used to illuminate the human heart without turning the pulpit into a dry history classroom." },
+      { id: 10, text: "The conclusion invites the congregation to actively sing, pray, and inhabit the psalm with New Testament resurrection hope." }
+    ];
+
+    let auditStatus = {};
+
+    // =========================================================================
+    // CORE UI NAVIGATION & LOGIC
+    // =========================================================================
+
+    function setStage(stageNum) {
+      currentStage = stageNum;
+      for (let i = 1; i <= 6; i++) {
+        const panel = document.getElementById(`stage-panel-${i}`);
+        const tab = document.getElementById(`tab-stage-${i}`);
+        if (panel) {
+          if (i === stageNum) panel.classList.remove('hidden');
+          else panel.classList.add('hidden');
+        }
+        if (tab) {
+          if (i === stageNum) {
+            tab.className = 'neu-card p-3.5 text-left space-y-1.5 transition-all step-active border-2';
+          } else {
+            tab.className = 'neu-card p-3.5 text-left space-y-1.5 transition-all border-2 border-transparent';
+          }
+        }
+      }
+
+      // Indicator text
+      const titles = [
+        "Genre & Tone • Rules of Engagement",
+        "Poetic Structure • Stanzas & Parallelism",
+        "Sensory Imagery • Governing Metaphors",
+        "Canonical Context • Psalter & Christ",
+        "Homiletical Idea • The Big Idea Forge",
+        "Sermon Movements • Doing What the Psalm Does"
+      ];
+      const indicator = document.getElementById('stage-indicator-text');
+      if (indicator) indicator.innerText = `Stage ${stageNum} of 6 • ${titles[stageNum - 1]}`;
+
+      // Update Prev / Next buttons
+      const prevBtn = document.getElementById('btn-prev-stage');
+      const nextBtn = document.getElementById('btn-next-stage');
+      if (prevBtn) prevBtn.disabled = (stageNum === 1);
+      if (nextBtn) {
+        if (stageNum === 6) {
+          nextBtn.innerHTML = `<span>Export Sermon Brief</span><i data-lucide="file-text" class="w-4 h-4"></i>`;
+          nextBtn.onclick = openExportModal;
+        } else {
+          nextBtn.innerHTML = `<span>Next Stage</span><i data-lucide="chevron-right" class="w-4 h-4"></i>`;
+          nextBtn.onclick = nextStage;
+        }
+      }
+
+      lucide.createIcons();
+      window.scrollTo({ top: 180, behavior: 'smooth' });
+    }
+
+    function nextStage() {
+      if (currentStage < 6) setStage(currentStage + 1);
+    }
+
+    function prevStage() {
+      if (currentStage > 1) setStage(currentStage - 1);
+    }
+
+    function selectGenre(genreKey) {
+      currentGenre = genreKey;
+      ['lament', 'praise', 'thanksgiving', 'trust', 'royal', 'wisdom'].forEach(k => {
+        const btn = document.getElementById(`genre-btn-${k}`);
+        if (btn) {
+          if (k === genreKey) {
+            btn.className = 'p-3 rounded-2xl neu-inset-sm text-left space-y-1 transition hover:scale-105 border-2 border-blue-500';
+          } else {
+            btn.className = 'p-3 rounded-2xl neu-card text-left space-y-1 transition hover:scale-105 border-2 border-transparent';
+          }
+        }
+      });
+
+      renderGenreDetails(genreKey);
+    }
+
+    function renderGenreDetails(genreKey) {
+      const g = genreDatabase[genreKey];
+      if (!g) return;
+
+      const titleEl = document.getElementById('genre-anatomy-title');
+      const listEl = document.getElementById('genre-anatomy-list');
+      const pitfallEl = document.getElementById('genre-pitfall-text');
+      const curveDescEl = document.getElementById('emotional-curve-desc');
+
+      if (titleEl) titleEl.innerText = `Expected Structural Elements: ${g.name}`;
+      if (pitfallEl) pitfallEl.innerText = g.pitfall;
+      if (curveDescEl) curveDescEl.innerText = g.curveDesc;
+
+      if (listEl) {
+        listEl.innerHTML = '';
+        g.anatomy.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'flex items-start gap-2';
+          div.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i><span>${item}</span>`;
+          listEl.appendChild(div);
+        });
+      }
+
+      renderEmotionalCurve(g.curve);
+      lucide.createIcons();
+    }
+
+    function renderEmotionalCurve(points) {
+      const container = document.getElementById('emotional-curve-container');
+      if (!container || !points || points.length === 0) return;
+
+      // Draw SVG graph
+      const w = 400;
+      const h = 180;
+      const step = w / (points.length - 1);
+
+      let pathD = `M 0,${h - (points[0].score / 100 * (h - 40) + 20)}`;
+      let circlesHtml = '';
+
+      points.forEach((p, idx) => {
+        const x = idx * step;
+        const y = h - (p.score / 100 * (h - 40) + 20);
+        if (idx > 0) pathD += ` L ${x},${y}`;
+
+        circlesHtml += `
+          <circle cx="${x}" cy="${y}" r="5" fill="#0066CC" stroke="#FFFFFF" stroke-width="2" class="cursor-pointer transition hover:r-7"/>
+          <text x="${x}" y="${y - 10}" text-anchor="middle" font-size="9" font-weight="bold" fill="#0066CC">${p.score}%</text>
+          <text x="${x}" y="${h - 2}" text-anchor="middle" font-size="8" fill="#64748B">${p.label}</text>
+        `;
+      });
+
+      container.innerHTML = `
+        <svg viewBox="0 0 ${w} ${h}" class="w-full h-full overflow-visible">
+          <!-- Baseline Guides -->
+          <line x1="0" y1="20" x2="${w}" y2="20" stroke="#E2E8F0" stroke-dasharray="3,3"/>
+          <line x1="0" y1="${h/2}" x2="${w}" y2="${h/2}" stroke="#E2E8F0" stroke-dasharray="3,3"/>
+          <line x1="0" y1="${h-20}" x2="${w}" y2="${h-20}" stroke="#CBD5E1"/>
+
+          <!-- Area fill -->
+          <path d="${pathD} L ${w},${h-20} L 0,${h-20} Z" fill="rgba(0, 102, 204, 0.08)"/>
+
+          <!-- Line curve -->
+          <path d="${pathD}" fill="none" stroke="#0066CC" stroke-width="3" stroke-linecap="round"/>
+
+          ${circlesHtml}
+        </svg>
+      `;
+    }
+
+    function loadCaseStudy(key) {
+      currentCaseStudy = key;
+      const cs = caseStudiesData[key];
+      if (!cs) return;
+
+      // Update Header Badge & Titles
+      const badge = document.getElementById('active-psalm-badge');
+      const title = document.getElementById('active-psalm-title');
+      const summary = document.getElementById('active-psalm-summary');
+      if (badge) badge.innerText = cs.badge;
+      if (title) title.innerText = cs.title;
+      if (summary) summary.innerText = cs.summary;
+
+      // Update Genre
+      selectGenre(cs.genre);
+
+      // Update Canonical Book indicator
+      const bookInd = document.getElementById('active-book-indicator');
+      if (bookInd) bookInd.innerText = cs.book;
+
+      // Update Homiletical Idea Examples
+      const subjEx = document.getElementById('subject-example');
+      const compEx = document.getElementById('complement-example');
+      const exeDisp = document.getElementById('exegetical-idea-display');
+      const homDisp = document.getElementById('homiletical-idea-display');
+
+      if (subjEx) subjEx.innerText = `"${cs.subject}"`;
+      if (compEx) compEx.innerText = `"...${cs.complement}"`;
+      if (exeDisp) exeDisp.innerText = `"${cs.exegeticalIdea}"`;
+      if (homDisp) homDisp.innerText = `"${cs.homileticalIdea}"`;
+
+      // Update Movements
+      renderMovements(cs.movements);
+
+      // Load user notes for this case study into textareas
+      const notes = userNotes[key] || {};
+      for (let i = 1; i <= 6; i++) {
+        const ta = document.getElementById(`note-stage-${i}`);
+        if (ta) ta.value = notes[`stage${i}`] || '';
+      }
+      const subjInp = document.getElementById('custom-subject-input');
+      const compInp = document.getElementById('custom-complement-input');
+      if (subjInp) subjInp.value = notes.subject || '';
+      if (compInp) compInp.value = notes.complement || '';
+    }
+
+    function renderMovements(moves) {
+      const container = document.getElementById('sermon-movements-container');
+      if (!container || !moves) return;
+      container.innerHTML = '';
+
+      moves.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'neu-inset p-4 sm:p-5 rounded-2xl space-y-2 border-l-4 border-l-blue-600 text-xs';
+        card.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full neu-inset-sm flex items-center justify-center font-bold text-blue-600 text-[11px]">${m.num}</span>
+              <h5 class="font-display font-extrabold text-sm text-slate-900 dark:text-white">${m.title}</h5>
+            </div>
+            <span class="neu-inset-sm px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold text-slate-500 self-start sm:self-auto">${m.text}</span>
+          </div>
+          <p class="text-slate-600 dark:text-slate-300 leading-relaxed pl-7">
+            <strong class="text-blue-600 dark:text-blue-400">Homiletical Move:</strong> ${m.move}
+          </p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function saveNote(field, value) {
+      if (!userNotes[currentCaseStudy]) userNotes[currentCaseStudy] = {};
+      userNotes[currentCaseStudy][field] = value;
+      try {
+        localStorage.setItem('psalms_sermon_prep_notes', JSON.stringify(userNotes));
+      } catch(e) {}
+    }
+
+    // =========================================================================
+    // AUDIT MODAL LOGIC
+    // =========================================================================
+    function openAuditModal() {
+      const modal = document.getElementById('audit-modal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+
+      const container = document.getElementById('audit-checklist-container');
+      container.innerHTML = '';
+
+      auditChecks.forEach(c => {
+        const isChecked = !!auditStatus[c.id];
+        const row = document.createElement('div');
+        row.className = `p-3.5 rounded-2xl flex items-start gap-3 text-xs transition cursor-pointer ${isChecked ? 'bg-teal-50 dark:bg-teal-950/40 border border-teal-300 dark:border-teal-800' : 'neu-inset'}`;
+        row.onclick = () => toggleAuditItem(c.id);
+        row.innerHTML = `
+          <div class="w-5 h-5 rounded-lg neu-inset-sm flex items-center justify-center shrink-0 mt-0.5 ${isChecked ? 'bg-teal-600 text-white' : 'text-transparent'}">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+          </div>
+          <div class="flex-1 text-slate-700 dark:text-slate-200 leading-relaxed ${isChecked ? 'font-bold' : ''}">
+            ${c.text}
+          </div>
+        `;
+        container.appendChild(row);
+      });
+
+      updateAuditScore();
+      lucide.createIcons();
+    }
+
+    function closeAuditModal() {
+      const modal = document.getElementById('audit-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function toggleAuditItem(id) {
+      auditStatus[id] = !auditStatus[id];
+      openAuditModal();
+    }
+
+    function updateAuditScore() {
+      let count = 0;
+      auditChecks.forEach(c => { if (auditStatus[c.id]) count++; });
+      const el = document.getElementById('audit-score');
+      if (el) el.innerText = `${count} of ${auditChecks.length} Verified`;
+    }
+
+    // =========================================================================
+    // EXPORT DOSSIER LOGIC
+    // =========================================================================
+    function openExportModal() {
+      const modal = document.getElementById('export-modal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+
+      const cs = caseStudiesData[currentCaseStudy];
+      const notes = userNotes[currentCaseStudy] || {};
+
+      let text = `================================================================================
+`;
+      text += `BIB523 THE BOOK OF PSALMS • SERMON PREPARATION DOSSIER
+`;
+      text += `================================================================================
+
+`;
+      text += `TEXT TARGET: ${cs.badge} - ${cs.title}
+`;
+      text += `CANONICAL LOCATION: ${cs.book}
+`;
+      text += `PRIMARY GENRE: ${genreDatabase[cs.genre].name}
+
+`;
+
+      text += `--------------------------------------------------------------------------------
+`;
+      text += `1. GENRE & EMOTIONAL TRAJECTORY
+`;
+      text += `--------------------------------------------------------------------------------
+`;
+      text += `Structural Milestones:
+`;
+      cs.anatomy.forEach(a => { text += `  • ${a}
+`; });
+      text += `Critical Homiletical Pitfall:
+  ${cs.pitfall}
+`;
+      if (notes.stage1) text += `Preacher's Notes:
+  ${notes.stage1}
+`;
+      text += `
+`;
+
+      text += `--------------------------------------------------------------------------------
+`;
+      text += `2. POETIC ARCHITECTURE & PARALLELISM MAP
+`;
+      text += `--------------------------------------------------------------------------------
+`;
+      text += `Homiletical Rule: "A, and what's more, B" (Avoid the Two-Point Fallacy)
+`;
+      if (notes.stage2) text += `Preacher's Structural Map:
+  ${notes.stage2}
+`;
+      text += `
+`;
+
+      text += `--------------------------------------------------------------------------------
+`;
+      text += `3. SENSORY IMAGERY & GOVERNING METAPHORS
+`;
+      text += `--------------------------------------------------------------------------------
+`;
+      text += `Sensory Palette: ${cs.sensoryAudit}
+`;
+      text += `Governing Metaphors: ${cs.metaphors}
+`;
+      if (notes.stage3) text += `Preacher's Metaphor Preaching Notes:
+  ${notes.stage3}
+`;
+      text += `
+`;
+
+      text += `--------------------------------------------------------------------------------
+`;
+      text += `4. CANONICAL LOCATION & CHRISTOLOGICAL TRAJECTORY
+`;
+      text += `--------------------------------------------------------------------------------
+`;
+      text += `Trajectory to Christ: ${cs.christology}
+`;
+      if (notes.stage4) text += `Preacher's Gospel Notes:
+  ${notes.stage4}
+`;
+      text += `
+`;
+
+      text += `--------------------------------------------------------------------------------
+`;
+      text += `5. THE HOMILETICAL IDEA (THE BIG IDEA)
+`;
+      text += `--------------------------------------------------------------------------------
+`;
+      text += `Subject: ${notes.subject || cs.subject}
+`;
+      text += `Complement: ${notes.complement || cs.complement}
+
+`;
+      text += `EXEGETICAL IDEA:
+  "${cs.exegeticalIdea}"
+
+`;
+      text += `HOMILETICAL IDEA (THE BIG IDEA):
+  "${notes.stage5 || cs.homileticalIdea}"
+
+`;
+
+      text += `--------------------------------------------------------------------------------
+`;
+      text += `6. SERMONIC OUTLINE ("DOING WHAT THE PSALM DOES")
+`;
+      text += `--------------------------------------------------------------------------------
+`;
+      cs.movements.forEach(m => {
+        text += `MOVEMENT ${m.num}: ${m.title} (${m.text})
+`;
+        text += `  Homiletical Move: ${m.move}
+
+`;
+      });
+      if (notes.stage6) text += `Preacher's Custom Outline Notes:
+  ${notes.stage6}
+`;
+
+      const box = document.getElementById('dossier-preview-box');
+      if (box) box.innerText = text;
+    }
+
+    function closeExportModal() {
+      const modal = document.getElementById('export-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function copyDossierText() {
+      const box = document.getElementById('dossier-preview-box');
+      if (!box) return;
+      navigator.clipboard.writeText(box.innerText).then(() => {
+        const label = document.getElementById('copy-btn-label');
+        if (label) {
+          label.innerText = 'Copied to Clipboard!';
+          setTimeout(() => { label.innerText = 'Copy to Clipboard'; }, 2000);
+        }
+      });
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateThemeIcon(isDark);
+    }
+
+    function updateThemeIcon(isDark) {
+      const icon = document.getElementById('theme-icon');
+      if (icon) {
+        icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+        lucide.createIcons();
+      }
+    }
+
+    // =========================================================================
+    // INITIALIZATION ON LOAD
+    // =========================================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        updateThemeIcon(true);
+      } else {
+        document.documentElement.classList.remove('dark');
+        updateThemeIcon(false);
+      }
+
+      loadCaseStudy('ps13');
+      setStage(1);
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

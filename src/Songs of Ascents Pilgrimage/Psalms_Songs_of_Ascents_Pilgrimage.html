@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Road to Zion: Songs of Ascents Visual Pilgrimage (Psalms 120–134) - BIB523</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans, DM Sans, Noto Serif Hebrew -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Serif+Hebrew:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="../vendor/tailwind.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="../vendor/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neu: {
+              bg: '#E8F1FA',
+              surface: '#FFFFFF',
+              well: '#EEF5FC',
+              fg: '#1E293B',
+              muted: '#5A6A80',
+              accent: '#0066CC',
+              accentLight: '#2684FF',
+              zion: '#D97706',
+              olive: '#15803D'
+            }
+          },
+          fontFamily: {
+            display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+            serif: ['Plus Jakarta Sans', 'Georgia', 'serif'],
+            hebrew: ['Noto Serif Hebrew', 'SBL Hebrew', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --neu-bg: #E8F1FA;
+      --neu-surface: #FFFFFF;
+      --neu-surface-well: #EEF5FC;
+      --neu-fg: #1E293B;
+      --neu-shadow-dark: rgba(180, 200, 222, 0.65);
+      --neu-shadow-light: rgba(255, 255, 255, 0.95);
+    }
+    .dark {
+      --neu-bg: #0F172A;
+      --neu-surface: #1E293B;
+      --neu-surface-well: #0B1120;
+      --neu-fg: #F1F5F9;
+      --neu-shadow-dark: rgba(0, 0, 0, 0.7);
+      --neu-shadow-light: rgba(255, 255, 255, 0.05);
+    }
+    body { background-color: var(--neu-bg); color: var(--neu-fg); font-family: 'DM Sans', sans-serif; }
+    .neu-card {
+      background-color: var(--neu-surface) !important;
+      border-radius: 28px !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      box-shadow: 8px 10px 22px var(--neu-shadow-dark), -8px -8px 20px var(--neu-shadow-light) !important;
+      transition: all 250ms ease;
+    }
+    .dark .neu-card { border: 1px solid rgba(255, 255, 255, 0.06) !important; }
+    .neu-inset {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.45) !important;
+      box-shadow: inset 4px 4px 8px var(--neu-shadow-dark), inset -4px -4px 8px var(--neu-shadow-light) !important;
+    }
+    .dark .neu-inset { border: 1px solid rgba(255, 255, 255, 0.04) !important; }
+        /* Outset Tactile Pill / Small Badge for Crisp Elevation */
+    .neu-outset-sm {
+      background: linear-gradient(145deg, #FFFFFF, #EDF4FA) !important;
+      border: 1px solid rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 2px 3px 6px var(--neu-shadow-dark), -2px -2px 6px var(--neu-shadow-light) !important;
+      transition: all 200ms ease;
+    }
+
+    .dark .neu-outset-sm {
+      background: linear-gradient(145deg, #1E293B, #151F30) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.6), -2px -2px 6px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .neu-inset-sm {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.35) !important;
+      box-shadow: inset 2.5px 2.5px 5px var(--neu-shadow-dark), inset -2.5px -2.5px 5px var(--neu-shadow-light) !important;
+    }
+    .neu-btn {
+      background: linear-gradient(145deg, #FFFFFF, #E2E8F0) !important;
+      color: #0066CC !important;
+      border-radius: 14px !important;
+      border: 1px solid rgba(255, 255, 255, 0.8) !important;
+      box-shadow: 4px 4px 10px var(--neu-shadow-dark), -4px -4px 10px var(--neu-shadow-light) !important;
+      font-weight: 700;
+      transition: all 200ms ease;
+      cursor: pointer;
+    }
+    .dark .neu-btn {
+      background: linear-gradient(145deg, #2A303C, #1E232B) !important;
+      color: #60A5FA !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6), -4px -4px 10px rgba(255, 255, 255, 0.05) !important;
+    }
+    .neu-btn:hover:not(:disabled) {
+      transform: translateY(-1.5px);
+      background: linear-gradient(145deg, #F0F7FF, #E0EFFF) !important;
+      box-shadow: 6px 6px 14px rgba(0, 102, 204, 0.28), -6px -6px 14px rgba(255, 255, 255, 0.95) !important;
+    }
+    .neu-btn-primary {
+      background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%) !important;
+      color: #FFFFFF !important;
+      border-radius: 14px !important;
+      box-shadow: 4px 4px 12px rgba(217, 119, 6, 0.45) !important;
+    }
+    .neu-tab-pill { border-radius: 12px !important; transition: all 200ms ease; }
+    .neu-tab-pill.active {
+      background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%) !important;
+      color: #FFFFFF !important;
+      box-shadow: 3px 3px 10px rgba(217, 119, 6, 0.45) !important;
+      font-weight: 700;
+    }
+    .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: rgba(180, 200, 222, 0.2); border-radius: 9999px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(217, 119, 6, 0.35); border-radius: 9999px; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased transition-colors duration-300">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-[#E8F1FA]/90 dark:bg-[#0F172A]/90 backdrop-blur border-b border-white/60 dark:border-white/5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="../Psalms_Interactive_Learning_Suite.html" class="neu-btn px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 text-slate-700 dark:text-slate-200 hover:text-amber-600 transition shrink-0" title="Return to All Course Apps">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Suite Hub</span>
+        </a>
+        <div class="w-10 h-10 rounded-2xl neu-outset-sm flex items-center justify-center text-amber-600 shrink-0 shadow-sm">
+          <i data-lucide="mountain" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h1 class="font-display font-extrabold text-lg sm:text-xl text-slate-800 dark:text-white tracking-tight flex items-center gap-2">
+            The Road to Zion: Songs of Ascents Studio
+            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
+              Week 8 Pilgrimage
+            </span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <nav class="neu-inset-sm p-1 rounded-2xl flex items-center gap-1 text-xs">
+          <button onclick="switchTab('ascent')" id="tab-btn-ascent" class="neu-tab-pill active px-3.5 py-1.5 font-bold">15-Step Mountain Ascent</button>
+          <button onclick="switchTab('triads')" id="tab-btn-triads" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">5 Triads Architecture</button>
+          <button onclick="switchTab('motifs')" id="tab-btn-motifs" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">Motif Tracker</button>
+          <button onclick="switchTab('drills')" id="tab-btn-drills" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">Pilgrim Drills</button>
+        </nav>
+
+        <button onclick="toggleTheme()" class="neu-btn w-9 h-9 flex items-center justify-center text-slate-500">
+          <i data-lucide="moon" id="theme-icon" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN VIEW -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- TAB 1: 15-STEP ASCENT -->
+    <section id="view-ascent" class="space-y-6">
+      
+      <!-- Overview Banner -->
+      <div class="neu-card p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 max-w-3xl">
+          <div class="neu-outset-sm px-3.5 py-1 rounded-full inline-flex items-center gap-1.5 text-xs font-display font-bold text-amber-600 uppercase tracking-wider shadow-sm">
+            <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+            Redactional Pilgrimage Cycle (Psalms 120–134)
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white">
+            From the Tents of Kedar to the Gates of Zion
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            The 15 <strong>Songs of Ascents (*Shir Hama'alot*)</strong> were sung by ancient Jewish pilgrims making the annual journey up to Jerusalem for the major pilgrim feasts (Passover, Pentecost, Tabernacles). They form a curated spiritual journey: moving from the distress of exile in the lowlands up to nocturnal praise in God's sanctuary.
+          </p>
+        </div>
+
+        <div class="neu-inset p-4 rounded-2xl text-center space-y-1 shrink-0">
+          <span class="text-xs uppercase font-bold text-slate-400">Total Ascent</span>
+          <div class="text-2xl font-black text-amber-600">15 Psalms</div>
+          <div class="text-[11px] text-slate-500">5 Distinct Triads of 3</div>
+        </div>
+      </div>
+
+      <!-- 15 Stepper Pills -->
+      <div class="neu-card p-3 sm:p-4 space-y-2">
+        <div class="flex items-center justify-between px-1">
+          <span class="text-xs font-bold uppercase text-slate-500 flex items-center gap-1.5">
+            <i data-lucide="footprints" class="w-4 h-4 text-amber-600"></i> Elevation Stepper (Step 1 to 15):
+          </span>
+          <span id="active-psalm-badge" class="neu-outset-sm px-3.5 py-0.5 rounded-full text-xs font-display font-bold text-amber-600 shadow-sm">
+            Step 1: Psalm 120 (Exile)
+          </span>
+        </div>
+
+        <div id="ascent-stepper" class="flex items-center gap-1.5 overflow-x-auto pb-2 custom-scrollbar"></div>
+      </div>
+
+      <!-- Active Psalm Detail Card -->
+      <div id="ascent-detail-card" class="neu-card p-6 sm:p-8 space-y-5"></div>
+
+    </section>
+
+    <!-- TAB 2: 5 TRIADS ARCHITECTURE -->
+    <section id="view-triads" class="hidden space-y-6">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-4">
+        <div>
+          <span class="text-xs font-display font-bold uppercase text-amber-600">Redactional Design</span>
+          <h2 class="text-2xl font-display font-extrabold text-slate-800 dark:text-white">The 5 Triads: The Rhythmic Pulse of Pilgrimage</h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-3xl">
+            Scholarship (Mitchell, Crow) demonstrates that the 15 psalms are structured into five triads of three songs each. Each triad repeats a steady, liturgical cycle:
+            <strong>(1) Trouble in the World ➔ (2) Divine Protection on the Road ➔ (3) Fellowship in Zion</strong>.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4" id="triads-grid"></div>
+      </div>
+
+    </section>
+
+    <!-- TAB 3: MOTIF TRACKER -->
+    <section id="view-motifs" class="hidden space-y-6">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-4">
+        <div>
+          <span class="text-xs font-display font-bold uppercase text-amber-600">Thematic Concordance</span>
+          <h2 class="text-2xl font-display font-extrabold text-slate-800 dark:text-white">Key Pilgrimage Motifs</h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-3xl">
+            Notice how specific theological words knit the collection together like golden threads.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="neu-card p-5 space-y-2 border-t-4 border-t-amber-600">
+            <span class="text-xs font-bold uppercase text-amber-600">1. Shamar (Keep / Guard)</span>
+            <div class="text-2xl font-black text-slate-800 dark:text-white">10x in Ps 121</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+              "The LORD is your keeper (shomer)... He who keeps Israel will neither slumber nor sleep."
+            </p>
+          </div>
+
+          <div class="neu-card p-5 space-y-2 border-t-4 border-t-emerald-600">
+            <span class="text-xs font-bold uppercase text-emerald-600">2. Shalom (Peace)</span>
+            <div class="text-2xl font-black text-slate-800 dark:text-white">Repeated Climax</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+              "Pray for the peace of Jerusalem!" (Ps 122:6). Concludes triads: "Peace be upon Israel!" (Pss 125:5, 128:6).
+            </p>
+          </div>
+
+          <div class="neu-card p-5 space-y-2 border-t-4 border-t-blue-600">
+            <span class="text-xs font-bold uppercase text-blue-600">3. Zion / Jerusalem</span>
+            <div class="text-2xl font-black text-slate-800 dark:text-white">The Sacred Summit</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+              "Those who trust in the LORD are like Mount Zion, which cannot be moved, but abides forever." (Ps 125:1).
+            </p>
+          </div>
+
+          <div class="neu-card p-5 space-y-2 border-t-4 border-t-purple-600">
+            <span class="text-xs font-bold uppercase text-purple-600">4. Barak (Blessing)</span>
+            <div class="text-2xl font-black text-slate-800 dark:text-white">Mutual Reciprocity</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-serif">
+              Zion blesses the family (Ps 128), and the night watchmen bless the LORD in the temple (Ps 134).
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 4: PILGRIM DRILLS -->
+    <section id="view-drills" class="hidden space-y-6">
+      
+      <div class="neu-card p-6 sm:p-10 space-y-6 max-w-4xl mx-auto">
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div>
+            <span class="text-xs font-display font-bold uppercase text-amber-600">Pilgrim Checkpoint</span>
+            <h2 class="text-2xl font-display font-extrabold text-slate-800 dark:text-white">Songs of Ascents Exegetical Drill</h2>
+          </div>
+          <span id="drill-score" class="neu-outset-sm px-3.5 py-1 rounded-full text-xs font-display font-bold text-amber-600 shadow-sm">Score: 0 / 0</span>
+        </div>
+
+        <div id="drill-container" class="space-y-6"></div>
+        <div id="drill-feedback" class="hidden p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed"></div>
+
+        <div class="flex justify-end pt-2">
+          <button id="next-drill-btn" onclick="nextDrill()" class="hidden neu-btn-primary px-6 py-2.5 text-xs font-bold flex items-center gap-2">
+            <span>Next Question</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (icon) icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+      lucide.createIcons();
+    }
+
+    function switchTab(tab) {
+      ['ascent', 'triads', 'motifs', 'drills'].forEach(t => {
+        document.getElementById(`view-${t}`).classList.add('hidden');
+        document.getElementById(`tab-btn-${t}`).className = 'neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]';
+      });
+      document.getElementById(`view-${tab}`).classList.remove('hidden');
+      document.getElementById(`tab-btn-${tab}`).className = 'neu-tab-pill active px-3.5 py-1.5 font-bold';
+      if (tab === 'drills') loadDrill();
+      lucide.createIcons();
+    }
+
+    const ASCENT_PSALMS = [
+      { num: 120, title: "Psalm 120: Distress in Distant Exile", stage: "Lowlands / Border", theme: "Lying Lips in Meshech & Kedar", highlightVerse: "Woe to me, that I sojourn in Meshech, that I dwell among the tents of Kedar! Too long have I had my dwelling among those who hate peace.", triad: 1, position: "A (Trouble)" },
+      { num: 121, title: "Psalm 121: The Mountain Guardian", stage: "The Treacherous Road", theme: "The Keeper of Israel (Shamar)", highlightVerse: "I lift up my eyes to the hills. From where does my help come? My help comes from the LORD, who made heaven and earth.", triad: 1, position: "B (Protection)" },
+      { num: 122, title: "Psalm 122: Standing in Zion's Gates", stage: "Arrival in Jerusalem", theme: "Pray for the Peace of Jerusalem", highlightVerse: "I was glad when they said to me, 'Let us go to the house of the LORD!' Our feet have been standing within your gates, O Jerusalem!", triad: 1, position: "C (Zion / Shalom)" },
+      { num: 123, title: "Psalm 123: Looking for Mercy", stage: "Scorn & Contempt", theme: "Eyes on the Master's Hand", highlightVerse: "Behold, as the eyes of servants look to the hand of their master... so our eyes look to the LORD our God, till he has mercy upon us.", triad: 2, position: "A (Trouble)" },
+      { num: 124, title: "Psalm 124: The Broken Snare", stage: "The Torrent of Foes", theme: "If the LORD Had Not Been on Our Side", highlightVerse: "The snare is broken, and we have escaped! Our help is in the name of the LORD, who made heaven and earth.", triad: 2, position: "B (Protection)" },
+      { num: 125, title: "Psalm 125: Unshakeable Mount Zion", stage: "The Mountain Wall", theme: "As Mountains Surround Jerusalem", highlightVerse: "Those who trust in the LORD are like Mount Zion, which cannot be moved, but abides forever. As the mountains surround Jerusalem, so the LORD surrounds his people.", triad: 2, position: "C (Zion / Shalom)" },
+      { num: 126, title: "Psalm 126: Sowing in Tears, Reaping in Joy", stage: "Exilic Restoration", theme: "Streams in the Negeb", highlightVerse: "Those who sow in tears shall reap with shouts of joy! He who goes out weeping, bearing the seed for sowing, shall come home with shouts of joy, bringing his sheaves with him.", triad: 3, position: "A (Trouble)" },
+      { num: 127, title: "Psalm 127: The Vain Builder", stage: "Home & Labor", theme: "Unless the LORD Builds the House", highlightVerse: "Unless the LORD builds the house, those who build it labor in vain. Unless the LORD watches over the city, the watchman stays awake in vain.", triad: 3, position: "B (Protection)" },
+      { num: 128, title: "Psalm 128: The Blessed Hearth", stage: "Covenant Family", theme: "Children Like Olive Shoots", highlightVerse: "Your wife will be like a fruitful vine within your house; your children will be like olive shoots around your table... Peace be upon Israel!", triad: 3, position: "C (Zion / Shalom)" },
+      { num: 129, title: "Psalm 129: Plowers on the Back", stage: "Oppression from Youth", theme: "Afflicted Yet Not Prevailed Against", highlightVerse: "Greatly have they afflicted me from my youth—let Israel now say... The plowers plowed upon my back; they made long their furrows. The LORD is righteous; he has cut the cords of the wicked.", triad: 4, position: "A (Trouble)" },
+      { num: 130, title: "Psalm 130: Out of the Depths (De Profundis)", stage: "Guilt & Forgiveness", theme: "Waiting More Than Watchmen", highlightVerse: "Out of the depths I cry to you, O LORD! O Lord, hear my voice!... But with you there is forgiveness, that you may be feared.", triad: 4, position: "B (Protection)" },
+      { num: 131, title: "Psalm 131: The Weaned Child", stage: "Spiritual Contentment", theme: "Quieted Soul in God", highlightVerse: "I do not occupy myself with things too great and too marvelous for me. But I have calmed and quieted my soul, like a weaned child with its mother.", triad: 4, position: "C (Zion / Shalom)" },
+      { num: 132, title: "Psalm 132: David's Oath & The Ark", stage: "Royal Sanctuary", theme: "Arise, O LORD, to Your Resting Place", highlightVerse: "For the LORD has chosen Zion; he has desired it for his dwelling place: 'This is my resting place forever; here I will dwell, for I have desired it.'", triad: 5, position: "A (Trouble / Holy Yearning)" },
+      { num: 133, title: "Psalm 133: The Oil of Unity", stage: "Communal Harmony", theme: "Like Oil on Aaron's Beard", highlightVerse: "Behold, how good and pleasant it is when brothers dwell in unity! It is like the precious oil on the head, running down on the beard, on the beard of Aaron...", triad: 5, position: "B (Protection / Blessing)" },
+      { num: 134, title: "Psalm 134: The Night Watchmen", stage: "Sanctuary Night Service", theme: "Bless the LORD at Midnight", highlightVerse: "Come, bless the LORD, all you servants of the LORD, who stand by night in the house of the LORD! Lift up your hands to the holy place and bless the LORD!", triad: 5, position: "C (Summit of Praise)" }
+    ];
+
+    let currentAscentIdx = 0;
+
+    function renderAscentStepper() {
+      const stepper = document.getElementById('ascent-stepper');
+      stepper.innerHTML = ASCENT_PSALMS.map((p, idx) => `
+        <button onclick="selectAscentPsalm(${idx})" class="shrink-0 px-3.5 py-2 rounded-xl neu-btn text-xs font-bold flex items-center gap-1.5 ${idx === currentAscentIdx ? 'active' : ''}">
+          <span class="w-5 h-5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-black flex items-center justify-center">${idx + 1}</span>
+          <span>Ps ${p.num}</span>
+        </button>
+      `).join('');
+    }
+
+    function selectAscentPsalm(idx) {
+      currentAscentIdx = idx;
+      renderAscentStepper();
+      renderAscentDetail();
+    }
+
+    function renderAscentDetail() {
+      const p = ASCENT_PSALMS[currentAscentIdx];
+      document.getElementById('active-psalm-badge').innerText = `Step ${currentAscentIdx + 1}: Psalm ${p.num}`;
+      const card = document.getElementById('ascent-detail-card');
+
+      card.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 gap-2">
+          <div>
+            <span class="text-xs font-display font-bold uppercase text-amber-600">Triad ${p.triad} &bull; Movement ${p.position}</span>
+            <h3 class="font-display font-extrabold text-xl text-slate-800 dark:text-white">${p.title}</h3>
+            <span class="text-xs text-slate-500 italic">${p.stage}</span>
+          </div>
+          <span class="neu-inset-sm px-3 py-1 rounded-full text-xs font-bold text-slate-700 dark:text-slate-200">
+            ${p.theme}
+          </span>
+        </div>
+
+        <div class="neu-inset p-5 rounded-2xl space-y-2">
+          <span class="text-[11px] font-bold uppercase text-slate-400">Key Pilgrimage Text:</span>
+          <p class="text-base sm:text-lg font-serif text-slate-800 dark:text-slate-100 leading-relaxed font-medium">
+            "${p.highlightVerse}"
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="neu-inset-sm p-4 rounded-2xl space-y-1">
+            <span class="text-xs font-bold uppercase text-slate-500">Historical Pilgrimage Setting:</span>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              Step ${currentAscentIdx + 1} reflects Israel's journey upward toward Jerusalem for the annual agricultural and covenantal feasts (Passover, Shavuot, Sukkot).
+            </p>
+          </div>
+          <div class="neu-inset-sm p-4 rounded-2xl space-y-1 border-l-4 border-l-amber-600">
+            <span class="text-xs font-bold uppercase text-amber-600">Contemporary Pastoral Meaning:</span>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              Models Christian life as a communal pilgrimage through an alien world, guarded by the God who neither slumbers nor sleeps.
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    const TRIADS_DATA = [
+      { triad: 1, psalms: "Pss 120–122", theme: "From Slander in Exile to Jerusalem's Gates", summary: "Departs from pagan Meshech/Kedar ➔ Finds safe keeping in the hills ➔ Rejoices standing in Jerusalem's gates." },
+      { triad: 2, psalms: "Pss 123–125", theme: "From Scorning Foes to Unshakeable Zion", summary: "Eyes looking for mercy amid contempt ➔ Celebrates escaping the torrent ➔ Confirms Zion cannot be shaken." },
+      { triad: 3, psalms: "Pss 126–128", theme: "From Exilic Tears to Family Harvest", summary: "Sowing in weeping ➔ Relying on the LORD to build the home ➔ Savoring olive shoots around the table in Shalom." },
+      { triad: 4, psalms: "Pss 129–131", theme: "From Long Furrows to Quieted Soul", summary: "Suffering plowers on the back ➔ Crying from guilt's deep abyss ➔ Resting quietly like a weaned child." },
+      { triad: 5, psalms: "Pss 132–134", theme: "From David's Ark to Night Praise in the Temple", summary: "Remembering David's holy vow for the Ark ➔ Celebrating the oil of brotherly unity ➔ Night watchmen praising God." }
+    ];
+
+    function renderTriads() {
+      const container = document.getElementById('triads-grid');
+      container.innerHTML = TRIADS_DATA.map(t => `
+        <div class="neu-card p-5 space-y-2 border-t-4 border-t-amber-600">
+          <span class="text-xs font-display font-bold text-amber-600">Triad ${t.triad}</span>
+          <h4 class="font-display font-bold text-sm text-slate-800 dark:text-white">${t.psalms}</h4>
+          <p class="text-xs font-semibold text-slate-700 dark:text-slate-300">${t.theme}</p>
+          <p class="text-[11px] text-slate-500 leading-relaxed">${t.summary}</p>
+        </div>
+      `).join('');
+    }
+
+    const DRILL_QUESTIONS = [
+      {
+        q: "Where does the pilgrimage begin in Psalm 120:5, establishing the lowlands of distant pagan exile?",
+        options: [
+          "In the royal palace of Solomon in Jerusalem.",
+          "In Meshech and the nomadic black tents of Kedar.",
+          "By the Jordan River crossing."
+        ],
+        correct: 1,
+        exp: "<strong>Spot on!</strong> Meshech was in distant Anatolia and Kedar was in the Syrian-Arabian desert. They represent the hostile, deceitful world from which the pilgrim begins their journey upward to God."
+      },
+      {
+        q: "In Psalm 121, how many times does the Hebrew root 'Shamar' (to keep / watch over / guard) repeat?",
+        options: [
+          "6 times (establishing Yahweh as the tireless Guardian of Israel)",
+          "Only 1 time in the opening verse",
+          "15 times, once for each song"
+        ],
+        correct: 0,
+        exp: "<strong>Correct!</strong> In only 8 short verses, <em>Shamar</em> appears 6 times! Yahweh is Israel's <em>Shomer</em> (Keeper) who neither slumbers nor sleeps."
+      },
+      {
+        q: "How does the final Song of Ascents (Psalm 134) conclude the entire 15-psalm pilgrimage collection?",
+        options: [
+          "With the pilgrims trekking back into exile.",
+          "With an imprecatory prayer against Babylon.",
+          "With night watchmen lifting their hands to bless Yahweh in the temple sanctuary."
+        ],
+        correct: 2,
+        exp: "<strong>Brilliant!</strong> The pilgrimage arrives at its ultimate destination: the inner sanctuary of the temple at night, where the priests and watchmen bless Yahweh, and the God who made heaven and earth blesses them from Zion."
+      }
+    ];
+
+    let currentDrillIdx = 0;
+    let drillScore = 0;
+    let drillAnswered = false;
+
+    function loadDrill() {
+      const q = DRILL_QUESTIONS[currentDrillIdx];
+      const card = document.getElementById('drill-container');
+      const feedback = document.getElementById('drill-feedback');
+      const nextBtn = document.getElementById('next-drill-btn');
+      drillAnswered = false;
+
+      feedback.classList.add('hidden');
+      nextBtn.classList.add('hidden');
+
+      card.innerHTML = `
+        <div class="neu-inset p-5 rounded-2xl space-y-2">
+          <span class="text-xs font-display font-bold text-amber-600">Question ${currentDrillIdx + 1} of ${DRILL_QUESTIONS.length}</span>
+          <p class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-100 leading-relaxed">${q.q}</p>
+        </div>
+
+        <div class="space-y-2">
+          ${q.options.map((opt, i) => `
+            <button onclick="checkDrill(${i})" id="d-opt-${i}" class="w-full text-left p-4 rounded-2xl neu-card hover:bg-amber-50 dark:hover:bg-slate-800 transition text-xs sm:text-sm font-semibold flex items-center justify-between">
+              <span>${opt}</span>
+              <i data-lucide="circle" class="w-4 h-4 text-slate-400"></i>
+            </button>
+          `).join('')}
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function checkDrill(idx) {
+      if (drillAnswered) return;
+      drillAnswered = true;
+
+      const q = DRILL_QUESTIONS[currentDrillIdx];
+      const feedback = document.getElementById('drill-feedback');
+      const nextBtn = document.getElementById('next-drill-btn');
+
+      q.options.forEach((opt, i) => {
+        const btn = document.getElementById(`d-opt-${i}`);
+        if (i === q.correct) {
+          btn.classList.add('border-2', 'border-emerald-500', 'bg-emerald-50', 'dark:bg-emerald-950/40');
+        } else if (i === idx) {
+          btn.classList.add('border-2', 'border-rose-500', 'bg-rose-50', 'dark:bg-rose-950/40');
+        }
+      });
+
+      if (idx === q.correct) {
+        drillScore++;
+        feedback.className = 'p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed border-l-4 border-l-emerald-500 text-emerald-900 dark:text-emerald-200';
+        feedback.innerHTML = `<strong class="text-emerald-600 block mb-1">✓ Excellent Exegesis!</strong> ${q.exp}`;
+      } else {
+        feedback.className = 'p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed border-l-4 border-l-rose-500 text-rose-900 dark:text-rose-200';
+        feedback.innerHTML = `<strong class="text-rose-600 block mb-1">Review the Redaction:</strong> ${q.exp}`;
+      }
+
+      document.getElementById('drill-score').innerText = `Score: ${drillScore} / ${currentDrillIdx + 1}`;
+      feedback.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');
+    }
+
+    function nextDrill() {
+      currentDrillIdx = (currentDrillIdx + 1) % DRILL_QUESTIONS.length;
+      loadDrill();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderAscentStepper();
+      renderAscentDetail();
+      renderTriads();
+    });
+  </script>
+</body>
+</html>

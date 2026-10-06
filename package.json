@@ -1,0 +1,103 @@
+{
+  "name": "psalms-learning-suite",
+  "productName": "Psalms Learning Suite",
+  "version": "1.0.0",
+  "description": "Interactive Learning Suite for Hebrew Poetry, Form-Critical Hermeneutics, and the Psalms",
+  "author": "Greg Vruggink <gregvruggink>",
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:all": "electron-builder -wm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gregvruggink/psalms-learning-suite.git"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.gregvruggink.psalmslearningsuite",
+    "productName": "Psalms Learning Suite",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "src/**/*",
+      "main.js",
+      "preload.js",
+      "package.json"
+    ],
+    "publish": {
+      "provider": "github",
+      "owner": "gregvruggink",
+      "repo": "psalms-learning-suite",
+      "releaseType": "release"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Psalms Learning Suite",
+      "uninstallDisplayName": "Psalms Learning Suite"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.png",
+      "category": "public.app-category.education",
+      "identity": null
+    },
+    "dmg": {
+      "title": "Psalms Learning Suite ${version}",
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  }
+}

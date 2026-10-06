@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Four Senses Hermeneutics Studio (Quadriga in the Psalms) - BIB523</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans, DM Sans, Noto Serif Hebrew -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Serif+Hebrew:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="../vendor/tailwind.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="../vendor/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neu: {
+              bg: '#E8F1FA',
+              surface: '#FFFFFF',
+              well: '#EEF5FC',
+              fg: '#1E293B',
+              muted: '#5A6A80',
+              accent: '#0066CC',
+              accentLight: '#2684FF',
+              amber: '#D97706',
+              teal: '#0D9488',
+              purple: '#7C3AED'
+            }
+          },
+          fontFamily: {
+            display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+            serif: ['Plus Jakarta Sans', 'Georgia', 'serif'],
+            hebrew: ['Noto Serif Hebrew', 'SBL Hebrew', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --neu-bg: #E8F1FA;
+      --neu-surface: #FFFFFF;
+      --neu-surface-well: #EEF5FC;
+      --neu-fg: #1E293B;
+      --neu-shadow-dark: rgba(180, 200, 222, 0.65);
+      --neu-shadow-light: rgba(255, 255, 255, 0.95);
+    }
+    .dark {
+      --neu-bg: #0F172A;
+      --neu-surface: #1E293B;
+      --neu-surface-well: #0B1120;
+      --neu-fg: #F1F5F9;
+      --neu-shadow-dark: rgba(0, 0, 0, 0.7);
+      --neu-shadow-light: rgba(255, 255, 255, 0.05);
+    }
+    body {
+      background-color: var(--neu-bg);
+      color: var(--neu-fg);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .neu-card {
+      background-color: var(--neu-surface) !important;
+      border-radius: 28px !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      box-shadow: 8px 10px 22px var(--neu-shadow-dark), -8px -8px 20px var(--neu-shadow-light) !important;
+      transition: all 250ms ease;
+    }
+    .dark .neu-card {
+      border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+    .neu-inset {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.45) !important;
+      box-shadow: inset 4px 4px 8px var(--neu-shadow-dark), inset -4px -4px 8px var(--neu-shadow-light) !important;
+    }
+    .dark .neu-inset {
+      border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    }
+        /* Outset Tactile Pill / Small Badge for Crisp Elevation */
+    .neu-outset-sm {
+      background: linear-gradient(145deg, #FFFFFF, #EDF4FA) !important;
+      border: 1px solid rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 2px 3px 6px var(--neu-shadow-dark), -2px -2px 6px var(--neu-shadow-light) !important;
+      transition: all 200ms ease;
+    }
+
+    .dark .neu-outset-sm {
+      background: linear-gradient(145deg, #1E293B, #151F30) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.6), -2px -2px 6px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .neu-inset-sm {
+      background-color: var(--neu-surface-well) !important;
+      border: 1px solid rgba(180, 200, 222, 0.35) !important;
+      box-shadow: inset 2.5px 2.5px 5px var(--neu-shadow-dark), inset -2.5px -2.5px 5px var(--neu-shadow-light) !important;
+    }
+    .neu-btn {
+      background: linear-gradient(145deg, #FFFFFF, #E2E8F0) !important;
+      color: #0066CC !important;
+      border-radius: 14px !important;
+      border: 1px solid rgba(255, 255, 255, 0.8) !important;
+      box-shadow: 4px 4px 10px var(--neu-shadow-dark), -4px -4px 10px var(--neu-shadow-light) !important;
+      font-weight: 700;
+      transition: all 200ms ease;
+      cursor: pointer;
+    }
+    .dark .neu-btn {
+      background: linear-gradient(145deg, #2A303C, #1E232B) !important;
+      color: #60A5FA !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6), -4px -4px 10px rgba(255, 255, 255, 0.05) !important;
+    }
+    .neu-btn:hover:not(:disabled) {
+      transform: translateY(-1.5px);
+      background: linear-gradient(145deg, #F0F7FF, #E0EFFF) !important;
+      box-shadow: 6px 6px 14px rgba(0, 102, 204, 0.28), -6px -6px 14px rgba(255, 255, 255, 0.95) !important;
+    }
+    .neu-btn-primary {
+      background: linear-gradient(135deg, #0066CC 0%, #2684FF 100%) !important;
+      color: #FFFFFF !important;
+      border-radius: 14px !important;
+      box-shadow: 4px 4px 12px rgba(0, 102, 204, 0.45) !important;
+    }
+    .neu-tab-pill {
+      border-radius: 12px !important;
+      transition: all 200ms ease;
+    }
+    .neu-tab-pill.active {
+      background: linear-gradient(135deg, #0066CC 0%, #2684FF 100%) !important;
+      color: #FFFFFF !important;
+      box-shadow: 3px 3px 10px rgba(0, 102, 204, 0.45) !important;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased transition-colors duration-300">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-[#E8F1FA]/90 dark:bg-[#0F172A]/90 backdrop-blur border-b border-white/60 dark:border-white/5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="../Psalms_Interactive_Learning_Suite.html" class="neu-btn px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 text-slate-700 dark:text-slate-200 hover:text-purple-600 transition shrink-0" title="Return to All Course Apps">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Suite Hub</span>
+        </a>
+        <div class="w-10 h-10 rounded-2xl neu-outset-sm flex items-center justify-center text-[#7C3AED] shrink-0 shadow-sm">
+          <i data-lucide="layers" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h1 class="font-display font-extrabold text-lg sm:text-xl text-slate-800 dark:text-white tracking-tight flex items-center gap-2">
+            The Four Senses Hermeneutics Studio
+            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300">
+              Quadriga Masterclass
+            </span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <nav class="neu-inset-sm p-1 rounded-2xl flex items-center gap-1 text-xs">
+          <button onclick="switchTab('house')" id="tab-btn-house" class="neu-tab-pill active px-3.5 py-1.5 font-bold">The Architectural House</button>
+          <button onclick="switchTab('casestudies')" id="tab-btn-casestudies" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">Passage Labs</button>
+          <button onclick="switchTab('trap')" id="tab-btn-trap" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">Trap Auditor (Drills)</button>
+          <button onclick="switchTab('builder')" id="tab-btn-builder" class="neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]">Preaching Blueprint</button>
+        </nav>
+
+        <button onclick="toggleTheme()" class="neu-btn w-9 h-9 flex items-center justify-center text-slate-500">
+          <i data-lucide="moon" id="theme-icon" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN VIEW CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- TAB 1: THE ARCHITECTURAL HOUSE MODEL -->
+    <section id="view-house" class="space-y-6">
+      
+      <!-- Dialogue Hook Card -->
+      <div class="neu-card p-6 sm:p-8 space-y-3">
+        <div class="neu-outset-sm px-3.5 py-1 rounded-full inline-flex items-center gap-1.5 text-xs font-display font-bold text-[#7C3AED] uppercase shadow-sm">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          Dr. Patrick Schreiner Masterclass Reference
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white">
+          "When David prayed, whose voice do we hear? David's, Christ's, or the Church's?"
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
+          The Christian church historically resolved this through the <strong>Four Senses of Scripture (*Quadriga*)</strong>. Far from medieval fantasy, when anchored in Reformation grammatical-historical guardrails, the four senses show how Jesus Christ is the eternal <em>archetype</em> of David's prayers, preserving the ancient history while unlocking the gospel.
+        </p>
+      </div>
+
+      <!-- Interactive 4-Tier House Diagram -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- The House Visualizer (Left Column) -->
+        <div class="lg:col-span-6 space-y-3">
+          
+          <!-- Level 4: Anagogical / Roof -->
+          <div onclick="selectSense(3)" id="sense-card-3" class="neu-card p-5 cursor-pointer transition hover:translate-x-1 border-l-4 border-l-amber-500 relative">
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="sun" class="w-4 h-4"></i> 4. Anagogical Sense (The Roof &amp; Horizon)
+              </span>
+              <span class="font-display text-[10px] font-medium text-slate-400">Speranda (What to Hope For)</span>
+            </div>
+            <h4 class="font-display font-bold text-sm text-slate-800 dark:text-white">Eschatological Consummation &amp; New Creation</h4>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Directs the heart toward Christ's final return, cosmic judgment, and the restoration of all things.</p>
+          </div>
+
+          <!-- Level 3: Tropological / Furnishings -->
+          <div onclick="selectSense(2)" id="sense-card-2" class="neu-card p-5 cursor-pointer transition hover:translate-x-1 border-l-4 border-l-emerald-500 relative">
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="heart" class="w-4 h-4"></i> 3. Tropological Sense (The Interior Furnishings)
+              </span>
+              <span class="font-display text-[10px] font-medium text-slate-400">Agenda (What to Do)</span>
+            </div>
+            <h4 class="font-display font-bold text-sm text-slate-800 dark:text-slate-100">Christian Ethics &amp; Soul Formation in Union with Christ</h4>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">How believers live today—valid ONLY when derived through union with Christ (Head to Body).</p>
+          </div>
+
+          <!-- Level 2: Christological / Walls -->
+          <div onclick="selectSense(1)" id="sense-card-1" class="neu-card p-5 cursor-pointer transition hover:translate-x-1 border-l-4 border-l-blue-600 relative active ring-2 ring-[#0066CC]">
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="cross" class="w-4 h-4"></i> 2. Christological / Allegorical Sense (The Walls)
+              </span>
+              <span class="font-display text-[10px] font-medium text-slate-400">Credenda (What to Believe)</span>
+            </div>
+            <h4 class="font-display font-bold text-sm text-slate-800 dark:text-white">Christ the Archetype: Cross, Resurrection &amp; Church</h4>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">How David’s office, cries, and victories witness to Jesus Christ and His bride (Totus Christus).</p>
+          </div>
+
+          <!-- Level 1: Literal / Foundation -->
+          <div onclick="selectSense(0)" id="sense-card-0" class="neu-card p-5 cursor-pointer transition hover:translate-x-1 border-l-4 border-l-slate-700 relative">
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="anchor" class="w-4 h-4"></i> 1. Literal / Historical Sense (The Foundation)
+              </span>
+              <span class="font-display text-[10px] font-medium text-slate-400">Historia (What Happened)</span>
+            </div>
+            <h4 class="font-display font-bold text-sm text-slate-800 dark:text-slate-100">Hebrew Grammar, Covenant History &amp; Ancient Setting</h4>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">The indispensable anchor: grammar, syntax, historical battles, and ancient Davidic kingship.</p>
+          </div>
+
+        </div>
+
+        <!-- Sense Deep-Dive Inspector (Right Column) -->
+        <div id="sense-inspector" class="lg:col-span-6 neu-card p-6 sm:p-8 space-y-4"></div>
+
+      </div>
+
+      <!-- The Golden Sequence & The Two Traps -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div class="neu-card p-6 space-y-3 border-l-4 border-l-emerald-500">
+          <div class="flex items-center gap-2 font-bold text-emerald-700 dark:text-emerald-400 text-sm">
+            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+            <span>The Sacred Sequencing of Grace</span>
+          </div>
+          <div class="p-3 neu-inset rounded-xl font-mono text-xs font-bold text-slate-800 dark:text-slate-100 text-center">
+            Literal (Historia) ➔ Christological (Credenda) ➔ Tropological (Agenda)
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <strong>Why Sequence Matters:</strong> You can only apply the psalm’s moral demands to the believer <em>after</em> filtering through Christ. Christ kept the psalm first. We inhabit its righteousness only through union with Him.
+          </p>
+        </div>
+
+        <div class="neu-card p-6 space-y-3 border-l-4 border-l-rose-500">
+          <div class="flex items-center gap-2 font-bold text-rose-700 dark:text-rose-400 text-sm">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+            <span>The Moralism Trap (Skipping Christ)</span>
+          </div>
+          <div class="p-3 neu-inset rounded-xl font-mono text-xs font-bold text-rose-700 dark:text-rose-300 text-center">
+            Literal (David) ──────[SKIPS CHRIST]─────► Moralism ("Dare to be a David")
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            If you jump from David directly to modern application without Christ, you produce exhausting works-righteousness and guilt. Jesus is the true Psalm-singer; we sing in Him.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TAB 2: PASSAGE LABS -->
+    <section id="view-casestudies" class="hidden space-y-6">
+      
+      <div class="neu-card p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl font-display font-extrabold text-slate-800 dark:text-white">Multi-Sense Passage Laboratories</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Select a classic messianic psalm and inspect how all 4 senses operate with biblical integrity.</p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <label class="text-xs font-bold text-slate-600 dark:text-slate-300">Target Psalm:</label>
+            <select id="case-select" onchange="loadPassageLab()" class="neu-inset-sm px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 focus:outline-none">
+              <option value="ps22">Psalm 22 ("My God, my God, why have you forsaken me?")</option>
+              <option value="ps110">Psalm 110 ("The LORD says to my Lord: Sit at my right hand")</option>
+              <option value="ps16">Psalm 16 ("You will not let your Holy One see corruption")</option>
+              <option value="ps72">Psalm 72 ("May he defend the poor of the people")</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Rendered Case Study -->
+        <div id="case-output" class="space-y-4 pt-2"></div>
+      </div>
+
+    </section>
+
+    <!-- TAB 3: TRAP AUDITOR DRILLS -->
+    <section id="view-trap" class="hidden space-y-6">
+      
+      <div class="neu-card p-6 sm:p-10 space-y-6 max-w-4xl mx-auto">
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase text-[#7C3AED]">Exegetical Drill</span>
+            <h2 class="text-2xl font-display font-extrabold text-slate-800 dark:text-white">The Hermeneutical Trap Auditor</h2>
+          </div>
+          <span id="trap-score" class="neu-outset-sm px-3.5 py-1 rounded-full text-xs font-display font-bold text-purple-600 shadow-sm">Score: 0 / 0</span>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          Read the following sermon excerpt or classroom interpretation. Diagnose whether it represents an orthodox multi-layered reading or falls into an exegetical trap.
+        </p>
+
+        <div id="trap-drill-card" class="space-y-6"></div>
+
+        <div id="trap-feedback" class="hidden p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed"></div>
+
+        <div class="flex justify-end pt-2">
+          <button id="next-trap-btn" onclick="nextTrapDrill()" class="hidden neu-btn-primary px-6 py-2.5 text-xs font-bold flex items-center gap-2">
+            <span>Next Drill Question</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 4: PREACHING BLUEPRINT BUILDER -->
+    <section id="view-builder" class="hidden space-y-6">
+      
+      <div class="neu-card p-6 sm:p-8 space-y-5">
+        <div>
+          <span class="text-xs font-mono font-bold uppercase text-[#0066CC]">Pulpit Panel Preparation</span>
+          <h2 class="text-2xl font-display font-extrabold text-slate-800 dark:text-white">The 4-Sense Sermon Blueprint Builder</h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+            Map out your own sermon or teaching lesson using the 4 tiers of the Quadriga. Export or copy your scaffolding for your Week 5 preaching presentation.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="text-xs font-bold text-slate-700 dark:text-slate-300">Your Target Psalm &amp; Verse Range:</label>
+              <input type="text" id="bp-ref" placeholder="e.g. Psalm 23:1-6 or Psalm 110:1-4" class="neu-inset-sm w-full p-2.5 text-xs rounded-xl focus:outline-none" />
+            </div>
+            <div class="space-y-1">
+              <label class="text-xs font-bold text-slate-700 dark:text-slate-300">Sermon Main Proposition (Theme):</label>
+              <input type="text" id="bp-theme" placeholder="e.g. The Good Shepherd Who Walks with Us Through Death's Shadow" class="neu-inset-sm w-full p-2.5 text-xs rounded-xl focus:outline-none" />
+            </div>
+          </div>
+
+          <!-- Tier Inputs -->
+          <div class="space-y-3">
+            <div class="p-4 neu-card space-y-1 border-l-4 border-l-slate-700">
+              <label class="text-xs font-bold text-slate-800 dark:text-slate-100 flex items-center gap-1.5">
+                <i data-lucide="anchor" class="w-4 h-4 text-slate-500"></i> Tier 1: Literal / Historical Anchor (What happened to David/Israel? Grammar &amp; Setting)
+              </label>
+              <textarea id="bp-tier1" rows="2" placeholder="Explain the historical grammar, Davidic office, or covenant background..." class="neu-inset-sm w-full p-2.5 text-xs rounded-xl focus:outline-none font-sans"></textarea>
+            </div>
+
+            <div class="p-4 neu-card space-y-1 border-l-4 border-l-blue-600">
+              <label class="text-xs font-bold text-blue-700 dark:text-blue-300 flex items-center gap-1.5">
+                <i data-lucide="cross" class="w-4 h-4 text-blue-500"></i> Tier 2: Christological / Allegorical Center (How does Christ fulfill this as Archetype?)
+              </label>
+              <textarea id="bp-tier2" rows="2" placeholder="Connect to Christ's incarnation, cross, resurrection, or heavenly reign..." class="neu-inset-sm w-full p-2.5 text-xs rounded-xl focus:outline-none font-sans"></textarea>
+            </div>
+
+            <div class="p-4 neu-card space-y-1 border-l-4 border-l-emerald-600">
+              <label class="text-xs font-bold text-emerald-700 dark:text-emerald-300 flex items-center gap-1.5">
+                <i data-lucide="heart" class="w-4 h-4 text-emerald-500"></i> Tier 3: Tropological / Moral Action (How does the believer live in union with Christ?)
+              </label>
+              <textarea id="bp-tier3" rows="2" placeholder="Avoid moralism! How do we live, pray, or suffer because we are united to the True King?" class="neu-inset-sm w-full p-2.5 text-xs rounded-xl focus:outline-none font-sans"></textarea>
+            </div>
+
+            <div class="p-4 neu-card space-y-1 border-l-4 border-l-amber-600">
+              <label class="text-xs font-bold text-amber-700 dark:text-amber-300 flex items-center gap-1.5">
+                <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i> Tier 4: Anagogical / Eschatological Horizon (What is our ultimate hope at the Parousia?)
+              </label>
+              <textarea id="bp-tier4" rows="2" placeholder="Point toward Christ's return, the wedding supper of the Lamb, or cosmic new creation..." class="neu-inset-sm w-full p-2.5 text-xs rounded-xl focus:outline-none font-sans"></textarea>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2">
+            <span id="save-status" class="text-xs text-slate-500 italic">Auto-saves to browser memory</span>
+            <button onclick="saveAndCopyBlueprint()" class="neu-btn-primary px-5 py-2 text-xs font-bold flex items-center gap-2">
+              <i data-lucide="copy" class="w-4 h-4"></i>
+              <span>Copy Formatted Sermon Outline</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (icon) icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+      lucide.createIcons();
+    }
+
+    function switchTab(tab) {
+      ['house', 'casestudies', 'trap', 'builder'].forEach(t => {
+        document.getElementById(`view-${t}`).classList.add('hidden');
+        document.getElementById(`tab-btn-${t}`).className = 'neu-tab-pill px-3.5 py-1.5 font-semibold text-[#0066CC] dark:text-[#60A5FA]';
+      });
+      document.getElementById(`view-${tab}`).classList.remove('hidden');
+      document.getElementById(`tab-btn-${tab}`).className = 'neu-tab-pill active px-3.5 py-1.5 font-bold';
+      if (tab === 'casestudies') loadPassageLab();
+      if (tab === 'trap') loadTrapDrill();
+      lucide.createIcons();
+    }
+
+    const SENSES_DATA = [
+      {
+        num: 1,
+        name: "The Literal / Historical Sense",
+        latin: "Historia (What Happened)",
+        badgeColor: "bg-slate-200 text-slate-800 dark:bg-slate-800 dark:text-slate-200",
+        summary: "The grammatical-historical reality of the ancient Hebrew text.",
+        definition: "The natural, immediate meaning conveyed by Hebrew grammar, syntax, literary genres, historical setting, and covenant boundaries in ancient Israel.",
+        roleInPsalms: "When David speaks of military sieges, physical exhaustion, sickness, or his throne, the text is genuinely about David and ancient Israel. We never discard or minimize this foundation.",
+        guardrail: "You must never bypass the literal sense! Untethered spiritualizing that treats Hebrew grammar as irrelevant destroys biblical authority."
+      },
+      {
+        num: 2,
+        name: "The Christological / Allegorical Sense",
+        latin: "Credenda (What to Believe)",
+        badgeColor: "bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300",
+        summary: "Christ as the eternal Archetype and Antitype of the Psalms.",
+        definition: "How the psalm bears witness to Jesus Christ, His two natures, His virgin birth, suffering, cross, resurrection, ascension, and heavenly session as King-Priest.",
+        roleInPsalms: "David was an anointed covenant king whose royal office shadowed the Son. Jesus did not just 'fulfill' isolated verses like predictive puzzle codes; Christ is the true singer of the Psalter (Hebrews 2:12).",
+        guardrail: "Guard against medieval speculative allegories that disconnect from the literal grammar (e.g. inventing dogmas out of poetic trivia)."
+      },
+      {
+        num: 3,
+        name: "The Tropological / Moral Sense",
+        latin: "Agenda (How to Live)",
+        badgeColor: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
+        summary: "How the believer lives in union with Christ.",
+        definition: "The ethical, devotional, and liturgical formation of the believer's inner heart and corporate church life.",
+        roleInPsalms: "The believer prays the psalms not as an isolated moral champion ('Look at David's faith, try harder!'), but as a member of Christ's body. We sing with Him, clothed in His righteousness.",
+        guardrail: "Always maintain the sequence: Literal ➔ Christological ➔ Tropological. Skipping Christ produces legalistic moralism."
+      },
+      {
+        num: 4,
+        name: "The Anagogical / Eschatological Sense",
+        latin: "Speranda (What to Hope For)",
+        badgeColor: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
+        summary: "The cosmic horizon: Parousia, judgment, and New Jerusalem.",
+        definition: "How the psalm points beyond temporal history to the final consummation of God's kingdom, the resurrection of the dead, and the new creation.",
+        roleInPsalms: "Every cry for divine justice (Ps 82) and vision of global peace (Ps 72) points to the return of Christ when every knee bows and death is swallowed up forever.",
+        guardrail: "Do not reduce eschatology to escapism. The anagogical sense anchors current endurance in the guaranteed victory of God."
+      }
+    ];
+
+    function selectSense(idx) {
+      [0, 1, 2, 3].forEach(i => {
+        const card = document.getElementById(`sense-card-${i}`);
+        if (card) {
+          if (i === idx) {
+            card.classList.add('ring-2', 'ring-[#0066CC]');
+          } else {
+            card.classList.remove('ring-2', 'ring-[#0066CC]');
+          }
+        }
+      });
+
+      const s = SENSES_DATA[idx];
+      const insp = document.getElementById('sense-inspector');
+      insp.innerHTML = `
+        <div class="space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+            <div>
+              <span class="text-xs font-mono font-bold uppercase text-slate-400">Level ${s.num}</span>
+              <h3 class="font-display font-extrabold text-xl text-slate-800 dark:text-white">${s.name}</h3>
+            </div>
+            <span class="text-xs font-mono font-bold px-3 py-1 rounded-full ${s.badgeColor}">${s.latin}</span>
+          </div>
+
+          <p class="text-sm font-medium text-[#0066CC] dark:text-[#389BFF] italic">"${s.summary}"</p>
+
+          <div class="space-y-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Definition:</span>
+            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-serif">${s.definition}</p>
+          </div>
+
+          <div class="space-y-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Role in Preaching the Psalms:</span>
+            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">${s.roleInPsalms}</p>
+          </div>
+
+          <div class="neu-inset-sm p-4 rounded-2xl border-l-4 border-l-rose-500 space-y-1">
+            <span class="text-[11px] font-bold uppercase text-rose-600 dark:text-rose-400 flex items-center gap-1.5">
+              <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Critical Theological Guardrail:
+            </span>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">${s.guardrail}</p>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    const PASSAGE_LABS = {
+      ps22: {
+        title: "Psalm 22: 'My God, my God, why have you forsaken me?'",
+        tiers: [
+          { name: "1. Literal / Historical", text: "David expresses agonizing personal isolation surrounded by enemies depicted as wild bulls, roaring lions, and scavenging dogs. He feels near death but recalls Israel's past deliverance." },
+          { name: "2. Christological / Allegorical", text: "Jesus speaks these exact words from the cross (Matt 27:46). David's pierced hands and dividing garments prefigure the crucifixion. Verses 22-25 describe the risen Christ declaring God's name to His brothers (Heb 2:12)." },
+          { name: "3. Tropological / Moral", text: "When Christians undergo profound suffering, we do not pray into a void. We pray in union with Jesus, knowing our Lord endured cosmic abandonment so we would never be abandoned." },
+          { name: "4. Anagogical / Eschatological", text: "Verses 27-28: 'All the ends of the earth shall remember and turn to the LORD... for kingship belongs to the LORD.' Points to the cosmic assembly around the Lamb in Revelation 5." }
+        ]
+      },
+      ps110: {
+        title: "Psalm 110: 'The LORD says to my Lord: Sit at my right hand'",
+        tiers: [
+          { name: "1. Literal / Historical", text: "A royal coronation oracle for the Davidic monarch in Jerusalem. The king is installed at Yahweh's right hand and declared a priest according to the ancient pre-Israelite order of Melchizedek (king-priest of Salem in Gen 14)." },
+          { name: "2. Christological / Allegorical", text: "Jesus asks the Pharisees: 'If David calls him Lord, how is he his son?' (Matt 22:41-46). Shows Christ's divinity and bodily ascension. Hebrews 7 expounds the Melchizedekian priesthood superior to Aaron's." },
+          { name: "3. Tropological / Moral", text: "Believers live in active, fearless covenant confidence. Because Christ sits as our eternal Priest-King interceding for us, our labor and ministry cannot be overthrown by earthly opposition." },
+          { name: "4. Anagogical / Eschatological", text: "Verse 5-6: 'He will shatter kings on the day of his wrath... He will execute judgment among the nations.' Prefigures the Parousia when all enemies become Christ's footstool (1 Cor 15:25)." }
+        ]
+      },
+      ps16: {
+        title: "Psalm 16: 'You will not abandon my soul to Sheol'",
+        tiers: [
+          { name: "1. Literal / Historical", text: "David confesses Yahweh as his supreme portion and inheritance. Facing physical peril, David expresses quiet trust that God will preserve his life from premature death." },
+          { name: "2. Christological / Allegorical", text: "Peter in Acts 2:25-31 and Paul in Acts 13:35 argue: David died and his body saw corruption! David spoke as a prophet of the Resurrection of the Messiah, whose body saw no decay." },
+          { name: "3. Tropological / Moral", text: "The Christian no longer lives in the paralyzing fear of death (Heb 2:14-15). In grief and dying, we have fullness of joy and pleasures forevermore at God's right hand." },
+          { name: "4. Anagogical / Eschatological", text: "Anticipates the bodily resurrection of all saints and the physical restoration of creation where death is finally abolished." }
+        ]
+      },
+      ps72: {
+        title: "Psalm 72: 'May he defend the cause of the poor of the people'",
+        tiers: [
+          { name: "1. Literal / Historical", text: "A royal prayer for Solomon's accession, establishing the royal Davidic ethic: defending the weak, crushing oppressors, and extending prosperity across the land." },
+          { name: "2. Christological / Allegorical", text: "Solomon fell tragically into idolatry and forced labor. The true Solomon is Jesus Christ, whose kingdom brings true justice, redeeming the poor from oppression and violence (v. 14)." },
+          { name: "3. Tropological / Moral", text: "The Church, as Christ's ambassadorial body, must champion justice for the vulnerable, the orphan, and the refugee, reflecting the Shepherd-King's character." },
+          { name: "4. Anagogical / Eschatological", text: "Verses 8-11: 'May he have dominion from sea to sea... all kings fall down before him, all nations serve him.' The global, eternal reign of Christ in the New Earth." }
+        ]
+      }
+    };
+
+    function loadPassageLab() {
+      const select = document.getElementById('case-select');
+      const data = PASSAGE_LABS[select.value];
+      const container = document.getElementById('case-output');
+      if (!container || !data) return;
+
+      const borderColors = [
+        'border-l-slate-700 bg-slate-50 dark:bg-slate-900/40',
+        'border-l-blue-600 bg-blue-50 dark:bg-blue-950/30',
+        'border-l-emerald-600 bg-emerald-50 dark:bg-emerald-950/30',
+        'border-l-amber-600 bg-amber-50 dark:bg-amber-950/30'
+      ];
+
+      container.innerHTML = `
+        <div class="border-b border-slate-200 dark:border-slate-800 pb-3 mb-4">
+          <h3 class="font-display font-extrabold text-lg text-slate-800 dark:text-white">${data.title}</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${data.tiers.map((t, idx) => `
+            <div class="neu-card p-5 border-l-4 ${borderColors[idx]} space-y-2">
+              <span class="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">${t.name}</span>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-serif">${t.text}</p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    const TRAP_DRILLS = [
+      {
+        scenario: "Sermon statement on Psalm 3: 'David faced Absalom with great courage. When you face your personal financial Goliaths this week, you need to summon David's courage, stand tall, and fight!'",
+        options: [
+          { text: "Sound Quadriga Interpretation", isCorrect: false },
+          { text: "The Moralism Trap (Jumps straight from David to modern listener, bypassing Christ)", isCorrect: true },
+          { text: "Untethered Medieval Allegory", isCorrect: false }
+        ],
+        explanation: "<strong>Correct!</strong> This is the classic <em>Moralism Trap</em>. It reduces the inspired Scripture to a self-help pep talk. It skips Christ entirely, burdening the congregation with works-righteousness."
+      },
+      {
+        scenario: "Commentary claim on Psalm 110: 'When David mentions the king drinking from the brook by the way (v. 7), this secretly proves that Jesus was baptized in the Jordan river by John the Baptist.'",
+        options: [
+          { text: "The Allegorical Fantasy Trap (Free-floating spiritualizing unanchored in Hebrew grammar)", isCorrect: true },
+          { text: "Sound Literal Grammar", isCorrect: false },
+          { text: "The Moralism Trap", isCorrect: false }
+        ],
+        explanation: "<strong>Spot on!</strong> This commits <em>Allegorical Excess</em>. In Hebrew warfare, drinking from the brook simply depicts a vigorous warrior pausing for quick refreshment to continue the pursuit. Inventing hidden NT sacraments out of poetic battle idiom violates grammatical-historical guardrails."
+      },
+      {
+        scenario: "Sermon on Psalm 22: 'David suffered unjustly as God's anointed king. Jesus took this very psalm on the cross as our substitute, enduring the horror of abandonment so we are reconciled. Therefore, in our suffering, we do not despair; we praise God in union with our risen Lord!'",
+        options: [
+          { text: "Sound Quadriga Sequencing (Literal ➔ Christological ➔ Tropological)", isCorrect: true },
+          { text: "Hyper-Historicist Flattening", isCorrect: false },
+          { text: "Works-Righteousness Moralism", isCorrect: false }
+        ],
+        explanation: "<strong>Brilliant!</strong> This captures the exact orthodox sequencing: it anchors in David's real history, centers on Christ's substitutionary cross, and derives Christian comfort directly from union with Christ."
+      }
+    ];
+
+    let currentTrapIdx = 0;
+    let trapScore = 0;
+    let trapAnswered = false;
+
+    function loadTrapDrill() {
+      const drill = TRAP_DRILLS[currentTrapIdx];
+      const card = document.getElementById('trap-drill-card');
+      const feedback = document.getElementById('trap-feedback');
+      const nextBtn = document.getElementById('next-trap-btn');
+      trapAnswered = false;
+
+      feedback.classList.add('hidden');
+      nextBtn.classList.add('hidden');
+
+      card.innerHTML = `
+        <div class="neu-inset p-5 rounded-2xl space-y-2 font-serif">
+          <div class="text-xs font-sans font-bold text-[#7C3AED]">Interpretive Case ${currentTrapIdx + 1} of ${TRAP_DRILLS.length}</div>
+          <p class="text-sm sm:text-base text-slate-800 dark:text-slate-100 leading-relaxed font-sans">${drill.scenario}</p>
+        </div>
+
+        <div class="space-y-2 font-sans pt-2">
+          <div class="text-xs font-bold uppercase text-slate-500">Diagnose the Exegesis:</div>
+          ${drill.options.map((opt, i) => `
+            <button onclick="checkTrapAnswer(${i})" id="trap-opt-${i}" class="w-full text-left p-4 rounded-2xl neu-card hover:bg-purple-50 dark:hover:bg-slate-800 transition text-xs sm:text-sm font-semibold flex items-center justify-between">
+              <span>${opt.text}</span>
+              <i data-lucide="circle" class="w-4 h-4 text-slate-400"></i>
+            </button>
+          `).join('')}
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function checkTrapAnswer(idx) {
+      if (trapAnswered) return;
+      trapAnswered = true;
+
+      const drill = TRAP_DRILLS[currentTrapIdx];
+      const feedback = document.getElementById('trap-feedback');
+      const nextBtn = document.getElementById('next-trap-btn');
+
+      drill.options.forEach((opt, i) => {
+        const btn = document.getElementById(`trap-opt-${i}`);
+        if (opt.isCorrect) {
+          btn.classList.add('border-2', 'border-emerald-500', 'bg-emerald-50', 'dark:bg-emerald-950/40');
+        } else if (i === idx) {
+          btn.classList.add('border-2', 'border-rose-500', 'bg-rose-50', 'dark:bg-rose-950/40');
+        }
+      });
+
+      const isCorrect = drill.options[idx].isCorrect;
+      if (isCorrect) {
+        trapScore++;
+        feedback.className = 'p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed border-l-4 border-l-emerald-500 text-emerald-900 dark:text-emerald-200';
+        feedback.innerHTML = `<strong class="text-emerald-600 block mb-1">✓ Correct Diagnosis!</strong> ${drill.explanation}`;
+      } else {
+        feedback.className = 'p-5 neu-inset rounded-2xl text-xs sm:text-sm leading-relaxed border-l-4 border-l-rose-500 text-rose-900 dark:text-rose-200';
+        feedback.innerHTML = `<strong class="text-rose-600 block mb-1">Review the Guardrails:</strong> ${drill.explanation}`;
+      }
+
+      document.getElementById('trap-score').innerText = `Score: ${trapScore} / ${currentTrapIdx + 1}`;
+      feedback.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');
+    }
+
+    function nextTrapDrill() {
+      currentTrapIdx = (currentTrapIdx + 1) % TRAP_DRILLS.length;
+      loadTrapDrill();
+    }
+
+    function saveAndCopyBlueprint() {
+      const ref = document.getElementById('bp-ref').value;
+      const theme = document.getElementById('bp-theme').value;
+      const t1 = document.getElementById('bp-tier1').value;
+      const t2 = document.getElementById('bp-tier2').value;
+      const t3 = document.getElementById('bp-tier3').value;
+      const t4 = document.getElementById('bp-tier4').value;
+
+      const formatted = `=== QUADRIGA SERMON BLUEPRINT ===
+Target Scripture: ${ref}
+Main Proposition: ${theme}
+
+1. LITERAL / HISTORICAL FOUNDATION (Historia):
+${t1}
+
+2. CHRISTOLOGICAL / ALLEGORICAL CENTER (Credenda):
+${t2}
+
+3. TROPOLOGICAL / MORAL LIFE IN CHRIST (Agenda):
+${t3}
+
+4. ANAGOGICAL / ESCHATOLOGICAL HORIZON (Speranda):
+${t4}
+`;
+      navigator.clipboard.writeText(formatted).then(() => {
+        const status = document.getElementById('save-status');
+        status.innerText = "✓ Blueprint Copied to Clipboard!";
+        status.className = "text-xs text-emerald-600 font-bold";
+        setTimeout(() => {
+          status.innerText = "Auto-saves to browser memory";
+          status.className = "text-xs text-slate-500 italic";
+        }, 3000);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      selectSense(1);
+    });
+  </script>
+</body>
+</html>
