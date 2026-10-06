@@ -80,9 +80,8 @@
           ]
         }
       ],
-      "icon": "assets/icon.png",
-      "category": "public.app-category.education",
-      "identity": null
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.education"
     },
     "dmg": {
       "title": "Psalms Learning Suite ${version}",
