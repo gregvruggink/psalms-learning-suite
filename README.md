@@ -14,8 +14,9 @@ Head over to the **[Latest GitHub Releases](https://github.com/gregvruggink/psal
 
 | Operating System | Download File | Installation Instructions |
 | :--- | :--- | :--- |
-| **Windows** | `Psalms.Learning.Suite.Setup.1.0.0.exe` | Run the installer and follow the setup wizard. Desktop and Start Menu shortcuts will be created automatically. |
-| **macOS** | `Psalms.Learning.Suite-1.0.0.dmg` | Open the `.dmg` file and drag **Psalms Learning Suite** into your **Applications** folder. *(See note below for first launch)* |
+| **Windows** | `Psalms-Learning-Suite-Setup-*.exe` | Run the installer and follow the setup wizard. Desktop and Start Menu shortcuts will be created automatically. |
+| **macOS** | `Psalms-Learning-Suite-*-arm64.dmg` / `.zip` | Open the `.dmg` file and drag **Psalms Learning Suite** into your **Applications** folder. *(See note below for first launch)* |
+| **Web & Brightspace / LMS** | `BIB523_Psalms_Interactive_Learning_Suite_All_In_One.html` | Single self-contained file with all 11 studios. Upload directly to Brightspace or open in any browser! |
 
 > [!NOTE]
 > **First-time launch on macOS:**

@@ -1,7 +1,7 @@
 {
   "name": "psalms-learning-suite",
   "productName": "Psalms Learning Suite",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Interactive Learning Suite for Hebrew Poetry, Form-Critical Hermeneutics, and the Psalms",
   "author": "Greg Vruggink <gregvruggink>",
   "license": "MIT",
@@ -84,7 +84,7 @@
       "category": "public.app-category.education"
     },
     "dmg": {
-      "title": "Psalms Learning Suite ${version}",
+      "title": "${productName} ${version} ${arch}",
       "contents": [
         {
           "x": 130,
