@@ -1050,8 +1050,8 @@
   <!-- =========================================================================
        TRANSLITERATION QUICK REFERENCE MODAL
        ========================================================================= -->
-  <div id="translit-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="neu-card w-full max-w-2xl max-h-[85vh] overflow-y-auto p-6 sm:p-8 space-y-6 relative border border-slate-200 dark:border-slate-800">
+  <div id="translit-modal" onclick="if(event.target === this) closeTranslitModal()" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-start justify-center p-3 sm:p-6 pt-4 sm:pt-8 md:pt-10 overflow-y-auto">
+    <div class="neu-card w-full max-w-2xl max-h-[88vh] overflow-y-auto p-6 sm:p-8 space-y-6 relative border border-slate-200 dark:border-slate-800 mb-8">
       
       <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
         <div class="flex items-center gap-2">
@@ -1579,13 +1579,26 @@
 
     function openTranslitModal() {
       const modal = document.getElementById('translit-modal');
-      if (modal) modal.classList.remove('hidden');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.scrollTop = 0;
+        const card = modal.querySelector('.neu-card');
+        if (card) card.scrollTop = 0;
+        document.body.style.overflow = 'hidden';
+      }
     }
 
     function closeTranslitModal() {
       const modal = document.getElementById('translit-modal');
-      if (modal) modal.classList.add('hidden');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
     }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeTranslitModal();
+    });
 
     function toggleAudioSpeed() {
       const speeds = [0.75, 1.0, 1.25];
