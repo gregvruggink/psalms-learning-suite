@@ -1828,17 +1828,22 @@
     // =========================================================================
     // SECTION 2 DRILL LOGIC
     // =========================================================================
+    let drillAnswered = false;
+
     function renderCurrentDrill() {
+      drillAnswered = false;
       const q = drillQuestions[currentDrillIndex];
       const refEl = document.getElementById('exercise-reference');
       const hebEl = document.getElementById('exercise-hebrew');
       const quoteEl = document.getElementById('exercise-quote');
       const btnsGrid = document.getElementById('exercise-buttons-grid');
       const feedback = document.getElementById('exercise-feedback');
+      const scoreEl = document.getElementById('drill-score');
 
       if (refEl) refEl.innerText = `Verse ${currentDrillIndex + 1} of ${drillQuestions.length}: ${q.ref}`;
       if (hebEl) hebEl.innerText = q.hebrew;
       if (quoteEl) quoteEl.innerHTML = `"${q.quote}"`;
+      if (scoreEl) scoreEl.innerText = `Score: ${drillScore} / ${drillQuestions.length}`;
       if (feedback) {
         feedback.className = 'hidden';
         feedback.innerHTML = '';
@@ -1848,6 +1853,7 @@
         btnsGrid.innerHTML = '';
         q.options.forEach((opt, optIdx) => {
           const btn = document.createElement('button');
+          btn.id = `btn-drill-opt-${opt.id}`;
           btn.className = 'neu-btn p-3 rounded-xl text-left text-xs font-bold hover:text-blue-600 transition flex items-center gap-2';
           btn.onclick = () => checkDrillAnswer(opt.id);
           btn.innerHTML = `
@@ -1857,45 +1863,196 @@
           btnsGrid.appendChild(btn);
         });
       }
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
     }
 
     function checkDrillAnswer(selectedId) {
+      if (drillAnswered) return;
+      drillAnswered = true;
+
       const q = drillQuestions[currentDrillIndex];
+      const isCorrect = (selectedId === q.answer);
+
+      if (isCorrect) {
+        drillScore++;
+      }
+      const scoreEl = document.getElementById('drill-score');
+      if (scoreEl) scoreEl.innerText = `Score: ${drillScore} / ${drillQuestions.length}`;
+
+      const btnsGrid = document.getElementById('exercise-buttons-grid');
+      if (btnsGrid) {
+        const buttons = btnsGrid.querySelectorAll('button');
+        buttons.forEach(btn => {
+          btn.disabled = true;
+        });
+
+        const correctBtn = document.getElementById(`btn-drill-opt-${q.answer}`);
+        const selectedBtn = document.getElementById(`btn-drill-opt-${selectedId}`);
+
+        if (correctBtn) {
+          correctBtn.className = 'neu-btn p-3 rounded-xl text-left text-xs font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-200 border-2 border-teal-500 shadow-sm flex items-center gap-2';
+        }
+
+        if (!isCorrect && selectedBtn) {
+          selectedBtn.className = 'neu-btn p-3 rounded-xl text-left text-xs font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200 border-2 border-rose-400 opacity-80 flex items-center gap-2';
+        }
+
+        buttons.forEach(btn => {
+          if (btn !== correctBtn && btn !== selectedBtn) {
+            btn.classList.add('opacity-40', 'cursor-not-allowed');
+          }
+        });
+      }
+
       const feedback = document.getElementById('exercise-feedback');
       if (!feedback) return;
       feedback.classList.remove('hidden');
 
-      if (selectedId === q.answer) {
-        drillScore++;
-        const scoreEl = document.getElementById('drill-score');
-        if (scoreEl) scoreEl.innerText = `Score: ${drillScore} / ${drillQuestions.length}`;
-        feedback.className = 'p-4 rounded-2xl text-xs space-y-1 bg-teal-50 dark:bg-teal-950/40 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800';
+      const isLast = (currentDrillIndex === drillQuestions.length - 1);
+      const nextBtnLabel = isLast ? 'See Final Results' : `Advance to Verse ${currentDrillIndex + 2} of ${drillQuestions.length}`;
+      const nextBtnIcon = isLast ? 'award' : 'arrow-right';
+      const nextBtnColor = isLast ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-blue-600 hover:bg-blue-700';
+
+      const correctOpt = q.options.find(o => o.id === q.answer) || { label: q.answer };
+      const cleanExplanation = q.explanation.replace(/^Correct!\s*/i, '');
+
+      if (isCorrect) {
+        feedback.className = 'p-4 rounded-2xl text-xs space-y-3 bg-teal-50 dark:bg-teal-950/40 text-teal-900 dark:text-teal-200 border border-teal-200 dark:border-teal-800 shadow-sm';
         feedback.innerHTML = `
-          <div class="flex items-center gap-1.5 font-bold">
-            <i data-lucide="check-circle" class="w-4 h-4 text-teal-600"></i> Correct Identification!
+          <div class="flex items-center gap-2 font-bold text-sm text-teal-800 dark:text-teal-200">
+            <i data-lucide="check-circle" class="w-5 h-5 text-teal-600 shrink-0"></i>
+            <span>Correct Identification &bull; ${correctOpt.label}</span>
           </div>
-          <p>${q.explanation}</p>
+          <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${cleanExplanation}</p>
+          <div class="pt-2 flex justify-end">
+            <button onclick="advanceDrillQuestion()" class="neu-btn px-4 py-2 text-xs font-bold text-white ${nextBtnColor} rounded-xl inline-flex items-center gap-1.5 shadow-sm transition">
+              <span>${nextBtnLabel}</span>
+              <i data-lucide="${nextBtnIcon}" class="w-4 h-4"></i>
+            </button>
+          </div>
         `;
       } else {
-        feedback.className = 'p-4 rounded-2xl text-xs space-y-1 bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800';
+        feedback.className = 'p-4 rounded-2xl text-xs space-y-3 bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200 border border-rose-200 dark:border-rose-800 shadow-sm';
         feedback.innerHTML = `
-          <div class="flex items-center gap-1.5 font-bold">
-            <i data-lucide="x-circle" class="w-4 h-4 text-rose-600"></i> Not quite.
+          <div class="flex items-center gap-2 font-bold text-sm text-rose-800 dark:text-rose-200">
+            <i data-lucide="alert-circle" class="w-5 h-5 text-rose-600 shrink-0"></i>
+            <span>Not Quite &bull; Correct Category: ${correctOpt.label}</span>
           </div>
-          <p>${q.explanation}</p>
+          <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${cleanExplanation}</p>
+          <div class="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <span class="text-[11px] text-slate-500 italic">Review the explanation above, then click advance when you're ready.</span>
+            <button onclick="advanceDrillQuestion()" class="neu-btn px-4 py-2 text-xs font-bold text-white ${nextBtnColor} rounded-xl inline-flex items-center justify-center gap-1.5 shadow-sm transition self-end sm:self-auto">
+              <span>${nextBtnLabel}</span>
+              <i data-lucide="${nextBtnIcon}" class="w-4 h-4"></i>
+            </button>
+          </div>
         `;
       }
 
-      lucide.createIcons();
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
 
-      setTimeout(() => {
-        if (currentDrillIndex < drillQuestions.length - 1) {
-          currentDrillIndex++;
-          renderCurrentDrill();
-        } else {
-          feedback.innerHTML += `<div class="pt-2 font-bold text-blue-600">Exercise Complete! You scored ${drillScore} out of ${drillQuestions.length}.</div>`;
-        }
-      }, 2600);
+    function advanceDrillQuestion() {
+      if (currentDrillIndex < drillQuestions.length - 1) {
+        currentDrillIndex++;
+        renderCurrentDrill();
+      } else {
+        renderDrillResults();
+      }
+    }
+
+    function renderDrillResults() {
+      const percentage = Math.round((drillScore / drillQuestions.length) * 100);
+      let feedbackMsg = "";
+      let iconColor = "text-blue-600";
+      let iconName = "award";
+
+      if (drillScore >= 7) {
+        feedbackMsg = "Outstanding Covenant Insight! You clearly discern how <em>Ḥeseḏ</em> functions across personal laments, royal Davidic promises, forgiveness pleas, and temple thanksgiving.";
+        iconColor = "text-amber-500";
+        iconName = "trophy";
+      } else if (drillScore >= 5) {
+        feedbackMsg = "Good Analysis! Remember to look closely at the speaker and need: Is the psalmist facing mortal danger (Rescue), confessing guilt (Forgiveness), or appealing to God's dynasty oath (Royal Covenant)?";
+        iconColor = "text-blue-600";
+        iconName = "check-circle";
+      } else {
+        feedbackMsg = "Helpful Practice! Review the 5 primary contextual categories in Section 2 above, then retake the drill to sharpen your theological diagnostics.";
+        iconColor = "text-teal-600";
+        iconName = "sparkles";
+      }
+
+      const exerciseBox = document.getElementById('exercise-box');
+      if (!exerciseBox) return;
+
+      exerciseBox.innerHTML = `
+        <div class="text-center py-6 px-4 space-y-4">
+          <div class="w-16 h-16 mx-auto rounded-3xl neu-inset-sm flex items-center justify-center ${iconColor} shadow-sm">
+            <i data-lucide="${iconName}" class="w-8 h-8"></i>
+          </div>
+          <div class="space-y-1">
+            <h4 class="font-display font-extrabold text-xl text-slate-900 dark:text-white">
+              Practice Drill Complete!
+            </h4>
+            <p class="text-sm font-bold text-blue-600 dark:text-blue-400">
+              Final Score: ${drillScore} of ${drillQuestions.length} Correct (${percentage}%)
+            </p>
+          </div>
+          <p class="max-w-md mx-auto text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            ${feedbackMsg}
+          </p>
+          <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
+            <button onclick="resetDrill()" class="neu-btn px-5 py-2.5 text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-2 shadow-sm">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+              <span>Try Practice Drill Again</span>
+            </button>
+            <a href="#hallel-section" class="neu-btn px-5 py-2.5 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-blue-600 flex items-center gap-2">
+              <span>Continue to Section 3: Psalm 136 Hallel</span>
+              <i data-lucide="arrow-down" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+      `;
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function resetDrill() {
+      currentDrillIndex = 0;
+      drillScore = 0;
+      drillAnswered = false;
+
+      const exerciseBox = document.getElementById('exercise-box');
+      if (!exerciseBox) return;
+
+      const q = drillQuestions[0];
+      exerciseBox.innerHTML = `
+        <div class="flex items-center justify-between text-xs font-display font-medium text-slate-400">
+          <span id="exercise-reference" class="font-bold text-blue-600 dark:text-blue-400">Verse 1 of 8: ${q.ref}</span>
+          <span id="exercise-tag" class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[11px] font-display font-bold text-slate-600 dark:text-slate-300 shadow-sm">Exegesis Analysis</span>
+        </div>
+
+        <div id="exercise-hebrew" class="font-hebrew-vocal text-xl text-right text-slate-800 dark:text-slate-100 py-1">
+          ${q.hebrew}
+        </div>
+
+        <blockquote id="exercise-quote" class="text-base sm:text-lg font-serif italic text-slate-800 dark:text-slate-100 border-l-4 border-blue-500 pl-4 py-1">
+          "${q.quote}"
+        </blockquote>
+
+        <div id="exercise-buttons-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+        </div>
+
+        <div id="exercise-feedback" class="hidden p-4 rounded-2xl text-xs space-y-3"></div>
+      `;
+
+      renderCurrentDrill();
     }
 
     // =========================================================================
