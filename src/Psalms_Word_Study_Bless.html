@@ -360,7 +360,7 @@
 
           <!-- Descriptive Body Text -->
           <p class="text-[#5A6A80] dark:text-[#94A3B8] text-sm sm:text-base leading-relaxed max-w-2xl">
-            In everyday English, "blessing" can sound vague, like well-wishing or casual good fortune. In biblical Hebrew, <strong>bārakh (בָּרַךְ)</strong> denotes a concrete covenant reality. In the Psalms, blessing functions in two primary directions: God blesses people by bestowing life, protection, and favor (Ps 115:12, Ps 128:5)—and people bless God by praising, thanking, and exalting His holy name (Ps 103:1, Ps 145:1).
+            In everyday English, "blessing" can sound vague, like well-wishing or casual good fortune. In biblical Hebrew, <strong>bārakh (בָּרַךְ)</strong> signifies a concrete covenant reality. In the Psalms, blessing functions in two primary directions: God blesses people by bestowing life, protection, and favor (Ps 115:12, Ps 128:5), and people bless God by praising, thanking, and exalting His holy name (Ps 103:1, Ps 145:1).
           </p>
 
           <!-- Interactive Action Buttons -->
@@ -382,7 +382,7 @@
             </span>
             <span class="text-slate-300 dark:text-slate-700">&bull;</span>
             <span class="inline-flex items-center gap-1 font-semibold">
-              <i data-lucide="milestone" class="w-3.5 h-3.5 text-teal-500"></i> Anchors the 5 Book Seams
+              <i data-lucide="milestone" class="w-3.5 h-3.5 text-teal-500"></i> Anchors the 5 Books
             </span>
             <span class="text-slate-300 dark:text-slate-700">&bull;</span>
             <span class="inline-flex items-center gap-1 font-semibold">
@@ -503,7 +503,7 @@
             Lexical Range in the Psalter
           </div>
           <h3 class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white">
-            1. The Plain Semantic Range of Bārakh
+            1. The Range of Meanings for Bārakh
           </h3>
         </div>
         <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md">
@@ -527,7 +527,7 @@
               </h4>
             </div>
             <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              The root <strong>B-R-K</strong> appears in several related Hebrew words: the verb <em>bārakh</em> (to bless / praise in the Piel stem), the noun <em>berakhah</em> (a blessing), the passive participle <em>bārûkh</em> (blessed / praised), and the noun <em>berekh</em> (knee, with the homonym verb 'to kneel' in Ps 95:6).
+              The root <strong>B-R-K</strong> appears in several related Hebrew words: the verb <em>bārakh</em> (to bless / praise in the Piel stem), the noun <em>berakhah</em> (a blessing), the passive participle <em>bārûkh</em> (blessed/praised), and the noun <em>berekh</em> (knee, with the homonym verb 'to kneel' in Ps 95:6).
             </p>
           </div>
           <div class="neu-inset-sm p-3 rounded-2xl text-xs space-y-1">
@@ -598,7 +598,7 @@
       <div class="max-w-3xl space-y-3">
         <div class="neu-outset-sm px-3.5 py-1 rounded-full inline-flex items-center gap-2 text-xs font-display font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider shadow-sm">
           <i data-lucide="alert-triangle" class="w-4 h-4"></i>
-          The Premier Translation Pitfall Solved
+          A Translation Pitfall
         </div>
         <h3 class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white">
           2. The Two "Blessed" Words: <span class="translit-text text-blue-600 dark:text-blue-400" data-translit-academic="Bārakh" data-translit-simplified="Barakh">Barakh</span> vs. <span class="translit-text text-teal-600 dark:text-teal-400" data-translit-academic="’Ashrê" data-translit-simplified="Ashrey">Ashrey</span>
@@ -778,7 +778,7 @@
             <div class="neu-outset-sm p-3 rounded-xl text-xs space-y-1 text-slate-600 dark:text-slate-300 shadow-sm">
               <strong class="text-teal-700 dark:text-teal-400">Lexical Usage in Context:</strong>
               <p>
-                In verse 8, David employs <em><span class="translit-text" data-translit-academic="’Ashrê" data-translit-simplified="Ashrey">Ashrey</span></em> to pronounce the blessedness or flourishing state of the individual (<em>geḇer</em>) who seeks refuge in Yahweh.
+                In verse 8, David employs <em><span class="translit-text" data-translit-academic="’Ashrê" data-translit-simplified="Ashrey">Ashrey</span></em> to pronounce the blessedness or flourishing state of the individual who seeks refuge in Yahweh.
               </p>
             </div>
           </div>
@@ -828,16 +828,16 @@
             "Blessed is the man who walks not in the counsel of the wicked, nor stands in the way of sinners, nor sits in the seat of scoffers..."
           </blockquote>
 
-          <div class="flex flex-wrap items-center gap-3 pt-2">
-            <button onclick="checkDrillAnswer('ashre')" class="neu-btn px-5 py-2 text-xs font-bold hover:text-teal-600">
+          <div id="exercise-options" class="flex flex-wrap items-center gap-3 pt-2">
+            <button id="btn-drill-ashre" onclick="checkDrillAnswer('ashre')" class="neu-btn px-5 py-2.5 text-xs font-bold hover:text-teal-600 transition">
               Option A: אַשְׁרֵי ('Ashrê &bull; Flourishing Life)
             </button>
-            <button onclick="checkDrillAnswer('barakh')" class="neu-btn px-5 py-2 text-xs font-bold hover:text-blue-600">
+            <button id="btn-drill-barakh" onclick="checkDrillAnswer('barakh')" class="neu-btn px-5 py-2.5 text-xs font-bold hover:text-blue-600 transition">
               Option B: בָּרַךְ (Bārakh &bull; Covenant Blessing / Praise)
             </button>
           </div>
 
-          <div id="exercise-feedback" class="hidden p-3.5 rounded-2xl text-xs space-y-1"></div>
+          <div id="exercise-feedback" class="hidden p-4 rounded-2xl text-xs space-y-3"></div>
         </div>
 
       </div>
@@ -857,7 +857,7 @@
         </div>
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <h3 class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white">
-            3. Barukh as the Structural Keystone of the 5 Books
+            3. Barukh as the Keystone of the 5 Books
           </h3>
           <button onclick="playCurrentSeamAudio()" id="btn-hear-seam-header" class="neu-btn px-3 py-1.5 text-xs font-bold inline-flex items-center gap-1.5 text-indigo-700 dark:text-indigo-300 shrink-0 self-start sm:self-auto" title="Listen to Current Seam Doxology">
             <i data-lucide="volume-2" class="w-3.5 h-3.5 text-indigo-600"></i>
@@ -865,7 +865,7 @@
           </button>
         </div>
         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
-          The 150 Psalms are not a random collection; they were carefully organized into 5 Books, matching the 5 Books of Moses (the Torah). Each of the first four books ends with a short hymn of praise (called a doxology) centered on <strong class="translit-text" data-translit-academic="Bārûkh Yahweh" data-translit-simplified="Barukh Yahweh">Barukh Yahweh</strong> (בָּרוּךְ יְהוָה, "Blessed be the LORD"). The whole collection finishes with the great celebration of praise in Psalm 150.
+          Each of the first four books in Psalms ends with a short hymn of praise (called a doxology) centered on <strong class="translit-text" data-translit-academic="Bārûkh Yahweh" data-translit-simplified="Barukh Yahweh">Barukh Yahweh</strong> (בָּרוּךְ יְהוָה, "Blessed be the LORD"). The whole collection finishes with the great celebration of praise in Psalm 150.
         </p>
       </div>
 
@@ -1662,113 +1662,294 @@
     // =========================================================================
     // INTERACTIVE DRILL: "SORT THE PSALM VERSE" (BARAKH VS ASHRE)
     // =========================================================================
-    const drillQuestions = [
+        const drillQuestions = [
       {
         ref: "Psalm 1:1",
         quote: "Blessed is the man who walks not in the counsel of the wicked, nor stands in the way of sinners, nor sits in the seat of scoffers...",
         answer: "ashre",
         hebrew: "אַשְׁרֵי הָאִישׁ",
-        explanation: "Correct! Psalm 1 starts with 'Ashrê. It celebrates the happy, blessed life of the person who loves God's teaching (Torah). Notice that 'ashre is always said about people, never to God."
+        explanation: "Psalm 1 opens with <strong>’Ashrê</strong>. It celebrates the blessed, joyful flourishing of the person rooted in God's Torah. In Hebrew, <em>’ashrê</em> is always an exclamatory construct noun said of human beings in a state of happiness—it is never addressed to God."
       },
       {
         ref: "Psalm 103:1",
         quote: "Bless the LORD, O my soul, and all that is within me, bless his holy name!",
         answer: "barakh",
         hebrew: "בָּרְכִי נַפְשִׁי אֶת־יְהוָה",
-        explanation: "Correct! This is Bārakh (a Piel imperative). David commands his own soul to praise and bless the LORD for His goodness and benefits."
+        explanation: "This is <strong>Bārakh</strong> (specifically a Piel imperative verb: <em>bārəḵî</em>). David commands his own soul to praise, honor, and kneel before Yahweh for His covenant benefits. When people bless God, it is always the root <em>B-R-K</em>."
       },
       {
         ref: "Psalm 32:1",
         quote: "Blessed is he whose transgression is forgiven, whose sin is covered.",
         answer: "ashre",
         hebrew: "אַשְׁרֵי נְשׂוּי־פֶּשַׁע",
-        explanation: "Correct! This is 'Ashrê. It celebrates the joyful relief and peace of someone whose sins have been forgiven by God."
+        explanation: "This is <strong>’Ashrê</strong>. David celebrates the profound relief, flourishing peace, and beatitude of the sinner whose rebellion has been lifted away by God's forgiveness."
       },
       {
         ref: "Psalm 41:13",
         quote: "Blessed be the LORD, the God of Israel, from everlasting to everlasting! Amen and Amen.",
         answer: "barakh",
         hebrew: "בָּרוּךְ יְהוָה אֱלֹהֵי יִשְׂרָאֵל",
-        explanation: "Correct! Bārûkh Yahweh ('Blessed be the LORD') is the short hymn of praise (doxology) that closes Book I of the Psalms. People bless God by honoring His eternal reign."
+        explanation: "This is <strong>Bārakh</strong> (the passive participle <em>bārûḵ</em>). <em>Bārûḵ Yahweh</em> ('Blessed be the LORD') is the great covenantal doxology closing Book I of the Psalms. Worshipers bless God by acknowledging His eternal reign."
       },
       {
         ref: "Psalm 84:4",
         quote: "Blessed are those who dwell in your house, ever singing your praise! Selah",
         answer: "ashre",
         hebrew: "אַשְׁרֵי יוֹשְׁבֵי בֵיתֶךָ",
-        explanation: "Correct! This is 'Ashrê. It expresses how happy and secure travelers and priests are when they make God's house their home."
+        explanation: "This is <strong>’Ashrê</strong>. The sons of Korah declare the blissful state of pilgrims and temple worshipers who experience intimate fellowship in God's dwelling place."
       },
       {
         ref: "Psalm 134:3",
         quote: "May the LORD bless you from Zion, he who made heaven and earth!",
         answer: "barakh",
         hebrew: "יְבָרֶכְךָ יְהוָה מִצִּיּוֹן",
-        explanation: "Correct! Yəḇāreḵəḵā (from Bārakh) means 'May He bless you.' This is God giving real life, peace, and protection to His people."
+        explanation: "This is <strong>Bārakh</strong> (Piel imperfect jussive: <em>yəḇāreḵəḵā</em>). The priest pronounces God's active covenant empowerment, protection, and life-giving blessing upon the pilgrim from Mount Zion."
       },
       {
         ref: "Psalm 34:1",
         quote: "I will bless the LORD at all times; his praise shall continually be in my mouth.",
         answer: "barakh",
         hebrew: "אֲבָרֲכָה אֶת־יְהוָה בְּכָל־עֵת",
-        explanation: "Correct! This is Bārakh (a cohortative verb expressing determination: 'I will bless!'). Even in adversity, David resolves to offer praise and thanksgiving to the LORD."
+        explanation: "This is <strong>Bārakh</strong> (a cohortative verb expressing determined intent: <em>’ăḇārăḵāh</em>). Even while fleeing enemies in fear, David resolves to continually praise and extol the LORD."
       },
       {
         ref: "Psalm 34:8",
         quote: "Oh, taste and see that the LORD is good! Blessed is the man who takes refuge in him!",
         answer: "ashre",
         hebrew: "אַשְׁרֵי הַגֶּבֶר יֶחֱסֶה־בּוֹ",
-        explanation: "Correct! This is 'Ashrê. David invites everyone to see how safe, happy, and cared for someone is when they take shelter in God."
+        explanation: "This is <strong>’Ashrê</strong>. Having praised God with <em>Bārakh</em> in verse 1, David now invites all hearers into the experiential, flourishing security (<em>’ashrê</em>) of taking refuge in the LORD."
       }
     ];
 
     let currentDrillIndex = 0;
     let drillScore = 0;
+    let drillAnswered = false;
 
     function renderCurrentDrill() {
+      drillAnswered = false;
       const q = drillQuestions[currentDrillIndex];
-      document.getElementById('exercise-reference').innerText = `Verse ${currentDrillIndex + 1} of ${drillQuestions.length}: ${q.ref}`;
-      document.getElementById('exercise-quote').innerHTML = `"${q.quote}"`;
+
+      const refEl = document.getElementById('exercise-reference');
+      const quoteEl = document.getElementById('exercise-quote');
+      const scoreEl = document.getElementById('drill-score');
+      
+      if (refEl) refEl.innerText = `Verse ${currentDrillIndex + 1} of ${drillQuestions.length}: ${q.ref}`;
+      if (quoteEl) quoteEl.innerHTML = `"${q.quote}"`;
+      if (scoreEl) scoreEl.innerText = `Score: ${drillScore} / ${drillQuestions.length}`;
+
+      const btnAshre = document.getElementById('btn-drill-ashre');
+      const btnBarakh = document.getElementById('btn-drill-barakh');
+
+      if (btnAshre && btnBarakh) {
+        btnAshre.disabled = false;
+        btnBarakh.disabled = false;
+        btnAshre.className = 'neu-btn px-5 py-2.5 text-xs font-bold hover:text-teal-600 transition';
+        btnBarakh.className = 'neu-btn px-5 py-2.5 text-xs font-bold hover:text-blue-600 transition';
+      }
+
       const feedback = document.getElementById('exercise-feedback');
-      feedback.className = 'hidden';
-      feedback.innerHTML = '';
+      if (feedback) {
+        feedback.className = 'hidden';
+        feedback.innerHTML = '';
+      }
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
     }
 
     function checkDrillAnswer(selected) {
+      if (drillAnswered) return;
+      drillAnswered = true;
+
       const q = drillQuestions[currentDrillIndex];
+      const isCorrect = (selected === q.answer);
+
+      if (isCorrect) {
+        drillScore++;
+      }
+      const scoreEl = document.getElementById('drill-score');
+      if (scoreEl) scoreEl.innerText = `Score: ${drillScore} / ${drillQuestions.length}`;
+
+      const btnAshre = document.getElementById('btn-drill-ashre');
+      const btnBarakh = document.getElementById('btn-drill-barakh');
+      if (btnAshre && btnBarakh) {
+        btnAshre.disabled = true;
+        btnBarakh.disabled = true;
+
+        if (q.answer === 'ashre') {
+          btnAshre.className = 'neu-btn px-5 py-2.5 text-xs font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border-2 border-teal-500 shadow-sm';
+          if (!isCorrect) {
+            btnBarakh.className = 'neu-btn px-5 py-2.5 text-xs font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-2 border-rose-400 opacity-80';
+          } else {
+            btnBarakh.className = 'neu-btn px-5 py-2.5 text-xs font-bold opacity-40 cursor-not-allowed';
+          }
+        } else {
+          btnBarakh.className = 'neu-btn px-5 py-2.5 text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-2 border-blue-500 shadow-sm';
+          if (!isCorrect) {
+            btnAshre.className = 'neu-btn px-5 py-2.5 text-xs font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-2 border-rose-400 opacity-80';
+          } else {
+            btnAshre.className = 'neu-btn px-5 py-2.5 text-xs font-bold opacity-40 cursor-not-allowed';
+          }
+        }
+      }
+
       const feedback = document.getElementById('exercise-feedback');
+      if (!feedback) return;
       feedback.classList.remove('hidden');
 
-      if (selected === q.answer) {
-        drillScore++;
-        document.getElementById('drill-score').innerText = `Score: ${drillScore} / ${drillQuestions.length}`;
-        feedback.className = 'p-3.5 rounded-2xl text-xs space-y-1 bg-teal-50 dark:bg-teal-950/40 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800';
+      const isLast = (currentDrillIndex === drillQuestions.length - 1);
+      const nextBtnLabel = isLast ? 'See Final Results' : `Advance to Verse ${currentDrillIndex + 2} of ${drillQuestions.length}`;
+      const nextBtnIcon = isLast ? 'award' : 'arrow-right';
+      const nextBtnColor = isLast ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-blue-600 hover:bg-blue-700';
+
+      const correctHebrewTerm = q.answer === 'ashre' ? "אַשְׁרֵי ('Ashrê • Flourishing Life)" : "בָּרַךְ (Bārakh • Covenant Blessing / Praise)";
+
+      if (isCorrect) {
+        feedback.className = 'p-4 rounded-2xl text-xs space-y-3 bg-teal-50 dark:bg-teal-950/40 text-teal-900 dark:text-teal-200 border border-teal-200 dark:border-teal-800 shadow-sm';
         feedback.innerHTML = `
-          <div class="flex items-center gap-1.5 font-bold">
-            <i data-lucide="check-circle" class="w-4 h-4 text-teal-600"></i> Correct! Hebrew: <span class="font-hebrew text-sm">${q.hebrew}</span>
+          <div class="flex items-start justify-between gap-2">
+            <div class="flex items-center gap-2 font-bold text-sm text-teal-800 dark:text-teal-200">
+              <i data-lucide="check-circle" class="w-5 h-5 text-teal-600 shrink-0"></i>
+              <span>Correct Identification!</span>
+            </div>
+            <span class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[11px] font-hebrew font-bold text-teal-700 dark:text-teal-300 shadow-sm">
+              ${q.hebrew}
+            </span>
           </div>
-          <p>${q.explanation}</p>
+          <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${q.explanation}</p>
+          <div class="pt-2 flex justify-end">
+            <button onclick="advanceDrillQuestion()" class="neu-btn px-4 py-2 text-xs font-bold text-white ${nextBtnColor} rounded-xl inline-flex items-center gap-1.5 shadow-sm transition">
+              <span>${nextBtnLabel}</span>
+              <i data-lucide="${nextBtnIcon}" class="w-4 h-4"></i>
+            </button>
+          </div>
         `;
       } else {
-        feedback.className = 'p-3.5 rounded-2xl text-xs space-y-1 bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800';
+        feedback.className = 'p-4 rounded-2xl text-xs space-y-3 bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200 border border-rose-200 dark:border-rose-800 shadow-sm';
         feedback.innerHTML = `
-          <div class="flex items-center gap-1.5 font-bold">
-            <i data-lucide="x-circle" class="w-4 h-4 text-rose-600"></i> Incorrect. Hebrew: <span class="font-hebrew text-sm">${q.hebrew}</span>
+          <div class="flex items-start justify-between gap-2">
+            <div class="flex items-center gap-2 font-bold text-sm text-rose-800 dark:text-rose-200">
+              <i data-lucide="alert-circle" class="w-5 h-5 text-rose-600 shrink-0"></i>
+              <span>Not Quite &bull; The Hebrew text uses ${correctHebrewTerm}</span>
+            </div>
+            <span class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[11px] font-hebrew font-bold text-rose-700 dark:text-rose-300 shadow-sm">
+              ${q.hebrew}
+            </span>
           </div>
-          <p>${q.explanation}</p>
+          <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${q.explanation}</p>
+          <div class="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <span class="text-[11px] text-slate-500 italic">Review the explanation above, then click advance when you're ready.</span>
+            <button onclick="advanceDrillQuestion()" class="neu-btn px-4 py-2 text-xs font-bold text-white ${nextBtnColor} rounded-xl inline-flex items-center justify-center gap-1.5 shadow-sm transition self-end sm:self-auto">
+              <span>${nextBtnLabel}</span>
+              <i data-lucide="${nextBtnIcon}" class="w-4 h-4"></i>
+            </button>
+          </div>
         `;
       }
 
-      lucide.createIcons();
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
 
-      // Advance to next verse after 2.5 seconds if more remain
-      setTimeout(() => {
-        if (currentDrillIndex < drillQuestions.length - 1) {
-          currentDrillIndex++;
-          renderCurrentDrill();
-        } else {
-          feedback.innerHTML += `<div class="pt-2 font-bold text-blue-600">Exercise Complete! You scored ${drillScore} out of ${drillQuestions.length}.</div>`;
-        }
-      }, 2600);
+    function advanceDrillQuestion() {
+      if (currentDrillIndex < drillQuestions.length - 1) {
+        currentDrillIndex++;
+        renderCurrentDrill();
+      } else {
+        renderDrillResults();
+      }
+    }
+
+    function renderDrillResults() {
+      const percentage = Math.round((drillScore / drillQuestions.length) * 100);
+      let feedbackMsg = "";
+      let iconColor = "text-blue-600";
+      let iconName = "award";
+
+      if (drillScore >= 7) {
+        feedbackMsg = "Outstanding Exegetical Ear! You clearly recognize the distinction between relational covenant blessing (<em>Bārakh</em>) and the wisdom state of flourishing (<em>’Ashrê</em>).";
+        iconColor = "text-amber-500";
+        iconName = "trophy";
+      } else if (drillScore >= 5) {
+        feedbackMsg = "Good Work! Remember the primary theological diagnostic: Can God be the direct object? If people are praising God, it is always <em>Bārakh</em>. If it describes human flourishing and peace, it is <em>’Ashrê</em>.";
+        iconColor = "text-blue-600";
+        iconName = "check-circle";
+      } else {
+        feedbackMsg = "Helpful Practice! Review the theological diagnostic table above in Section 2, then try this drill once more to lock in the difference.";
+        iconColor = "text-teal-600";
+        iconName = "sparkles";
+      }
+
+      const exerciseBox = document.getElementById('exercise-box');
+      if (!exerciseBox) return;
+
+      exerciseBox.innerHTML = `
+        <div class="text-center py-6 px-4 space-y-4">
+          <div class="w-16 h-16 mx-auto rounded-3xl neu-inset-sm flex items-center justify-center ${iconColor} shadow-sm">
+            <i data-lucide="${iconName}" class="w-8 h-8"></i>
+          </div>
+          <div class="space-y-1">
+            <h4 class="font-display font-extrabold text-xl text-slate-900 dark:text-white">
+              Practice Drill Complete!
+            </h4>
+            <p class="text-sm font-bold text-blue-600 dark:text-blue-400">
+              Final Score: ${drillScore} of ${drillQuestions.length} Correct (${percentage}%)
+            </p>
+          </div>
+          <p class="max-w-md mx-auto text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            ${feedbackMsg}
+          </p>
+          <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
+            <button onclick="resetDrill()" class="neu-btn px-5 py-2.5 text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-2 shadow-sm">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+              <span>Try Practice Drill Again</span>
+            </button>
+            <a href="#seams-section" class="neu-btn px-5 py-2.5 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-blue-600 flex items-center gap-2">
+              <span>Continue to Section 3: Canonical Seams</span>
+              <i data-lucide="arrow-down" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+      `;
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function resetDrill() {
+      currentDrillIndex = 0;
+      drillScore = 0;
+      drillAnswered = false;
+
+      const exerciseBox = document.getElementById('exercise-box');
+      if (!exerciseBox) return;
+
+      exerciseBox.innerHTML = `
+        <div class="flex items-center justify-between text-xs font-display font-medium text-slate-400">
+          <span id="exercise-reference" class="font-bold text-blue-600 dark:text-blue-400">Verse 1 of 8: Psalm 1:1</span>
+          <span id="exercise-tag" class="neu-outset-sm px-2.5 py-0.5 rounded-full text-[11px] font-display font-bold text-slate-600 dark:text-slate-300 shadow-sm">Exegesis Challenge</span>
+        </div>
+
+        <blockquote id="exercise-quote" class="text-base sm:text-lg font-serif italic text-slate-800 dark:text-slate-100 border-l-4 border-blue-500 pl-4 py-1">
+          "Blessed is the man who walks not in the counsel of the wicked, nor stands in the way of sinners, nor sits in the seat of scoffers..."
+        </blockquote>
+
+        <div id="exercise-options" class="flex flex-wrap items-center gap-3 pt-2">
+          <button id="btn-drill-ashre" onclick="checkDrillAnswer('ashre')" class="neu-btn px-5 py-2.5 text-xs font-bold hover:text-teal-600 transition">
+            Option A: אַשְׁרֵי ('Ashrê &bull; Flourishing Life)
+          </button>
+          <button id="btn-drill-barakh" onclick="checkDrillAnswer('barakh')" class="neu-btn px-5 py-2.5 text-xs font-bold hover:text-blue-600 transition">
+            Option B: בָּרַךְ (Bārakh &bull; Covenant Blessing / Praise)
+          </button>
+        </div>
+
+        <div id="exercise-feedback" class="hidden p-4 rounded-2xl text-xs space-y-3"></div>
+      `;
+
+      renderCurrentDrill();
     }
 
     renderCurrentDrill();
