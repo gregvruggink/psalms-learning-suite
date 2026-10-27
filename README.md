@@ -37,7 +37,7 @@ The suite connects eight dedicated learning environments into a unified desktop 
 3. **Understanding Praise Psalms Studio**:
    - Comprehensive guide to descriptive praise (*Tehillim*) across the Hebrew Psalter.
    - Three core movements: 1. Invitation (Call to Praise), 2. Reason (*Kî* clause), and 3. Closing Praise.
-   - Split database with a 35-psalm labeled study library and hands-on movement practice.
+   - Split explorer with a 35-psalm labeled study library and an interactive Full-Text Movement Highlighter Lab.
    - Interactive "Find the Reason" lab and "Spot the Genre" exercise (Praise vs. Thanksgiving vs. Lament).
 4. **Lament Soul-Care Diagnostic Studio**:
    - Interactive anatomy of the 6-part lament structure (Address, Complaint, Confession of Trust, Petition, Assurance of Being Heard, Vow of Praise).

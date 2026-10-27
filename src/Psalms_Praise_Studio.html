@@ -425,7 +425,7 @@
             Praise Psalms Explorer
           </h3>
           <p class="text-xs text-slate-500 font-serif">
-            Choose how you want to engage: study pre-labeled examples, or unscramble the movements in randomized practice.
+            Choose how you want to engage: study 35 pre-labeled praise psalms, or interactively highlight movements in full psalm texts.
           </p>
         </div>
 
@@ -436,8 +436,8 @@
             <span>Study View (35 Labeled)</span>
           </button>
           <button onclick="setExplorerMode('practice')" id="explorer-mode-practice-btn" class="neu-tab-pill px-3.5 py-1.5 text-xs font-bold flex items-center gap-1.5">
-            <i data-lucide="shuffle" class="w-3.5 h-3.5"></i>
-            <span>Movement Puzzle Sorter</span>
+            <i data-lucide="highlighter" class="w-3.5 h-3.5"></i>
+            <span>Full-Text Movement Highlighter</span>
           </button>
         </div>
       </div>
@@ -513,55 +513,127 @@
       </div>
 
       <!-- ===================================================================== -->
-      <!-- EXPLORER SUB-VIEW B: SHUFFLED MOVEMENT PUZZLE SORTER                  -->
+            <!-- ===================================================================== -->
+      <!-- EXPLORER SUB-VIEW B: FULL-TEXT MOVEMENT HIGHLIGHTER LAB               -->
       <!-- ===================================================================== -->
       <div id="explorer-practice-container" class="space-y-5 hidden">
-        
-        <!-- Practice Header & Controls -->
-        <div class="neu-card p-5 space-y-4">
+
+        <!-- Header & Controls Card -->
+        <div class="neu-card p-5 space-y-4 border-l-4 border-l-amber-500">
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
-              <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
-                Unscramble Challenge
-              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
+                  Interactive Lab
+                </span>
+                <span id="highlighter-solved-badge" class="px-2 py-0.5 rounded-full neu-inset text-[10px] font-bold text-slate-600 dark:text-slate-300">
+                  Psalms Solved: 0 / 8
+                </span>
+              </div>
               <h4 class="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
-                Movement Puzzle Sorter
+                Full-Text Movement Highlighter
               </h4>
-              <p class="text-xs text-slate-500 font-serif">
-                The three passages below are presented in scrambled order! Read each passage and click the button that correctly identifies its movement.
+              <p class="text-xs text-slate-500 dark:text-slate-400 font-serif">
+                Read the continuous psalm below. Select a movement from the palette, then click each verse to highlight where each movement appears.
               </p>
             </div>
 
-            <div class="flex items-center gap-2 w-full sm:w-auto">
-              <!-- Select Psalm dropdown -->
-              <select id="practice-psalm-select" onchange="onSelectPracticePsalmDropdown(this.value)" class="neu-inset px-3 py-1.5 text-xs rounded-xl font-bold text-slate-700 dark:text-slate-200 outline-none">
-                <!-- Populated dynamically with all 35 psalms -->
+            <!-- Psalm Selector Dropdown & Action Controls -->
+            <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+              <select id="highlighter-psalm-select" onchange="onSelectHighlighterPsalmDropdown(parseInt(this.value))" class="neu-inset px-3 py-1.5 text-xs rounded-xl font-bold text-slate-700 dark:text-slate-200 outline-none">
+                <!-- Populated dynamically with all 8 full-text psalms -->
               </select>
 
-              <!-- Next Random Button -->
-              <button onclick="loadRandomPracticePsalm()" class="neu-btn px-3 py-1.5 rounded-xl text-xs font-bold text-amber-600 flex items-center gap-1.5 whitespace-nowrap">
-                <i data-lucide="shuffle" class="w-3.5 h-3.5"></i>
-                <span>Random Psalm</span>
+              <button onclick="nextHighlighterPsalm()" class="neu-btn px-3 py-1.5 rounded-xl text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5 whitespace-nowrap">
+                <i data-lucide="skip-forward" class="w-3.5 h-3.5"></i>
+                <span>Next Psalm</span>
+              </button>
+
+              <button onclick="toggleHebrewText()" id="toggle-hebrew-btn" class="neu-btn px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 flex items-center gap-1.5 whitespace-nowrap" title="Toggle Hebrew text visibility">
+                <i data-lucide="languages" class="w-3.5 h-3.5"></i>
+                <span id="hebrew-toggle-label">Hebrew: ON</span>
               </button>
             </div>
           </div>
 
-          <div class="flex items-center justify-between text-xs pt-1 border-t border-slate-200/50 dark:border-slate-800">
-            <div class="flex items-center gap-2">
-              <span class="font-bold text-slate-600 dark:text-slate-400">Current Challenge:</span>
-              <span id="practice-current-title" class="font-bold text-blue-600 dark:text-blue-400"></span>
+          <!-- Movement Highlighter Palette Bar -->
+          <div class="pt-3 border-t border-slate-200/60 dark:border-slate-800/80 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-bold text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+                <i data-lucide="palette" class="w-3.5 h-3.5 text-amber-600"></i>
+                <span>Highlighter Palette:</span>
+                <span class="text-slate-400 font-normal hidden sm:inline">(Select a movement, then click any verse to apply)</span>
+              </span>
+              <span id="active-tool-indicator" class="text-[11px] font-bold text-amber-700 dark:text-amber-400">
+                Active: Movement 1: Invitation
+              </span>
             </div>
-            <span id="practice-stats-badge" class="px-2.5 py-0.5 rounded-full neu-inset font-bold text-slate-600 dark:text-slate-300 text-[11px]">
-              Psalms Solved: 0
-            </span>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <!-- Tool 1: Movement 1 -->
+              <button onclick="selectHighlighterTool(1)" id="palette-btn-1" class="palette-tool-btn p-2.5 rounded-xl text-left transition flex items-center gap-2.5 border-2 border-amber-500 bg-amber-500 text-white shadow-sm">
+                <div class="w-7 h-7 rounded-lg bg-white/20 flex items-center justify-center font-bold text-sm shrink-0">1</div>
+                <div class="min-w-0">
+                  <div class="text-xs font-bold truncate">Movement 1</div>
+                  <div class="text-[10px] opacity-90 truncate">Invitation (Call)</div>
+                </div>
+              </button>
+
+              <!-- Tool 2: Movement 2 -->
+              <button onclick="selectHighlighterTool(2)" id="palette-btn-2" class="palette-tool-btn p-2.5 rounded-xl text-left transition flex items-center gap-2.5 border-2 border-transparent neu-btn text-blue-700 dark:text-blue-300 bg-blue-50/50 dark:bg-blue-950/30">
+                <div class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-sm shrink-0">2</div>
+                <div class="min-w-0">
+                  <div class="text-xs font-bold truncate">Movement 2</div>
+                  <div class="text-[10px] opacity-75 truncate">Reason (Why / Kî)</div>
+                </div>
+              </button>
+
+              <!-- Tool 3: Movement 3 -->
+              <button onclick="selectHighlighterTool(3)" id="palette-btn-3" class="palette-tool-btn p-2.5 rounded-xl text-left transition flex items-center gap-2.5 border-2 border-transparent neu-btn text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-950/30">
+                <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm shrink-0">3</div>
+                <div class="min-w-0">
+                  <div class="text-xs font-bold truncate">Movement 3</div>
+                  <div class="text-[10px] opacity-75 truncate">Closing Praise</div>
+                </div>
+              </button>
+
+              <!-- Tool 0: Eraser -->
+              <button onclick="selectHighlighterTool(0)" id="palette-btn-0" class="palette-tool-btn p-2.5 rounded-xl text-left transition flex items-center gap-2.5 border-2 border-transparent neu-btn text-slate-600 dark:text-slate-400 bg-slate-100/70 dark:bg-slate-800/70">
+                <div class="w-7 h-7 rounded-lg bg-slate-300/40 text-slate-600 dark:text-slate-300 flex items-center justify-center shrink-0">
+                  <i data-lucide="eraser" class="w-4 h-4"></i>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-xs font-bold truncate">Clear Tool</div>
+                  <div class="text-[10px] opacity-75 truncate">Erase Highlight</div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Actions: Check, Reset, Solution -->
+          <div class="pt-2 flex flex-wrap items-center justify-between gap-2 border-t border-slate-200/50 dark:border-slate-800/60">
+            <div class="flex items-center gap-2">
+              <button onclick="checkHighlighterWork()" id="btn-check-highlighter" class="neu-btn px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md flex items-center gap-1.5">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span>Check My Work</span>
+              </button>
+
+              <button onclick="resetHighlighter()" class="neu-btn px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 flex items-center gap-1.5">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                <span>Reset Highlights</span>
+              </button>
+            </div>
+
+            <button onclick="revealHighlighterSolution()" class="neu-btn px-3 py-2 rounded-xl text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+              <span id="solution-toggle-label">Show Solution</span>
+            </button>
           </div>
         </div>
 
-        <!-- Shuffled Cards Box -->
-        <div class="max-w-4xl mx-auto">
-          <div id="shuffled-puzzle-box" class="space-y-5">
-            <!-- Populated by JS -->
-          </div>
+        <!-- Interactive Psalm Canvas -->
+        <div id="highlighter-canvas" class="space-y-4 max-w-4xl mx-auto">
+          <!-- Populated dynamically by JS -->
         </div>
 
       </div>
@@ -790,8 +862,8 @@
         if (practiceContainer) practiceContainer.classList.remove('hidden');
         if (studyBtn) studyBtn.className = 'neu-tab-pill px-3.5 py-1.5 text-xs font-bold flex items-center gap-1.5';
         if (practiceBtn) practiceBtn.className = 'neu-tab-pill active px-3.5 py-1.5 text-xs font-bold flex items-center gap-1.5';
-        initPracticeDropdown();
-        loadPracticePsalm(currentPracticePsalmId);
+        initHighlighterDropdown();
+        renderHighlighterLab();
       }
       lucide.createIcons();
     }
@@ -942,164 +1014,288 @@
       lucide.createIcons();
     }
 
+        // ---------------------------------------------------------------------------
+    // TAB 2 (B): FULL-TEXT MOVEMENT HIGHLIGHTER LAB LOGIC
     // ---------------------------------------------------------------------------
-    // TAB 2 (B): SHUFFLED MOVEMENT PUZZLE SORTER LOGIC
-    // ---------------------------------------------------------------------------
-    let currentPracticePsalmId = 'ps8';
-    let currentShuffledPassages = [];
-    let practiceUserAnswers = {}; // passageIndex -> chosenMovement (1, 2, or 3)
-    let psalmsSolvedCount = 0;
+    const FULL_TEXT_PRAISE_PSALMS = [{"id": "full_ps117", "num": 117, "title": "Psalm 117: The Shortest Universal Praise", "intro": "The shortest psalm in the Bible, containing only two verses. Can you identify where Invitation ends, where Reason is given, and where Closing Praise appears?", "lines": [{"id": "l1", "verse": "Verse 1", "hebrew": "הַלְלוּ אֶת־יְהוָה כָּל־גּוֹיִם שַׁבְּחוּהוּ כָּל־הָאֻמִּים", "text": "Praise the LORD, all you nations! Extol him, all you peoples!", "correctMovement": 1, "movementName": "Movement 1: Invitation", "clue": "This is Movement 1: Invitation. It directly commands all nations and peoples to worship God."}, {"id": "l2", "verse": "Verse 2a", "hebrew": "כִּי גָבַר עָלֵינוּ חַסְדּוֹ וֶאֱמֶת־יְהוָה לְעוֹלָם", "text": "FOR (Kî) great is his steadfast love toward us, and the faithfulness of the LORD endures forever.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason. Notice the opening word FOR (Kî). It provides the concrete reason why all peoples should worship: God's immense steadfast love (hesed) and enduring truth (emet)."}, {"id": "l3", "verse": "Verse 2b", "hebrew": "הַלְלוּ־יָהּ", "text": "Praise the LORD! (Hallelujah!)", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "clue": "This is Movement 3: Closing Praise. The psalm ends with the celebratory exclamation: Hallelujah!"}]}, {"id": "full_ps100", "num": 100, "title": "Psalm 100: A Song of Joy and Thanksgiving", "intro": "A classic entrance hymn. Read through all five verses and identify which verses call the community to worship, which verses provide the reasons for praise, and which conclude the psalm.", "lines": [{"id": "l1", "verse": "Verses 1 to 2", "hebrew": "הָרִיעוּ לַיהוָה כָּל־הָאָרֶץ עִבְדוּ אֶת־יְהוָה בְּשִׂמְחָה בֹּאוּ לְפָנָיו בִּרְנָנָה", "text": "Shout for joy to the LORD, all the earth! Worship the LORD with gladness; come before him with joyful songs.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "clue": "This is Movement 1: Invitation. Three opening imperative verbs: shout, worship, and come before him."}, {"id": "l2", "verse": "Verse 3", "hebrew": "דְּעוּ כִּי־יְהוָה הוּא אֱלֹהִים הוּא־עָשָׂנוּ וְלוֹ אֲנַחְנוּ עַמּוֹ וְצֹאן מַרְעִיתוֹ", "text": "Know that the LORD is God. It is he who made us, and we are his; we are his people, the sheep of his pasture.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason. It explains why we worship: God made us, and we are his flock under his personal shepherd care."}, {"id": "l3", "verse": "Verse 4", "hebrew": "בֹּאוּ שְׁעָרָיו בְּתוֹדָה חֲצֵרֹתָיו בִּתְהִלָּה הוֹדוּ־לוֹ בָּרְכוּ שְׁמוֹ", "text": "Enter his gates with thanksgiving and his courts with praise; give thanks to him and praise his name.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "clue": "This is Movement 1: Invitation (a renewed call to praise). It summons worshippers to walk through the temple gates with gratitude."}, {"id": "l4", "verse": "Verse 5", "hebrew": "כִּי־טוֹב יְהוָה לְעוֹלָם חַסְדּוֹ וְעַד־דֹּר וָדֹר אֱמוּנָתוֹ", "text": "FOR (Kî) the LORD is good and his love endures forever; his faithfulness continues through all generations.", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "clue": "This is Movement 3: Closing Praise. It gives the ultimate reason (Kî) while functioning as the grand concluding doxology celebrating God's everlasting love."}]}, {"id": "full_ps8", "num": 8, "title": "Psalm 8: The Majesty of the Creator", "intro": "A creation hymn where the opening line and closing line match exactly. Read the full text to highlight where the praise begins, where the reasons unfold, and where the circle closes.", "lines": [{"id": "l1", "verse": "Verse 1a", "hebrew": "יְהוָה אֲדֹנֵינוּ מָה־אַדִּיר שִׁמְךָ בְּכָל־הָאָרֶץ אֲשֶׁר תְּנָה הוֹדְךָ עַל־הַשָּׁמָיִם", "text": "O LORD, our Lord, how majestic is your name in all the earth! You have set your glory above the heavens.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "clue": "This is Movement 1: Invitation. It directly proclaims God's beauty and opens the hymn of adoration."}, {"id": "l2", "verse": "Verse 2", "hebrew": "מִפִּי עוֹלְלִים וְיֹנְקִים יִסַּדְתָּ עֹז לְמַעַן צוֹרְרֶיךָ", "text": "Through the praise of children and infants you have established a stronghold against your enemies, to silence the foe and the avenger.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason. It explains God's surprising power: using the vulnerable voices of babies to overcome enemies."}, {"id": "l3", "verse": "Verses 3 to 5", "hebrew": "כִּי־אֶרְאֶה שָׁמֶיךָ מַעֲשֵׂה אֶצְבְּעֹתֶיךָ... מָה־אֱנוֹשׁ כִּי־תִזְכְּרֶנּוּ", "text": "When I look at your heavens, the work of your fingers, the moon and the stars, which you have set in place: what is mankind that you are mindful of them, human beings that you care for them? You made them a little lower than the angels and crowned them with glory and honor.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason. Beginning with Kî, it marvels that the Creator of the cosmos elevated fragile humans to honor."}, {"id": "l4", "verse": "Verses 6 to 8", "hebrew": "תַּמְשִׁילֵהוּ בְּמַעֲשֵׂי יָדֶיךָ כֹּל שַׁתָּה תַחַת־רַגְלָיו", "text": "You made them rulers over the works of your hands; you put everything under their feet: all flocks and herds, and the animals of the wild, the birds in the sky, and the fish in the sea.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason continued. It describes the scope of human stewardship over land, air, and sea."}, {"id": "l5", "verse": "Verse 9", "hebrew": "יְהוָה אֲדֹנֵינוּ מָה־אַדִּיר שִׁמְךָ בְּכָל־הָאָרֶץ", "text": "O LORD, our Lord, how majestic is your name in all the earth!", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "clue": "This is Movement 3: Closing Praise. The exact repetition of verse 1 completes the frame of adoration."}]}, {"id": "full_ps146", "num": 146, "title": "Psalm 146: Praise the Lord, My Soul", "intro": "The first of the final five Hallelujah psalms. Read through its contrast between human rulers and God's justice, and identify each movement.", "lines": [{"id": "l1", "verse": "Verses 1 to 2", "hebrew": "הַלְלוּ־יָהּ הַלְלִי נַפְשִׁי אֶת־יְהוָה אֲהַלְלָה יְהוָה בְּחַיָּי אֲזַמְּרָה לֵאלֹהַי בְּעוֹדִי", "text": "Praise the LORD! Praise the LORD, my soul! I will praise the LORD all my life; I will sing praise to my God as long as I live.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "clue": "This is Movement 1: Invitation. A double call to praise and a personal lifelong vow to sing."}, {"id": "l2", "verse": "Verses 3 to 4", "hebrew": "אַל־תִּבְטְחוּ בִנְדִיבִים בְּבֶן־אָדָם שֶׁאֵין לוֹ תְשׁוּעָה", "text": "Do not put your trust in princes, in human beings, who cannot save. When their breath departs, they return to the ground; on that very day their plans come to nothing.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason (by contrast). It warns against false trust in mortal leaders whose promises die with them."}, {"id": "l3", "verse": "Verses 5 to 6", "hebrew": "אַשְׁרֵי שֶׁאֵל יַעֲקֹב בְּעֶזְרוֹ שִׂבְרוֹ עַל־יְהוָה אֱלֹהָיו עֹשֶׂה שָׁמַיִם וָאָרֶץ", "text": "Blessed are those whose help is the God of Jacob, whose hope is in the LORD their God. He is the Maker of heaven and earth, the sea, and everything in them: he remains faithful forever.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason. It gives the true foundation of trust: God is the faithful Creator of the universe."}, {"id": "l4", "verse": "Verses 7 to 9", "hebrew": "עֹשֶׂה מִשְׁפָּט לַעֲשׁוּקִים נֹתֵן לֶחֶם לָרְעֵבִים יְהוָה מַתִּיר אֲסוּרִים", "text": "He upholds the cause of the oppressed and gives food to the hungry. The LORD sets prisoners free, the LORD gives sight to the blind, the LORD lifts up those who are bowed down, the LORD loves the righteous.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason continued. A relentless list of God's compassionate actions for vulnerable people."}, {"id": "l5", "verse": "Verse 10", "hebrew": "יִמְלֹךְ יְהוָה לְעוֹלָם אֱלֹהַיִךְ צִיּוֹן לְדֹר וָדֹר הַלְלוּ־יָהּ", "text": "The LORD reigns forever, your God, O Zion, for all generations. Praise the LORD! (Hallelujah!)", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "clue": "This is Movement 3: Closing Praise. The enthronement declaration that the Lord reigns forever, concluding with Hallelujah."}]}, {"id": "full_ps150", "num": 150, "title": "Psalm 150: The Final Grand Doxology", "intro": "The grand finale of the entire Psalter. Every verse is packed with praise. Read the text to highlight where Invitation is given, why God is praised, and how the entire book closes.", "lines": [{"id": "l1", "verse": "Verse 1", "hebrew": "הַלְלוּ־יָהּ הַלְלוּ־אֵל בְּקָדְשׁוֹ הַלְלוּהוּ בִּרְקִיעַ עֻזּוֹ", "text": "Praise the LORD! (Hallelujah!) Praise God in his sanctuary; praise him in his mighty heavens.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "clue": "This is Movement 1: Invitation. It summons praise in the earthly temple and in the cosmic skies."}, {"id": "l2", "verse": "Verse 2", "hebrew": "הַלְלוּהוּ בִגְבוּרֹתָיו הַלְלוּהוּ כְּרֹב גֻּדְלוֹ", "text": "Praise him for his acts of power; praise him for his surpassing greatness.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason. It specifies the two great reasons for praise: God's mighty acts (deeds in history) and his surpassing greatness (divine character)."}, {"id": "l3", "verse": "Verses 3 to 5", "hebrew": "הַלְלוּהוּ בְּתֵקַע שׁוֹפָר הַלְלוּהוּ בְּנֵבֶל וְכִנּוֹר... הַלְלוּהוּ בְּצִלְצְלֵי־שָׁמַע", "text": "Praise him with the sounding of the trumpet, praise him with the harp and lyre, praise him with timbrel and dancing, praise him with the strings and pipe, praise him with the clash of cymbals, praise him with resounding cymbals.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "clue": "This is Movement 1: Invitation (instrumental call). A series of direct commands mobilizing every orchestra instrument to sound praise."}, {"id": "l4", "verse": "Verse 6", "hebrew": "כֹּל הַנְּשָׁמָה תְּהַלֵּל יָהּ הַלְלוּ־יָהּ", "text": "Let everything that has breath praise the LORD! Praise the LORD! (Hallelujah!)", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "clue": "This is Movement 3: Closing Praise. The ultimate climax of the Psalter: every living breath united in Hallelujah!"}]}, {"id": "full_ps47", "num": 47, "title": "Psalm 47: Clap Your Hands, All Nations", "intro": "A lively royal hymn. Notice how the call to praise repeats before the psalm arrives at its enthronement climax.", "lines": [{"id": "l1", "verse": "Verse 1", "hebrew": "כָּל־הָעַמִּים תִּקְעוּ־כָף הָרִיעוּ לֵאלֹהִים בְּקוֹל רִנָּה", "text": "Clap your hands, all you nations; shout to God with cries of joy!", "correctMovement": 1, "movementName": "Movement 1: Invitation", "clue": "This is Movement 1: Invitation. Summoning all peoples to clap their hands and shout."}, {"id": "l2", "verse": "Verses 2 to 5", "hebrew": "כִּי־יְהוָה עֶלְיוֹן נוֹרָא מֶלֶךְ גָּדוֹל עַל־כָּל־הָאָרֶץ... עָלָה אֱלֹהִים בִּתְרוּעָה", "text": "FOR (Kî) the LORD Most High is awesome, the great King over all the earth. He subdued nations under us, peoples under our feet. He chose our inheritance for us... God has ascended amid shouts of joy, the LORD amid the sounding of trumpets.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason. Introduced by Kî ('for'): God is King over all the earth and has established his people."}, {"id": "l3", "verse": "Verses 6 to 7", "hebrew": "זַמְּרוּ אֱלֹהִים זַמֵּרוּ זַמְּרוּ לְמַלְכֵּנוּ זַמֵּרוּ", "text": "Sing praises to God, sing praises; sing praises to our King, sing praises. For God is the King of all the earth; sing to him a psalm of praise.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "clue": "This is Movement 1: Invitation (a renewed call). Repeating the imperative 'sing praises' five times."}, {"id": "l4", "verse": "Verses 8 to 9", "hebrew": "מָלַךְ אֱלֹהִים עַל־גּוֹיִם אֱלֹהִים יָשַׁב עַל־כִּסֵּא קָדְשׁוֹ", "text": "God reigns over the nations; God is seated on his holy throne. The nobles of the nations assemble as the people of the God of Abraham, for the kings of the earth belong to God; he is greatly exalted.", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "clue": "This is Movement 3: Closing Praise. The final confession of God reigning on his holy throne as all nations join his family."}]}, {"id": "full_ps113", "num": 113, "title": "Psalm 113: From the Ash Heap to the Throne", "intro": "A hymn celebrating God's majesty and his mercy. Notice how the psalm moves from calling servants to praise, to God's transcendent greatness, to his compassionate lifting of the poor.", "lines": [{"id": "l1", "verse": "Verses 1 to 3", "hebrew": "הַלְלוּ יָהּ הַלְלוּ עַבְדֵי יְהוָה הַלְלוּ אֶת־שֵׁם יְהוָה יְהִי שֵׁם יְהוָה מְבֹרָךְ מֵעַתָּה וְעַד־עוֹלָם מִמִּזְרַח־שֶׁמֶשׁ עַד־מְבוֹאוֹ מְהֻלָּל שֵׁם יְהוָה", "text": "Praise the LORD! Praise, O servants of the LORD, praise the name of the LORD. Blessed be the name of the LORD from this time forth and forevermore! From the rising of the sun to its going down the LORD's name is to be praised.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "clue": "This is Movement 1: Invitation. A triple imperative calling the servants of the LORD to praise his name everywhere from sunrise to sunset."}, {"id": "l2", "verse": "Verses 4 to 6", "hebrew": "רָם עַל־כָּל־גּוֹיִם יְהוָה עַל הַשָּׁמַיִם כְּבוֹדוֹ מִי כַּיהוָה אֱלֹהֵינוּ הַמַּגְבִּיהִי לָשָׁבֶת הַמַּשְׁפִּילִי לִרְאוֹת בַּשָּׁמַיִם וּבָאָרֶץ", "text": "The LORD is high above all nations, his glory above the heavens. Who is like the LORD our God, who sits enthroned on high, who stoops down to look on the heavens and the earth?", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason. It marvels at God's unmatched majesty: he sits enthroned above the heavens yet stoops down to care for creation."}, {"id": "l3", "verse": "Verses 7 to 8", "hebrew": "מְקִימִי מֵעָפָר דָּל מֵאַשְׁפֹּת יָרִים אֶבְיוֹן לְהוֹשִׁיבִי עִם־נְדִיבִים עִם נְדִיבֵי עַמּוֹ", "text": "He raises the poor from the dust and lifts the needy from the ash heap, that he may seat them with princes, with the princes of his people.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason continued. It highlights God's justice and grace: raising the most vulnerable people from the dust to places of honor."}, {"id": "l4", "verse": "Verse 9", "hebrew": "מוֹשִׁיבִי עֲקֶרֶת הַבַּיִת אֵם־הַבָּנִים שְׂמֵחָה הַלְלוּ־יָהּ", "text": "He settles the childless woman in her home as a happy mother of children. Praise the LORD! (Hallelujah!)", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "clue": "This is Movement 3: Closing Praise. The psalm reaches its joyful conclusion with home-restoration and the final ringing Hallelujah!"}]}, {"id": "full_ps33", "num": 33, "title": "Psalm 33: The Creator and Sovereign King", "intro": "One of the few praise psalms without a superscription. Read the text to highlight where the community is summoned with instruments, where God's creative word and steadfast love provide the reasons, and where the people respond in trust.", "lines": [{"id": "l1", "verse": "Verses 1 to 3", "hebrew": "רַנְּנוּ צַדִּיקִים בַּיהוָה לַיְשָׁרִים נָאוָה תְהִלָּה הוֹדוּ לַיהוָה בְּכִנּוֹר בְּנֵבֶל עָשׂוֹר זַמְּרוּ־לוֹ שִׁירוּ־לוֹ שִׁיר חָדָשׁ הֵיטִיבוּ נַגֵּן בִּתְרוּעָה", "text": "Sing joyfully to the LORD, you righteous; it is fitting for the upright to praise him. Praise the LORD with the harp; make music to him on the ten-stringed lyre. Sing to him a new song; play skillfully, and shout for joy.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "clue": "This is Movement 1: Invitation. Six musical imperatives summoning the righteous to sing, play instruments, and shout for joy."}, {"id": "l2", "verse": "Verses 4 to 9", "hebrew": "כִּי־יָשָׁר דְּבַר־יְהוָה וְכָל־מַעֲשֵׂהוּ בֶּאֱמוּנָה... כִּי הוּא אָמַר וַיֶּהִי הוּא־צִוָּה וַיַּעֲמֹד", "text": "FOR (Kî) the word of the LORD is right and true; he is faithful in all he does. The LORD loves righteousness and justice; the earth is full of his unfailing love. By the word of the LORD the heavens were made... For he spoke, and it came to be; he commanded, and it stood firm.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason. Introduced by the foundational Kî ('for'): God's word is true, his steadfast love fills the earth, and his voice created the cosmos."}, {"id": "l3", "verse": "Verses 10 to 19", "hebrew": "יְהוָה הֵפִיר עֲצַת גּוֹיִם... הִנֵּה עֵין יְהוָה אֶל־יְרֵאָיו לַמְיַחֲלִים לְחַסְדּוֹ", "text": "The LORD foils the plans of the nations... But the plans of the LORD stand firm forever. Blessed is the nation whose God is the LORD... The eyes of the LORD are on those who fear him, on those whose hope is in his unfailing love, to deliver them from death.", "correctMovement": 2, "movementName": "Movement 2: Reason", "clue": "This is Movement 2: Reason continued. It proclaims God's providential care over human history: worldly kings cannot save by armies, but God delivers those who trust him."}, {"id": "l4", "verse": "Verses 20 to 22", "hebrew": "נַפְשֵׁנוּ חִכְּתָה לַיהוָה עֶזְרֵנוּ וּמָגִנֵּנוּ הוּא... יְהִי־חַסְדְּךָ יְהוָה עָלֵינוּ כַּאֲשֶׁר יִחַלְנוּ לָךְ", "text": "We wait in hope for the LORD; he is our help and our shield. In him our hearts rejoice, for we trust in his holy name. May your unfailing love be with us, LORD, even as we put our hope in you.", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "clue": "This is Movement 3: Closing Praise. The community concludes with a communal confession of trust, rejoicing in God's name and offering a closing blessing of hope."}]}];
 
-    function initPracticeDropdown() {
-      const select = document.getElementById('practice-psalm-select');
+    let currentFullPsalmIndex = 0;
+    let activeHighlighterTool = 1; // 1 = Invitation, 2 = Reason, 3 = Closing, 0 = Eraser
+    let userHighlights = {}; // lineId -> movementNumber (1, 2, or 3)
+    let hasCheckedCurrent = false;
+    let isSolutionRevealed = false;
+    let showHebrew = true;
+    let solvedFullPsalms = new Set();
+
+    function initHighlighterDropdown() {
+      const select = document.getElementById('highlighter-psalm-select');
       if (!select || select.children.length > 0) return;
 
-      PRAISE_PSALMS.forEach(p => {
+      FULL_TEXT_PRAISE_PSALMS.forEach((p, idx) => {
         const opt = document.createElement('option');
-        opt.value = p.id;
-        opt.textContent = `Psalm ${p.num} (${p.categoryLabel})`;
+        opt.value = idx;
+        opt.textContent = `Psalm ${p.num} (${p.lines.length} sections)`;
         select.appendChild(opt);
       });
-      select.value = currentPracticePsalmId;
+      select.value = currentFullPsalmIndex;
     }
 
-    function onSelectPracticePsalmDropdown(val) {
-      loadPracticePsalm(val);
+    function onSelectHighlighterPsalmDropdown(val) {
+      loadFullPsalm(val);
     }
 
-    function loadRandomPracticePsalm() {
+    function nextHighlighterPsalm() {
       playSound('click');
-      const otherPsalms = PRAISE_PSALMS.filter(p => p.id !== currentPracticePsalmId);
-      const randomPsalm = otherPsalms[Math.floor(Math.random() * otherPsalms.length)] || PRAISE_PSALMS[0];
-      const select = document.getElementById('practice-psalm-select');
-      if (select) select.value = randomPsalm.id;
-      loadPracticePsalm(randomPsalm.id);
+      const nextIdx = (currentFullPsalmIndex + 1) % FULL_TEXT_PRAISE_PSALMS.length;
+      loadFullPsalm(nextIdx);
     }
 
-    function loadPracticePsalm(psalmId) {
-      currentPracticePsalmId = psalmId;
-      practiceUserAnswers = {};
+    function loadFullPsalm(idx) {
+      currentFullPsalmIndex = idx;
+      userHighlights = {};
+      hasCheckedCurrent = false;
+      isSolutionRevealed = false;
 
-      const p = PRAISE_PSALMS.find(x => x.id === psalmId) || PRAISE_PSALMS[0];
+      const select = document.getElementById('highlighter-psalm-select');
+      if (select) select.value = idx;
 
-      // Build the 3 passages
-      const raw = [
-        {
-          movement: 1,
-          movementName: 'Movement 1: Invitation',
-          hebrew: p.invitationHebrew,
-          text: p.invitation,
-          reasonText: 'This passage is the Invitation (Call to Praise). It summons worshippers, addresses the soul, or commands creation to worship God.'
-        },
-        {
-          movement: 2,
-          movementName: 'Movement 2: Reason',
-          hebrew: p.reasonHebrew,
-          text: p.reason,
-          reasonText: 'This passage is the Reason (Ground Clause). It gives the grounded reasons why God is worthy of praise, focusing on his creation or his care.'
-        },
-        {
-          movement: 3,
-          movementName: 'Movement 3: Closing Praise',
-          hebrew: '',
-          text: p.closing,
-          reasonText: 'This passage is the Closing Praise (Doxology). It concludes the psalm by repeating the praise or asking for blessing.'
+      const solBtn = document.getElementById('solution-toggle-label');
+      if (solBtn) solBtn.textContent = 'Show Solution';
+
+      renderHighlighterLab();
+    }
+
+    function toggleHebrewText() {
+      playSound('click');
+      showHebrew = !showHebrew;
+      const lbl = document.getElementById('hebrew-toggle-label');
+      if (lbl) lbl.textContent = showHebrew ? 'Hebrew: ON' : 'Hebrew: OFF';
+      renderHighlighterLab();
+    }
+
+    function selectHighlighterTool(toolNum) {
+      playSound('click');
+      activeHighlighterTool = toolNum;
+      updatePaletteUI();
+    }
+
+    function updatePaletteUI() {
+      const toolNames = {
+        1: 'Active: Movement 1: Invitation',
+        2: 'Active: Movement 2: Reason',
+        3: 'Active: Movement 3: Closing Praise',
+        0: 'Active: Clear Tool (Eraser)'
+      };
+      const indicator = document.getElementById('active-tool-indicator');
+      if (indicator) indicator.textContent = toolNames[activeHighlighterTool] || '';
+
+      const configs = [
+        { id: 'palette-btn-1', activeClass: 'border-amber-500 bg-amber-500 text-white shadow-sm', inactiveClass: 'border-transparent neu-btn text-amber-700 dark:text-amber-300 bg-amber-50/50 dark:bg-amber-950/30' },
+        { id: 'palette-btn-2', activeClass: 'border-blue-600 bg-blue-600 text-white shadow-sm', inactiveClass: 'border-transparent neu-btn text-blue-700 dark:text-blue-300 bg-blue-50/50 dark:bg-blue-950/30' },
+        { id: 'palette-btn-3', activeClass: 'border-emerald-600 bg-emerald-600 text-white shadow-sm', inactiveClass: 'border-transparent neu-btn text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-950/30' },
+        { id: 'palette-btn-0', activeClass: 'border-slate-600 bg-slate-600 text-white shadow-sm', inactiveClass: 'border-transparent neu-btn text-slate-600 dark:text-slate-400 bg-slate-100/70 dark:bg-slate-800/70' }
+      ];
+
+      configs.forEach((cfg, idx) => {
+        const btn = document.getElementById(cfg.id);
+        if (!btn) return;
+        const toolVal = (idx === 3) ? 0 : (idx + 1);
+        if (toolVal === activeHighlighterTool) {
+          btn.className = `palette-tool-btn p-2.5 rounded-xl text-left transition flex items-center gap-2.5 border-2 ${cfg.activeClass}`;
+        } else {
+          btn.className = `palette-tool-btn p-2.5 rounded-xl text-left transition flex items-center gap-2.5 border-2 ${cfg.inactiveClass}`;
         }
-      ];
-
-      // Shuffle the passages so they are NEVER in predictable 1, 2, 3 order!
-      // Valid non-identity permutations: [2, 1, 3], [3, 1, 2], [2, 3, 1], [3, 2, 1], [1, 3, 2]
-      const permutations = [
-        [1, 0, 2], // 2, 1, 3
-        [2, 0, 1], // 3, 1, 2
-        [1, 2, 0], // 2, 3, 1
-        [2, 1, 0], // 3, 2, 1
-        [0, 2, 1]  // 1, 3, 2
-      ];
-      const choice = permutations[Math.floor(Math.random() * permutations.length)];
-      currentShuffledPassages = choice.map(idx => raw[idx]);
-
-      const titleEl = document.getElementById('practice-current-title');
-      if (titleEl) titleEl.textContent = `${p.title} (${p.categoryLabel})`;
-
-      renderShuffledPuzzle();
+      });
     }
 
-    function renderShuffledPuzzle() {
-      const container = document.getElementById('shuffled-puzzle-box');
+    function highlightVerse(lineId, toolNumOverride) {
+      playSound('click');
+      let toolToApply = activeHighlighterTool;
+      if (toolNumOverride !== undefined) {
+        toolToApply = toolNumOverride;
+      }
+
+      if (toolToApply === 0) {
+        delete userHighlights[lineId];
+      } else {
+        userHighlights[lineId] = toolToApply;
+      }
+
+      if (hasCheckedCurrent) {
+        hasCheckedCurrent = false;
+      }
+
+      renderHighlighterLab();
+    }
+
+    function checkHighlighterWork() {
+      const currentPsalm = FULL_TEXT_PRAISE_PSALMS[currentFullPsalmIndex];
+      hasCheckedCurrent = true;
+
+      let correctCount = 0;
+      currentPsalm.lines.forEach(l => {
+        if (userHighlights[l.id] === l.correctMovement) {
+          correctCount++;
+        }
+      });
+
+      if (correctCount === currentPsalm.lines.length) {
+        playSound('chime');
+        solvedFullPsalms.add(currentPsalm.id);
+        const badge = document.getElementById('highlighter-solved-badge');
+        if (badge) badge.textContent = `Psalms Solved: ${solvedFullPsalms.size} / ${FULL_TEXT_PRAISE_PSALMS.length}`;
+      } else {
+        playSound('error');
+      }
+
+      renderHighlighterLab();
+    }
+
+    function resetHighlighter() {
+      playSound('click');
+      userHighlights = {};
+      hasCheckedCurrent = false;
+      isSolutionRevealed = false;
+      const solBtn = document.getElementById('solution-toggle-label');
+      if (solBtn) solBtn.textContent = 'Show Solution';
+      renderHighlighterLab();
+    }
+
+    function revealHighlighterSolution() {
+      playSound('click');
+      const currentPsalm = FULL_TEXT_PRAISE_PSALMS[currentFullPsalmIndex];
+      isSolutionRevealed = !isSolutionRevealed;
+
+      const solBtn = document.getElementById('solution-toggle-label');
+
+      if (isSolutionRevealed) {
+        currentPsalm.lines.forEach(l => {
+          userHighlights[l.id] = l.correctMovement;
+        });
+        hasCheckedCurrent = true;
+        if (solBtn) solBtn.textContent = 'Hide Solution';
+      } else {
+        userHighlights = {};
+        hasCheckedCurrent = false;
+        if (solBtn) solBtn.textContent = 'Show Solution';
+      }
+
+      renderHighlighterLab();
+    }
+
+    function renderHighlighterLab() {
+      const container = document.getElementById('highlighter-canvas');
       if (!container) return;
 
-      const letters = ['Passage A', 'Passage B', 'Passage C'];
-      let cardsHtml = '';
+      const currentPsalm = FULL_TEXT_PRAISE_PSALMS[currentFullPsalmIndex];
+      if (!currentPsalm) return;
+
       let allCorrect = true;
+      let totalLines = currentPsalm.lines.length;
+      let correctCount = 0;
 
-      currentShuffledPassages.forEach((item, idx) => {
-        const userChoice = practiceUserAnswers[idx];
-        const isAnswered = (userChoice !== undefined);
-        const isCorrect = (userChoice === item.movement);
+      let linesHtml = '';
+      currentPsalm.lines.forEach((line, idx) => {
+        const userMvmt = userHighlights[line.id];
+        const isTagged = (userMvmt !== undefined);
+        const isCorrect = (userMvmt === line.correctMovement);
 
-        if (!isCorrect) allCorrect = false;
+        if (isCorrect) {
+          correctCount++;
+        } else {
+          allCorrect = false;
+        }
 
-        let statusBorder = 'border-l-4 border-l-slate-300 dark:border-l-slate-700';
+        let cardBorder = 'border-l-4 border-l-slate-300 dark:border-l-slate-700 bg-white/70 dark:bg-slate-900/70 hover:border-l-amber-400';
+        let badgeHtml = `
+          <button onclick="event.stopPropagation(); highlightVerse('${line.id}', ${activeHighlighterTool})" class="px-2.5 py-1 rounded-full border border-dashed border-slate-300 dark:border-slate-700 text-[11px] font-medium text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition">
+            Click to Highlight
+          </button>
+        `;
+
+        if (userMvmt === 1) {
+          cardBorder = 'border-l-4 border-l-amber-500 bg-amber-50/40 dark:bg-amber-950/20';
+          badgeHtml = `
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold text-amber-800 bg-amber-100 dark:bg-amber-900/40 dark:text-amber-300 flex items-center gap-1.5 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+              <span>Movement 1: Invitation</span>
+            </span>
+          `;
+        } else if (userMvmt === 2) {
+          cardBorder = 'border-l-4 border-l-blue-600 bg-blue-50/40 dark:bg-blue-950/20';
+          badgeHtml = `
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold text-blue-800 bg-blue-100 dark:bg-blue-900/40 dark:text-blue-300 flex items-center gap-1.5 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+              <span>Movement 2: Reason</span>
+            </span>
+          `;
+        } else if (userMvmt === 3) {
+          cardBorder = 'border-l-4 border-l-emerald-500 bg-emerald-50/40 dark:bg-emerald-950/20';
+          badgeHtml = `
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold text-emerald-800 bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300 flex items-center gap-1.5 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>Movement 3: Closing Praise</span>
+            </span>
+          `;
+        }
+
         let feedbackHtml = '';
-
-        if (isAnswered) {
+        if (hasCheckedCurrent) {
           if (isCorrect) {
-            statusBorder = 'border-l-4 border-l-emerald-500 bg-emerald-50/20 dark:bg-emerald-950/20';
             feedbackHtml = `
-              <div class="neu-inset p-3 space-y-1 text-xs border-l-2 border-l-emerald-500">
-                <span class="font-bold text-emerald-600 dark:text-emerald-400">Correct! ${item.movementName}</span>
-                <p class="text-slate-600 dark:text-slate-300 font-serif">${item.reasonText}</p>
+              <div class="neu-inset p-3 space-y-1 text-xs border-l-2 border-l-emerald-500 mt-2">
+                <span class="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                  <span>Correct! ${line.movementName}</span>
+                </span>
+                <p class="text-slate-600 dark:text-slate-300 font-serif leading-relaxed">${line.clue}</p>
               </div>
             `;
           } else {
-            statusBorder = 'border-l-4 border-l-rose-500 bg-rose-50/20 dark:bg-rose-950/20';
             feedbackHtml = `
-              <div class="neu-inset p-3 space-y-1 text-xs border-l-2 border-l-rose-500">
-                <span class="font-bold text-rose-600 dark:text-rose-400">Not quite!</span>
-                <p class="text-slate-600 dark:text-slate-300 font-serif">Read the wording carefully: is it an opening invitation, a reason why God is praised, or a closing doxology? Try another option above.</p>
+              <div class="neu-inset p-3 space-y-1 text-xs border-l-2 border-l-rose-500 mt-2">
+                <span class="font-bold text-rose-600 dark:text-rose-400 flex items-center gap-1.5">
+                  <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i>
+                  <span>${isTagged ? 'Needs adjustment' : 'Unhighlighted section'}</span>
+                </span>
+                <p class="text-slate-600 dark:text-slate-300 font-serif leading-relaxed">${line.clue}</p>
               </div>
             `;
           }
         }
 
-        // 3 Movement Buttons
-        const btns = [
-          { num: 1, label: 'Movement 1: Invitation' },
-          { num: 2, label: 'Movement 2: Reason' },
-          { num: 3, label: 'Movement 3: Closing Praise' }
-        ];
+        linesHtml += `
+          <div onclick="highlightVerse('${line.id}')" class="neu-card p-4 sm:p-5 space-y-3 cursor-pointer transition ${cardBorder}">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/50 dark:border-slate-800/50 pb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg neu-inset flex items-center justify-center text-xs font-extrabold text-slate-700 dark:text-slate-300">
+                  ${idx + 1}
+                </span>
+                <span class="font-display font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-200">
+                  ${line.verse}
+                </span>
+              </div>
 
-        let buttonsHtml = '';
-        btns.forEach(b => {
-          let btnClass = 'neu-btn px-3 py-2 rounded-xl text-xs font-bold transition';
-          if (isAnswered && userChoice === b.num) {
-            if (isCorrect) {
-              btnClass = 'px-3 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 shadow-md';
-            } else {
-              btnClass = 'px-3 py-2 rounded-xl text-xs font-bold text-white bg-rose-600 shadow-md';
-            }
-          }
+              <div class="flex items-center gap-2">
+                ${badgeHtml}
 
-          buttonsHtml += `
-            <button onclick="answerPuzzlePassage(${idx}, ${b.num})" class="${btnClass}">
-              <span>${b.label}</span>
-            </button>
-          `;
-        });
-
-        cardsHtml += `
-          <div class="neu-card p-5 space-y-3 ${statusBorder}">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">${letters[idx]} (Scrambled)</span>
-              <span class="text-xs font-bold text-slate-400">Identify this passage:</span>
+                <div class="hidden sm:flex items-center gap-1 pl-2 border-l border-slate-200 dark:border-slate-800" onclick="event.stopPropagation()">
+                  <button title="Tag Movement 1: Invitation" onclick="highlightVerse('${line.id}', 1)" class="w-6 h-6 rounded-lg text-xs font-bold transition ${userMvmt === 1 ? 'bg-amber-500 text-white shadow-sm' : 'neu-btn text-amber-700 dark:text-amber-300'}">1</button>
+                  <button title="Tag Movement 2: Reason" onclick="highlightVerse('${line.id}', 2)" class="w-6 h-6 rounded-lg text-xs font-bold transition ${userMvmt === 2 ? 'bg-blue-600 text-white shadow-sm' : 'neu-btn text-blue-700 dark:text-blue-300'}">2</button>
+                  <button title="Tag Movement 3: Closing Praise" onclick="highlightVerse('${line.id}', 3)" class="w-6 h-6 rounded-lg text-xs font-bold transition ${userMvmt === 3 ? 'bg-emerald-600 text-white shadow-sm' : 'neu-btn text-emerald-700 dark:text-emerald-300'}">3</button>
+                  <button title="Clear highlight" onclick="highlightVerse('${line.id}', 0)" class="w-6 h-6 rounded-lg text-xs font-bold transition neu-btn text-slate-400 hover:text-rose-500"><i data-lucide="x" class="w-3 h-3 mx-auto"></i></button>
+                </div>
+              </div>
             </div>
 
-            ${item.hebrew ? `<div class="font-hebrew text-sm text-slate-700 dark:text-slate-300 text-right leading-loose">${item.hebrew}</div>` : ''}
-            <div class="text-xs sm:text-sm font-serif italic text-slate-800 dark:text-slate-200">"${item.text}"</div>
+            ${(showHebrew && line.hebrew) ? `
+              <div class="font-hebrew text-base sm:text-lg text-slate-900 dark:text-slate-100 text-right leading-loose pt-1 select-none">
+                ${line.hebrew}
+              </div>
+            ` : ''}
 
-            <div class="pt-2 flex flex-wrap items-center gap-2">
-              ${buttonsHtml}
+            <div class="text-xs sm:text-sm font-serif text-slate-800 dark:text-slate-200 leading-relaxed pt-1">
+              "${line.text}"
             </div>
 
             ${feedbackHtml}
@@ -1107,61 +1303,73 @@
         `;
       });
 
-      let celebrationHtml = '';
-      const answeredCount = Object.keys(practiceUserAnswers).length;
-      if (answeredCount === 3 && allCorrect) {
-        celebrationHtml = `
-          <div class="neu-inset p-6 text-center space-y-4 border-l-4 border-l-emerald-500">
-            <span class="w-12 h-12 mx-auto rounded-full bg-emerald-500/20 text-emerald-600 flex items-center justify-center">
-              <i data-lucide="check-check" class="w-6 h-6"></i>
-            </span>
-            <h4 class="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
-              Puzzle Solved! You correctly unscrambled this praise psalm.
-            </h4>
-            <div class="text-xs text-slate-600 dark:text-slate-300 font-serif max-w-lg mx-auto">
-              <strong>Liturgical Order of Praise:</strong><br>
-              <span class="text-amber-600 font-bold">1. Invitation</span> &rarr; 
-              <span class="text-blue-600 font-bold">2. Reason (Kî Ground)</span> &rarr; 
-              <span class="text-emerald-600 font-bold">3. Closing Praise</span>
+      let bottomSummaryHtml = '';
+      if (hasCheckedCurrent) {
+        if (allCorrect) {
+          bottomSummaryHtml = `
+            <div class="neu-inset p-6 text-center space-y-4 border-l-4 border-l-emerald-500 rounded-2xl">
+              <div class="w-12 h-12 mx-auto rounded-full bg-emerald-500/20 text-emerald-600 flex items-center justify-center">
+                <i data-lucide="award" class="w-6 h-6"></i>
+              </div>
+              <h4 class="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
+                Psalm Mastered! You correctly identified every movement.
+              </h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-serif max-w-xl mx-auto leading-relaxed">
+                You have successfully traced how <strong>${currentPsalm.title}</strong> opens with its liturgical invitation, unfolds the reasons for praise, and concludes with doxology.
+              </p>
+              <div class="pt-2 flex items-center justify-center gap-3">
+                <button onclick="nextHighlighterPsalm()" class="neu-btn px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-md inline-flex items-center gap-2">
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  <span>Next Full-Text Psalm</span>
+                </button>
+              </div>
             </div>
-            <div class="pt-2">
-              <button onclick="onPsalmPuzzleCompleted()" class="neu-btn px-5 py-2.5 rounded-xl text-xs font-bold text-amber-600 inline-flex items-center gap-2">
-                <i data-lucide="shuffle" class="w-4 h-4"></i>
-                <span>Next Random Psalm Puzzle</span>
+          `;
+        } else {
+          bottomSummaryHtml = `
+            <div class="neu-inset p-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-l-4 border-l-amber-500 rounded-2xl text-xs">
+              <div>
+                <span class="font-bold text-amber-600 dark:text-amber-400">Keep going!</span>
+                <p class="text-slate-600 dark:text-slate-300 font-serif">${correctCount} of ${totalLines} sections identified correctly. Check the hints flagged above and adjust your highlights.</p>
+              </div>
+              <button onclick="checkHighlighterWork()" class="neu-btn px-4 py-2 rounded-xl text-xs font-bold text-amber-600 flex items-center gap-1.5 whitespace-nowrap">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                <span>Recheck Highlights</span>
               </button>
             </div>
-          </div>
-        `;
+          `;
+        }
       }
 
       container.innerHTML = `
-        <div class="space-y-4">
-          ${cardsHtml}
-          ${celebrationHtml}
+        <div class="neu-card p-5 space-y-2 border-l-4 border-l-blue-600">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+              Continuous Hebrew & English Text
+            </span>
+            <span class="text-xs text-slate-400 font-medium">
+              ${totalLines} Passages to Classify
+            </span>
+          </div>
+          <h3 class="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
+            ${currentPsalm.title}
+          </h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+            ${currentPsalm.intro}
+          </p>
         </div>
+
+        <div class="space-y-3">
+          ${linesHtml}
+        </div>
+
+        ${bottomSummaryHtml}
       `;
+
+      updatePaletteUI();
       lucide.createIcons();
     }
 
-    function answerPuzzlePassage(passageIdx, chosenMovement) {
-      practiceUserAnswers[passageIdx] = chosenMovement;
-      const isCorrect = (chosenMovement === currentShuffledPassages[passageIdx].movement);
-
-      if (isCorrect) {
-        playSound('correct');
-      } else {
-        playSound('click');
-      }
-
-      renderShuffledPuzzle();
-    }
-
-    function onPsalmPuzzleCompleted() {
-      psalmsSolvedCount++;
-      const badge = document.getElementById('practice-stats-badge');
-      if (badge) badge.textContent = `Psalms Solved: ${psalmsSolvedCount}`;
-      loadRandomPracticePsalm();
-    }
 
     // ---------------------------------------------------------------------------
     // TAB 3: "FIND THE REASON" LAB
