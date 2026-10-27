@@ -9865,6 +9865,11 @@ function nextTeachStep() {
     // If on last step, advance to next device
     if (currentDeviceIndex < DEVICES_DATA.length - 1) {
       selectDevice(currentDeviceIndex + 1);
+    } else {
+      // Completed all 12 devices in the tutorial! Advance to Practice Studio
+      playSound('correct');
+      switchMainTab('practice');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 }
@@ -10004,7 +10009,7 @@ function renderTeachLesson() {
         onclick="nextTeachStep()"
         class="neu-btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-bold text-white transition transform active:scale-95"
       >
-        <span>${currentStepIndex === 3 ? (currentDeviceIndex === DEVICES_DATA.length - 1 ? 'Finish Tutorial' : 'Next Device →') : 'Continue to Next Step'}</span>
+        <span>${currentStepIndex === 3 ? (currentDeviceIndex === DEVICES_DATA.length - 1 ? 'Finish Tutorial & Move to Practice 🎯' : 'Next Device →') : 'Continue to Next Step'}</span>
         <i data-lucide="arrow-right" class="w-4 h-4"></i>
       </button>
 
