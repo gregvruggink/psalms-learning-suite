@@ -35,10 +35,10 @@ The suite connects eight dedicated learning environments into a unified desktop 
    - Master 10 key Hebrew poetic forms (Parallelism, Chiasm, Inclusio, Merism, Acrostic, etc.).
    - Interactive diagnostic drills with instant feedback, scoring, and mastery tracking.
 3. **Understanding Praise Psalms Studio**:
-   - Learn how to spot and understand praise psalms.
-   - Explore the three main parts: 1. The Call to Praise, 2. The Reasons Why (*Kî* clause), and 3. The Closing Praise across Psalms 8, 104, 146, and 33.
-   - Psalm 24 study focusing on God's ownership of the earth, clean hands and pure hearts, the Hebrew root *nasa'* ("lift up"), and call-and-response worship at the city gates.
-   - Interactive practice quiz gym and corporate worship liturgy builder.
+   - Comprehensive guide to descriptive praise (*Tehillim*) across the Hebrew Psalter.
+   - The three core movements: 1. The Invitation (Call to Praise), 2. The Reason (*Kî* clause), and 3. The Closing Praise.
+   - Searchable 35-psalm database with Hebrew keywords, themes, and verse breakdowns.
+   - Interactive "Find the Reason" lab and "Spot the Genre" gym (Praise vs. Thanksgiving vs. Lament).
 4. **Lament Soul-Care Diagnostic Studio**:
    - Interactive anatomy of the 6-part lament structure (Address, Complaint, Confession of Trust, Petition, Assurance of Being Heard, Vow of Praise).
 5. **Quadriga Four-Senses Hermeneutics Studio**:
