@@ -16,7 +16,7 @@ Head over to the **[Latest GitHub Releases](https://github.com/gregvruggink/psal
 | :--- | :--- | :--- |
 | **Windows** | `Psalms-Learning-Suite-Setup-*.exe` | Run the installer and follow the setup wizard. Desktop and Start Menu shortcuts will be created automatically. |
 | **macOS** | `Psalms-Learning-Suite-*-arm64.dmg` / `.zip` | Open the `.dmg` file and drag **Psalms Learning Suite** into your **Applications** folder. *(See note below for first launch)* |
-| **Web & Brightspace / LMS** | `BIB523_Psalms_Interactive_Learning_Suite_All_In_One.html` | Single self-contained file with all 11 studios. Upload directly to Brightspace or open in any browser! |
+| **Web & Brightspace / LMS** | `BIB523_Psalms_Interactive_Learning_Suite_All_In_One.html` | Single self-contained file with all 12 studios. Upload directly to Brightspace or open in any browser! |
 
 > [!NOTE]
 > **First-time launch on macOS:**
@@ -26,7 +26,7 @@ Head over to the **[Latest GitHub Releases](https://github.com/gregvruggink/psal
 
 ## ✨ Features & Included Interactive Studios
 
-The suite connects seven dedicated learning environments into a unified desktop dashboard:
+The suite connects eight dedicated learning environments into a unified desktop dashboard:
 
 1. **Psalms Explorer & Form-Critical Atlas**:
    - Interactive database of all 150 psalms categorized by genre (Lament, Hymn of Praise, Thanksgiving, Kingship/Royal, Wisdom/Torah, Trust, Pilgrimage, Liturgical, Historical, Imprecatory).
@@ -34,15 +34,20 @@ The suite connects seven dedicated learning environments into a unified desktop 
 2. **Poetic Devices Tutor & Practice Gym**:
    - Master 10 key Hebrew poetic forms (Parallelism, Chiasm, Inclusio, Merism, Acrostic, etc.).
    - Interactive diagnostic drills with instant feedback, scoring, and mastery tracking.
-3. **Lament Soul-Care Diagnostic Studio**:
+3. **Psalms of Praise & Cosmic Polemics Studio**:
+   - 3-part descriptive praise dissector (Call &rarr; Cause [*Kî*] &rarr; Renewed Praise) with Brueggemann's orientation baseline (Pss 8, 104, 33, 146).
+   - "Stealing Baal's Thunder" (KTU 2.1 comparative polemic) & Dr. Emmylou Grosser's 7-stage spatial theophany journey (Ps 29) with Web Audio thunder synthesis.
+   - Psalm 24 Three-Pass Exegesis Simulator (Ark Procession, Cosmic Polemic, Christ's Ascension) & root *nāśā’* analysis.
+   - Interactive Exegetical Practice Gym & corporate worship liturgy and pastoral prayer forge.
+4. **Lament Soul-Care Diagnostic Studio**:
    - Interactive anatomy of the 6-part lament structure (Address, Complaint, Confession of Trust, Petition, Assurance of Being Heard, Vow of Praise).
-4. **Quadriga Four-Senses Hermeneutics Studio**:
+5. **Quadriga Four-Senses Hermeneutics Studio**:
    - Explore traditional and historical interpretation: Literal (*Historical*), Allegorical (*Christological*), Tropological (*Moral/Soul-Care*), and Anagogical (*Eschatological*).
-5. **Psalm 119 Acrostic Synonyms Studio**:
+6. **Psalm 119 Acrostic Synonyms Studio**:
    - In-depth study of the 8 Torah synonyms (Torah, Edot, Piqqudim, Mitsvot, Mishpatim, Chuqqim, Dabar, Imrah) across the 22 Hebrew alphabet strophes.
-6. **Songs of Ascents Pilgrimage (Psalms 120–134)**:
+7. **Songs of Ascents Pilgrimage (Psalms 120–134)**:
    - Follow the topographical journey from the hostile borders of Meshech/Kedar up to the Temple Mount in Jerusalem.
-7. **Hebrew Key Word Studies & Expository Sermon Studio**:
+8. **Hebrew Key Word Studies & Expository Sermon Studio**:
    - Deep-dive word studies on *B-R-K* (Bless), *Ḥesed* (Covenant Loyalty), and *Qodesh* (Holiness).
    - Hebrew transliteration quick reference guide (Academic SBL & Simplified).
    - Homiletical sermon outline editor with student note saving.
