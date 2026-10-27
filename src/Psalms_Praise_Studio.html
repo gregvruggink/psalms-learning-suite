@@ -175,15 +175,15 @@
         </button>
         <button onclick="switchTab('explorer')" id="tab-btn-explorer" class="neu-tab-pill px-4 py-2 text-xs font-bold flex items-center gap-2 whitespace-nowrap">
           <i data-lucide="compass" class="w-4 h-4"></i>
-          <span>2. Praise Psalms Explorer (35)</span>
+          <span>2. Praise Psalms Explorer</span>
         </button>
         <button onclick="switchTab('reasonLab')" id="tab-btn-reasonLab" class="neu-tab-pill px-4 py-2 text-xs font-bold flex items-center gap-2 whitespace-nowrap">
           <i data-lucide="target" class="w-4 h-4"></i>
           <span>3. "Find the Reason" Lab</span>
         </button>
-        <button onclick="switchTab('genreGym')" id="tab-btn-genreGym" class="neu-tab-pill px-4 py-2 text-xs font-bold flex items-center gap-2 whitespace-nowrap">
+        <button onclick="switchTab('genrePractice')" id="tab-btn-genrePractice" class="neu-tab-pill px-4 py-2 text-xs font-bold flex items-center gap-2 whitespace-nowrap">
           <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-          <span>4. Spot the Genre Gym</span>
+          <span>4. Spot the Genre</span>
         </button>
       </nav>
 
@@ -251,7 +251,7 @@
       <div class="space-y-4">
         <h3 class="font-display font-extrabold text-lg text-slate-900 dark:text-white flex items-center gap-2">
           <i data-lucide="list-ordered" class="w-5 h-5 text-amber-500"></i>
-          <span>The Three Movements of a Praise Psalm</span>
+          <span>Three Movements of a Praise Psalm</span>
         </h3>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -263,7 +263,7 @@
                 <span class="text-[11px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Movement 1</span>
                 <span class="w-7 h-7 rounded-lg neu-inset flex items-center justify-center text-amber-600 text-xs font-bold">1</span>
               </div>
-              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">The Invitation (Call to Praise)</h4>
+              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">Invitation (Call to Praise)</h4>
               <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
                 The psalm opens with direct words inviting praise. The singer addresses the congregation, their own soul, or the entire creation.
               </p>
@@ -285,7 +285,7 @@
                 <span class="text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Movement 2</span>
                 <span class="w-7 h-7 rounded-lg neu-inset flex items-center justify-center text-blue-600 text-xs font-bold">2</span>
               </div>
-              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">The Reason (Hebrew: Kî Clause)</h4>
+              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">Reason (Hebrew: Kî Clause)</h4>
               <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
                 The middle of the psalm answers the question: <em>Why should we praise God?</em> It often begins with the Hebrew word <strong class="text-blue-600">כִּי (Kî)</strong>, meaning "for" or "because."
               </p>
@@ -306,7 +306,7 @@
                 <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Movement 3</span>
                 <span class="w-7 h-7 rounded-lg neu-inset flex items-center justify-center text-emerald-600 text-xs font-bold">3</span>
               </div>
-              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">The Closing Praise (Doxology)</h4>
+              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">Closing Praise (Doxology)</h4>
               <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
                 The psalm concludes by circling back to praise. It may repeat the opening line, offer a prayer of blessing, or end with a final joyful shout.
               </p>
@@ -414,72 +414,134 @@
     </section>
 
     <!-- ======================================================================= -->
-    <!-- TAB 2: PRAISE PSALMS EXPLORER (DATABASE OF 35 PSALMS)                   -->
+    <!-- TAB 2: PRAISE PSALMS EXPLORER (SPLIT INTO STUDY & PRACTICE)             -->
     <!-- ======================================================================= -->
     <section id="view-explorer" class="space-y-6 hidden">
 
-      <!-- Filter & Search Bar -->
-      <div class="neu-card p-5 space-y-4">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div>
-            <h3 class="font-display font-extrabold text-lg text-slate-900 dark:text-white">
-              Praise Psalms Database
-            </h3>
-            <p class="text-xs text-slate-500 font-serif">
-              Explore 35 descriptive praise hymns across the five books of the Psalter.
-            </p>
-          </div>
-
-          <!-- Search Box -->
-          <div class="w-full sm:w-72 relative">
-            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
-            <input 
-              type="text" 
-              id="psalm-search-input" 
-              oninput="filterPraisePsalms()" 
-              placeholder="Search by Psalm number, theme..." 
-              class="w-full neu-inset pl-9 pr-4 py-2 text-xs rounded-xl outline-none font-medium text-slate-800 dark:text-slate-200"
-            />
-          </div>
+      <!-- Mode Switcher Banner -->
+      <div class="neu-card p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3 border-l-4 border-l-blue-600">
+        <div>
+          <h3 class="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
+            Praise Psalms Explorer
+          </h3>
+          <p class="text-xs text-slate-500 font-serif">
+            Choose how you want to engage: study pre-labeled examples, or label the movements yourself.
+          </p>
         </div>
 
-        <!-- Category Pills -->
-        <div class="flex items-center gap-1.5 overflow-x-auto pb-1" id="category-pills-container">
-          <button onclick="setCategoryFilter('all')" id="cat-pill-all" class="neu-tab-pill active px-3 py-1.5 text-xs font-bold whitespace-nowrap">
-            All (35)
+        <!-- Mode Toggle Pills -->
+        <div class="flex items-center gap-2 p-1 neu-inset rounded-2xl">
+          <button onclick="setExplorerMode('study')" id="explorer-mode-study-btn" class="neu-tab-pill active px-3.5 py-1.5 text-xs font-bold flex items-center gap-1.5">
+            <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+            <span>Study View (Labeled)</span>
           </button>
-          <button onclick="setCategoryFilter('creation')" id="cat-pill-creation" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
-            Creation & Nature (7)
-          </button>
-          <button onclick="setCategoryFilter('justice')" id="cat-pill-justice" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
-            Care & Justice (6)
-          </button>
-          <button onclick="setCategoryFilter('reign')" id="cat-pill-reign" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
-            The Lord Reigns (8)
-          </button>
-          <button onclick="setCategoryFilter('zion')" id="cat-pill-zion" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
-            Songs of Zion (6)
-          </button>
-          <button onclick="setCategoryFilter('history')" id="cat-pill-history" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
-            Salvation History (5)
-          </button>
-          <button onclick="setCategoryFilter('universal')" id="cat-pill-universal" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
-            Universal Doxology (7)
+          <button onclick="setExplorerMode('practice')" id="explorer-mode-practice-btn" class="neu-tab-pill px-3.5 py-1.5 text-xs font-bold flex items-center gap-1.5">
+            <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i>
+            <span>Practice View (Choose Movements)</span>
           </button>
         </div>
       </div>
 
-      <!-- Master Grid & Detail -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- ===================================================================== -->
+      <!-- EXPLORER SUB-VIEW A: STUDY VIEW (35 LABELED PSALMS)                   -->
+      <!-- ===================================================================== -->
+      <div id="explorer-study-container" class="space-y-5">
         
-        <!-- Left: List of Psalms -->
-        <div class="lg:col-span-5 space-y-3" id="psalms-list-container">
-          <!-- Populated by JS -->
+        <!-- Filter & Search Bar -->
+        <div class="neu-card p-4 space-y-3">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">
+              35 Descriptive Hymns with Labeled Movements
+            </span>
+
+            <!-- Search Box -->
+            <div class="w-full sm:w-72 relative">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input 
+                type="text" 
+                id="psalm-search-input" 
+                oninput="filterPraisePsalms()" 
+                placeholder="Search by Psalm number, theme..." 
+                class="w-full neu-inset pl-9 pr-4 py-2 text-xs rounded-xl outline-none font-medium text-slate-800 dark:text-slate-200"
+              />
+            </div>
+          </div>
+
+          <!-- Category Pills -->
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1" id="category-pills-container">
+            <button onclick="setCategoryFilter('all')" id="cat-pill-all" class="neu-tab-pill active px-3 py-1.5 text-xs font-bold whitespace-nowrap">
+              All (35)
+            </button>
+            <button onclick="setCategoryFilter('creation')" id="cat-pill-creation" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
+              Creation & Nature (7)
+            </button>
+            <button onclick="setCategoryFilter('justice')" id="cat-pill-justice" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
+              Care & Justice (6)
+            </button>
+            <button onclick="setCategoryFilter('reign')" id="cat-pill-reign" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
+              The Lord Reigns (8)
+            </button>
+            <button onclick="setCategoryFilter('zion')" id="cat-pill-zion" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
+              Songs of Zion (6)
+            </button>
+            <button onclick="setCategoryFilter('history')" id="cat-pill-history" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
+              Salvation History (5)
+            </button>
+            <button onclick="setCategoryFilter('universal')" id="cat-pill-universal" class="neu-tab-pill px-3 py-1.5 text-xs font-bold whitespace-nowrap">
+              Universal Doxology (7)
+            </button>
+          </div>
         </div>
 
-        <!-- Right: Selected Psalm Deep-Dive Card -->
-        <div class="lg:col-span-7">
-          <div id="psalm-detail-card" class="neu-card p-6 space-y-5 sticky top-24">
+        <!-- Master Grid & Detail -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Left: List of Psalms -->
+          <div class="lg:col-span-5 space-y-3" id="psalms-list-container">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Right: Selected Psalm Deep-Dive Card -->
+          <div class="lg:col-span-7">
+            <div id="psalm-detail-card" class="neu-card p-6 space-y-5 sticky top-24">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- EXPLORER SUB-VIEW B: PRACTICE VIEW (CHOOSE MOVEMENTS)                 -->
+      <!-- ===================================================================== -->
+      <div id="explorer-practice-container" class="space-y-5 hidden">
+        
+        <!-- Practice Header & Psalm Selector -->
+        <div class="neu-card p-5 space-y-4">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div>
+              <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
+                Hands-on Practice
+              </span>
+              <h4 class="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
+                Choose Where Movements Come
+              </h4>
+              <p class="text-xs text-slate-500 font-serif">
+                Select a psalm below. Read each section and click the button to identify its movement.
+              </p>
+            </div>
+
+            <!-- Psalm Practice Switcher -->
+            <div class="flex items-center gap-1.5 overflow-x-auto p-1 neu-inset rounded-2xl w-full sm:w-auto" id="practice-psalms-switcher">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Sorter Box -->
+        <div class="max-w-4xl mx-auto">
+          <div id="interactive-practice-box" class="space-y-5">
             <!-- Populated by JS -->
           </div>
         </div>
@@ -520,9 +582,9 @@
     </section>
 
     <!-- ======================================================================= -->
-    <!-- TAB 4: SPOT THE GENRE GYM                                               -->
+    <!-- TAB 4: SPOT THE GENRE (GYM REMOVED)                                     -->
     <!-- ======================================================================= -->
-    <section id="view-genreGym" class="space-y-6 hidden">
+    <section id="view-genrePractice" class="space-y-6 hidden">
 
       <div class="neu-card p-6 space-y-3 border-l-4 border-l-purple-500">
         <div class="flex items-center justify-between">
@@ -534,7 +596,7 @@
           </span>
         </div>
         <h3 class="font-display font-extrabold text-xl text-slate-900 dark:text-white">
-          Spot the Genre Gym
+          Spot the Genre
         </h3>
         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-serif leading-relaxed max-w-3xl">
           Can you tell the difference between <strong>Descriptive Praise</strong> (celebrating who God is), 
@@ -544,7 +606,7 @@
       </div>
 
       <div class="max-w-3xl mx-auto">
-        <div id="genre-gym-card" class="neu-card p-6 sm:p-8 space-y-6">
+        <div id="genre-card" class="neu-card p-6 sm:p-8 space-y-6">
           <!-- Populated by JS -->
         </div>
       </div>
@@ -626,7 +688,7 @@
           });
         }
       } catch (e) {
-        // Fallback
+        // Audio fallback
       }
     }
 
@@ -662,7 +724,7 @@
     // ---------------------------------------------------------------------------
     // TAB ENGINE
     // ---------------------------------------------------------------------------
-    const TABS = ['guide', 'explorer', 'reasonLab', 'genreGym'];
+    const TABS = ['guide', 'explorer', 'reasonLab', 'genrePractice'];
 
     function switchTab(tabId) {
       playSound('click');
@@ -684,11 +746,41 @@
     // DATA INJECTION
     // ---------------------------------------------------------------------------
     const PRAISE_PSALMS = [{"id": "ps8", "num": 8, "title": "Psalm 8: The Majesty of the Creator", "category": "creation", "categoryLabel": "Creation & Nature", "book": "Book 1 (Pss 1-41)", "theme": "God crowns fragile human beings with dignity to care for his majestic creation.", "invitation": "O LORD, our Lord, how majestic is your name in all the earth! You have set your glory above the heavens. (v. 1)", "invitationHebrew": "יְהוָה אֲדֹנֵינוּ מָה־אַדִּיר שִׁמְךָ בְּכָל־הָאָרֶץ", "reason": "When I look at your heavens, the work of your fingers... what is mankind that you are mindful of them? Yet you made them a little lower than the heavenly beings and crowned them with glory and honor. (vv. 3-5)", "reasonHebrew": "כִּי־אֶרְאֶה שָׁמֶיךָ מַעֲשֵׂה אֶצְבְּעֹתֶיךָ", "closing": "O LORD, our Lord, how majestic is your name in all the earth! (v. 9)", "hebrewKeywords": "Adonenu (Our Lord), Addir (Majestic), Kavod (Glory)"}, {"id": "ps29", "num": 29, "title": "Psalm 29: The Voice of the Lord", "category": "creation", "categoryLabel": "Creation & Nature", "book": "Book 1 (Pss 1-41)", "theme": "God speaks with thunderous authority over creation, blessing his people with peace.", "invitation": "Ascribe to the LORD, you heavenly beings, ascribe to the LORD glory and strength. Worship the LORD in the splendor of his holiness. (vv. 1-2)", "invitationHebrew": "הָבוּ לַיהוָה בְּנֵי אֵלִים הָבוּ לַיהוָה כָּבוֹד וָעֹז", "reason": "The voice of the LORD is over the waters; the God of glory thunders. The voice of the LORD shatters the cedars; the voice of the LORD shakes the wilderness. (vv. 3-8)", "reasonHebrew": "קוֹל יְהוָה עַל־הַמָּיִם אֵל־הַכָּבוֹד הִרְעִים", "closing": "The LORD sits enthroned over the flood; the LORD is enthroned as King forever. The LORD gives strength to his people; the LORD blesses his people with peace (shalom). (vv. 10-11)", "hebrewKeywords": "Qol Yahweh (Voice of the Lord), Hadarat Qodesh (Splendor of Holiness), Shalom (Peace)"}, {"id": "ps33", "num": 33, "title": "Psalm 33: The Sovereign Word and Steadfast Love", "category": "creation", "categoryLabel": "Creation & Nature", "book": "Book 1 (Pss 1-41)", "theme": "The Lord spoke the universe into being; no king is saved by a vast army, but by trusting in God.", "invitation": "Sing joyfully to the LORD, you righteous; it is fitting for the upright to praise him. Praise the LORD with the harp; make music to him on the ten-stringed lyre. (vv. 1-2)", "invitationHebrew": "רַנְּנוּ צַדִּיקִים בַּיהוָה לַיְשָׁרִים נָאוָה תְהִלָּה", "reason": "FOR (Kî) the word of the LORD is right and true; he is faithful in all he does. By the word of the LORD the heavens were made, their starry host by the breath of his mouth. (vv. 4-6)", "reasonHebrew": "כִּי־יָשָׁר דְּבַר־יְהוָה וְכָל־מַעֲשֵׂהוּ בֶּאֱמוּנָה", "closing": "May your unfailing love be with us, LORD, even as we put our hope in you. (v. 22)", "hebrewKeywords": "Davar Yahweh (Word of the Lord), Hesed (Steadfast Love), Emunah (Faithfulness)"}, {"id": "ps46", "num": 46, "title": "Psalm 46: God Our Refuge and Fortress", "category": "zion", "categoryLabel": "Songs of Zion", "book": "Book 2 (Pss 42-72)", "theme": "Though mountains shake and waters roar, God remains an immovable refuge in the city of God.", "invitation": "God is our refuge and strength, an ever-present help in trouble. (v. 1)", "invitationHebrew": "אֱלֹהִים לָנוּ מַחֲסֶה וָעֹז עֶזְרָה בְצָרוֹת נִמְצָא מְאֹד", "reason": "There is a river whose streams make glad the city of God, the holy place where the Most High dwells. God is within her, she will not fall; God will help her at break of day. (vv. 4-5)", "reasonHebrew": "נָהָר פְּלָגָיו יְשַׂמְּחוּ עִיר־אֱלֹהִים קְדֹשׁ מִשְׁכְּנֵי עֶלְיוֹן", "closing": "The LORD of hosts is with us; the God of Jacob is our fortress. (v. 11)", "hebrewKeywords": "Mahseh (Refuge), Oz (Strength), Misgav (Fortress)"}, {"id": "ps47", "num": 47, "title": "Psalm 47: God is King Over All the Earth", "category": "reign", "categoryLabel": "The Lord Reigns", "book": "Book 2 (Pss 42-72)", "theme": "A joyful royal hymn calling all nations to clap their hands because God reigns over all rulers.", "invitation": "Clap your hands, all you nations; shout to God with cries of joy! (v. 1)", "invitationHebrew": "כָּל־הָעַמִּים תִּקְעוּ־כָף הָרִיעוּ לֵאלֹהִים בְּקוֹל רִנָּה", "reason": "FOR (Kî) the LORD Most High is awesome, the great King over all the earth. He subdues nations under us and chooses our inheritance for us. (vv. 2-4)", "reasonHebrew": "כִּי־יְהוָה עֶלְיוֹן נוֹרָא מֶלֶךְ גָּדוֹל עַל־כָּל־הָאָרֶץ", "closing": "God reigns over the nations; God is seated on his holy throne. The kings of the earth belong to God; he is greatly exalted. (vv. 8-9)", "hebrewKeywords": "Melekh Gadol (Great King), Elyon (Most High), Teruah (Shout of Joy)"}, {"id": "ps48", "num": 48, "title": "Psalm 48: Mount Zion, City of the Great King", "category": "zion", "categoryLabel": "Songs of Zion", "book": "Book 2 (Pss 42-72)", "theme": "Praising God's holy mountain, where kings assembled and were amazed at God's protective presence.", "invitation": "Great is the LORD, and most worthy of praise, in the city of our God, his holy mountain. (v. 1)", "invitationHebrew": "גָּדוֹל יְהוָה וּמְהֻלָּל מְאֹד בְּעִיר אֱלֹהֵינוּ הַר־קָדְשׁוֹ", "reason": "Beautiful in its loftiness, the joy of the whole earth, like the heights of Zaphon is Mount Zion, the city of the Great King. God is in her citadels; he has shown himself to be her fortress. (vv. 2-3)", "reasonHebrew": "יְפֵה נוֹף מְשׂוֹשׂ כָּל־הָאָרֶץ הַר־צִיּוֹן", "closing": "FOR (Kî) this God is our God for ever and ever; he will be our guide even to the end. (v. 14)", "hebrewKeywords": "Har Qodesh (Holy Mountain), Qiryah (City), Tsedeq (Righteousness)"}, {"id": "ps65", "num": 65, "title": "Psalm 65: God's Bounty in Harvest and Earth", "category": "creation", "categoryLabel": "Creation & Nature", "book": "Book 2 (Pss 42-72)", "theme": "A harvest hymn celebrating how God forgives sin and enriches the earth with streams and grain.", "invitation": "Praise awaits you, our God, in Zion; to you our vows will be fulfilled. You who answer prayer, to you all people will come. (vv. 1-2)", "invitationHebrew": "לְךָ דֻמִיָּה תְהִלָּה אֱלֹהִים בְּצִיּוֹן", "reason": "You care for the land and water it; you enrich it abundantly. The streams of God are filled with water to provide the people with grain, for so you have ordained it. (v. 9)", "reasonHebrew": "פָּקַדְתָּ הָאָרֶץ וַתְּשֹׁקְקֶהָ רַבַּת תַּעְשְׁרֶנָּה", "closing": "The meadows are covered with flocks and the valleys are mantled with grain; they shout for joy and sing. (v. 13)", "hebrewKeywords": "Tehillah (Praise), Tevel (World), Tuv (Goodness)"}, {"id": "ps67", "num": 67, "title": "Psalm 67: Let All the Peoples Praise You", "category": "universal", "categoryLabel": "Universal Doxology", "book": "Book 2 (Pss 42-72)", "theme": "A missionary praise psalm praying for God's blessing so that all nations may know his salvation.", "invitation": "May God be gracious to us and bless us and make his face shine on us, so that your ways may be known on earth, your salvation among all nations. (vv. 1-2)", "invitationHebrew": "אֱלֹהִים יְחָנֵנוּ וִיבָרְכֵנוּ יָאֵר פָּנָיו אִתָּנוּ", "reason": "FOR (Kî) you rule the peoples with equity and guide the nations of the earth. (v. 4)", "reasonHebrew": "כִּי־תִשְׁפֹּט עַמִּים מִישׂוֹר וּלְאֻמִּים בָּאָרֶץ תַּנְחֵם", "closing": "May God bless us still, so that all the ends of the earth will fear him. (v. 7)", "hebrewKeywords": "Yeshua (Salvation), Mishor (Equity), Berakhah (Blessing)"}, {"id": "ps68", "num": 68, "title": "Psalm 68: Father of the Fatherless", "category": "justice", "categoryLabel": "Care & Justice", "book": "Book 2 (Pss 42-72)", "theme": "A victory hymn celebrating God as protector of orphans, defender of widows, and giver of homes to the lonely.", "invitation": "Sing to God, sing in praise of his name, extol him who rides on the clouds; rejoice before him: his name is the LORD. (v. 4)", "invitationHebrew": "שִׁירוּ לֵאלֹהִים זַמְּרוּ שְׁמוֹ סֹלּוּ לָרֹכֵב בָּעֲרָבוֹת", "reason": "A father to the fatherless, a defender of widows, is God in his holy dwelling. God sets the lonely in families, he leads out the prisoners with singing. (vv. 5-6)", "reasonHebrew": "אֲבִי יְתוֹמִים וְדַיַּן אַלְמָנוֹת אֱלֹהִים בִּמְעוֹן קָדְשׁוֹ", "closing": "Praise be to God! Ascribe power to God, whose majesty is over Israel. (vv. 34-35)", "hebrewKeywords": "Avi Yetomim (Father of Orphans), Dayan Almanot (Defender of Widows), Oz (Power)"}, {"id": "ps76", "num": 76, "title": "Psalm 76: God is Renowned in Judah", "category": "zion", "categoryLabel": "Songs of Zion", "book": "Book 3 (Pss 73-89)", "theme": "Praising God who breaks the weapons of war and delivers the humble of the earth.", "invitation": "God is renowned in Judah; in Israel his name is great. His tent is in Salem, his dwelling place in Zion. (vv. 1-2)", "invitationHebrew": "נוֹדָע בִּיהוּדָה אֱלֹהִים בְּיִשְׂרָאֵל גָּדוֹל שְׁמוֹ", "reason": "There he broke the flashing arrows, the shields and the swords, the weapons of war. You are resplendent with light, more majestic than mountains rich with game. (vv. 3-4)", "reasonHebrew": "שָׁמָּה שִׁבַּר רִשְׁפֵי־קָשֶׁת מָגֵן וְחֶרֶב וּמִלְחָמָה", "closing": "Make vows to the LORD your God and fulfill them; let all the neighboring lands bring gifts to the One to be feared. (v. 11)", "hebrewKeywords": "Salem (Jerusalem), Shalom (Peace), Anve-Erets (Humble of the Earth)"}, {"id": "ps84", "num": 84, "title": "Psalm 84: Longing for God's Dwelling", "category": "zion", "categoryLabel": "Songs of Zion", "book": "Book 3 (Pss 73-89)", "theme": "Expressing deep joy for the house of God; better is one day in his courts than a thousand elsewhere.", "invitation": "How lovely is your dwelling place, LORD Almighty! My soul yearns, even faints, for the courts of the LORD; my heart and my flesh cry out for the living God. (vv. 1-2)", "invitationHebrew": "מַה־יְּדִידוֹת מִשְׁכְּנוֹתֶיךָ יְהוָה צְבָאוֹת", "reason": "FOR (Kî) a day in your courts is better than a thousand elsewhere; I would rather be a doorkeeper in the house of my God than dwell in the tents of the wicked. (v. 10)", "reasonHebrew": "כִּי טוֹב־יוֹם בַּחֲצֵרֶיךָ מֵאָלֶף", "closing": "LORD Almighty, blessed is the one who trusts in you. (v. 12)", "hebrewKeywords": "Mishkenot (Dwelling Place), Hatsrot (Courts), Ashre (Blessed)"}, {"id": "ps87", "num": 87, "title": "Psalm 87: Zion, Mother of Nations", "category": "zion", "categoryLabel": "Songs of Zion", "book": "Book 3 (Pss 73-89)", "theme": "Celebrating Zion as a spiritual home where peoples from all foreign nations are counted as born citizens.", "invitation": "He has founded his city on the holy mountain. The LORD loves the gates of Zion more than all the other dwellings of Jacob. Glorious things are said of you, city of God. (vv. 1-3)", "invitationHebrew": "יְסוּדָתוֹ בְּהַרְרֵי־קֹדֶשׁ אֹהֵב יְהוָה שַׁעֲרֵי צִיּוֹן", "reason": "The LORD will write in the register of the peoples: 'This one was born in Zion.' (v. 6)", "reasonHebrew": "יְהוָה יִסְפֹּר בִּכְתוֹב עַמִּים זֶה יֻלַּד־שָׁם", "closing": "As they make music they will sing: 'All my fountains are in you.' (v. 7)", "hebrewKeywords": "Sha'are Tsiyyon (Gates of Zion), Yulad Sham (Born There), Ma'yan (Fountain)"}, {"id": "ps93", "num": 93, "title": "Psalm 93: The Lord Reigns in Majesty", "category": "reign", "categoryLabel": "The Lord Reigns", "book": "Book 4 (Pss 90-106)", "theme": "Declaring that the Lord is King forever, firmer than the pounding ocean waves.", "invitation": "The LORD reigns, he is robed in majesty; the LORD is robed in majesty and armed with strength; indeed, the world is established, firm and secure. (v. 1)", "invitationHebrew": "יְהוָה מָלָךְ גֵּאוּת לָבֵשׁ לָבֵשׁ יְהוָה עֹז הִתְאַזָּר", "reason": "Mightier than the thunder of the great waters, mightier than the breakers of the sea: the LORD on high is mighty. (v. 4)", "reasonHebrew": "מִקֹּלוֹת מַיִם רַבִּים אַדִּירִים מִשְׁבְּרֵי־יָם אַדִּיר בַּמָּרוֹם יְהוָה", "closing": "Your statutes, LORD, stand firm; holiness adorns your house for endless days. (v. 5)", "hebrewKeywords": "Yahweh Malakh (The Lord Reigns), Ge'ut (Majesty), Qodesh (Holiness)"}, {"id": "ps95", "num": 95, "title": "Psalm 95: Come, Let Us Sing for Joy", "category": "reign", "categoryLabel": "The Lord Reigns", "book": "Book 4 (Pss 90-106)", "theme": "A classic call to praise God as our Rock and Shepherd, coupled with an urgent plea to hear his voice today.", "invitation": "Come, let us sing for joy to the LORD; let us shout aloud to the Rock of our salvation. Let us come before him with thanksgiving and extol him with music and song. (vv. 1-2)", "invitationHebrew": "לְכוּ נְרַנְּנָה לַיהוָה נָרִיעָה לְצוּר יִשְׁעֵנוּ", "reason": "FOR (Kî) the LORD is the great God, the great King above all gods. In his hand are the depths of the earth, and the mountain peaks belong to him. (vv. 3-4)", "reasonHebrew": "כִּי אֵל גָּדוֹל יְהוָה וּמֶלֶךְ גָּדוֹל עַל־כָּל־אֱלֹהִים", "closing": "FOR (Kî) he is our God and we are the people of his pasture, the flock under his care. Today, if only you would hear his voice! (v. 7)", "hebrewKeywords": "Tsur Yishenu (Rock of Our Salvation), Roeh (Shepherd), Tsone Yado (Flock of His Hand)"}, {"id": "ps96", "num": 96, "title": "Psalm 96: Sing to the Lord a New Song", "category": "reign", "categoryLabel": "The Lord Reigns", "book": "Book 4 (Pss 90-106)", "theme": "Inviting all families of nations and nature itself to rejoice because the Lord comes to judge the world in equity.", "invitation": "Sing to the LORD a new song; sing to the LORD, all the earth. Sing to the LORD, praise his name; proclaim his salvation day after day. (vv. 1-2)", "invitationHebrew": "שִׁירוּ לַיהוָה שִׁיר חָדָשׁ שִׁירוּ לַיהוָה כָּל־הָאָרֶץ", "reason": "FOR (Kî) great is the LORD and most worthy of praise; he is to be feared above all gods. For all the gods of the nations are idols, but the LORD made the heavens. (vv. 4-5)", "reasonHebrew": "כִּי גָדוֹל יְהוָה וּמְהֻלָּל מְאֹד", "closing": "Let all creation rejoice before the LORD, FOR (Kî) he comes, he comes to judge the earth. He will judge the world in righteousness. (v. 13)", "hebrewKeywords": "Shir Hadash (New Song), Hadarat Qodesh (Splendor of Holiness), Tsedeq (Righteousness)"}, {"id": "ps97", "num": 97, "title": "Psalm 97: The Earth Rejoices in His Rule", "category": "reign", "categoryLabel": "The Lord Reigns", "book": "Book 4 (Pss 90-106)", "theme": "Righteousness and justice are the foundation of God's throne, shedding light on the righteous.", "invitation": "The LORD reigns, let the earth be glad; let the distant shores rejoice! (v. 1)", "invitationHebrew": "יְהוָה מָלָךְ תָּגֵל הָאָרֶץ יִשְׂמְחוּ אִיִּים רַבִּים", "reason": "Clouds and thick darkness surround him; righteousness and justice are the foundation of his throne. Fire goes before him and consumes his foes on every side. (vv. 2-3)", "reasonHebrew": "צֶדֶק וּמִשְׁפָּט מְכוֹן כִּסְאוֹ", "closing": "Rejoice in the LORD, you who are righteous, and praise his holy name. (v. 12)", "hebrewKeywords": "Tsedeq (Righteousness), Mishpat (Justice), Or Zarua (Light Shed Abroad)"}, {"id": "ps98", "num": 98, "title": "Psalm 98: Joy to the World", "category": "reign", "categoryLabel": "The Lord Reigns", "book": "Book 4 (Pss 90-106)", "theme": "Calling trumpets, oceans, rivers, and hills to celebrate the King who has revealed his salvation.", "invitation": "Sing to the LORD a new song, FOR (Kî) he has done marvelous things; his right hand and his holy arm have worked salvation for him. (v. 1)", "invitationHebrew": "שִׁירוּ לַיהוָה שִׁיר חָדָשׁ כִּי־נִפְלָאוֹת עָשָׂה", "reason": "The LORD has made his salvation known and revealed his righteousness to the nations. He has remembered his love and his faithfulness to Israel. (vv. 2-3)", "reasonHebrew": "הוֹדִיעַ יְהוָה יְשׁוּעָתוֹ לְעֵינֵי הַגּוֹיִם גִּלָּה צִדְקָתוֹ", "closing": "Let the rivers clap their hands, let the mountains sing together for joy; let them sing before the LORD, FOR (Kî) he comes to judge the earth. (vv. 8-9)", "hebrewKeywords": "Nifla'ot (Marvelous Things), Shofar (Horn), Teruah (Shout)"}, {"id": "ps99", "num": 99, "title": "Psalm 99: The Holy King", "category": "reign", "categoryLabel": "The Lord Reigns", "book": "Book 4 (Pss 90-106)", "theme": "A 3-fold refrain celebrating God's holiness: 'He is holy!' (vv. 3, 5, 9), loving justice and forgiving his people.", "invitation": "The LORD reigns, let the nations tremble; he sits enthroned between the cherubim, let the earth shake. Great is the LORD in Zion. (vv. 1-2)", "invitationHebrew": "יְהוָה מָלָךְ יִרְגְּזוּ עַמִּים יֹשֵׁב כְּרוּבִים תָּנוּט הָאָרֶץ", "reason": "The King is mighty, he loves justice; you have established equity; in Jacob you have done what is just and right. (v. 4)", "reasonHebrew": "וְעֹז מֶלֶךְ מִשְׁפָּט אָהֵב אַתָּה כּוֹנַנְתָּ מֵישָׁרִים", "closing": "Exalt the LORD our God and worship at his holy mountain, FOR (Kî) the LORD our God is holy. (v. 9)", "hebrewKeywords": "Qadosh Hu (He is Holy), Keruvim (Cherubim), Mishpat (Justice)"}, {"id": "ps100", "num": 100, "title": "Psalm 100: A Psalm of Thanksgiving and Joy", "category": "universal", "categoryLabel": "Universal Doxology", "book": "Book 4 (Pss 90-106)", "theme": "The universal hymn inviting the whole earth to enter God's gates with joy because he is good and faithful.", "invitation": "Shout for joy to the LORD, all the earth. Worship the LORD with gladness; come before him with joyful songs. (vv. 1-2)", "invitationHebrew": "הָרִיעוּ לַיהוָה כָּל־הָאָרֶץ עִבְדוּ אֶת־יְהוָה בְּשִׂמְחָה", "reason": "Know that the LORD is God. It is he who made us, and we are his; we are his people, the sheep of his pasture. (v. 3)", "reasonHebrew": "דְּעוּ כִּי־יְהוָה הוּא אֱלֹהִים הוּא־עָשָׂנוּ וְלוֹ אֲנַחְנוּ", "closing": "FOR (Kî) the LORD is good and his love endures forever; his faithfulness continues through all generations. (v. 5)", "hebrewKeywords": "Tov Yahweh (The Lord is Good), Olam Hasdo (His Love Endures Forever), Todah (Thanksgiving)"}, {"id": "ps103", "num": 103, "title": "Psalm 103: Bless the Lord, O My Soul", "category": "justice", "categoryLabel": "Care & Justice", "book": "Book 4 (Pss 90-106)", "theme": "A tender hymn enumerating God's personal benefits: forgiving iniquity, healing disease, and pitying us as a father pities his children.", "invitation": "Praise the LORD, my soul; all my inmost being, praise his holy name. Praise the LORD, my soul, and forget not all his benefits. (vv. 1-2)", "invitationHebrew": "בָּרְכִי נַפְשִׁי אֶת־יְהוָה וְכָל־קְרָבַי אֶת־שֵׁם קָדְשׁוֹ", "reason": "The LORD works righteousness and justice for all the oppressed... The LORD is compassionate and gracious, slow to anger, abounding in love. As high as the heavens are above the earth, so great is his love for those who fear him. (vv. 6-11)", "reasonHebrew": "רַחוּם וְחַנּוּן יְהוָה אֶרֶךְ אַפַּיִם וְרַב־חָסֶד", "closing": "Praise the LORD, all his works everywhere in his dominion. Praise the LORD, my soul! (v. 22)", "hebrewKeywords": "Barechi Nafshi (Bless My Soul), Rahum ve-Hannun (Compassionate and Gracious), Hesed (Steadfast Love)"}, {"id": "ps104", "num": 104, "title": "Psalm 104: The Great Care of Nature", "category": "creation", "categoryLabel": "Creation & Nature", "book": "Book 4 (Pss 90-106)", "theme": "A sweeping celebration of God's daily providence for spring waters, wild goats, birds, lions, and humans.", "invitation": "Praise the LORD, my soul. LORD my God, you are very great; you are clothed with splendor and majesty. (v. 1)", "invitationHebrew": "בָּרְכִי נַפְשִׁי אֶת־יְהוָה יְהוָה אֱלֹהַי גָּדַלְתָּ מְּאֹד", "reason": "All creatures look to you to give them their food at the proper time. When you give it to them, they gather it up; when you open your hand, they are satisfied with good things. (vv. 27-28)", "reasonHebrew": "כֻּלָּם אֵלֶיךָ יְשַׂבֵּרוּן לָתֵת אָכְלָם בְּעִתּוֹ", "closing": "May the glory of the LORD endure forever; may the LORD rejoice in his works. Praise the LORD, my soul. Praise the LORD! (vv. 31, 35)", "hebrewKeywords": "Hod ve-Hadar (Splendor and Majesty), Ruah (Spirit / Breath), Hallelujah (Praise the Lord)"}, {"id": "ps105", "num": 105, "title": "Psalm 105: Remembering the Covenant Deeds", "category": "history", "categoryLabel": "Salvation History", "book": "Book 4 (Pss 90-106)", "theme": "Recounting God's faithful acts across history from the promise to Abraham through the Exodus and wilderness wanderings.", "invitation": "Give praise to the LORD, proclaim his name; make known among the nations what he has done. Sing to him, sing praise to him; tell of all his wonderful acts. (vv. 1-2)", "invitationHebrew": "הוֹדוּ לַיהוָה קִרְאוּ בִשְׁמוֹ הוֹדִיעוּ בָעַמִּים עֲלִילוֹתָיו", "reason": "He remembers his covenant forever, the promise he made, for a thousand generations, the covenant he made with Abraham, the oath he swore to Isaac. (vv. 8-9)", "reasonHebrew": "זָכַר לְעוֹלָם בְּרִיתוֹ דָּבָר צִוָּה לְאֶלֶף דּוֹר", "closing": "He brought out his people with rejoicing, his chosen ones with shouts of joy... Praise the LORD! (Hallelujah!) (vv. 43, 45)", "hebrewKeywords": "Berit (Covenant), Nifla'ot (Wonders), Zakar (Remembered)"}, {"id": "ps111", "num": 111, "title": "Psalm 111: The Wonderful Works of the Lord", "category": "history", "categoryLabel": "Salvation History", "book": "Book 5 (Pss 107-150)", "theme": "An acrostic praise hymn celebrating God's gracious character and truth in his historical works and covenant.", "invitation": "Praise the LORD! (Hallelujah!) I will extol the LORD with all my heart in the council of the upright and in the assembly. (v. 1)", "invitationHebrew": "הַלְלוּ־יָהּ אוֹדֶה יְהוָה בְּכָל־לֵבָב בְּסוֹד יְשָׁרִים וְעֵדָה", "reason": "Great are the works of the LORD; they are pondered by all who delight in them. Glorious and majestic are his deeds, and his righteousness endures forever. (vv. 2-3)", "reasonHebrew": "גְּדֹלִים מַעֲשֵׂי יְהוָה דְּרוּשִׁים לְכָל־חֶפְצֵיהֶם", "closing": "The fear of the LORD is the beginning of wisdom; all who follow his precepts have good understanding. To him belongs eternal praise. (v. 10)", "hebrewKeywords": "Hallelujah (Praise the Lord), Hesed (Grace), Reshit Hokhmah (Beginning of Wisdom)"}, {"id": "ps113", "num": 113, "title": "Psalm 113: God Lifts the Poor from the Dust", "category": "justice", "categoryLabel": "Care & Justice", "book": "Book 5 (Pss 107-150)", "theme": "The opening hymn of the Egyptian Hallel: God is exalted high above all nations, yet bends down to lift the poor and needy.", "invitation": "Praise the LORD! (Hallelujah!) Praise the LORD, you his servants; praise the name of the LORD. Let the name of the LORD be praised, both now and forevermore. (vv. 1-2)", "invitationHebrew": "הַלְלוּ־יָהּ הַלְלוּ עַבְדֵי יְהוָה הַלְלוּ אֶת־שֵׁם יְהוָה", "reason": "Who is like the LORD our God, the One who sits enthroned on high, who stoops down to look on the heavens and the earth? He raises the poor from the dust and lifts the needy from the ash heap. (vv. 5-7)", "reasonHebrew": "מְקִימִי מֵעָפָר דָּל מֵאַשְׁפֹּת יָרִים אֶבְיוֹן", "closing": "He settles the childless woman in her home as a happy mother of children. Praise the LORD! (v. 9)", "hebrewKeywords": "Dal (Poor), Evyon (Needy), Ashpot (Ash Heap), Hallelujah"}, {"id": "ps114", "num": 114, "title": "Psalm 114: When Israel Came Out of Egypt", "category": "history", "categoryLabel": "Salvation History", "book": "Book 5 (Pss 107-150)", "theme": "A Passover Hallel hymn depicting creation trembling at the presence of the God of Jacob who turned rock into a spring.", "invitation": "When Israel came out of Egypt, Jacob from a people of foreign tongue, Judah became God's sanctuary, Israel his dominion. (vv. 1-2)", "invitationHebrew": "בְּצֵאת יִשְׂרָאֵל מִמִּצְרָיִם בֵּית יַעֲקֹב מֵעַם לֹעֵז", "reason": "The sea looked and fled, the Jordan turned back; the mountains leaped like rams, the hills like lambs. Why was it, sea, that you fled? Why, Jordan, did you turn back? (vv. 3-5)", "reasonHebrew": "הַיָּם רָאָה וַיָּנֹס הַיַּרְדֵּן יִסֹּב לְאָחוֹר", "closing": "Tremble, earth, at the presence of the Lord, at the presence of the God of Jacob, who turned the rock into a pool, the hard rock into springs of water. (vv. 7-8)", "hebrewKeywords": "Mitsrayim (Egypt), Qodesh (Sanctuary), Tsur (Rock), Mayim (Water)"}, {"id": "ps117", "num": 117, "title": "Psalm 117: The Shortest Hymn of Universal Praise", "category": "universal", "categoryLabel": "Universal Doxology", "book": "Book 5 (Pss 107-150)", "theme": "Only two verses long: calling all nations to praise the Lord because of his strong steadfast love and eternal truth.", "invitation": "Praise the LORD, all you nations; extol him, all you peoples. (v. 1)", "invitationHebrew": "הַלְלוּ אֶת־יְהוָה כָּל־גּוֹיִם שַׁבְּחוּהוּ כָּל־הָאֻמִּים", "reason": "FOR (Kî) great is his love toward us, and the faithfulness of the LORD endures forever. (v. 2a)", "reasonHebrew": "כִּי גָבַר עָלֵינוּ חַסְדּוֹ וֶאֱמֶת־יְהוָה לְעוֹלָם", "closing": "Praise the LORD! (Hallelujah!) (v. 2b)", "hebrewKeywords": "Goyim (Nations), Hesed (Steadfast Love), Emet (Faithfulness / Truth)"}, {"id": "ps134", "num": 134, "title": "Psalm 134: Praise in the Night Watch", "category": "universal", "categoryLabel": "Universal Doxology", "book": "Book 5 (Pss 107-150)", "theme": "The final Song of Ascents: calling night temple ministers to lift their hands in blessing to the Maker of heaven and earth.", "invitation": "Praise the LORD, all you servants of the LORD who minister by night in the house of the LORD. Lift up your hands in the sanctuary and praise the LORD. (vv. 1-2)", "invitationHebrew": "הִנֵּה בָּרְכוּ אֶת־יְהוָה כָּל־עַבְדֵי יְהוָה הָעֹמְדִים בְּבֵית־יְהוָה בַּלֵּילוֹת", "reason": "The LORD who made heaven and earth bless you from Zion. (v. 3)", "reasonHebrew": "יְבָרֶכְךָ יְהוָה מִצִּיּוֹן עֹשֵׂה שָׁמַיִם וָאָרֶץ", "closing": "Lift up your hands in the sanctuary and praise the LORD! (v. 2)", "hebrewKeywords": "Barekhu (Bless), Qodesh (Sanctuary), Oseh Shamayim va-Arets (Maker of Heaven and Earth)"}, {"id": "ps135", "num": 135, "title": "Psalm 135: The Goodness and Power of the Lord", "category": "history", "categoryLabel": "Salvation History", "book": "Book 5 (Pss 107-150)", "theme": "Praising the Lord for his goodness, his sovereignty over weather, and his liberation of Israel from Egypt.", "invitation": "Praise the LORD! Praise the name of the LORD; praise him, you servants of the LORD, you who minister in the house of the LORD. (vv. 1-2)", "invitationHebrew": "הַלְלוּ־יָהּ הַלְלוּ אֶת־שֵׁם יְהוָה הַלְלוּ עַבְדֵי יְהוָה", "reason": "Praise the LORD, FOR (Kî) the LORD is good; sing praise to his name, for that is pleasant. For the LORD has chosen Jacob to be his own, Israel to be his treasured possession. (vv. 3-4)", "reasonHebrew": "כִּי־טוֹב יְהוָה זַמְּרוּ לִשְׁמוֹ כִּי נָעִים", "closing": "Praise be to the LORD from Zion, to him who dwells in Jerusalem. Praise the LORD! (v. 21)", "hebrewKeywords": "Ki Tov (For He is Good), Segullah (Treasured Possession), Hallelujah"}, {"id": "ps136", "num": 136, "title": "Psalm 136: The Great Hallel of Everlasting Love", "category": "history", "categoryLabel": "Salvation History", "book": "Book 5 (Pss 107-150)", "theme": "A 26-verse litany where every line concludes with the congregational refrain: 'His steadfast love endures forever.'", "invitation": "Give thanks to the LORD, for he is good. His love endures forever. Give thanks to the God of gods. His love endures forever. (vv. 1-2)", "invitationHebrew": "הוֹדוּ לַיהוָה כִּי־טוֹב כִּי לְעוֹלָם חַסְדּוֹ", "reason": "To him who alone does great wonders, his love endures forever; who by his understanding made the heavens, who spread out the earth upon the waters, who gives food to every creature. (vv. 4-6, 25)", "reasonHebrew": "לְעֹשֵׂה נִפְלָאוֹת גְּדֹלוֹת לְבַדּוֹ כִּי לְעוֹלָם חַסְדּוֹ", "closing": "Give thanks to the God of heaven. His love endures forever. (v. 26)", "hebrewKeywords": "Ki Le'olam Hasdo (For His Love Endures Forever), Nifla'ot (Wonders), El Ha-Shamayim (God of Heaven)"}, {"id": "ps145", "num": 145, "title": "Psalm 145: David's Hymn of Kingdom and Grace", "category": "universal", "categoryLabel": "Universal Doxology", "book": "Book 5 (Pss 107-150)", "theme": "The only psalm in the Psalter titled 'A Psalm of Praise' (Tehillah le-David): God's kingdom is everlasting and he satisfies all desires.", "invitation": "I will exalt you, my God the King; I will praise your name for ever and ever. Every day I will praise you and extol your name for ever and ever. (vv. 1-2)", "invitationHebrew": "אֲרוֹמִמְךָ אֱלוֹהַי הַמֶּלֶךְ וַאֲבָרְכָה שִׁמְךָ לְעוֹלָם וָעֶד", "reason": "The LORD is gracious and compassionate, slow to anger and rich in love. The LORD is good to all; he has compassion on all he has made. (vv. 8-9)", "reasonHebrew": "חַנּוּן וְרַחוּם יְהוָה אֶרֶךְ אַפַּיִם וּגְדָל־חָסֶד", "closing": "My mouth will speak in praise of the LORD. Let every creature praise his holy name for ever and ever. (v. 21)", "hebrewKeywords": "Tehillah (Praise), Malkhutekha (Your Kingdom), Hannun ve-Rahum (Gracious and Merciful)"}, {"id": "ps146", "num": 146, "title": "Psalm 146: God the Helper of the Oppressed", "category": "justice", "categoryLabel": "Care & Justice", "book": "Book 5 (Pss 107-150)", "theme": "The first of the final five Hallelujah psalms: do not put your trust in human princes, but in the God who frees prisoners and feeds the hungry.", "invitation": "Praise the LORD! Praise the LORD, my soul. I will praise the LORD all my life; I will sing praise to my God as long as I live. (vv. 1-2)", "invitationHebrew": "הַלְלוּ־יָהּ הַלְלִי נַפְשִׁי אֶת־יְהוָה אֲהַלְלָה יְהוָה בְּחַיָּי", "reason": "Blessed are those whose help is the God of Jacob... He upholds the cause of the oppressed and gives food to the hungry. The LORD sets prisoners free, the LORD gives sight to the blind. (vv. 5, 7-8)", "reasonHebrew": "עֹשֶׂה מִשְׁפָּט לַעֲשׁוּקִים נֹתֵן לֶחֶם לָרְעֵבִים", "closing": "The LORD reigns forever, your God, O Zion, for all generations. Praise the LORD! (v. 10)", "hebrewKeywords": "Nedivim (Princes), Asuqim (Oppressed), Hallelujah"}, {"id": "ps147", "num": 147, "title": "Psalm 147: He Heals the Brokenhearted and Counts the Stars", "category": "justice", "categoryLabel": "Care & Justice", "book": "Book 5 (Pss 107-150)", "theme": "Marveling that the same God who determines the number of the stars also gently binds up the wounds of brokenhearted people.", "invitation": "Praise the LORD. How good it is to sing praises to our God, how pleasant and fitting to praise him! (v. 1)", "invitationHebrew": "הַלְלוּ־יָהּ כִּי־טוֹב זַמְּרָה אֱלֹהֵינוּ כִּי־נָעִים נָאוָה תְהִלָּה", "reason": "He heals the brokenhearted and binds up their wounds. He determines the number of the stars and calls them each by name. Great is our Lord and abundant in power; his understanding has no limit. (vv. 3-5)", "reasonHebrew": "הָרֹפֵא לִשְׁבוּרֵי לֵב וּמְחַבֵּשׁ לְעַצְּבוֹתָם", "closing": "He has revealed his word to Jacob, his laws and decrees to Israel... Praise the LORD! (vv. 19-20)", "hebrewKeywords": "Rofe Lishvure Lev (Heals Brokenhearted), Kokhavim (Stars), Hallelujah"}, {"id": "ps148", "num": 148, "title": "Psalm 148: The Cosmic Symphony of Praise", "category": "creation", "categoryLabel": "Creation & Nature", "book": "Book 5 (Pss 107-150)", "theme": "A cosmic choir where every level of creation, from angels and stars down to sea monsters, fruit trees, and young and old people, is called to praise.", "invitation": "Praise the LORD! Praise the LORD from the heavens; praise him in the heights above. Praise him, all his angels; praise him, all his heavenly hosts. (vv. 1-2)", "invitationHebrew": "הַלְלוּ־יָהּ הַלְלוּ אֶת־יְהוָה מִן־הַשָּׁמַיִם הַלְלוּהוּ בַּמְּרוֹמִים", "reason": "Let them praise the name of the LORD, FOR (Kî) at his command they were created, and he established them for ever and ever; he issued a decree that will never pass away. (vv. 5-6)", "reasonHebrew": "כִּי הוּא צִוָּה וְנִבְרָאוּ", "closing": "He has raised up for his people a horn, the praise of all his faithful servants... Praise the LORD! (v. 14)", "hebrewKeywords": "Shamayim (Heavens), Taninim (Sea Creatures), Qeren (Horn), Hallelujah"}, {"id": "ps149", "num": 149, "title": "Psalm 149: Dancing and Singing in the Assembly", "category": "universal", "categoryLabel": "Universal Doxology", "book": "Book 5 (Pss 107-150)", "theme": "A joyful celebration of dancing, timbrel, and song in the congregation, rejoicing in the Maker of Israel.", "invitation": "Praise the LORD! Sing to the LORD a new song, his praise in the assembly of his faithful people. Let Israel rejoice in their Maker. (vv. 1-2)", "invitationHebrew": "הַלְלוּ־יָהּ שִׁירוּ לַיהוָה שִׁיר חָדָשׁ תְּהִלָּתוֹ בִּקְהַל חֲסִידִים", "reason": "FOR (Kî) the LORD takes delight in his people; he crowns the humble with victory. (v. 4)", "reasonHebrew": "כִּי־רוֹצֶה יְהוָה בְּעַמּוֹ יְפָאֵר עֲנָוִים בִּישׁוּעָה", "closing": "May the praise of God be in their mouths... this is the glory of all his faithful people. Praise the LORD! (vv. 6, 9)", "hebrewKeywords": "Shir Hadash (New Song), Hasidim (Faithful People), Anavim (Humble)"}, {"id": "ps150", "num": 150, "title": "Psalm 150: The Final Grand Doxology", "category": "universal", "categoryLabel": "Universal Doxology", "book": "Book 5 (Pss 107-150)", "theme": "The 6-verse grand finale of the entire Book of Psalms: praising God everywhere, for everything, with every instrument, by every living breath.", "invitation": "Praise the LORD! (Hallelujah!) Praise God in his sanctuary; praise him in his mighty heavens. (v. 1)", "invitationHebrew": "הַלְלוּ־יָהּ הַלְלוּ־אֵל בְּקָדְשׁוֹ הַלְלוּהוּ בִּרְקִיעַ עֻזּוֹ", "reason": "Praise him for his acts of power; praise him for his surpassing greatness. (v. 2)", "reasonHebrew": "הַלְלוּהוּ בִגְבוּרֹתָיו הַלְלוּהוּ כְּרֹב גֻּדְלוֹ", "closing": "Let everything that has breath praise the LORD! Praise the LORD! (v. 6)", "hebrewKeywords": "Gevurot (Acts of Power), Kol Ha-Neshamah (Every Breath), Hallelujah"}];
+    const INTERACTIVE_PRACTICE_PSALMS = [{"id": "prac_ps8", "num": 8, "title": "Psalm 8", "subtitle": "Creation and Human Dignity", "sections": [{"id": "s1", "label": "Section A", "verses": "Verse 1a", "hebrew": "יְהוָה אֲדֹנֵינוּ מָה־אַדִּיר שִׁמְךָ בְּכָל־הָאָרֶץ", "text": "O LORD, our Lord, how majestic is your name in all the earth! You have set your glory above the heavens.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "explanation": "This is Movement 1: Invitation. The singer addresses God directly and calls out his majesty to open the psalm."}, {"id": "s2", "label": "Section B", "verses": "Verses 3 to 5", "hebrew": "כִּי־אֶרְאֶה שָׁמֶיךָ מַעֲשֵׂה אֶצְבְּעֹתֶיךָ", "text": "When I look at your heavens, the work of your fingers... what is mankind that you are mindful of them? Yet you crowned them with glory and honor.", "correctMovement": 2, "movementName": "Movement 2: Reason", "explanation": "This is Movement 2: Reason. It starts with the ground clause (Kî): contemplating the moon and stars and marveling that God entrusted creation to human care."}, {"id": "s3", "label": "Section C", "verses": "Verse 9", "hebrew": "יְהוָה אֲדֹנֵינוּ מָה־אַדִּיר שִׁמְךָ בְּכָל־הָאָרֶץ", "text": "O LORD, our Lord, how majestic is your name in all the earth!", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "explanation": "This is Movement 3: Closing Praise. The psalm repeats the opening acclamation, forming an inclusio to conclude."}]}, {"id": "prac_ps33", "num": 33, "title": "Psalm 33", "subtitle": "The Creative Word and Trust", "sections": [{"id": "s1", "label": "Section A", "verses": "Verses 1 to 3", "hebrew": "רַנְּנוּ צַדִּיקִים בַּיהוָה לַיְשָׁרִים נָאוָה תְהִלָּה", "text": "Sing joyfully to the LORD, you righteous; it is fitting for the upright to praise him. Praise the LORD with the harp; make music to him on the ten-stringed lyre.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "explanation": "This is Movement 1: Invitation. A direct imperative summoning worshippers to play harps, lyres, and sing joyfully."}, {"id": "s2", "label": "Section B", "verses": "Verses 4 to 6", "hebrew": "כִּי־יָשָׁר דְּבַר־יְהוָה וְכָל־מַעֲשֵׂהוּ בֶּאֱמוּנָה", "text": "FOR (Kî) the word of the LORD is right and true; he is faithful in all he does. By the word of the LORD the heavens were made.", "correctMovement": 2, "movementName": "Movement 2: Reason", "explanation": "This is Movement 2: Reason. Notice the key word FOR (Kî), giving the reason: God spoke the heavens into being and rules history."}, {"id": "s3", "label": "Section C", "verses": "Verses 20 to 22", "hebrew": "יְהִי־חַסְדְּךָ יְהוָה עָלֵינוּ כַּאֲשֶׁר יִחַלְנוּ לָךְ", "text": "We wait in hope for the LORD; he is our help and our shield... May your unfailing love be with us, LORD, even as we put our hope in you.", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "explanation": "This is Movement 3: Closing Praise. A final communal declaration of trust and prayer for God's steadfast love."}]}, {"id": "prac_ps47", "num": 47, "title": "Psalm 47", "subtitle": "King Over All the Earth", "sections": [{"id": "s1", "label": "Section A", "verses": "Verse 1", "hebrew": "כָּל־הָעַמִּים תִּקְעוּ־כָף הָרִיעוּ לֵאלֹהִים בְּקוֹל רִנָּה", "text": "Clap your hands, all you nations; shout to God with cries of joy!", "correctMovement": 1, "movementName": "Movement 1: Invitation", "explanation": "This is Movement 1: Invitation. An energetic call commanding clapping hands and shouts of triumph."}, {"id": "s2", "label": "Section B", "verses": "Verses 2 to 4", "hebrew": "כִּי־יְהוָה עֶלְיוֹן נוֹרָא מֶלֶךְ גָּדוֹל עַל־כָּל־הָאָרֶץ", "text": "FOR (Kî) the LORD Most High is awesome, the great King over all the earth. He subdues nations under us, peoples under our feet.", "correctMovement": 2, "movementName": "Movement 2: Reason", "explanation": "This is Movement 2: Reason. Introduced by Kî ('for'): God is the supreme King over all earthly powers."}, {"id": "s3", "label": "Section C", "verses": "Verses 8 to 9", "hebrew": "מָלַךְ אֱלֹהִים עַל־גּוֹיִם אֱלֹהִים יָשַׁב עַל־כִּסֵּא קָדְשׁוֹ", "text": "God reigns over the nations; God is seated on his holy throne. The nobles of the nations assemble... for the kings of the earth belong to God.", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "explanation": "This is Movement 3: Closing Praise. Concludes with an enthronement acclamation of God seated on his holy throne."}]}, {"id": "prac_ps100", "num": 100, "title": "Psalm 100", "subtitle": "Universal Song of Gladness", "sections": [{"id": "s1", "label": "Section A", "verses": "Verses 1 to 2", "hebrew": "הָרִיעוּ לַיהוָה כָּל־הָאָרֶץ עִבְדוּ אֶת־יְהוָה בְּשִׂמְחָה", "text": "Shout for joy to the LORD, all the earth. Worship the LORD with gladness; come before him with joyful songs.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "explanation": "This is Movement 1: Invitation. Summoning the entire earth to come before God with singing."}, {"id": "s2", "label": "Section B", "verses": "Verse 3", "hebrew": "דְּעוּ כִּי־יְהוָה הוּא אֱלֹהִים הוּא־עָשָׂנוּ וְלוֹ אֲנַחְנוּ", "text": "Know that the LORD is God. It is he who made us, and we are his; we are his people, the sheep of his pasture.", "correctMovement": 2, "movementName": "Movement 2: Reason", "explanation": "This is Movement 2: Reason. Explaining who we are in relation to God: he made us, and we belong to him as his flock."}, {"id": "s3", "label": "Section C", "verses": "Verse 5", "hebrew": "כִּי־טוֹב יְהוָה לְעוֹלָם חַסְדּוֹ וְעַד־דֹּר וָדֹר אֱמוּנָתוֹ", "text": "FOR (Kî) the LORD is good and his love endures forever; his faithfulness continues through all generations.", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "explanation": "This is Movement 3: Closing Praise. A final doxological confession of God's enduring goodness, steadfast love, and faithfulness."}]}, {"id": "prac_ps104", "num": 104, "title": "Psalm 104", "subtitle": "Care for All Living Creatures", "sections": [{"id": "s1", "label": "Section A", "verses": "Verse 1a", "hebrew": "בָּרְכִי נַפְשִׁי אֶת־יְהוָה יְהוָה אֱלֹהַי גָּדַלְתָּ מְּאֹד", "text": "Praise the LORD, my soul. LORD my God, you are very great; you are clothed with splendor and majesty.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "explanation": "This is Movement 1: Invitation. An interior monologue commanding the singer's own soul to bless God."}, {"id": "s2", "label": "Section B", "verses": "Verses 14 to 28", "hebrew": "מַצְמִיחַ חָצִיר לַבְּהֵמָה וְעֵשֶׂב לַעֲבֹדַת הָאָדָם", "text": "He makes grass grow for the cattle, and plants for people to cultivate... All creatures look to you to give them their food at the proper time. When you open your hand, they are satisfied with good things.", "correctMovement": 2, "movementName": "Movement 2: Reason", "explanation": "This is Movement 2: Reason. The extensive catalog of God's daily ecological care for animals, birds, and people."}, {"id": "s3", "label": "Section C", "verses": "Verses 31 to 35", "hebrew": "יְהִי כְבוֹד יְהוָה לְעוֹלָם יִשְׂמַח יְהוָה בְּמַעֲשָׂיו... הַלְלוּ־יָהּ", "text": "May the glory of the LORD endure forever; may the LORD rejoice in his works... Praise the LORD, my soul. Praise the LORD! (Hallelujah!)", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "explanation": "This is Movement 3: Closing Praise. Concludes with a wish that God rejoice in his creation, ending with Hallelujah."}]}, {"id": "prac_ps117", "num": 117, "title": "Psalm 117", "subtitle": "The Universal Doxology", "sections": [{"id": "s1", "label": "Section A", "verses": "Verse 1", "hebrew": "הַלְלוּ אֶת־יְהוָה כָּל־גּוֹיִם שַׁבְּחוּהוּ כָּל־הָאֻמִּים", "text": "Praise the LORD, all you nations; extol him, all you peoples.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "explanation": "This is Movement 1: Invitation. Calling all Gentiles and nations to give praise."}, {"id": "s2", "label": "Section B", "verses": "Verse 2a", "hebrew": "כִּי גָבַר עָלֵינוּ חַסְדּוֹ וֶאֱמֶת־יְהוָה לְעוֹלָם", "text": "FOR (Kî) great is his love toward us, and the faithfulness of the LORD endures forever.", "correctMovement": 2, "movementName": "Movement 2: Reason", "explanation": "This is Movement 2: Reason. The concise ground clause (Kî) declaring God's mighty steadfast love and everlasting truth."}, {"id": "s3", "label": "Section C", "verses": "Verse 2b", "hebrew": "הַלְלוּ־יָהּ", "text": "Praise the LORD! (Hallelujah!)", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "explanation": "This is Movement 3: Closing Praise. The single-word closing shout: Hallelujah."}]}, {"id": "prac_ps146", "num": 146, "title": "Psalm 146", "subtitle": "Trusting God Over Princes", "sections": [{"id": "s1", "label": "Section A", "verses": "Verses 1 to 2", "hebrew": "הַלְלוּ־יָהּ הַלְלִי נַפְשִׁי אֶת־יְהוָה אֲהַלְלָה יְהוָה בְּחַיָּי", "text": "Praise the LORD! Praise the LORD, my soul. I will praise the LORD all my life; I will sing praise to my God as long as I live.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "explanation": "This is Movement 1: Invitation. A life vow to keep singing praise to God."}, {"id": "s2", "label": "Section B", "verses": "Verses 7 to 9", "hebrew": "עֹשֶׂה מִשְׁפָּט לַעֲשׁוּקִים נֹתֵן לֶחֶם לָרְעֵבִים", "text": "He upholds the cause of the oppressed and gives food to the hungry. The LORD sets prisoners free, the LORD gives sight to the blind, the LORD lifts up those who are bowed down.", "correctMovement": 2, "movementName": "Movement 2: Reason", "explanation": "This is Movement 2: Reason. Pointing to God's active justice for prisoners, the hungry, the blind, and strangers."}, {"id": "s3", "label": "Section C", "verses": "Verse 10", "hebrew": "יִמְלֹךְ יְהוָה לְעוֹלָם אֱלֹהַיִךְ צִיּוֹן לְדֹר וָדֹר הַלְלוּ־יָהּ", "text": "The LORD reigns forever, your God, O Zion, for all generations. Praise the LORD! (Hallelujah!)", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "explanation": "This is Movement 3: Closing Praise. The eternal reign of the Lord over Zion, closing with Hallelujah."}]}, {"id": "prac_ps148", "num": 148, "title": "Psalm 148", "subtitle": "The Cosmic Symphony", "sections": [{"id": "s1", "label": "Section A", "verses": "Verses 1 to 4", "hebrew": "הַלְלוּ־יָהּ הַלְלוּ אֶת־יְהוָה מִן־הַשָּׁמַיִם הַלְלוּהוּ בַּמְּרוֹמִים", "text": "Praise the LORD! Praise the LORD from the heavens; praise him in the heights above. Praise him, all his angels; praise him, all his heavenly hosts.", "correctMovement": 1, "movementName": "Movement 1: Invitation", "explanation": "This is Movement 1: Invitation. Calling upon angels, heavenly hosts, sun, moon, and stars to praise."}, {"id": "s2", "label": "Section B", "verses": "Verses 5 to 6", "hebrew": "יְהַלְלוּ אֶת־שֵׁם יְהוָה כִּי הוּא צִוָּה וְנִבְרָאוּ", "text": "Let them praise the name of the LORD, FOR (Kî) at his command they were created, and he established them for ever and ever; he issued a decree that will never pass away.", "correctMovement": 2, "movementName": "Movement 2: Reason", "explanation": "This is Movement 2: Reason. Notice the ground (Kî): they were created by his decree and established in order."}, {"id": "s3", "label": "Section C", "verses": "Verses 13 to 14", "hebrew": "יְהַלְלוּ אֶת־שֵׁם יְהוָה כִּי־נִשְׂגָּב שְׁמוֹ לְבַדּוֹ... הַלְלוּ־יָהּ", "text": "Let them praise the name of the LORD, for his name alone is exalted... He has raised up for his people a horn, the praise of all his faithful servants. Praise the LORD!", "correctMovement": 3, "movementName": "Movement 3: Closing Praise", "explanation": "This is Movement 3: Closing Praise. The community joins in final praise for God exalting his people."}]}];
     const FIND_THE_REASON_DATA = [{"id": 1, "ref": "Psalm 100:1 to 5", "title": "Psalm 100", "question": "Which line contains the specific reason why we enter God's gates with thanksgiving?", "lines": [{"text": "Shout for joy to the LORD, all the earth! Worship the LORD with gladness.", "isReason": false, "role": "Call to Praise (Invitation)"}, {"text": "Come before him with joyful songs.", "isReason": false, "role": "Call to Praise (Posture)"}, {"text": "Enter his gates with thanksgiving and his courts with praise; give thanks to him and praise his name.", "isReason": false, "role": "Call to Praise (Action)"}, {"text": "FOR (Kî) the LORD is good and his love endures forever; his faithfulness continues through all generations.", "isReason": true, "role": "The Reason (Ground Clause)"}], "explanation": "Verse 5 begins with the Hebrew word Kî ('for' / 'because'). It explains that God's eternal goodness, steadfast love, and multi-generational faithfulness are the bedrock reasons for our worship."}, {"id": 2, "ref": "Psalm 33:1 to 5", "title": "Psalm 33", "question": "Which line states the underlying reason for playing instruments and singing to the Lord?", "lines": [{"text": "Sing joyfully to the LORD, you righteous; it is fitting for the upright to praise him.", "isReason": false, "role": "Call to Praise (Invitation)"}, {"text": "Praise the LORD with the harp; make music to him on the ten-stringed lyre.", "isReason": false, "role": "Call to Praise (Instruments)"}, {"text": "Sing to him a new song; play skillfully, and shout for joy.", "isReason": false, "role": "Call to Praise (Expression)"}, {"text": "FOR (Kî) the word of the LORD is right and true; he is faithful in all he does.", "isReason": true, "role": "The Reason (Ground Clause)"}], "explanation": "Verse 4 provides the reason (Kî): God's spoken word is upright, trustworthy, and faithful. The musical celebration is a response to this truth."}, {"id": 3, "ref": "Psalm 117:1 to 2", "title": "Psalm 117", "question": "Why are all nations on earth summoned to praise the Lord in this shortest psalm?", "lines": [{"text": "Praise the LORD, all you nations!", "isReason": false, "role": "Call to Praise (Global Invitation)"}, {"text": "Extol him, all you peoples!", "isReason": false, "role": "Call to Praise (Parallel Invitation)"}, {"text": "FOR (Kî) great is his love toward us, and the faithfulness of the LORD endures forever.", "isReason": true, "role": "The Reason (Ground Clause)"}, {"text": "Praise the LORD! (Hallelujah!)", "isReason": false, "role": "Closing Doxology"}], "explanation": "Verse 2 opens with Kî: God's immense steadfast covenant love (hesed) and enduring truth (emet) extend to all nations."}, {"id": 4, "ref": "Psalm 95:1 to 5", "title": "Psalm 95", "question": "Which line gives the reason why God is described as the Rock of our salvation?", "lines": [{"text": "Come, let us sing for joy to the LORD; let us shout aloud to the Rock of our salvation.", "isReason": false, "role": "Call to Praise (Invitation)"}, {"text": "Let us come before him with thanksgiving and extol him with music and song.", "isReason": false, "role": "Call to Praise (Action)"}, {"text": "FOR (Kî) the LORD is the great God, the great King above all gods.", "isReason": true, "role": "The Reason (Ground Clause)"}, {"text": "In his hand are the depths of the earth, and the mountain peaks belong to him.", "isReason": false, "role": "Supporting Description of Creation"}], "explanation": "Verse 3 introduces the ground (Kî): Yahweh is not a minor local deity, but the supreme Sovereign King who holds the heights and depths of creation."}, {"id": 5, "ref": "Psalm 146:1 to 7", "title": "Psalm 146", "question": "Which line explains why trusting in God is better than putting confidence in human rulers?", "lines": [{"text": "Praise the LORD, my soul! I will praise the LORD all my life.", "isReason": false, "role": "Call to Praise (Personal Vow)"}, {"text": "Do not put your trust in princes, in human beings, who cannot save.", "isReason": false, "role": "Warning against false trust"}, {"text": "When their breath departs, they return to the ground; on that very day their plans come to nothing.", "isReason": false, "role": "Description of human frailty"}, {"text": "He upholds the cause of the oppressed and gives food to the hungry; the LORD sets prisoners free.", "isReason": true, "role": "The Reason (God's Action of Justice)"}], "explanation": "Verses 7 to 9 provide the reason for trusting God: Unlike mortal princes who die and leave broken promises, God continually executes justice for the oppressed, feeds the hungry, and frees the captive."}, {"id": 6, "ref": "Psalm 103:1 to 8", "title": "Psalm 103", "question": "Which line describes God's compassionate character as the foundation of personal praise?", "lines": [{"text": "Praise the LORD, my soul; all my inmost being, praise his holy name.", "isReason": false, "role": "Call to Praise (Inner self)"}, {"text": "Praise the LORD, my soul, and forget not all his benefits.", "isReason": false, "role": "Call to Praise (Call to remember)"}, {"text": "The LORD is compassionate and gracious, slow to anger, abounding in love.", "isReason": true, "role": "The Reason (God's Revealed Character)"}, {"text": "He does not treat us as our sins deserve or repay us according to our iniquities.", "isReason": false, "role": "Supporting Result"}], "explanation": "Verse 8 quotes God's foundational covenant name from Exodus 34:6: 'compassionate and gracious, slow to anger, abounding in love.' This character is the reason we praise him."}, {"id": 7, "ref": "Psalm 148:1 to 6", "title": "Psalm 148", "question": "Which line explains why the sun, moon, and shining stars must praise the Lord?", "lines": [{"text": "Praise the LORD from the heavens; praise him in the heights above.", "isReason": false, "role": "Call to Praise (Heavens)"}, {"text": "Praise him, sun and moon; praise him, all you shining stars.", "isReason": false, "role": "Call to Praise (Cosmic bodies)"}, {"text": "Praise him, you highest heavens and you waters above the skies.", "isReason": false, "role": "Call to Praise (Upper atmosphere)"}, {"text": "FOR (Kî) at his command they were created, and he established them for ever and ever.", "isReason": true, "role": "The Reason (Creation by Decree)"}], "explanation": "Verse 5 gives the reason (Kî): The heavenly lights are not gods to be worshipped; they are creatures brought into existence by God's commanding word."}, {"id": 8, "ref": "Psalm 135:1 to 4", "title": "Psalm 135", "question": "Which line gives the double reason why God's servants should sing to his name?", "lines": [{"text": "Praise the LORD! Praise the name of the LORD; praise him, you servants of the LORD.", "isReason": false, "role": "Call to Praise (Servants)"}, {"text": "You who minister in the house of the LORD, in the courts of the house of our God.", "isReason": false, "role": "Call to Praise (Setting)"}, {"text": "Praise the LORD, FOR (Kî) the LORD is good; sing praise to his name, for that is pleasant.", "isReason": true, "role": "The Reason (God's Goodness)"}, {"text": "Praise be to the LORD from Zion, to him who dwells in Jerusalem.", "isReason": false, "role": "Closing Blessing"}], "explanation": "Verse 3 uses Kî twice: We praise God because he is fundamentally good, and because praising him brings deep spiritual delight to the worshipper."}];
     const GENRE_DATA = [{"ref": "Psalm 104:24", "text": "How many are your works, LORD! In wisdom you made them all; the earth is full of your creatures.", "options": ["Descriptive Praise (Hymn)", "Declarative Thanksgiving", "Lament (Complaint)"], "answer": 0, "explanation": "Descriptive Praise! The psalmist is not thanking God for a specific personal rescue, but marveling at God's eternal wisdom displayed across creation."}, {"ref": "Psalm 30:1 to 3", "text": "I will exalt you, LORD, for you lifted me out of the depths and did not let my enemies gloat over me... You, LORD, brought me up from the realm of the dead; you spared me from going down to the pit.", "options": ["Descriptive Praise (Hymn)", "Declarative Thanksgiving", "Lament (Complaint)"], "answer": 1, "explanation": "Declarative Thanksgiving! This is a personal thanksgiving for a specific, past crisis: the singer was near death ('in the pit'), prayed, and God delivered them."}, {"ref": "Psalm 13:1 to 2", "text": "How long, LORD? Will you forget me forever? How long will you hide your face from me? How long must I wrestle with my thoughts and day after day have sorrow in my heart?", "options": ["Descriptive Praise (Hymn)", "Declarative Thanksgiving", "Lament (Complaint)"], "answer": 2, "explanation": "Lament! The speaker is in acute personal distress, crying out to God with urgent questions ('How long?') and laying bare their sorrow."}, {"ref": "Psalm 113:7 to 8", "text": "He raises the poor from the dust and lifts the needy from the ash heap; he seats them with princes, with the princes of his people.", "options": ["Descriptive Praise (Hymn)", "Declarative Thanksgiving", "Lament (Complaint)"], "answer": 0, "explanation": "Descriptive Praise! This celebrates God's habitual character and regular way of acting: he continually upholds the humble and exalts the lowly."}, {"ref": "Psalm 116:3 to 4", "text": "The cords of death entangled me, the anguish of the grave came over me; I was overcome by distress and sorrow. Then I called on the name of the LORD: 'LORD, save me!'", "options": ["Descriptive Praise (Hymn)", "Declarative Thanksgiving", "Lament (Complaint)"], "answer": 1, "explanation": "Declarative Thanksgiving! The psalmist looks back and narrates their previous distress ('the cords of death') and reports how God answered their prayer."}];
 
     // ---------------------------------------------------------------------------
-    // TAB 2: EXPLORER LOGIC
+    // TAB 2: EXPLORER MODE TOGGLE (STUDY VS PRACTICE)
+    // ---------------------------------------------------------------------------
+    let explorerMode = 'study';
+
+    function setExplorerMode(mode) {
+      playSound('click');
+      explorerMode = mode;
+      const studyContainer = document.getElementById('explorer-study-container');
+      const practiceContainer = document.getElementById('explorer-practice-container');
+      const studyBtn = document.getElementById('explorer-mode-study-btn');
+      const practiceBtn = document.getElementById('explorer-mode-practice-btn');
+
+      if (mode === 'study') {
+        if (studyContainer) studyContainer.classList.remove('hidden');
+        if (practiceContainer) practiceContainer.classList.add('hidden');
+        if (studyBtn) studyBtn.className = 'neu-tab-pill active px-3.5 py-1.5 text-xs font-bold flex items-center gap-1.5';
+        if (practiceBtn) practiceBtn.className = 'neu-tab-pill px-3.5 py-1.5 text-xs font-bold flex items-center gap-1.5';
+      } else {
+        if (studyContainer) studyContainer.classList.add('hidden');
+        if (practiceContainer) practiceContainer.classList.remove('hidden');
+        if (studyBtn) studyBtn.className = 'neu-tab-pill px-3.5 py-1.5 text-xs font-bold flex items-center gap-1.5';
+        if (practiceBtn) practiceBtn.className = 'neu-tab-pill active px-3.5 py-1.5 text-xs font-bold flex items-center gap-1.5';
+        renderPracticePsalmSwitcher();
+        renderInteractivePracticePsalm();
+      }
+      lucide.createIcons();
+    }
+
+    // ---------------------------------------------------------------------------
+    // TAB 2 (A): STUDY VIEW LOGIC (35 LABELED PSALMS)
     // ---------------------------------------------------------------------------
     let activeCategory = 'all';
     let selectedPsalmId = 'ps8';
@@ -774,6 +866,7 @@
       const p = PRAISE_PSALMS.find(x => x.id === selectedPsalmId) || PRAISE_PSALMS[0];
       if (!container || !p) return;
 
+      // Note: "The" removed from movement titles!
       container.innerHTML = `
         <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-4">
           <div>
@@ -792,13 +885,13 @@
           </p>
         </div>
 
-        <!-- 3 Movements Display -->
+        <!-- 3 Movements Display (Without "The") -->
         <div class="space-y-3 pt-1">
           
           <!-- Movement 1 -->
           <div class="neu-card p-4 space-y-2 border-l-4 border-l-amber-500">
             <div class="flex items-center justify-between text-[11px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
-              <span>Movement 1: The Invitation (Call to Praise)</span>
+              <span>Movement 1: Invitation (Call to Praise)</span>
             </div>
             <div class="font-hebrew text-sm text-slate-700 dark:text-slate-300 text-right leading-loose">${p.invitationHebrew}</div>
             <div class="text-xs font-serif italic text-slate-800 dark:text-slate-200">"${p.invitation}"</div>
@@ -807,7 +900,7 @@
           <!-- Movement 2 -->
           <div class="neu-card p-4 space-y-2 border-l-4 border-l-blue-500">
             <div class="flex items-center justify-between text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-              <span>Movement 2: The Reason (Ground / Kî Clause)</span>
+              <span>Movement 2: Reason (Ground / Kî Clause)</span>
             </div>
             <div class="font-hebrew text-sm text-slate-700 dark:text-slate-300 text-right leading-loose">${p.reasonHebrew}</div>
             <div class="text-xs font-serif italic text-slate-800 dark:text-slate-200">"${p.reason}"</div>
@@ -816,7 +909,7 @@
           <!-- Movement 3 -->
           <div class="neu-card p-4 space-y-2 border-l-4 border-l-emerald-500">
             <div class="flex items-center justify-between text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
-              <span>Movement 3: The Closing Praise (Doxology)</span>
+              <span>Movement 3: Closing Praise (Doxology)</span>
             </div>
             <div class="text-xs font-serif italic text-slate-800 dark:text-slate-200">"${p.closing}"</div>
           </div>
@@ -830,6 +923,197 @@
         </div>
       `;
       lucide.createIcons();
+    }
+
+    // ---------------------------------------------------------------------------
+    // TAB 2 (B): PRACTICE VIEW LOGIC (CLICK TO CHOOSE WHERE MOVEMENTS COME)
+    // ---------------------------------------------------------------------------
+    let activePracticePsalmIdx = 0;
+    let practiceUserAnswers = {}; // [sectionId] = chosenMovement (1, 2, or 3)
+
+    function renderPracticePsalmSwitcher() {
+      const switcher = document.getElementById('practice-psalms-switcher');
+      if (!switcher) return;
+
+      let html = '';
+      INTERACTIVE_PRACTICE_PSALMS.forEach((p, idx) => {
+        const isActive = (idx === activePracticePsalmIdx);
+        const pillClass = isActive ? 'neu-tab-pill active px-3 py-1 text-xs font-bold' : 'neu-tab-pill px-3 py-1 text-xs font-bold';
+        html += `
+          <button onclick="selectPracticePsalm(${idx})" class="${pillClass} whitespace-nowrap">
+            Psalm ${p.num}
+          </button>
+        `;
+      });
+      switcher.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    function selectPracticePsalm(idx) {
+      playSound('click');
+      activePracticePsalmIdx = idx;
+      practiceUserAnswers = {};
+      renderPracticePsalmSwitcher();
+      renderInteractivePracticePsalm();
+    }
+
+    function renderInteractivePracticePsalm() {
+      const container = document.getElementById('interactive-practice-box');
+      const p = INTERACTIVE_PRACTICE_PSALMS[activePracticePsalmIdx];
+      if (!container || !p) return;
+
+      let sectionsHtml = '';
+      let allCorrect = true;
+
+      p.sections.forEach((sec, idx) => {
+        const userChoice = practiceUserAnswers[sec.id];
+        const isAnswered = (userChoice !== undefined);
+        const isCorrect = (userChoice === sec.correctMovement);
+
+        if (!isCorrect) allCorrect = false;
+
+        let statusBorder = 'border-l-4 border-l-slate-300 dark:border-l-slate-700';
+        let feedbackHtml = '';
+
+        if (isAnswered) {
+          if (isCorrect) {
+            statusBorder = 'border-l-4 border-l-emerald-500 bg-emerald-50/30 dark:bg-emerald-950/20';
+            feedbackHtml = `
+              <div class="neu-inset p-3 space-y-1 text-xs border-l-2 border-l-emerald-500">
+                <span class="font-bold text-emerald-600 dark:text-emerald-400">Correct! ${sec.movementName}</span>
+                <p class="text-slate-600 dark:text-slate-300 font-serif">${sec.explanation}</p>
+              </div>
+            `;
+          } else {
+            statusBorder = 'border-l-4 border-l-rose-500 bg-rose-50/30 dark:bg-rose-950/20';
+            feedbackHtml = `
+              <div class="neu-inset p-3 space-y-1 text-xs border-l-2 border-l-rose-500">
+                <span class="font-bold text-rose-600 dark:text-rose-400">Not quite!</span>
+                <p class="text-slate-600 dark:text-slate-300 font-serif">Notice what this text is doing: is it calling to praise, giving the reason why, or wrapping up? Try clicking another button above.</p>
+              </div>
+            `;
+          }
+        }
+
+        // Option Buttons
+        const btnOptions = [
+          { num: 1, label: 'Movement 1: Invitation' },
+          { num: 2, label: 'Movement 2: Reason' },
+          { num: 3, label: 'Movement 3: Closing Praise' }
+        ];
+
+        let buttonsHtml = '';
+        btnOptions.forEach(opt => {
+          let btnClass = 'neu-btn px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5';
+          if (isAnswered && userChoice === opt.num) {
+            if (isCorrect) {
+              btnClass = 'px-3 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 shadow-md flex items-center gap-1.5';
+            } else {
+              btnClass = 'px-3 py-2 rounded-xl text-xs font-bold text-white bg-rose-600 shadow-md flex items-center gap-1.5';
+            }
+          }
+
+          buttonsHtml += `
+            <button onclick="chooseMovement('${sec.id}', ${opt.num})" class="${btnClass}">
+              <span>${opt.label}</span>
+            </button>
+          `;
+        });
+
+        sectionsHtml += `
+          <div class="neu-card p-5 space-y-3 ${statusBorder}">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">${sec.label} &bull; ${sec.verses}</span>
+              <span class="text-xs font-bold text-slate-400">Click to Identify:</span>
+            </div>
+
+            <div class="font-hebrew text-sm text-slate-700 dark:text-slate-300 text-right leading-loose">${sec.hebrew}</div>
+            <div class="text-xs sm:text-sm font-serif italic text-slate-800 dark:text-slate-200">"${sec.text}"</div>
+
+            <div class="pt-2 flex flex-wrap items-center gap-2">
+              ${buttonsHtml}
+            </div>
+
+            ${feedbackHtml}
+          </div>
+        `;
+      });
+
+      let completionBanner = '';
+      const totalSections = p.sections.length;
+      const answeredCount = Object.keys(practiceUserAnswers).length;
+
+      if (answeredCount === totalSections && allCorrect) {
+        completionBanner = `
+          <div class="neu-inset p-5 text-center space-y-3 border-l-4 border-l-emerald-500">
+            <span class="w-10 h-10 mx-auto rounded-full bg-emerald-500/20 text-emerald-600 flex items-center justify-center">
+              <i data-lucide="check-check" class="w-5 h-5"></i>
+            </span>
+            <h4 class="font-display font-extrabold text-base text-slate-900 dark:text-white">
+              Excellent! You correctly identified all three movements in ${p.title}!
+            </h4>
+            <p class="text-xs text-slate-500 font-serif">
+              You can clearly recognize how the Invitation, Reason, and Closing Praise fit together.
+            </p>
+            <div class="pt-1">
+              <button onclick="nextPracticePsalm()" class="neu-btn px-4 py-2 rounded-xl text-xs font-bold text-amber-600 inline-flex items-center gap-1.5">
+                <span>Try Next Psalm</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = `
+        <div class="space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
+            <div>
+              <h4 class="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
+                ${p.title}: ${p.subtitle}
+              </h4>
+              <p class="text-xs text-slate-500 font-serif">
+                Identify which movement belongs to Section A, Section B, and Section C.
+              </p>
+            </div>
+            <span class="text-xs font-bold px-3 py-1 rounded-full neu-inset text-amber-600">
+              Practice Psalm ${activePracticePsalmIdx + 1} of ${INTERACTIVE_PRACTICE_PSALMS.length}
+            </span>
+          </div>
+
+          <div class="space-y-4">
+            ${sectionsHtml}
+          </div>
+
+          ${completionBanner}
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function chooseMovement(sectionId, chosenNum) {
+      const p = INTERACTIVE_PRACTICE_PSALMS[activePracticePsalmIdx];
+      const sec = p.sections.find(s => s.id === sectionId);
+      if (!sec) return;
+
+      practiceUserAnswers[sectionId] = chosenNum;
+      const isCorrect = (chosenNum === sec.correctMovement);
+
+      if (isCorrect) {
+        playSound('correct');
+      } else {
+        playSound('click');
+      }
+
+      renderInteractivePracticePsalm();
+    }
+
+    function nextPracticePsalm() {
+      playSound('click');
+      activePracticePsalmIdx = (activePracticePsalmIdx + 1) % INTERACTIVE_PRACTICE_PSALMS.length;
+      practiceUserAnswers = {};
+      renderPracticePsalmSwitcher();
+      renderInteractivePracticePsalm();
     }
 
     // ---------------------------------------------------------------------------
@@ -983,14 +1267,14 @@
     }
 
     // ---------------------------------------------------------------------------
-    // TAB 4: SPOT THE GENRE GYM
+    // TAB 4: SPOT THE GENRE (GYM REMOVED)
     // ---------------------------------------------------------------------------
     let genreIdx = 0;
     let genreScore = 0;
     let genreAnswered = {};
 
-    function renderGenreGym() {
-      const card = document.getElementById('genre-gym-card');
+    function renderGenrePractice() {
+      const card = document.getElementById('genre-card');
       if (!card) return;
 
       if (genreIdx >= GENRE_DATA.length) {
@@ -1000,7 +1284,7 @@
               <i data-lucide="trophy" class="w-7 h-7"></i>
             </span>
             <h4 class="font-display font-extrabold text-lg text-slate-900 dark:text-white">
-              Genre Gym Completed!
+              Practice Completed!
             </h4>
             <p class="text-sm text-slate-600 dark:text-slate-300 font-serif">
               You scored <strong>${genreScore}</strong> out of <strong>${GENRE_DATA.length}</strong>!
@@ -1008,7 +1292,7 @@
             <p class="text-xs text-slate-500 max-w-md mx-auto font-serif">
               You can now clearly distinguish between descriptive praise (who God is), thanksgiving (past rescues), and lament (distress).
             </p>
-            <button onclick="restartGenreGym()" class="neu-btn px-5 py-2.5 rounded-xl text-xs font-bold text-purple-600 inline-flex items-center gap-2">
+            <button onclick="restartGenrePractice()" class="neu-btn px-5 py-2.5 rounded-xl text-xs font-bold text-purple-600 inline-flex items-center gap-2">
               <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
               <span>Try Again</span>
             </button>
@@ -1114,16 +1398,16 @@
     function nextGenreRound() {
       playSound('click');
       genreIdx++;
-      renderGenreGym();
+      renderGenrePractice();
     }
 
-    function restartGenreGym() {
+    function restartGenrePractice() {
       playSound('click');
       genreIdx = 0;
       genreScore = 0;
       genreAnswered = {};
       document.getElementById('genre-score-badge').textContent = `Score: 0 / ${GENRE_DATA.length}`;
-      renderGenreGym();
+      renderGenrePractice();
     }
 
     // ---------------------------------------------------------------------------
@@ -1134,7 +1418,7 @@
       filterPraisePsalms();
       renderPsalmDetail();
       renderReasonExercise();
-      renderGenreGym();
+      renderGenrePractice();
       lucide.createIcons();
     });
   </script>
