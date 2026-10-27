@@ -38,7 +38,7 @@ The suite connects eight dedicated learning environments into a unified desktop 
    - Comprehensive guide to descriptive praise (*Tehillim*) across the Hebrew Psalter.
    - Three core movements: 1. Invitation (Call to Praise), 2. Reason (*Kî* clause), and 3. Closing Praise.
    - Split explorer with a 35-psalm labeled study library and an interactive Full-Text Movement Highlighter Lab.
-   - Interactive "Find the Reason" lab and "Spot the Genre" exercise (Praise vs. Thanksgiving vs. Lament).
+   - Interactive "Find the Reason" lab exploring causal *Kî* ground clauses.
 4. **Lament Soul-Care Diagnostic Studio**:
    - Interactive anatomy of the 6-part lament structure (Address, Complaint, Confession of Trust, Petition, Assurance of Being Heard, Vow of Praise).
 5. **Quadriga Four-Senses Hermeneutics Studio**:
