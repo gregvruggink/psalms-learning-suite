@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Understanding Praise Psalms Studio (BIB523 Week 3)</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Serif+Hebrew:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS Local Vendor -->
+  <script src="vendor/tailwind.js"></script>
+  <!-- Lucide Icons Local Vendor -->
+  <script src="vendor/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neu: {
+              bg: '#E8F1FA',
+              surface: '#FFFFFF',
+              well: '#EEF5FC',
+              fg: '#1E293B',
+              muted: '#5A6A80',
+              accent: '#0066CC',
+              accentLight: '#2684FF',
+              amber: '#D97706',
+              green: '#059669',
+              purple: '#7C3AED'
+            }
+          },
+          fontFamily: {
+            display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+            serif: ['Plus Jakarta Sans', 'Georgia', 'serif'],
+            hebrew: ['Noto Serif Hebrew', 'SBL Hebrew', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --neu-bg: #E8F1FA;
+      --neu-surface: #FFFFFF;
+      --neu-surface-well: #EEF5FC;
+      --neu-fg: #1E293B;
+      --neu-shadow-dark: rgba(180, 200, 222, 0.65);
+      --neu-shadow-light: rgba(255, 255, 255, 0.95);
+    }
+    .dark {
+      --neu-bg: #0F172A;
+      --neu-surface: #1E293B;
+      --neu-surface-well: #0B1120;
+      --neu-fg: #F1F5F9;
+      --neu-shadow-dark: rgba(0, 0, 0, 0.7);
+      --neu-shadow-light: rgba(255, 255, 255, 0.05);
+    }
+    body {
+      background-color: var(--neu-bg);
+      color: var(--neu-fg);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .neu-card {
+      background-color: var(--neu-surface) !important;
+      border-radius: 24px !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      box-shadow: 6px 8px 18px var(--neu-shadow-dark), -6px -6px 16px var(--neu-shadow-light) !important;
+      transition: all 200ms ease;
+    }
+    .dark .neu-card {
+      border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+    .neu-inset {
+      background-color: var(--neu-surface-well) !important;
+      border-radius: 18px !important;
+      box-shadow: inset 3px 3px 7px var(--neu-shadow-dark), inset -3px -3px 7px var(--neu-shadow-light) !important;
+    }
+    .neu-btn {
+      background-color: var(--neu-surface) !important;
+      box-shadow: 4px 4px 10px var(--neu-shadow-dark), -4px -4px 10px var(--neu-shadow-light) !important;
+      transition: all 180ms ease !important;
+      cursor: pointer;
+    }
+    .neu-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 6px 6px 14px var(--neu-shadow-dark), -6px -6px 14px var(--neu-shadow-light) !important;
+    }
+    .neu-btn:active {
+      transform: translateY(1px);
+      box-shadow: inset 2px 2px 5px var(--neu-shadow-dark), inset -2px -2px 5px var(--neu-shadow-light) !important;
+    }
+    .neu-tab-pill {
+      border-radius: 14px;
+      font-weight: 700;
+      transition: all 180ms ease;
+      cursor: pointer;
+    }
+    .neu-tab-pill.active {
+      background-color: #0066CC !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.35) !important;
+    }
+    .dark .neu-tab-pill.active {
+      background-color: #2684FF !important;
+      color: #FFFFFF !important;
+    }
+    .font-hebrew {
+      font-family: 'Noto Serif Hebrew', serif;
+      direction: rtl;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber-100 selection:text-amber-900 dark:selection:bg-amber-900 dark:selection:text-amber-100">
+
+  <!-- ========================================================================= -->
+  <!-- TOP NAVIGATION BAR                                                        -->
+  <!-- ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-3">
+        <a href="../Psalms_Interactive_Learning_Suite.html" class="neu-btn px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-amber-600 flex items-center gap-1.5 transition">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Suite Hub</span>
+        </a>
+        <div class="h-6 w-px bg-slate-300 dark:bg-slate-700 hidden sm:block"></div>
+        <div class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-xl neu-btn flex items-center justify-center text-amber-500">
+            <i data-lucide="sun" class="w-5 h-5"></i>
+          </span>
+          <div>
+            <h1 class="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white leading-tight">
+              Understanding Praise Psalms
+            </h1>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-semibold">
+              BIB523 Week 3 &bull; Descriptive Praise in the Book of Psalms
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center gap-2">
+        <button onclick="toggleAudio()" id="sound-btn" class="neu-btn px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-amber-600 flex items-center gap-1.5" title="Toggle Sound">
+          <i data-lucide="volume-2" id="sound-icon" class="w-4 h-4"></i>
+          <span class="hidden md:inline">Audio</span>
+        </button>
+        <button onclick="toggleTheme()" class="neu-btn p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-amber-600" title="Toggle Light/Dark Theme">
+          <i data-lucide="moon" id="theme-icon" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN STUDIO CONTAINER                                                     -->
+  <!-- ========================================================================= -->
+  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 flex-1">
+
+    <!-- Top Navigation Tabs -->
+    <div class="neu-card p-2 flex flex-wrap items-center justify-between gap-2">
+      <nav class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto p-1">
+        <button onclick="switchTab('identify')" id="tab-btn-identify" class="neu-tab-pill active px-4 py-2 text-xs font-bold flex items-center gap-2 whitespace-nowrap">
+          <i data-lucide="search" class="w-4 h-4"></i>
+          <span>1. How to Spot Praise</span>
+        </button>
+        <button onclick="switchTab('parts')" id="tab-btn-parts" class="neu-tab-pill px-4 py-2 text-xs font-bold flex items-center gap-2 whitespace-nowrap">
+          <i data-lucide="list-ordered" class="w-4 h-4"></i>
+          <span>2. The Three Main Parts</span>
+        </button>
+        <button onclick="switchTab('psalm24')" id="tab-btn-psalm24" class="neu-tab-pill px-4 py-2 text-xs font-bold flex items-center gap-2 whitespace-nowrap">
+          <i data-lucide="door-open" class="w-4 h-4"></i>
+          <span>3. Psalm 24 Study</span>
+        </button>
+        <button onclick="switchTab('practice')" id="tab-btn-practice" class="neu-tab-pill px-4 py-2 text-xs font-bold flex items-center gap-2 whitespace-nowrap">
+          <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+          <span>4. Practice & Worship</span>
+        </button>
+      </nav>
+
+      <div class="text-[11px] font-bold text-amber-600 dark:text-amber-400 px-3 py-1 rounded-lg bg-amber-500/10 hidden lg:flex items-center gap-1.5">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+        <span>Bullock Ch. 6 Focus</span>
+      </div>
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- TAB 1: HOW TO SPOT PRAISE                                               -->
+    <!-- ======================================================================= -->
+    <section id="view-identify" class="space-y-6">
+
+      <!-- Hero Introduction Banner -->
+      <div class="neu-card p-6 sm:p-8 space-y-4 border-l-4 border-l-amber-500">
+        <div class="max-w-3xl space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+            What is a Praise Psalm?
+          </span>
+          <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white">
+            Praising God for Who He Is and What He Does
+          </h2>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-serif">
+            In Hebrew, the entire Book of Psalms is named <em>Tehillim</em>, which means "Praises." 
+            A praise psalm is a song of pure joy and thanksgiving to God. Unlike a lament psalm, where a person is crying out in pain, 
+            a praise psalm focuses entirely on God's greatness, his love, and his care for the world.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div class="neu-inset p-4 space-y-2">
+            <div class="flex items-center gap-2 text-amber-600 dark:text-amber-400 font-bold text-xs uppercase tracking-wider">
+              <i data-lucide="compass" class="w-4 h-4"></i>
+              <span>Life Orientation</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              Scholar Walter Brueggemann calls these "Psalms of Orientation." They remind us that the world is reliable, good, and safely in God's hands.
+            </p>
+          </div>
+
+          <div class="neu-inset p-4 space-y-2">
+            <div class="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold text-xs uppercase tracking-wider">
+              <i data-lucide="anchor" class="w-4 h-4"></i>
+              <span>Grounded in Truth</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              Biblical praise is not just repeating empty emotional slogans. Biblical praise always gives real reasons for its joy, pointing to God's deeds.
+            </p>
+          </div>
+
+          <div class="neu-inset p-4 space-y-2">
+            <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-xs uppercase tracking-wider">
+              <i data-lucide="users" class="w-4 h-4"></i>
+              <span>Shared Community</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              Praise invites other people to join in. The singer calls on the congregation, the nations, and even nature to praise the Lord together.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- The 3 Clues to Spotting a Praise Psalm -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="font-display font-extrabold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+            <i data-lucide="check-check" class="w-5 h-5 text-amber-500"></i>
+            <span>The Three Clues: How to Identify a Praise Psalm</span>
+          </h3>
+          <span class="text-xs text-slate-500 font-semibold">Look for these signs in the text</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          
+          <!-- Clue 1 -->
+          <div class="neu-card p-5 space-y-3 border-t-4 border-t-amber-500 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Clue 1</span>
+                <span class="w-7 h-7 rounded-lg neu-inset flex items-center justify-center text-amber-600 text-xs font-bold">1</span>
+              </div>
+              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">An Invitation to Praise</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+                The psalm opens with direct commands to give praise. It calls on you, the community, or creation to worship God.
+              </p>
+            </div>
+            <div class="neu-inset p-3 space-y-1">
+              <span class="text-[10px] font-bold uppercase text-slate-500">Common Examples:</span>
+              <p class="text-xs text-slate-800 dark:text-slate-200 font-medium italic">
+                "Praise the Lord!" (Hallelujah)<br>
+                "Sing to the Lord a new song!"<br>
+                "Bless the Lord, O my soul!"
+              </p>
+            </div>
+          </div>
+
+          <!-- Clue 2 -->
+          <div class="neu-card p-5 space-y-3 border-t-4 border-t-blue-500 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Clue 2</span>
+                <span class="w-7 h-7 rounded-lg neu-inset flex items-center justify-center text-blue-600 text-xs font-bold">2</span>
+              </div>
+              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">The Reason Word: "For" or "Because"</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+                In Hebrew, this is the small word <strong class="text-blue-600">כִּי (Kî)</strong>. It connects the invitation to the actual reason why God deserves our praise.
+              </p>
+            </div>
+            <div class="neu-inset p-3 space-y-1">
+              <span class="text-[10px] font-bold uppercase text-slate-500">Look for this pattern:</span>
+              <p class="text-xs text-slate-800 dark:text-slate-200 font-medium italic">
+                "Praise the Lord...<br>
+                <span class="text-blue-600 font-bold">FOR</span> he is good."<br>
+                <span class="text-blue-600 font-bold">FOR</span> his steadfast love endures forever."
+              </p>
+            </div>
+          </div>
+
+          <!-- Clue 3 -->
+          <div class="neu-card p-5 space-y-3 border-t-4 border-t-emerald-500 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Clue 3</span>
+                <span class="w-7 h-7 rounded-lg neu-inset flex items-center justify-center text-emerald-600 text-xs font-bold">3</span>
+              </div>
+              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">Two Main Reasons Given</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+                The reasons usually fall into two big categories: God's greatness in making the universe, and God's goodness in helping needy people.
+              </p>
+            </div>
+            <div class="neu-inset p-3 space-y-1">
+              <span class="text-[10px] font-bold uppercase text-slate-500">The Two Big Reasons:</span>
+              <p class="text-xs text-slate-800 dark:text-slate-200 font-medium italic">
+                1. <strong>Creation</strong>: God rules the sun, sea, and stars.<br>
+                2. <strong>Care</strong>: God lifts up the poor and defends the oppressed.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- The 4 Main Types of Praise Psalms -->
+      <div class="neu-card p-6 space-y-4">
+        <h3 class="font-display font-extrabold text-base text-slate-900 dark:text-white flex items-center gap-2">
+          <i data-lucide="layers" class="w-4 h-4 text-amber-500"></i>
+          <span>Four Common Types of Praise Psalms in the Bible</span>
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="neu-inset p-4 space-y-2">
+            <div class="font-bold text-xs text-amber-600 dark:text-amber-400 uppercase tracking-wider">1. Creation Hymns</div>
+            <div class="text-sm font-bold text-slate-900 dark:text-white">Psalm 8, Psalm 104</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              These celebrate the beauty and balance of God's world, the animals he feeds, and the honor he gave to human beings.
+            </p>
+          </div>
+
+          <div class="neu-inset p-4 space-y-2">
+            <div class="font-bold text-xs text-blue-600 dark:text-blue-400 uppercase tracking-wider">2. History Hymns</div>
+            <div class="text-sm font-bold text-slate-900 dark:text-white">Psalm 105, Psalm 136</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              These retell Israel's story from Abraham to the Exodus, thanking God for keeping his promises across generations.
+            </p>
+          </div>
+
+          <div class="neu-inset p-4 space-y-2">
+            <div class="font-bold text-xs text-purple-600 dark:text-purple-400 uppercase tracking-wider">3. Songs of Zion</div>
+            <div class="text-sm font-bold text-slate-900 dark:text-white">Psalm 46, Psalm 48</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              These celebrate God's presence dwelling with his people in Jerusalem, assuring them that God is their refuge.
+            </p>
+          </div>
+
+          <div class="neu-inset p-4 space-y-2">
+            <div class="font-bold text-xs text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">4. King / Enthronement</div>
+            <div class="text-sm font-bold text-slate-900 dark:text-white">Psalm 24, Psalm 93, 97</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              These celebrate the Lord as the true King over all kings, ruling with righteousness, justice, and peace.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- TAB 2: THE THREE MAIN PARTS                                             -->
+    <!-- ======================================================================= -->
+    <section id="view-parts" class="space-y-6 hidden">
+
+      <!-- Section Banner -->
+      <div class="neu-card p-6 space-y-2 border-l-4 border-l-blue-500">
+        <h3 class="font-display font-extrabold text-xl text-slate-900 dark:text-white">
+          The Three Main Parts of a Praise Psalm
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-serif max-w-3xl leading-relaxed">
+          Almost every praise psalm in the Bible is organized into three simple parts. 
+          First, an invitation to praise. Second, the reasons why. Third, a closing expression of praise or blessing.
+        </p>
+      </div>
+
+      <!-- Interactive 3-Part Psalm Explorer -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left Column: Psalm Selector & Part Guide -->
+        <div class="lg:col-span-4 space-y-5">
+          
+          <!-- Psalm Selector Buttons -->
+          <div class="neu-card p-4 space-y-3">
+            <label class="text-xs font-bold uppercase tracking-wider text-slate-500">Choose a Psalm to Inspect:</label>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="loadPartsPsalm('ps8')" id="btn-ps8" class="neu-btn px-3 py-2.5 rounded-xl text-xs font-bold text-left transition flex items-center justify-between border-l-4 border-l-blue-500">
+                <span>Psalm 8</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-blue-500"></i>
+              </button>
+              <button onclick="loadPartsPsalm('ps104')" id="btn-ps104" class="neu-btn px-3 py-2.5 rounded-xl text-xs font-bold text-left transition flex items-center justify-between">
+                <span>Psalm 104</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+              </button>
+              <button onclick="loadPartsPsalm('ps146')" id="btn-ps146" class="neu-btn px-3 py-2.5 rounded-xl text-xs font-bold text-left transition flex items-center justify-between">
+                <span>Psalm 146</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+              </button>
+              <button onclick="loadPartsPsalm('ps33')" id="btn-ps33" class="neu-btn px-3 py-2.5 rounded-xl text-xs font-bold text-left transition flex items-center justify-between">
+                <span>Psalm 33</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Color Key Guide -->
+          <div class="neu-card p-5 space-y-4">
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-500">The 3 Parts Color Key:</div>
+            
+            <div class="space-y-3">
+              <div class="neu-inset p-3 border-l-4 border-l-amber-500 space-y-1">
+                <div class="text-xs font-bold text-amber-600 dark:text-amber-400">Part 1: The Invitation</div>
+                <div class="text-[11px] text-slate-600 dark:text-slate-400 font-serif">
+                  A warm call inviting people or the soul to praise God.
+                </div>
+              </div>
+
+              <div class="neu-inset p-3 border-l-4 border-l-blue-500 space-y-1">
+                <div class="text-xs font-bold text-blue-600 dark:text-blue-400">Part 2: The Reasons (Kî)</div>
+                <div class="text-[11px] text-slate-600 dark:text-slate-400 font-serif">
+                  The evidence: what God has made and how God cares for people.
+                </div>
+              </div>
+
+              <div class="neu-inset p-3 border-l-4 border-l-emerald-500 space-y-1">
+                <div class="text-xs font-bold text-emerald-600 dark:text-emerald-400">Part 3: The Closing Praise</div>
+                <div class="text-[11px] text-slate-600 dark:text-slate-400 font-serif">
+                  A concluding exclamation of adoration or a prayer for blessing.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Interactive Verse Display -->
+        <div class="lg:col-span-8">
+          <div id="parts-display-card" class="neu-card p-6 space-y-5">
+            <!-- Dynamically populated by JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- TAB 3: PSALM 24 STUDY                                                   -->
+    <!-- ======================================================================= -->
+    <section id="view-psalm24" class="space-y-6 hidden">
+
+      <!-- Section Banner -->
+      <div class="neu-card p-6 space-y-3 border-l-4 border-l-purple-600">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
+            Assignment 3A Helper
+          </span>
+          <span class="text-xs font-bold text-slate-500">10 Verses &bull; 3 Movements</span>
+        </div>
+        <h3 class="font-display font-extrabold text-xl text-slate-900 dark:text-white">
+          Psalm 24: Welcoming the King of Glory
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-serif leading-relaxed max-w-3xl">
+          Psalm 24 is one of the most famous hymns of praise. In ancient times, worshippers sang this psalm as they processed up Mount Zion carrying the Ark of the Covenant into the city of God.
+        </p>
+      </div>
+
+      <!-- The 3 Movements of Psalm 24 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
+        <!-- Movement 1 -->
+        <div class="neu-card p-5 space-y-3 border-t-4 border-t-blue-500 flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="text-[10px] font-bold text-blue-600 uppercase tracking-wider">Movement 1 (Verses 1 to 2)</span>
+            <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">God Owns the Whole World</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              The camera starts wide: God owns the whole earth and everyone living on it because he created the land above the waters.
+            </p>
+          </div>
+          <div class="neu-inset p-3 text-xs italic font-serif text-slate-700 dark:text-slate-300">
+            "The earth is the Lord's, and everything in it, the world, and all who live in it." (v. 1)
+          </div>
+        </div>
+
+        <!-- Movement 2 -->
+        <div class="neu-card p-5 space-y-3 border-t-4 border-t-emerald-500 flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Movement 2 (Verses 3 to 6)</span>
+            <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">Who May Come Near?</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              The camera zooms in to the worshipper's personal character. Only people with clean hands and pure hearts can stand in God's presence.
+            </p>
+          </div>
+          <div class="neu-inset p-3 text-xs italic font-serif text-slate-700 dark:text-slate-300">
+            "Who may ascend the mountain of the Lord? The one who has clean hands and a pure heart." (vv. 3 to 4)
+          </div>
+        </div>
+
+        <!-- Movement 3 -->
+        <div class="neu-card p-5 space-y-3 border-t-4 border-t-amber-500 flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">Movement 3 (Verses 7 to 10)</span>
+            <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">Open the Ancient Gates!</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              The camera explodes into joyful singing outside the city gates. The gates are invited to lift up their heads so the King of Glory can enter.
+            </p>
+          </div>
+          <div class="neu-inset p-3 text-xs italic font-serif text-slate-700 dark:text-slate-300">
+            "Lift up your heads, you gates; be lifted up, you ancient doors, that the King of glory may come in." (v. 7)
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Special Feature: The Hebrew Word "Nasa" (Lift Up) -->
+      <div class="neu-card p-6 space-y-4">
+        <div class="flex items-center justify-between">
+          <h4 class="font-display font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+            <i data-lucide="arrow-up-circle" class="w-5 h-5 text-amber-500"></i>
+            <span>Key Word Connection: The Hebrew Root נָשָׂא (Nasa', "Lift Up")</span>
+          </h4>
+          <span class="text-xs font-bold text-amber-600 bg-amber-500/10 px-2.5 py-1 rounded-full">Appears 6 Times</span>
+        </div>
+        
+        <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+          In Assignment 3A, you are asked about the Hebrew verb <strong>נָשָׂא (nasa')</strong>. 
+          Notice how the biblical poet weaves this single word through the psalm to connect your heart with God's glory:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+          <div class="neu-inset p-4 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-200">1. Inward Devotion</span>
+              <span class="text-[10px] font-bold text-blue-600">Verse 4</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif">
+              "The one who does not <strong class="text-amber-600">lift up</strong> his soul to an idol." (We do not give our trust to false things).
+            </p>
+          </div>
+
+          <div class="neu-inset p-4 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-200">2. Divine Reward</span>
+              <span class="text-[10px] font-bold text-emerald-600">Verse 5</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif">
+              "They will receive [literally: <strong class="text-amber-600">lift up / carry away</strong>] blessing from the Lord."
+            </p>
+          </div>
+
+          <div class="neu-inset p-4 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-200">3. Outward Celebration</span>
+              <span class="text-[10px] font-bold text-amber-600">Verses 7 and 9</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif">
+              "<strong class="text-amber-600">Lift up</strong> your heads, you gates! Be <strong class="text-amber-600">lifted up</strong>, ancient doors!"
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Choral Call and Response Simulator -->
+      <div class="neu-card p-6 space-y-4">
+        <h4 class="font-display font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+          <i data-lucide="music" class="w-4 h-4 text-purple-500"></i>
+          <span>How Ancient Worship Worked: Call and Response at the Gate</span>
+        </h4>
+        <p class="text-xs text-slate-600 dark:text-slate-400 font-serif">
+          Imagine a crowd walking up the mountain carrying the Ark of the Covenant. They reach the closed city doors and sing out:
+        </p>
+
+        <div class="neu-inset p-4 space-y-3 text-xs font-serif">
+          <div class="flex items-start gap-3">
+            <span class="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-bold uppercase text-[10px]">Choir Outside</span>
+            <p class="text-slate-800 dark:text-slate-200">"Lift up your heads, you gates! Be lifted up, you ancient doors, that the King of glory may come in!"</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 font-bold uppercase text-[10px]">Gatekeepers Inside</span>
+            <p class="text-slate-800 dark:text-slate-200">"Who is this King of glory?"</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 font-bold uppercase text-[10px]">All Together</span>
+            <p class="text-slate-800 dark:text-slate-200 font-bold">"The Lord strong and mighty, the Lord mighty in battle! He is the King of glory!"</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- TAB 4: PRACTICE & WORSHIP                                               -->
+    <!-- ======================================================================= -->
+    <section id="view-practice" class="space-y-6 hidden">
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left Column: Practice Quiz -->
+        <div class="lg:col-span-6 space-y-5">
+          <div class="neu-card p-6 space-y-4 border-t-4 border-t-amber-500">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                Quiz Your Knowledge
+              </span>
+              <span id="drill-score-badge" class="text-xs font-bold px-2.5 py-1 rounded-full neu-inset text-slate-700 dark:text-slate-300">
+                Score: 0 / 5
+              </span>
+            </div>
+
+            <h3 class="font-display font-extrabold text-base text-slate-900 dark:text-white">
+              Praise Psalms Practice Gym
+            </h3>
+            <p class="text-xs text-slate-500 font-serif">
+              Test your ability to spot praise psalms, identify the three main parts, and find the reason clause.
+            </p>
+
+            <!-- Quiz Card Box -->
+            <div id="quiz-card-box" class="space-y-4 pt-2">
+              <!-- Dynamically populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Corporate Worship & Prayer Forge -->
+        <div class="lg:col-span-6 space-y-5">
+          <div class="neu-card p-6 space-y-4 border-t-4 border-t-blue-500">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                Assignment 3C Helper
+              </span>
+              <span class="text-xs font-bold text-slate-500">Church Worship Script</span>
+            </div>
+
+            <h3 class="font-display font-extrabold text-base text-slate-900 dark:text-white">
+              Worship Liturgy & Prayer Builder
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              In Assignment 3C, you design a church service incorporating the praise psalm patterns you have learned. 
+              Choose your focus psalm and church theme to generate a responsive call to worship and prayer.
+            </p>
+
+            <!-- Form Controls -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div class="space-y-1">
+                <label class="text-[11px] font-bold uppercase text-slate-500">Choose Focal Psalm:</label>
+                <select id="worship-psalm" onchange="generateWorshipScript()" class="w-full neu-inset p-2.5 text-xs rounded-xl font-bold text-slate-800 dark:text-slate-200 outline-none">
+                  <option value="ps8">Psalm 8 (Creation & Human Honor)</option>
+                  <option value="ps24" selected>Psalm 24 (The King of Glory)</option>
+                  <option value="ps104">Psalm 104 (God Caring for All Life)</option>
+                  <option value="ps146">Psalm 146 (Helping the Helpless)</option>
+                </select>
+              </div>
+
+              <div class="space-y-1">
+                <label class="text-[11px] font-bold uppercase text-slate-500">Worship Theme:</label>
+                <select id="worship-theme" onchange="generateWorshipScript()" class="w-full neu-inset p-2.5 text-xs rounded-xl font-bold text-slate-800 dark:text-slate-200 outline-none">
+                  <option value="creation">God the Creator</option>
+                  <option value="king" selected>Christ our Ascended King</option>
+                  <option value="trust">Trusting God in Troubled Times</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Output Preview -->
+            <div class="space-y-2 pt-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold uppercase text-slate-500">Generated Worship Guide:</span>
+                <button onclick="copyWorshipScript()" class="neu-btn px-3 py-1 rounded-xl text-xs font-bold text-blue-600 flex items-center gap-1.5">
+                  <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                  <span id="copy-label">Copy Text</span>
+                </button>
+              </div>
+              <pre id="worship-output" class="neu-inset p-4 text-xs font-mono text-slate-800 dark:text-slate-200 whitespace-pre-wrap max-h-72 overflow-y-auto leading-relaxed"></pre>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER                                                                    -->
+  <!-- ========================================================================= -->
+  <footer class="neu-inset mt-auto py-5 px-6 text-xs text-slate-500 text-center border-t border-slate-200/60 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>BIB523 The Book of Psalms &bull; Asia Biblical Theological Seminary (ABTS)</div>
+      <div class="font-display italic text-slate-600 dark:text-slate-300">
+        "O LORD, our Lord, how majestic is your name in all the earth!" (Psalm 8:1)
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT LOGIC                                                          -->
+  <!-- ========================================================================= -->
+  <script>
+    // ---------------------------------------------------------------------------
+    // WEB AUDIO API SOUND GENERATOR (Subtle clicks and chimes)
+    // ---------------------------------------------------------------------------
+    let isAudioEnabled = true;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioCtx;
+    }
+
+    function toggleAudio() {
+      isAudioEnabled = !isAudioEnabled;
+      const icon = document.getElementById('sound-icon');
+      if (icon) {
+        icon.setAttribute('data-lucide', isAudioEnabled ? 'volume-2' : 'volume-x');
+        lucide.createIcons();
+      }
+      if (isAudioEnabled) playSound('click');
+    }
+
+    function playSound(type) {
+      if (!isAudioEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (ctx.state === 'suspended') ctx.resume();
+
+        const now = ctx.currentTime;
+        if (type === 'click') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(400, now);
+          osc.frequency.exponentialRampToValueAtTime(200, now + 0.04);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.04);
+        } else if (type === 'correct') {
+          [523.25, 659.25, 783.99].forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, now + i * 0.07);
+            gain.gain.setValueAtTime(0.12, now + i * 0.07);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.25);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + i * 0.07);
+            osc.stop(now + i * 0.07 + 0.25);
+          });
+        }
+      } catch (e) {
+        // Audio error fail-safe
+      }
+    }
+
+    // ---------------------------------------------------------------------------
+    // THEME TOGGLER
+    // ---------------------------------------------------------------------------
+    function initTheme() {
+      const savedTheme = localStorage.getItem('bib523_theme') || 'light';
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      updateThemeIcon();
+    }
+
+    function toggleTheme() {
+      playSound('click');
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('bib523_theme', isDark ? 'dark' : 'light');
+      updateThemeIcon();
+    }
+
+    function updateThemeIcon() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const icon = document.getElementById('theme-icon');
+      if (icon) {
+        icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+        lucide.createIcons();
+      }
+    }
+
+    // ---------------------------------------------------------------------------
+    // TAB SWITCHER
+    // ---------------------------------------------------------------------------
+    const TABS = ['identify', 'parts', 'psalm24', 'practice'];
+
+    function switchTab(tabId) {
+      playSound('click');
+      TABS.forEach(t => {
+        const view = document.getElementById(`view-${t}`);
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (t === tabId) {
+          if (view) view.classList.remove('hidden');
+          if (btn) btn.className = 'neu-tab-pill active px-4 py-2 text-xs font-bold flex items-center gap-2 whitespace-nowrap';
+        } else {
+          if (view) view.classList.add('hidden');
+          if (btn) btn.className = 'neu-tab-pill px-4 py-2 text-xs font-bold flex items-center gap-2 whitespace-nowrap';
+        }
+      });
+      lucide.createIcons();
+    }
+
+    // ---------------------------------------------------------------------------
+    // MODULE 2 DATA: THE THREE MAIN PARTS
+    // ---------------------------------------------------------------------------
+    const PSALM_PARTS_DATA = {
+      ps8: {
+        title: "Psalm 8: The Majesty of the Creator",
+        ref: "Psalm 8:1 to 9",
+        summary: "This creation hymn begins and ends with the exact same sentence of praise, like bookends holding together the reasons in the middle.",
+        parts: [
+          {
+            badge: "Part 1",
+            verses: "Verse 1a",
+            title: "The Opening Call to Praise",
+            hebrew: "יְהוָה אֲדֹנֵינוּ מָה־אַדִּיר שִׁמְךָ בְּכָל־הָאָרֶץ",
+            text: "O LORD, our Lord, how majestic is your name in all the earth!",
+            explanation: "The singer begins by declaring God's unmatched beauty across the entire earth.",
+            color: "border-l-amber-500"
+          },
+          {
+            badge: "Part 2",
+            verses: "Verses 1b to 8",
+            title: "The Reasons Why (God's Works)",
+            hebrew: "כִּי־אֶרְאֶה שָׁמֶיךָ מַעֲשֵׂה אֶצְבְּעֹתֶיךָ",
+            text: "When I look at your heavens, the work of your fingers... what is mankind that you are mindful of them? Yet you crowned them with glory and honor.",
+            explanation: "Here is the reason: When we see the vast stars, we marvel that God chose humans to rule over his creation.",
+            color: "border-l-blue-500"
+          },
+          {
+            badge: "Part 3",
+            verses: "Verse 9",
+            title: "The Closing Praise",
+            hebrew: "יְהוָה אֲדֹנֵינוּ מָה־אַדִּיר שִׁמְךָ בְּכָל־הָאָרֶץ",
+            text: "O LORD, our Lord, how majestic is your name in all the earth!",
+            explanation: "The psalm finishes with the exact same words it started with, closing the circle of praise.",
+            color: "border-l-emerald-500"
+          }
+        ]
+      },
+      ps104: {
+        title: "Psalm 104: The Great Care of Creation",
+        ref: "Psalm 104:1 to 35",
+        summary: "A celebration of how God provides water, food, and homes for all animals, birds, and humans.",
+        parts: [
+          {
+            badge: "Part 1",
+            verses: "Verse 1a",
+            title: "The Opening Call to Praise",
+            hebrew: "בָּרְכִי נַפְשִׁי אֶת־יְהוָה יְהוָה אֱלֹהַי גָּדַלְתָּ מְּאֹד",
+            text: "Bless the LORD, O my soul! O LORD my God, you are very great!",
+            explanation: "The psalmist speaks to his own soul, commanding his heart to give praise to God.",
+            color: "border-l-amber-500"
+          },
+          {
+            badge: "Part 2",
+            verses: "Verses 1b to 30",
+            title: "The Reasons Why (God Feeds His World)",
+            hebrew: "כֻּלָּם אֵלֶיךָ יְשַׂבֵּרוּן לָתֵת אָכְלָם בְּעִתּוֹ",
+            text: "All of them look to you to give them their food at the proper time. When you open your hand, they are satisfied with good things.",
+            explanation: "The evidence: Lions, birds, goats, and sea creatures all rely on God's daily generosity.",
+            color: "border-l-blue-500"
+          },
+          {
+            badge: "Part 3",
+            verses: "Verses 31 to 35",
+            title: "The Closing Praise",
+            hebrew: "בָּרְכִי נַפְשִׁי אֶת־יְהוָה הַלְלוּ־יָהּ",
+            text: "Bless the LORD, O my soul! Praise the LORD! (Hallelujah!)",
+            explanation: "The psalm ends by asking that God rejoice in his works, concluding with a joyful Hallelujah.",
+            color: "border-l-emerald-500"
+          }
+        ]
+      },
+      ps146: {
+        title: "Psalm 146: Trusting God, Not Human Leaders",
+        ref: "Psalm 146:1 to 10",
+        summary: "Shows why it is better to trust God than mortal princes, because God defends the vulnerable.",
+        parts: [
+          {
+            badge: "Part 1",
+            verses: "Verses 1 to 2",
+            title: "The Opening Call to Praise",
+            hebrew: "הַלְלוּ־יָהּ הַלְלִי נַפְשִׁי אֶת־יְהוָה",
+            text: "Praise the LORD! Praise the LORD, O my soul! I will praise the LORD as long as I live.",
+            explanation: "A personal commitment to spend a lifetime praising God.",
+            color: "border-l-amber-500"
+          },
+          {
+            badge: "Part 2",
+            verses: "Verses 3 to 9",
+            title: "The Reasons Why (God Defends the Weak)",
+            hebrew: "עֹשֶׂה מִשְׁפָּט לַעֲשׁוּקִים נֹתֵן לֶחֶם לָרְעֵבִים",
+            text: "He upholds the cause of the oppressed and gives food to the hungry. The LORD sets prisoners free and lifts up those who are bowed down.",
+            explanation: "Human rulers die and their plans vanish, but God protects the fatherless and the widow forever.",
+            color: "border-l-blue-500"
+          },
+          {
+            badge: "Part 3",
+            verses: "Verse 10",
+            title: "The Closing Praise",
+            hebrew: "יִמְלֹךְ יְהוָה לְעוֹלָם אֱלֹהַיִךְ צִיּוֹן לְדֹר וָדֹר הַלְלוּ־יָהּ",
+            text: "The LORD reigns forever, your God, O Zion, for all generations. Praise the LORD!",
+            explanation: "An announcement that the Lord rules as King for all time.",
+            color: "border-l-emerald-500"
+          }
+        ]
+      },
+      ps33: {
+        title: "Psalm 33: The Creator and Defender",
+        ref: "Psalm 33:1 to 22",
+        summary: "Celebrates the word of God in creating the universe and his faithfulness to those who fear him.",
+        parts: [
+          {
+            badge: "Part 1",
+            verses: "Verses 1 to 3",
+            title: "The Opening Call to Praise",
+            hebrew: "רַנְּנוּ צַדִּיקִים בַּיהוָה לַיְשָׁרִים נָאוָה תְהִלָּה",
+            text: "Sing joyfully to the LORD, you righteous; it is fitting for the upright to praise him! Praise the LORD with the harp; make music to him on the ten-stringed lyre.",
+            explanation: "Inviting righteous people to pick up musical instruments and make joyful noise.",
+            color: "border-l-amber-500"
+          },
+          {
+            badge: "Part 2",
+            verses: "Verses 4 to 19",
+            title: "The Reasons Why (The Word of the Lord)",
+            hebrew: "כִּי־יָשָׁר דְּבַר־יְהוָה וְכָל־מַעֲשֵׂהוּ בֶּאֱמוּנָה",
+            text: "FOR (Kî) the word of the LORD is right and true; he is faithful in all he does. By the word of the LORD the heavens were made.",
+            explanation: "Notice the word FOR (Kî) introducing the reason: God spoke the world into existence, and no human army can save without him.",
+            color: "border-l-blue-500"
+          },
+          {
+            badge: "Part 3",
+            verses: "Verses 20 to 22",
+            title: "The Closing Prayer of Trust",
+            hebrew: "יְהִי־חַסְדְּךָ יְהוָה עָלֵינוּ כַּאֲשֶׁר יִחַלְנוּ לָךְ",
+            text: "May your unfailing love be with us, LORD, even as we put our hope in you.",
+            explanation: "The psalm concludes with a prayer asking for God's steadfast love (hesed).",
+            color: "border-l-emerald-500"
+          }
+        ]
+      }
+    };
+
+    function loadPartsPsalm(key) {
+      playSound('click');
+      ['ps8', 'ps104', 'ps146', 'ps33'].forEach(k => {
+        const btn = document.getElementById(`btn-${k}`);
+        if (btn) {
+          if (k === key) {
+            btn.className = 'neu-btn px-3 py-2.5 rounded-xl text-xs font-bold text-left transition flex items-center justify-between border-l-4 border-l-blue-500';
+          } else {
+            btn.className = 'neu-btn px-3 py-2.5 rounded-xl text-xs font-bold text-left transition flex items-center justify-between';
+          }
+        }
+      });
+
+      const data = PSALM_PARTS_DATA[key];
+      const container = document.getElementById('parts-display-card');
+      if (!data || !container) return;
+
+      let html = `
+        <div class="neu-inset p-4 space-y-1">
+          <div class="flex items-center justify-between">
+            <h4 class="font-display font-extrabold text-base text-slate-900 dark:text-white">${data.title}</h4>
+            <span class="text-xs font-bold text-blue-600 dark:text-blue-400">${data.ref}</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-serif">${data.summary}</p>
+        </div>
+        <div class="space-y-4 pt-1">
+      `;
+
+      data.parts.forEach((p) => {
+        html += `
+          <div class="neu-card p-4 space-y-2 border-l-4 ${p.color}">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">${p.badge} &bull; ${p.verses}</span>
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-200">${p.title}</span>
+            </div>
+            <div class="font-hebrew text-sm sm:text-base text-slate-700 dark:text-slate-300 text-right leading-loose">${p.hebrew}</div>
+            <div class="text-xs sm:text-sm font-serif italic text-slate-800 dark:text-slate-100">"${p.text}"</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 pt-1 border-t border-slate-200/50 dark:border-white/5 font-serif">
+              <strong>What this part does:</strong> ${p.explanation}
+            </div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      container.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    // ---------------------------------------------------------------------------
+    // MODULE 4: QUIZ GYM
+    // ---------------------------------------------------------------------------
+    const QUIZ_QUESTIONS = [
+      {
+        question: "What is the primary difference between a Praise Psalm and a Lament Psalm?",
+        options: [
+          "Praise psalms express pure joy and adore God for who he is, while lament psalms bring sorrow and pain to God in times of trouble.",
+          "Praise psalms are only written by King David, while lament psalms were written by Moses.",
+          "Praise psalms are only sung in the temple, while lament psalms are sung at funerals.",
+          "Praise psalms never mention God's deeds, while lament psalms always do."
+        ],
+        answer: 0,
+        explanation: "Correct! Praise psalms center on adoration and thanksgiving, whereas lament psalms bring distress and confusion to God."
+      },
+      {
+        question: "In the 3-part structure of a praise psalm, what does the second part focus on?",
+        options: [
+          "Asking God to forgive the singer's sins.",
+          "Giving the specific reasons why God deserves praise (his creation and care).",
+          "Explaining how the temple was constructed.",
+          "Listing the names of the kings of Israel."
+        ],
+        answer: 1,
+        explanation: "Correct! Part 2 is the reason clause, often introduced by 'for' or 'because' (Hebrew: Kî)."
+      },
+      {
+        question: "Which small Hebrew word frequently introduces the reason for praise in the Book of Psalms?",
+        options: [
+          "Shalom (Peace)",
+          "Kî (For / Because)",
+          "Nefesh (Soul)",
+          "Torah (Law)"
+        ],
+        answer: 1,
+        explanation: "Correct! The particle כִּי (Kî) introduces the ground or cause clause, answering why we praise God."
+      },
+      {
+        question: "In Psalm 24, who is permitted to ascend the mountain of the Lord?",
+        options: [
+          "Only high priests who wear special linen garments.",
+          "Only soldiers who have won victories in battle.",
+          "Anyone who has clean hands and a pure heart.",
+          "Only citizens born inside the city of Jerusalem."
+        ],
+        answer: 2,
+        explanation: "Correct! Psalm 24:3 to 4 emphasizes that God requires clean hands, a pure heart, and undivided devotion."
+      },
+      {
+        question: "How does the Hebrew verb נָשָׂא (nasa', 'lift up') connect the parts of Psalm 24?",
+        options: [
+          "It connects not lifting your soul to idols with receiving blessing and ancient gates lifting their heads.",
+          "It is used to describe lifting up animal sacrifices on the altar.",
+          "It describes lifting the Ark onto the shoulders of the priests.",
+          "It is only used as a musical tempo notation."
+        ],
+        answer: 0,
+        explanation: "Correct! The root nasa' appears 6 times in Psalm 24, linking inward purity with divine reward and the gates lifting their heads."
+      }
+    ];
+
+    let currentQuestionIdx = 0;
+    let quizScore = 0;
+    let answeredQuestions = {};
+
+    function renderQuizCard() {
+      const box = document.getElementById('quiz-card-box');
+      if (!box) return;
+
+      if (currentQuestionIdx >= QUIZ_QUESTIONS.length) {
+        box.innerHTML = `
+          <div class="neu-inset p-5 text-center space-y-3">
+            <span class="w-12 h-12 mx-auto rounded-full bg-emerald-500/20 text-emerald-600 flex items-center justify-center">
+              <i data-lucide="award" class="w-6 h-6"></i>
+            </span>
+            <h4 class="font-display font-extrabold text-base text-slate-900 dark:text-white">Quiz Completed!</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif">
+              You scored <strong>${quizScore}</strong> out of <strong>${QUIZ_QUESTIONS.length}</strong>!
+            </p>
+            <button onclick="restartQuiz()" class="neu-btn px-4 py-2 rounded-xl text-xs font-bold text-amber-600">
+              Try Again
+            </button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      const q = QUIZ_QUESTIONS[currentQuestionIdx];
+      let optionsHtml = '';
+      q.options.forEach((opt, idx) => {
+        optionsHtml += `
+          <button onclick="checkQuizAnswer(${idx})" id="quiz-opt-${idx}" class="w-full p-3 rounded-xl neu-btn text-left text-xs font-serif text-slate-800 dark:text-slate-200 transition flex items-start gap-2.5">
+            <span class="w-5 h-5 rounded-md neu-inset flex items-center justify-center font-bold text-[10px] text-amber-600 flex-shrink-0">
+              ${String.fromCharCode(65 + idx)}
+            </span>
+            <span>${opt}</span>
+          </button>
+        `;
+      });
+
+      box.innerHTML = `
+        <div class="space-y-3">
+          <div class="flex items-center justify-between text-[11px] font-bold text-slate-500">
+            <span>Question ${currentQuestionIdx + 1} of ${QUIZ_QUESTIONS.length}</span>
+          </div>
+          <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white font-sans leading-snug">
+            ${q.question}
+          </div>
+          <div class="space-y-2 pt-1" id="quiz-options-container">
+            ${optionsHtml}
+          </div>
+          <div id="quiz-feedback-box" class="pt-2"></div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function checkQuizAnswer(chosenIdx) {
+      if (answeredQuestions[currentQuestionIdx] !== undefined) return;
+      answeredQuestions[currentQuestionIdx] = chosenIdx;
+
+      const q = QUIZ_QUESTIONS[currentQuestionIdx];
+      const isCorrect = (chosenIdx === q.answer);
+      if (isCorrect) {
+        quizScore++;
+        playSound('correct');
+      } else {
+        playSound('click');
+      }
+
+      document.getElementById('drill-score-badge').textContent = `Score: ${quizScore} / ${QUIZ_QUESTIONS.length}`;
+
+      const chosenBtn = document.getElementById(`quiz-opt-${chosenIdx}`);
+      const correctBtn = document.getElementById(`quiz-opt-${q.answer}`);
+
+      if (chosenBtn) {
+        if (isCorrect) {
+          chosenBtn.classList.add('bg-emerald-50', 'dark:bg-emerald-950/40', 'border', 'border-emerald-500');
+        } else {
+          chosenBtn.classList.add('bg-rose-50', 'dark:bg-rose-950/40', 'border', 'border-rose-500');
+        }
+      }
+      if (!isCorrect && correctBtn) {
+        correctBtn.classList.add('bg-emerald-50', 'dark:bg-emerald-950/40', 'border', 'border-emerald-500');
+      }
+
+      const feedbackBox = document.getElementById('quiz-feedback-box');
+      if (feedbackBox) {
+        feedbackBox.innerHTML = `
+          <div class="neu-inset p-3 space-y-2 border-l-4 ${isCorrect ? 'border-l-emerald-500' : 'border-l-rose-500'}">
+            <div class="text-xs font-bold ${isCorrect ? 'text-emerald-600' : 'text-rose-600'}">
+              ${isCorrect ? 'Correct!' : 'Incorrect'}
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+              ${q.explanation}
+            </p>
+            <div class="pt-1 text-right">
+              <button onclick="nextQuizQuestion()" class="neu-btn px-3 py-1.5 rounded-xl text-xs font-bold text-amber-600 inline-flex items-center gap-1">
+                <span>Next Question</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+        `;
+        lucide.createIcons();
+      }
+    }
+
+    function nextQuizQuestion() {
+      playSound('click');
+      currentQuestionIdx++;
+      renderQuizCard();
+    }
+
+    function restartQuiz() {
+      playSound('click');
+      currentQuestionIdx = 0;
+      quizScore = 0;
+      answeredQuestions = {};
+      document.getElementById('drill-score-badge').textContent = `Score: 0 / ${QUIZ_QUESTIONS.length}`;
+      renderQuizCard();
+    }
+
+    // ---------------------------------------------------------------------------
+    // MODULE 4: WORSHIP SCRIPT BUILDER
+    // ---------------------------------------------------------------------------
+    function generateWorshipScript() {
+      const psalm = document.getElementById('worship-psalm').value;
+      const theme = document.getElementById('worship-theme').value;
+
+      const titles = {
+        ps8: "Psalm 8: The Majestic Creator",
+        ps24: "Psalm 24: The Ascended King of Glory",
+        ps104: "Psalm 104: The Great Provider",
+        ps146: "Psalm 146: The Helper of the Helpless"
+      };
+
+      let script = `=====================================================================\n`;
+      script += `LITURGY OF PRAISE: ${titles[psalm].toUpperCase()}\n`;
+      script += `Focus: Celebrating God's Majesty and Faithfulness\n`;
+      script += `=====================================================================\n\n`;
+
+      script += `[CALL TO WORSHIP: 3-PART RESPONSIVE READING]\n\n`;
+
+      script += `PART 1: THE INVITATION TO PRAISE\n`;
+      if (psalm === 'ps8') {
+        script += `Leader: O LORD, our Lord, how majestic is your name in all the earth!\n`;
+        script += `People: You have set your glory above the heavens!\n`;
+      } else if (psalm === 'ps24') {
+        script += `Leader: The earth is the LORD's, and everything in it!\n`;
+        script += `People: The world, and all who live in it!\n`;
+      } else if (psalm === 'ps104') {
+        script += `Leader: Bless the LORD, O my soul! O LORD my God, you are very great!\n`;
+        script += `People: You are clothed with splendor and majesty!\n`;
+      } else {
+        script += `Leader: Praise the LORD! Praise the LORD, O my soul!\n`;
+        script += `People: I will sing praise to my God all my life long!\n`;
+      }
+
+      script += `\nPART 2: THE REASONS WHY (THE GROUND CLAUSE)\n`;
+      if (psalm === 'ps8') {
+        script += `Leader: FOR when we look at your heavens, the work of your fingers, the moon and stars you set in place;\n`;
+        script += `People: What is mankind that you are mindful of them? Yet you crowned them with glory and honor!\n`;
+      } else if (psalm === 'ps24') {
+        script += `Leader: FOR he founded the earth on the seas and established it on the waters!\n`;
+        script += `People: Who may ascend the mountain of the LORD? The one who has clean hands and a pure heart!\n`;
+      } else if (psalm === 'ps104') {
+        script += `Leader: FOR he makes springs pour water into the ravines; it flows between the mountains!\n`;
+        script += `People: All creatures look to him, and he gives them their food at the proper time!\n`;
+      } else {
+        script += `Leader: FOR blessed are those whose help is the God of Jacob, who made heaven and earth!\n`;
+        script += `People: He upholds the cause of the oppressed and gives food to the hungry!\n`;
+      }
+
+      script += `\nPART 3: THE CLOSING ACCLAMATION\n`;
+      if (psalm === 'ps8') {
+        script += `All Together: O LORD, our Lord, how majestic is your name in all the earth!\n`;
+      } else if (psalm === 'ps24') {
+        script += `Leader: Lift up your heads, you gates; be lifted up, you ancient doors!\n`;
+        script += `People: That the King of glory may come in!\n`;
+        script += `All Together: Who is this King of glory? The LORD strong and mighty, the LORD of hosts, he is the King of glory!\n`;
+      } else if (psalm === 'ps104') {
+        script += `All Together: May the glory of the LORD endure forever! Bless the LORD, O my soul! Praise the LORD!\n`;
+      } else {
+        script += `All Together: The LORD reigns forever, your God, O Zion, for all generations. Praise the LORD! Hallelujah!\n`;
+      }
+
+      script += `\n---------------------------------------------------------------------\n`;
+      script += `PASTORAL PRAYER OF PRAISE\n`;
+      script += `---------------------------------------------------------------------\n\n`;
+      script += `"Gracious God and Father, we gather in your presence this morning to lift up our voices with the psalmist. You are the Creator of all things, and your majesty fills the earth.\n\n`;
+      script += `Forgive us for the times our hearts are drawn away by false promises of security and pride. Create in us clean hands and pure hearts. Remind us that our lives are securely held in your hands, and that you reign as King over every generation.\n\n`;
+      script += `Receive our worship today, not because we are worthy in ourselves, but because of your great love and grace shown to us in Jesus Christ our Lord. Amen."\n`;
+
+      const outputEl = document.getElementById('worship-output');
+      if (outputEl) outputEl.textContent = script;
+    }
+
+    function copyWorshipScript() {
+      playSound('click');
+      const outputEl = document.getElementById('worship-output');
+      if (!outputEl) return;
+      navigator.clipboard.writeText(outputEl.textContent).then(() => {
+        const label = document.getElementById('copy-label');
+        if (label) {
+          label.textContent = "Copied!";
+          setTimeout(() => label.textContent = "Copy Text", 2000);
+        }
+      });
+    }
+
+    // ---------------------------------------------------------------------------
+    // INITIALIZATION
+    // ---------------------------------------------------------------------------
+    window.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      loadPartsPsalm('ps8');
+      renderQuizCard();
+      generateWorshipScript();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
