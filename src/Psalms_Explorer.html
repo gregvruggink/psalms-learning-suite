@@ -453,6 +453,7 @@
         <select id="color-by" class="neu-input w-full p-2 text-xs font-bold cursor-pointer">
           <option value="genre">Genre (Bullock)</option>
           <option value="book">Book (I – V)</option>
+          <option value="author">Author Attribution</option>
           <option value="tag">Selected Tag (Match Highlight)</option>
         </select>
       </div>
@@ -856,6 +857,13 @@
         allThemes.push("Acrostic");
       }
 
+      // Canonical & Liturgical Collections
+      if (i >= 120 && i <= 134 && !allThemes.includes("Songs of Ascents")) allThemes.push("Songs of Ascents");
+      if (i >= 113 && i <= 118 && !allThemes.includes("Egyptian Hallel")) allThemes.push("Egyptian Hallel");
+      if (i >= 146 && i <= 150 && !allThemes.includes("Final Hallel")) allThemes.push("Final Hallel");
+      if (i === 136 && !allThemes.includes("Great Hallel")) allThemes.push("Great Hallel");
+      if ([6, 32, 38, 51, 102, 130, 143].includes(i) && !allThemes.includes("Penitential Psalm")) allThemes.push("Penitential Psalm");
+
       let primaryTopTheme = "Other";
       for (const t of top8Themes) {
         if (allThemes.includes(t)) {
@@ -882,6 +890,17 @@
     // =============================================================================
     // COLOR PALETTES (Exact Original Colors Preserved)
     // =============================================================================
+    const authorColors = {
+      "David": "#2563eb",         // Royal Blue
+      "Asaph": "#d97706",         // Amber / Gold
+      "Sons of Korah": "#9333ea", // Purple
+      "Solomon": "#059669",       // Emerald Green
+      "Moses": "#dc2626",         // Crimson Red
+      "Heman": "#4f46e5",         // Indigo
+      "Ethan": "#0891b2",         // Cyan / Teal
+      "Anonymous": "#64748b"      // Slate Gray
+    };
+
     const genreColors = {
       "Indiv. Lament": "#2563eb", // Blue 600
       "Corp. Lament": "#7dd3fc",  // Sky 300
@@ -905,6 +924,7 @@
     function getColor(d, key = currentColorMode) {
       if (key === 'genre') return genreColors[d.genre];
       if (key === 'book') return bookColors(d.book);
+      if (key === 'author') return authorColors[d.author] || '#64748b';
       if (key === 'tag') {
         if (currentSelectedTag && currentSelectedTag !== 'all') {
           return d.themes.includes(currentSelectedTag) ? '#0066CC' : '#CBD5E1';
@@ -946,6 +966,24 @@
               focusOnCategory('book', book);
             } else {
               filterByLegend('book', book);
+            }
+          };
+          legendContainer.appendChild(item);
+        });
+      } else if (key === 'author') {
+        const authorsList = ["David", "Asaph", "Sons of Korah", "Solomon", "Moses", "Heman", "Ethan", "Anonymous"];
+        authorsList.forEach(author => {
+          const count = psalmData.filter(d => d.author === author).length;
+          if (count === 0) return;
+          const color = authorColors[author] || '#64748b';
+          const item = document.createElement('button');
+          item.className = `legend-chip flex items-center gap-1.5 font-medium transition-all ${currentFilterKey === author || focusedCategory === author ? 'active-filter' : ''}`;
+          item.innerHTML = `<span class="w-2.5 h-2.5 rounded-full inline-block shadow-sm" style="background-color: ${color}"></span> ${author} (${count})`;
+          item.onclick = () => {
+            if (currentGrouping === 'author') {
+              focusOnCategory('author', author);
+            } else {
+              filterByLegend('author', author);
             }
           };
           legendContainer.appendChild(item);
@@ -999,6 +1037,28 @@
       });
 
       tagSelectElem.innerHTML = '<option value="all">All Tags &amp; Themes (150 Psalms)</option>';
+
+      const canonicalCollections = [
+        { name: "Songs of Ascents", label: "Songs of Ascents (Pss 120–134)" },
+        { name: "Egyptian Hallel", label: "Egyptian Hallel (Pss 113–118)" },
+        { name: "Final Hallel", label: "Final Hallel (Pss 146–150)" },
+        { name: "Great Hallel", label: "Great Hallel (Ps 136)" },
+        { name: "Penitential Psalm", label: "Penitential Psalms (7 Psalms)" },
+        { name: "Acrostic", label: "Acrostic Psalms (9 Psalms)" }
+      ];
+
+      const canonGroup = document.createElement('optgroup');
+      canonGroup.label = "📜 Canonical & Liturgical Collections";
+      canonicalCollections.forEach(col => {
+        const count = tagCounts[col.name] || 0;
+        if (count > 0) {
+          const opt = document.createElement('option');
+          opt.value = col.name;
+          opt.textContent = `${col.label} (${count})`;
+          canonGroup.appendChild(opt);
+        }
+      });
+      tagSelectElem.appendChild(canonGroup);
 
       const popGroup = document.createElement('optgroup');
       popGroup.label = "🔥 Popular Biblical Themes";
@@ -1059,7 +1119,7 @@
         let visible = true;
 
         if (focusedCategory) {
-          const catField = (currentGrouping === 'book') ? 'book' : 'genre';
+          const catField = (currentGrouping === 'book') ? 'book' : (currentGrouping === 'author' ? 'author' : 'genre');
           if (d[catField] !== focusedCategory) visible = false;
         }
 
@@ -1250,7 +1310,7 @@
         .style("opacity", d => (d[type] === categoryName && (d.radius * targetScale > 9)) ? 1 : 0);
 
       focusBannerText.innerHTML = `
-        <span class="w-3 h-3 rounded-full inline-block shadow-sm" style="background-color: ${type === 'genre' ? genreColors[categoryName] : bookColors(categoryName)}"></span>
+        <span class="w-3 h-3 rounded-full inline-block shadow-sm" style="background-color: ${type === 'genre' ? genreColors[categoryName] : (type === 'author' ? authorColors[categoryName] : bookColors(categoryName))}"></span>
         <span>${categoryName}</span>
         <span class="text-[10px] font-semibold text-[#5A6A80] dark:text-[#94A3B8]">(${matching.length} Psalms)</span>
       `;
@@ -1316,7 +1376,7 @@
         <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 text-xs bg-slate-50 dark:bg-slate-900/50 p-2.5 rounded-xl border border-slate-200/50 dark:border-white/5 mb-3">
           <div>
             <span class="text-[#5A6A80] dark:text-[#94A3B8] block text-[10px] uppercase font-bold tracking-wider">Author</span>
-            <span class="text-[#1E293B] dark:text-[#F1F5F9] font-semibold">${d.author}</span>
+            <span class="text-[#1E293B] dark:text-[#F1F5F9] font-semibold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full inline-block shadow-sm" style="background-color: ${authorColors[d.author] || '#64748b'}"></span>${d.author}</span>
           </div>
 
           <div>
@@ -1340,6 +1400,16 @@
           const isTagActive = (currentSelectedTag === theme);
           if (theme === 'Acrostic') {
             html += `<span class="px-2 py-0.5 ${isTagActive ? 'bg-indigo-600 text-white' : 'bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300'} font-bold rounded-lg text-[10px] shadow-sm cursor-pointer" onclick="selectTag('Acrostic')">ACROSTIC</span>`;
+          } else if (theme === 'Songs of Ascents') {
+            html += `<span class="px-2 py-0.5 ${isTagActive ? 'bg-amber-600 text-white' : 'bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300'} font-bold rounded-lg text-[10px] shadow-sm cursor-pointer" onclick="selectTag('Songs of Ascents')">SONGS OF ASCENTS</span>`;
+          } else if (theme === 'Egyptian Hallel') {
+            html += `<span class="px-2 py-0.5 ${isTagActive ? 'bg-emerald-600 text-white' : 'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300'} font-bold rounded-lg text-[10px] shadow-sm cursor-pointer" onclick="selectTag('Egyptian Hallel')">EGYPTIAN HALLEL</span>`;
+          } else if (theme === 'Final Hallel') {
+            html += `<span class="px-2 py-0.5 ${isTagActive ? 'bg-yellow-600 text-white' : 'bg-yellow-100 dark:bg-yellow-900/60 text-yellow-800 dark:text-yellow-200'} font-bold rounded-lg text-[10px] shadow-sm cursor-pointer" onclick="selectTag('Final Hallel')">FINAL HALLEL</span>`;
+          } else if (theme === 'Great Hallel') {
+            html += `<span class="px-2 py-0.5 ${isTagActive ? 'bg-purple-600 text-white' : 'bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300'} font-bold rounded-lg text-[10px] shadow-sm cursor-pointer" onclick="selectTag('Great Hallel')">GREAT HALLEL</span>`;
+          } else if (theme === 'Penitential Psalm') {
+            html += `<span class="px-2 py-0.5 ${isTagActive ? 'bg-rose-600 text-white' : 'bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300'} font-bold rounded-lg text-[10px] shadow-sm cursor-pointer" onclick="selectTag('Penitential Psalm')">PENITENTIAL</span>`;
           } else {
             html += `<span class="px-2 py-0.5 ${isTagActive ? 'bg-[#0066CC] text-white' : 'bg-slate-100 dark:bg-slate-800 text-[#5A6A80] dark:text-[#94A3B8]'} font-medium rounded-lg text-[10px] border border-slate-200/60 dark:border-slate-700/60 cursor-pointer" onclick="selectTag('${theme}')">${theme}</span>`;
           }
@@ -1576,7 +1646,7 @@
           };
 
           // Real Neumorphic Pill Button inside foreignObject
-          const color = (groupBy === 'book') ? bookColors(cat) : (genreColors[cat] || '#0066CC');
+          const color = (groupBy === 'book') ? bookColors(cat) : (groupBy === 'author' ? (authorColors[cat] || '#0066CC') : (genreColors[cat] || '#0066CC'));
           const btnW = Math.max(cat.length * 9.5 + 68, 140);
           const btnH = 34;
 
@@ -1593,7 +1663,7 @@
             .attr("title", `Click to zoom focus on ${cat} (${count} psalms)`)
             .on("click", (e) => {
               e.stopPropagation();
-              if (groupBy === 'genre' || groupBy === 'book') {
+              if (groupBy === 'genre' || groupBy === 'book' || groupBy === 'author') {
                 focusOnCategory(groupBy, cat);
               }
             });
