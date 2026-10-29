@@ -36,9 +36,8 @@ The suite connects eight dedicated learning environments into a unified desktop 
    - Interactive diagnostic drills with instant feedback, scoring, and mastery tracking.
 3. **Understanding Praise Psalms Studio**:
    - Comprehensive guide to descriptive praise (*Tehillim*) across the Hebrew Psalter.
-   - Three core movements: 1. Invitation (Call to Praise), 2. Reason (*Kî* clause), and 3. Closing Praise.
-   - Split explorer with a 35-psalm labeled study library and a Shuffled Movement Puzzle Sorter.
-   - Interactive "Find the Reason" lab exploring causal *Kî* ground clauses.
+   - Three core movements: 1. Invitation (Call to Praise), 2. Reason (*Ki* clause), and 3. Closing Praise.
+   - 35-psalm labeled study library, interactive top-level Movement Puzzle Sorter, and "Find the Reason" Lab.
 4. **Lament Soul-Care Diagnostic Studio**:
    - Interactive anatomy of the 6-part lament structure (Address, Complaint, Confession of Trust, Petition, Assurance of Being Heard, Vow of Praise).
 5. **Quadriga Four-Senses Hermeneutics Studio**:
