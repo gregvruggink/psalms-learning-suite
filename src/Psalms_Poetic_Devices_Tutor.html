@@ -1289,36 +1289,99 @@ const DEVICES_DATA = [
     theology: "Theology Through Sacred Architecture. God's universal justice, peace, and covenant reign form the steady, quiet center that holds all chaotic outer circumstances together.",
     hazard: "Missing the Center. Expecting the climax to be in the very last verse, completely overlooking the central heartbeat verse that governs the entire psalm (e.g. Psalm 67:4).",
     correction: "Pair matching themes from the outside in (A with A', B with B') to locate the unmatched center (C). Treat Center C as the governing theological compass of the whole poem.",
-    exampleRef: "Psalm 67",
+    exampleRef: "Psalm 67:1–7",
     exampleHebrew: "יִשְׂמְחוּ וִירַנְּנוּ לְאֻמִּים (Let the nations be glad and sing for joy - Ps 67:4)",
     exampleLines: [
-      { label: "A (Opening Frame - v. 1-2)", text: "God be gracious to us... that your way may be known on earth", highlight: "Blessing to Israel" },
-      { label: "B (Inner Frame - v. 3)", text: "Let the peoples praise you, O God; let all the peoples praise you!", highlight: "Nations Praise" },
-      { label: "C (THE FOCAL CENTER / APEX - v. 4)", text: "LET THE NATIONS BE GLAD AND SING FOR JOY, FOR YOU JUDGE THE PEOPLES WITH EQUITY!", highlight: "DIVINE EQUITY & REIGN OVER ALL" },
-      { label: "B' (Inner Frame Match - v. 5)", text: "Let the peoples praise you, O God; let all the peoples praise you!", highlight: "Nations Praise Repeated" },
-      { label: "A' (Closing Frame Match - v. 6-7)", text: "The earth has yielded its increase; God, our God, shall bless us... let all ends of the earth fear him!", highlight: "Blessing to Israel Extended to Ends of Earth" }
+      {
+        label: "A — Outer Mirror (vv. 1–2) • God Blesses Us ➔ Known on All the Earth",
+        text: "May <strong><u>God</u></strong> be gracious to us and <strong><u>bless us</u></strong>... that your way may be known on <strong><u>earth</u></strong>, your saving power among all nations.",
+        highlight: "God ... bless us ... earth",
+        indentClass: "border-l-4 border-[#0066CC]/80 bg-blue-50/40 dark:bg-blue-950/25",
+        labelClass: "text-[#0066CC] dark:text-[#389BFF]"
+      },
+      {
+        label: "B — Inner Mirror (v. 3) • Identical Chorus: All Peoples Praise God",
+        text: "<strong><u>Let the peoples praise you, O God; let all the peoples praise you!</u></strong>",
+        highlight: "Let the peoples praise you",
+        indentClass: "sm:ml-6 border-l-4 border-teal-500/80 bg-teal-50/40 dark:bg-teal-950/25",
+        labelClass: "text-teal-700 dark:text-teal-400"
+      },
+      {
+        label: "C — THE FOCAL CENTER / APEX (v. 4) • Central Message: God Judges Justly",
+        text: "Let the nations be glad and sing for joy, for <strong><u>you judge the peoples with equity</u></strong> and guide the nations upon earth!",
+        highlight: "you judge the peoples with equity",
+        indentClass: "sm:ml-12 border-l-4 border-amber-500 bg-amber-50/60 dark:bg-amber-950/35",
+        labelClass: "text-amber-700 dark:text-amber-400"
+      },
+      {
+        label: "B' — Inner Mirror (v. 5) • Identical Chorus: All Peoples Praise God",
+        text: "<strong><u>Let the peoples praise you, O God; let all the peoples praise you!</u></strong>",
+        highlight: "Let the peoples praise you",
+        indentClass: "sm:ml-6 border-l-4 border-teal-500/80 bg-teal-50/40 dark:bg-teal-950/25",
+        labelClass: "text-teal-700 dark:text-teal-400"
+      },
+      {
+        label: "A' — Outer Mirror (vv. 6–7) • God Blesses Us ➔ Feared on All the Earth",
+        text: "The earth has yielded its increase; <strong><u>God</u></strong>, our God, shall <strong><u>bless us</u></strong>. God shall <strong><u>bless us</u></strong>; let all the ends of the <strong><u>earth</u></strong> fear him!",
+        highlight: "God ... bless us ... earth",
+        indentClass: "border-l-4 border-[#0066CC]/80 bg-blue-50/40 dark:bg-blue-950/25",
+        labelClass: "text-[#0066CC] dark:text-[#389BFF]"
+      }
     ],
     extraExamples: [
-      { ref: "Psalm 8", text: "A: God's majestic name (v.1) -> B: Heavens & moon (v.3) -> C: What is mankind that you are mindful of him? (v.4 - apex) -> B': Dominion over beasts (v.6-8) -> A': God's majestic name (v.9)" },
-      { ref: "Psalm 15", text: "A: Who may abide in your tent? (v.1) -> B: Moral walk & tongue (v.2-3) -> C: He who honors those who fear the Lord (v.4 - center) -> B': Financial integrity (v.5a) -> A': He shall never be moved (v.5b)" },
-      { ref: "Psalm 3", text: "A: Enemies rise (v.1-2) -> B: Lord is shield (v.3-4) -> C: I slept and woke, Lord sustained me (v.5 - peace in crisis) -> B': Arise O Lord (v.6-7) -> A': Salvation belongs to Lord (v.8)" }
+      {
+        ref: "Psalm 124:7",
+        text: "A: We have escaped like a bird -> B: from the snare of the fowlers -> B': the snare is broken -> A': and we have escaped!",
+        html: `
+          <div class="space-y-1 not-italic leading-relaxed">
+            <div class="pl-2.5 border-l-2 border-[#0066CC]"><span class="font-sans font-bold text-[#0066CC] dark:text-[#389BFF]">A — Outer Mirror (Escaped Freedom):</span> <em>"We have <strong><u>escaped</u></strong> like a bird"</em></div>
+            <div class="pl-2.5 ml-4 sm:ml-6 border-l-2 border-teal-500"><span class="font-sans font-bold text-teal-700 dark:text-teal-400">B — Inner Mirror (The Snare):</span> <em>"from the <strong><u>snare</u></strong> of the fowlers;"</em></div>
+            <div class="pl-2.5 ml-4 sm:ml-6 border-l-2 border-teal-500"><span class="font-sans font-bold text-teal-700 dark:text-teal-400">B' — Inner Mirror (The Snare Broken):</span> <em>"the <strong><u>snare</u></strong> is broken,"</em></div>
+            <div class="pl-2.5 border-l-2 border-[#0066CC]"><span class="font-sans font-bold text-[#0066CC] dark:text-[#389BFF]">A' — Outer Mirror (Escaped Freedom):</span> <em>"and we have <strong><u>escaped</u></strong>!"</em></div>
+          </div>
+        `
+      },
+      {
+        ref: "Psalm 7:16",
+        text: "A: His mischief -> B: returns upon his own head -> B': and on his own skull -> A': his violence descends.",
+        html: `
+          <div class="space-y-1 not-italic leading-relaxed">
+            <div class="pl-2.5 border-l-2 border-[#0066CC]"><span class="font-sans font-bold text-[#0066CC] dark:text-[#389BFF]">A — Outer Mirror (Wicked Harm):</span> <em>"His <strong><u>mischief</u></strong>"</em></div>
+            <div class="pl-2.5 ml-4 sm:ml-6 border-l-2 border-teal-500"><span class="font-sans font-bold text-teal-700 dark:text-teal-400">B — Inner Mirror (Strikes His Own Head):</span> <em>"returns upon <strong><u>his own head</u></strong>,"</em></div>
+            <div class="pl-2.5 ml-4 sm:ml-6 border-l-2 border-teal-500"><span class="font-sans font-bold text-teal-700 dark:text-teal-400">B' — Inner Mirror (Strikes His Own Head):</span> <em>"and on <strong><u>his own skull</u></strong>"</em></div>
+            <div class="pl-2.5 border-l-2 border-[#0066CC]"><span class="font-sans font-bold text-[#0066CC] dark:text-[#389BFF]">A' — Outer Mirror (Wicked Harm):</span> <em>"his <strong><u>violence</u></strong> descends."</em></div>
+          </div>
+        `
+      },
+      {
+        ref: "Psalm 137:5–6",
+        text: "A: If I forget you, O Jerusalem (v.5a) -> B: let my right hand forget its skill (v.5b) -> B': Let my tongue stick to the roof of my mouth (v.6a) -> A': if I do not remember you... Jerusalem (v.6b).",
+        html: `
+          <div class="space-y-1 not-italic leading-relaxed">
+            <div class="pl-2.5 border-l-2 border-[#0066CC]"><span class="font-sans font-bold text-[#0066CC] dark:text-[#389BFF]">A — Outer Mirror (Remembering Jerusalem, v. 5a):</span> <em>"<strong><u>If I</u></strong> forget <strong><u>you, O Jerusalem</u></strong>,"</em></div>
+            <div class="pl-2.5 ml-4 sm:ml-6 border-l-2 border-teal-500"><span class="font-sans font-bold text-teal-700 dark:text-teal-400">B — Inner Mirror (Musician's Hand Silenced, v. 5b):</span> <em>"<strong><u>let my</u></strong> right hand forget its skill!"</em></div>
+            <div class="pl-2.5 ml-4 sm:ml-6 border-l-2 border-teal-500"><span class="font-sans font-bold text-teal-700 dark:text-teal-400">B' — Inner Mirror (Singer's Tongue Silenced, v. 6a):</span> <em>"<strong><u>Let my</u></strong> tongue stick to the roof of my mouth,"</em></div>
+            <div class="pl-2.5 border-l-2 border-[#0066CC]"><span class="font-sans font-bold text-[#0066CC] dark:text-[#389BFF]">A' — Outer Mirror (Remembering Jerusalem, v. 6b):</span> <em>"<strong><u>if I</u></strong> do not remember <strong><u>you</u></strong>, <strong><u>if I</u></strong> do not set <strong><u>Jerusalem</u></strong> above my highest joy!"</em></div>
+          </div>
+        `
+      }
     ],
     visualDiagram: `
-      <div class="space-y-1.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 font-serif text-xs">
-        <div class="p-2 chiasm-bracket-a rounded">
-          <strong class="font-mono text-indigo-600 dark:text-indigo-400">A (Outer Frame):</strong> Blessing on Israel (v. 1-2)
+      <div class="space-y-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 font-serif text-xs sm:text-sm">
+        <div class="pl-4 pr-3 py-2.5 chiasm-bracket-a rounded">
+          <strong class="font-mono text-[#0066CC] dark:text-[#389BFF]">A — Outer Mirror (vv. 1–2):</strong> <strong>God blesses us</strong> so the <strong>earth</strong> knows Him — <em>"May <strong><u>God</u></strong> be gracious to us and <strong><u>bless us</u></strong>... known on <strong><u>earth</u></strong>"</em>
         </div>
-        <div class="p-2 chiasm-bracket-b ml-4 rounded">
-          <strong class="font-mono text-cyan-600 dark:text-cyan-400">B (Inner Frame):</strong> Peoples praise God (v. 3)
+        <div class="pl-4 pr-3 py-2.5 chiasm-bracket-b ml-4 sm:ml-6 rounded">
+          <strong class="font-mono text-teal-700 dark:text-teal-400">B — Inner Mirror (v. 3):</strong> <strong>All peoples praise God</strong> — <em>"<strong><u>Let the peoples praise you, O God; let all the peoples praise you!</u></strong>"</em>
         </div>
-        <div class="p-3 chiasm-bracket-c ml-8 rounded pivot-glow text-amber-900 dark:text-amber-100 font-bold border-l-4 border-amber-500">
-          <strong class="font-mono text-amber-600 dark:text-amber-400">C (FOCAL APEX / CENTER):</strong> "Let the nations be glad... for you judge the peoples with equity!" (v. 4)
+        <div class="pl-5 pr-3 py-3 chiasm-bracket-c ml-8 sm:ml-12 rounded pivot-glow text-amber-900 dark:text-amber-100 font-bold">
+          <strong class="font-mono text-amber-700 dark:text-amber-400">C — FOCAL APEX / CENTER (v. 4):</strong> <em>"Let the nations be glad and sing for joy, for <strong><u>you judge the peoples with equity</u></strong>!"</em>
         </div>
-        <div class="p-2 chiasm-bracket-b ml-4 rounded">
-          <strong class="font-mono text-cyan-600 dark:text-cyan-400">B' (Inner Match):</strong> Peoples praise God repeated (v. 5)
+        <div class="pl-4 pr-3 py-2.5 chiasm-bracket-b ml-4 sm:ml-6 rounded">
+          <strong class="font-mono text-teal-700 dark:text-teal-400">B' — Inner Mirror (v. 5):</strong> <strong>All peoples praise God</strong> — <em>"<strong><u>Let the peoples praise you, O God; let all the peoples praise you!</u></strong>"</em>
         </div>
-        <div class="p-2 chiasm-bracket-a rounded">
-          <strong class="font-mono text-indigo-600 dark:text-indigo-400">A' (Outer Match):</strong> Blessing on Israel extending to all the ends of the earth (v. 6-7)
+        <div class="pl-4 pr-3 py-2.5 chiasm-bracket-a rounded">
+          <strong class="font-mono text-[#0066CC] dark:text-[#389BFF]">A' — Outer Mirror (vv. 6–7):</strong> <strong>God blesses us</strong> so the <strong>earth</strong> fears Him — <em>"<strong><u>God</u></strong>, our God, shall <strong><u>bless us</u></strong>... let all the ends of the <strong><u>earth</u></strong> fear him!"</em>
         </div>
       </div>
     `
@@ -10066,8 +10129,8 @@ function renderStep1Encounter(dev) {
         <!-- The Lines of Poetry -->
         <div class="space-y-2 font-serif py-1">
           ${dev.exampleLines.map((line, idx) => `
-            <div class="p-2.5 sm:p-3 rounded-2xl hover:neu-inset-sm transition-all">
-              <div class="text-[11px] font-sans font-bold uppercase text-[#0066CC] dark:text-[#389BFF] mb-0.5">
+            <div class="p-2.5 sm:p-3 rounded-2xl hover:neu-inset-sm transition-all ${line.indentClass || ''}">
+              <div class="text-[11px] font-sans font-bold uppercase ${line.labelClass || 'text-[#0066CC] dark:text-[#389BFF]'} mb-0.5">
                 <span>${line.label}</span>
               </div>
               <div class="text-base sm:text-lg font-medium text-[#3D4852] dark:text-[#E2E8F0] leading-relaxed">
@@ -10181,7 +10244,10 @@ function renderStep3MeaningAndTrap(dev) {
           ${dev.extraExamples.map(ex => `
             <div class="p-3.5 rounded-2xl neu-inset-sm flex flex-col sm:flex-row sm:items-baseline gap-2">
               <span class="text-xs font-bold font-sans text-[#0066CC] dark:text-[#389BFF] shrink-0 w-28">${ex.ref}:</span>
-              <span class="text-xs sm:text-sm font-serif text-[#3D4852] dark:text-[#CBD5E1] italic">"${ex.text}"</span>
+              ${ex.html
+                ? `<div class="flex-1 text-xs sm:text-sm font-serif text-[#3D4852] dark:text-[#CBD5E1]">${ex.html}</div>`
+                : `<span class="text-xs sm:text-sm font-serif text-[#3D4852] dark:text-[#CBD5E1] italic">"${ex.text}"</span>`
+              }
             </div>
           `).join('')}
         </div>
